@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-exec-test
+  namespace: default
+  labels:
+    app.kubernetes.io/name: kno-exec-test
+spec:
+  restartPolicy: Never
+  containers:
+    - name: workload
+      image: iclaw/busybox:1.37.0-musl
+      command:
+        - /bin/sh
+        - -c
+        - |
+          i=0
+          while [ "$i" -lt 5 ]; do
+            /bin/echo "exec event $i"
+            /bin/sleep 1
+            i=$((i + 1))
+          done
+

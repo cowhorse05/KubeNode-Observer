@@ -1,0 +1,3 @@
+FROM scratch
+COPY bin/kno-agent /kno-agent
+ENTRYPOINT ["/kno-agent"]
