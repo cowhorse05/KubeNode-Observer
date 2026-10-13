@@ -1,0 +1,58 @@
+deploy/minikube/kno-agent.yaml
+  s_6e6fc63242599e::t_dbdd8f4c920dfa 1-16,18,25-55,65-78
+  s_6e6fc63242599e::t_65d922414ecb2d 20-24
+  s_6e6fc63242599e::t_982c43afdd3b1e 17,19
+  s_6e6fc63242599e::t_6c56a804877cef 56-64
+Dockerfile.local
+  s_6e6fc63242599e::t_dedc3b5874eef6 1-3
+.github/workflows/ci.yml
+  s_6e6fc63242599e::t_dbdd8f4c920dfa 1-22
+.dockerignore
+  s_6e6fc63242599e::t_982c43afdd3b1e 1-8
+examples/exec-test/pod.yaml
+  s_6e6fc63242599e::t_a627e5564e5a6e 12
+  s_6e6fc63242599e::t_93144f1c4d8185 1-11,13-23
+examples/exec-test/Dockerfile.local
+  s_6e6fc63242599e::t_b7e8e1c8cd9ebe 1-5
+examples/exec-test/pod-local.yaml
+  s_6e6fc63242599e::t_b7e8e1c8cd9ebe 1-13
+Dockerfile
+  s_6e6fc63242599e::t_93144f1c4d8185 2,11,15
+  s_6e6fc63242599e::t_a627e5564e5a6e 1
+  s_6e6fc63242599e::t_dbdd8f4c920dfa 3-10,12-14,16
+README.md
+  s_6e6fc63242599e::t_b7e8e1c8cd9ebe 3-59
+.gitignore
+  s_6e6fc63242599e::t_dbdd8f4c920dfa 1-5
+docs/development-environment.md
+  s_6e6fc63242599e::t_7cdb55f38f8261 1-34
+go.mod
+  s_6e6fc63242599e::t_c018168c5bbfc2 10-14
+  s_6e6fc63242599e::t_dbdd8f4c920dfa 1-9
+Makefile
+  s_6e6fc63242599e::t_dbdd8f4c920dfa 1-4,8,10-14,17-21,23-29,41-45,47
+  s_6e6fc63242599e::t_b7e8e1c8cd9ebe 5-6,9,32-39
+  s_6e6fc63242599e::t_7cdb55f38f8261 22
+  s_6e6fc63242599e::t_5075f4a411adba 7,15-16
+  s_6e6fc63242599e::t_dedc3b5874eef6 30-31,40,46
+docs/plan.md
+  s_6e6fc63242599e::t_b6d8056b4d85b6 1-70,81-413
+  s_6e6fc63242599e::t_93144f1c4d8185 71-72,74,78-80
+  s_6e6fc63242599e::t_a627e5564e5a6e 73,75-77
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.49-trip",
+  "base_commit_sha": "74711f705e4bfe679f5c9d0fcc31a65f1dc4b750",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
