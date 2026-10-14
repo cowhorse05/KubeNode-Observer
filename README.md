@@ -1,6 +1,7 @@
 # KubeNode-Observer
 
-Kubernetes 节点出现热点时，节点级指标只能说明“哪里变慢了”，很难直接回答“哪个 Pod、容器和进程导致了问题”。KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测项目，目标是建立 Node → Pod → Container → Process 的关联，并为后续的 microVM/Kata Containers 隔离开销研究提供可复现实验基础。
+Kubernetes 节点出现热点时，节点级指标只能说明“哪里变慢了”，很难直接回答“哪个 Pod、容器和进程导致了问题”。
+KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测项目，目标是建立 Node → Pod → Container → Process 的关联，并为后续的 microVM/Kata Containers 隔离开销研究提供可复现实验基础。
 
 当前完成了第一个可运行闭环：节点 DaemonSet 加载 `sched_process_exec` tracepoint，通过 ring buffer 将进程执行事件送入 Go，并暴露健康与事件计数接口。
 
@@ -8,8 +9,9 @@ Kubernetes 节点出现热点时，节点级指标只能说明“哪里变慢了
 
 - 基于 `cilium/ebpf` 加载 CO-RE eBPF 程序；
 - 捕获进程执行事件及 PID、TGID、comm、cgroup ID；
+- 通过 Kubernetes Informer、CRI、procfs 和 cgroup v2 构建并交叉校验 Pod → Container → Process 拓扑快照；
 - 以特权 DaemonSet 运行，并最小化挂载节点 tracefs；
-- 提供 `/healthz` 和 `kno health`；
+- 提供 `/healthz`、`/api/v1/topology`、`kno health` 和 `kno topology`；
 - 提供不依赖远端镜像仓库的本地端到端 smoke test。
 
 ## 本地开发
@@ -51,6 +53,14 @@ kubectl --context kno-dev -n kube-system logs -l app.kubernetes.io/name=kno-agen
 kubectl --context kno-dev -n kube-system port-forward service/kno-agent 18080:18080
 ./bin/kno health
 ```
+
+查询指定 Pod 的容器、cgroup 和进程拓扑：
+
+```bash
+./bin/kno topology --namespace kube-system --pod coredns-7d764666f9-lfstc
+```
+
+拓扑中的 `cgroupId` 是 cgroup v2 目录 inode，可直接与 `bpf_get_current_cgroup_id()` 返回值关联。CRI 负责提供容器 PID 和 Kubernetes 标签，Informer 负责验证 Pod UID、Phase 与 QoS，`/host/proc` 负责确认实际进程归属。
 
 ## 内网镜像约定
 

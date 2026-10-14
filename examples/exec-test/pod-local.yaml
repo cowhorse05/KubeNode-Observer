@@ -11,3 +11,6 @@ spec:
     - name: workload
       image: kubenode-observer/exec-test:dev
       imagePullPolicy: IfNotPresent
+      args:
+        - --iterations=30
+        - --interval=1s

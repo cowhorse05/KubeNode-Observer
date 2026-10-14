@@ -5,10 +5,10 @@
 
 struct exec_event {
     __u64 timestamp_ns;
-    __u64 cgroup_id;
-    __u32 pid;
-    __u32 tgid;
-    char comm[TASK_COMM_LEN];
+    __u64 cgroup_id; //current cgroup ID, which is the ID of the cgroup that the process belongs to,use to mark container boundaries
+    __u32 pid; //Current thread ID, pid from the kernel's perspective
+    __u32 tgid; //Thread group ID, which is the process ID that user-space getpid() sees
+    char comm[TASK_COMM_LEN]; //current thread's command name
 };
 
 struct {

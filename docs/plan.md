@@ -196,6 +196,8 @@ eBPF event
 
 目标：不依赖 eBPF，先建立正确的资源身份映射。
 
+状态（2026-10-14）：已完成。当前实现使用 Node/Pod Informer、containerd CRI、host procfs 和 cgroup v2 inode 构建拓扑；已验证普通 Pod、static mirror Pod、Pod 删除清理，以及与 eBPF cgroup ID 的一致性。
+
 任务：
 
 - 使用 Informer 缓存 Node 和 Pod。

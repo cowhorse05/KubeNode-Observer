@@ -26,6 +26,7 @@
 - 本地测试 Pod 的 `workload` 进程事件能够经 ring buffer 送达 Go 用户态；
 - `/healthz` 能报告 eBPF 加载状态、运行时间与事件总数；
 - Agent 与 smoke workload 都可通过本地静态二进制构建，不依赖 Docker Hub 运行时镜像。
+- CRI、Kubernetes Informer、procfs 与 cgroup v2 的拓扑结果已完成三方校验；测试 cgroup inode 与 eBPF 事件中的 cgroup ID 一致。
 
 Minikube 容器需要显式挂载节点的 `/sys/kernel/tracing`。仅设置 `privileged: true` 不会把宿主机 tracefs 自动带入容器的 mount namespace。
 
