@@ -1,0 +1,46 @@
+Makefile
+  s_6e6fc63242599e::t_a55a96d665b836 8,16-17,35
+hack/smoke-test.sh
+  s_6e6fc63242599e::t_d860884f544f0e 6
+  s_6e6fc63242599e::t_b64a2a680bf8b4 16,20
+  s_6e6fc63242599e::t_4975459cf6f29b 21-22
+  s_6e6fc63242599e::t_1536b49f31a0c9 8-11
+  s_6e6fc63242599e::t_46b5aa708d8758 23
+examples/exec-test/pod-local.yaml
+  s_6e6fc63242599e::t_b64a2a680bf8b4 14-16
+docs/plan.md
+  s_6e6fc63242599e::t_8f64502ec5dc8b 199-200
+deploy/minikube/kno-agent.yaml
+  s_6e6fc63242599e::t_621982b32505ec 1-28,45
+  s_6e6fc63242599e::t_232c2c0d214dce 60-68,98-105,111-121
+docs/architechture.md
+  s_6e6fc63242599e::t_e63780f26b5aef 1-31
+README.md
+  s_6e6fc63242599e::t_e63780f26b5aef 58-59
+cmd/kno/main.go
+  s_6e6fc63242599e::t_232c2c0d214dce 4,6,10,56-102
+go.mod
+  s_6e6fc63242599e::t_392811e77874fa 8,12,23
+  s_6e6fc63242599e::t_2a52e5412e4429 38,42,44-45
+  s_6e6fc63242599e::t_91e7ef06f72e1a 10-11,16-22,24-28,30-35,37,39,41,43,46-54
+  s_6e6fc63242599e::t_46fe6e2fa77530 9
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_63ed12894fe2fd 48-61
+  s_6e6fc63242599e::t_232c2c0d214dce 18,23-27,41-47,62-64,66-68,71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.49-trip",
+  "base_commit_sha": "c84aadc7bc3deb626a92b94dd7e0f2ca2cf2bfb3",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
