@@ -1,0 +1,65 @@
+internal/bpfgen/generate.go
+  s_6e6fc63242599e::t_2f6b1cae392b7c 5
+internal/cpu/collector_test.go
+  s_6e6fc63242599e::t_4cc49031dfdc2d 1-93
+cmd/kno/main.go
+  s_6e6fc63242599e::t_c36f13ea8458ed 165
+  s_6e6fc63242599e::t_8a89d68c135d98 157-164,166-220
+docs/development-environment.md
+  s_6e6fc63242599e::t_d1269f79cdf62a 3,7,34-37
+README.md
+  s_6e6fc63242599e::t_d1269f79cdf62a 6,12,16,45,76-84
+internal/bpfgen/cpu_bpfel.go
+  s_6e6fc63242599e::t_d04d1267645518 1-147
+docs/architechture.md
+  s_6e6fc63242599e::t_d1269f79cdf62a 55-78
+deploy/minikube/kno-agent.yaml
+  s_6e6fc63242599e::t_c36f13ea8458ed 64
+examples/cpu-hog/Dockerfile.local
+  s_6e6fc63242599e::t_26a14893201c3a 1-3
+internal/cpu/collector.go
+  s_6e6fc63242599e::t_4cc49031dfdc2d 1-83,86-333
+  s_6e6fc63242599e::t_ce98a8f7f9026b 84-85
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_4af241508dfd26 35-38
+  s_6e6fc63242599e::t_c36f13ea8458ed 30,80
+  s_6e6fc63242599e::t_8a89d68c135d98 18,48-53,79,105,157
+docs/plan.md
+  s_6e6fc63242599e::t_d1269f79cdf62a 241-242,372-377,379
+Makefile
+  s_6e6fc63242599e::t_26a14893201c3a 6,11,24,39-42,47-49
+examples/cpu-hog/pod-local.yaml
+  s_6e6fc63242599e::t_26a14893201c3a 1-15
+internal/probe/cpu.go
+  s_6e6fc63242599e::t_2f6b1cae392b7c 1-95
+examples/cpu-hog/main.go
+  s_6e6fc63242599e::t_26d038ad70d9ef 18
+  s_6e6fc63242599e::t_26a14893201c3a 1-17,19-45
+hack/cpu-hotspot-test.sh
+  s_6e6fc63242599e::t_90491ba2ddb7e9 7,41,48-51
+  s_6e6fc63242599e::t_66899e3e98eda3 8,42-43
+  s_6e6fc63242599e::t_26a14893201c3a 1-6,9-36,38,52-58
+  s_6e6fc63242599e::t_d86d9bc41cf5ca 44-47
+  s_6e6fc63242599e::t_23c679e528f227 37,39-40
+bpf/cpu.bpf.c
+  s_6e6fc63242599e::t_2f6b1cae392b7c 1-71,74,76-84
+  s_6e6fc63242599e::t_0e56b7e5f4c321 72-73,75
+internal/probe/cpu_test.go
+  s_6e6fc63242599e::t_2f6b1cae392b7c 1-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "b127cf05de0dcde14558377afbbe173ed20877ad",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
