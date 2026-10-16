@@ -52,3 +52,27 @@ sched_process_exec / sched_process_exit
 事件先以稳定的 cgroup ID 入库，查询时会再次尝试补全尚未命中的身份。这使短生命周期进程不依赖 `/proc/<pid>` 在事件消费时仍然存在。API 支持按 namespace、Pod 和事件类型过滤；内存环只用于短期诊断，不承担持久化职责。
 
 当前实现首先保证身份正确性和可验证性。大规模节点上的刷新开销、事件驱动增量更新和 tombstone 容量将在基准测试后继续优化。
+
+## CPU runtime 聚合
+
+```text
+sched_switch raw tracepoint
+          │ switch-out task
+          ▼
+ task_start LRU map ──> runtime delta
+          │
+          ▼
+ cpu_runtime LRU map
+ key: cgroup ID + TGID + PID
+ value: cumulative runtime_ns + comm
+          │ 每秒读取累计值并做差
+          ▼
+ CPU Collector ──Topology Store──> Pod / Container / Process
+          │
+          ▼
+ /api/v1/cpu ──> kno top pods|containers|processes
+```
+
+高频 `sched_switch` 事件只在内核中更新 map，用户态每秒读取一次累计值。进程视图会把同一 TGID 的线程 runtime 相加，容器和 Pod 视图继续逐层汇总。`cpuPercent = 窗口内 runtime / 实际墙钟窗口 × 100`，因此多线程工作负载可以超过 100%。
+
+当前窗口是 Agent 最近一次约 1 秒的采样，不是长期平均值。误差主要来自窗口边界上的任务创建/退出、BPF map 并发读取、Agent 自身调度延迟和短暂的元数据未命中；collector 使用实际读取时间而非 ticker 的预定时间作为分母，避免 Agent 被限流时放大结果。

@@ -238,6 +238,8 @@ eBPF event
 
 目标：实现第一个实际可用的性能功能。
 
+状态（2026-10-16）：已完成。`sched_switch` raw tracepoint 在内核 LRU map 中按 cgroup ID、TGID、PID 累计 runtime，用户态按实际采样时间计算约 1 秒窗口，并支持 Pod、Container、Process 三级热点排序。Minikube 单 worker CPU hog 稳定窗口实测约 99.48%，与 cgroup v2 `cpu.stat` 趋势一致，自动测试同时校验排名、合理区间和下钻身份。
+
 任务：
 
 - 基于 `sched_switch` 计算进程 CPU runtime。
@@ -367,14 +369,14 @@ microVM 工作在 MVP 完成后开始。
 
 只安排当前最近的一段工作，完成后再细化后续任务。
 
-1. 为 `sched_switch` CPU runtime 聚合定义 BPF map key/value 和窗口语义。
-2. 实现按 cgroup ID、TGID、PID 的内核侧 runtime 累加。
-3. 在用户态周期读取并计算 CPU 使用率。
-4. 建立 Pod → Container → Process 汇总和热点排序。
-5. 添加可控 CPU hog workload 与对照测试。
-6. 实现 `kno top pods|containers|processes`。
+1. 定义 `sched_wakeup` 到 `sched_switch` 的 run queue latency 语义和过滤规则。
+2. 设计内核侧 log2 直方图，避免逐事件上传。
+3. 实现可控 CPU contention workload 和 baseline 场景。
+4. 输出 P50、P95、P99 与原始 histogram bucket。
+5. 与 `perf sched` 或 cgroup CPU pressure 趋势对照。
+6. 实现 `kno trace runqlat --pod ... --duration ...`。
 
-M4 完成前不进入 run queue latency、Kata 或 Web UI。
+M5 完成前不进入 Kata 或 Web UI。
 
 ## 11. 主要风险
 

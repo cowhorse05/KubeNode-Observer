@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
+	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
@@ -26,10 +27,15 @@ func main() {
 	hostProc := flag.String("host-proc", "/host/proc", "host procfs mount")
 	cgroupRoot := flag.String("cgroup-root", "/host/sys/fs/cgroup", "host cgroup v2 mount")
 	topologyInterval := flag.Duration("topology-interval", 10*time.Second, "topology refresh interval")
+	cpuInterval := flag.Duration("cpu-interval", time.Second, "CPU runtime sampling interval")
 	nodeName := flag.String("node-name", os.Getenv("NODE_NAME"), "Kubernetes node name")
 	flag.Parse()
 
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	if *topologyInterval <= 0 || *cpuInterval <= 0 {
+		logger.Error("collection intervals must be positive", "topologyInterval", *topologyInterval, "cpuInterval", *cpuInterval)
+		os.Exit(2)
+	}
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
 
@@ -39,6 +45,12 @@ func main() {
 		os.Exit(1)
 	}
 	defer execProbe.Close()
+	cpuProbe, err := probe.NewCPUProbe()
+	if err != nil {
+		logger.Error("failed to initialize CPU eBPF probe", "error", err)
+		os.Exit(1)
+	}
+	defer cpuProbe.Close()
 
 	criClient, err := topology.NewCRIClient(*runtimeEndpoint)
 	if err != nil {
@@ -64,6 +76,8 @@ func main() {
 	topologyStore := topology.NewStore(topologyCollector)
 	go topologyStore.Run(ctx, *topologyInterval)
 	events := eventstore.NewStore(4096, topologyStore)
+	cpuCollector := cpu.NewCollector(cpuProbe, topologyStore)
+	go cpuCollector.Run(ctx, *cpuInterval)
 
 	refreshRequests := make(chan struct{}, 1)
 	var unresolvedMu sync.Mutex
@@ -88,6 +102,7 @@ func main() {
 	handler.Handle("/healthz", health.Handler())
 	handler.Handle("/api/v1/topology", topologyStore)
 	handler.Handle("/api/v1/events", events)
+	handler.Handle("/api/v1/cpu", cpuCollector)
 	server := &http.Server{
 		Addr:              *listenAddress,
 		Handler:           handler,
@@ -139,7 +154,7 @@ func main() {
 		}
 	}()
 
-	logger.Info("kno-agent started", "probes", "sched_process_exec,sched_process_exit", "runtimeEndpoint", *runtimeEndpoint, "node", *nodeName)
+	logger.Info("kno-agent started", "probes", "sched_process_exec,sched_process_exit,sched_switch", "runtimeEndpoint", *runtimeEndpoint, "node", *nodeName)
 	select {
 	case <-ctx.Done():
 		logger.Info("shutdown requested")

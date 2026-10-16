@@ -61,6 +61,7 @@ spec:
             - --host-proc=/host/proc
             - --cgroup-root=/host/sys/fs/cgroup
             - --topology-interval=5s
+            - --cpu-interval=1s
           env:
             - name: NODE_NAME
               valueFrom:

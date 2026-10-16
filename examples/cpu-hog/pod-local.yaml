@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-cpu-hog-local
+  labels:
+    app.kubernetes.io/name: kno-cpu-hog
+spec:
+  restartPolicy: Never
+  containers:
+    - name: workload
+      image: kubenode-observer/cpu-hog:dev
+      imagePullPolicy: IfNotPresent
+      args:
+        - --workers=1
+        - --duration=120s

@@ -1,10 +1,10 @@
 # 开发与验证环境
 
-本文记录 M0-M3 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
+本文记录 M0-M4 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
 
 ## 已验证环境
 
-验证日期：2026-10-14
+验证日期：2026-10-16
 
 | 组件 | 版本或状态 |
 | --- | --- |
@@ -31,6 +31,10 @@
 - 生命周期事件包含 PID、TGID、PPID，并能补全 Pod、Container 和镜像身份；
 - 非零退出码验证中，内核原始 wait status `512` 被归一化为 `exitCode=2`，同时保留 `rawExitCode=512`；
 - 连续测试期间 `/healthz` 报告 `eventsLost=0`。
+- `sched_switch` raw tracepoint 能在 DaemonSet 中加载，调度 runtime 只通过 BPF LRU map 聚合，不经过 ring buffer；
+- 单 worker CPU hog 稳定排在 default namespace 热点首位，稳定窗口实测约 `99.48%`，趋势与 cgroup v2 `cpu.stat` 的单核占用一致；
+- `kno top pods`、`kno top containers` 和 `kno top processes` 返回相同 runtime 的逐层归属，进程名在 exec 后正确刷新为 `workload`；
+- `make cpu-smoke` 会同时验证热点排名、70%-110% 的单 worker 合理区间以及 Container/Process 下钻结果。
 
 Minikube 容器需要显式挂载节点的 `/sys/kernel/tracing`。仅设置 `privileged: true` 不会把宿主机 tracefs 自动带入容器的 mount namespace。
 
