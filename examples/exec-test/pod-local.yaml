@@ -14,3 +14,4 @@ spec:
       args:
         - --iterations=30
         - --interval=1s
+        - --child-exit-code=2

@@ -20,7 +20,7 @@ kubectl --context "${KUBE_CONTEXT}" wait \
 for _ in $(seq 1 20); do
   logs="$(kubectl --context "${KUBE_CONTEXT}" -n kube-system logs \
     -l app.kubernetes.io/name=kno-agent --since-time="${START_TIME}")"
-  if grep -q '"comm":"workload"' <<<"${logs}"; then
+  if grep -q '"type":"exec".*"comm":"workload"' <<<"${logs}"; then
     echo "smoke test passed: workload exec event observed"
     exit 0
   fi

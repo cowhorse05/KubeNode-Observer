@@ -55,12 +55,14 @@ type ExecSpecs struct {
 // It can be passed ebpf.CollectionSpec.Assign.
 type ExecProgramSpecs struct {
 	TraceExec *ebpf.ProgramSpec `ebpf:"trace_exec"`
+	TraceExit *ebpf.ProgramSpec `ebpf:"trace_exit"`
 }
 
 // ExecMapSpecs contains maps before they are loaded into the kernel.
 //
 // It can be passed ebpf.CollectionSpec.Assign.
 type ExecMapSpecs struct {
+	EventStats *ebpf.MapSpec `ebpf:"event_stats"`
 	ExecEvents *ebpf.MapSpec `ebpf:"exec_events"`
 }
 
@@ -90,11 +92,13 @@ func (o *ExecObjects) Close() error {
 //
 // It can be passed to LoadExecObjects or ebpf.CollectionSpec.LoadAndAssign.
 type ExecMaps struct {
+	EventStats *ebpf.Map `ebpf:"event_stats"`
 	ExecEvents *ebpf.Map `ebpf:"exec_events"`
 }
 
 func (m *ExecMaps) Close() error {
 	return _ExecClose(
+		m.EventStats,
 		m.ExecEvents,
 	)
 }
@@ -110,11 +114,13 @@ type ExecVariables struct {
 // It can be passed to LoadExecObjects or ebpf.CollectionSpec.LoadAndAssign.
 type ExecPrograms struct {
 	TraceExec *ebpf.Program `ebpf:"trace_exec"`
+	TraceExit *ebpf.Program `ebpf:"trace_exit"`
 }
 
 func (p *ExecPrograms) Close() error {
 	return _ExecClose(
 		p.TraceExec,
+		p.TraceExit,
 	)
 }
 

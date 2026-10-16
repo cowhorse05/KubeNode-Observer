@@ -217,6 +217,8 @@ eBPF event
 
 目标：打通第一条完整的 eBPF 事件归属链。
 
+状态（2026-10-14）：已完成。当前实现同时观测 exec/exit，使用 cgroup ID 补全 Kubernetes 身份，以 4096 条内存环提供过滤查询，并用 5 分钟 tombstone 处理容器删除后的延迟归属。Minikube 实测非零退出码、PPID、Pod/Container 身份均正确，测试期间事件丢失为 0。
+
 任务：
 
 - 实现 exec/exit tracepoint 程序。
@@ -365,16 +367,14 @@ microVM 工作在 MVP 完成后开始。
 
 只安排当前最近的一段工作，完成后再细化后续任务。
 
-1. 确定开发所使用的 Linux/Minikube 环境。
-2. 初始化 Go module 和基础目录。
-3. 编写环境检查脚本。
-4. 完成最小 tracepoint eBPF 程序。
-5. 使用 `bpf2go` 从 Go 加载程序并读取事件。
-6. 打包成 Minikube DaemonSet。
-7. 添加 `kno` CLI health check。
-8. 建立第一条端到端集成测试。
+1. 为 `sched_switch` CPU runtime 聚合定义 BPF map key/value 和窗口语义。
+2. 实现按 cgroup ID、TGID、PID 的内核侧 runtime 累加。
+3. 在用户态周期读取并计算 CPU 使用率。
+4. 建立 Pod → Container → Process 汇总和热点排序。
+5. 添加可控 CPU hog workload 与对照测试。
+6. 实现 `kno top pods|containers|processes`。
 
-在上述任务完成前，不开始 CRI 映射、CPU profiler、Kata 或 Web UI。
+M4 完成前不进入 run queue latency、Kata 或 Web UI。
 
 ## 11. 主要风险
 

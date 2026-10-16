@@ -15,3 +15,12 @@ func TestExecEventCommandWithoutNullTerminator(t *testing.T) {
 		t.Fatalf("Command() = %q, want %q", got, want)
 	}
 }
+
+func TestExecEventKind(t *testing.T) {
+	if got := (ExecEvent{Type: EventTypeExec}).Kind(); got != "exec" {
+		t.Fatalf("exec kind = %q", got)
+	}
+	if got := (ExecEvent{Type: EventTypeExit}).Kind(); got != "exit" {
+		t.Fatalf("exit kind = %q", got)
+	}
+}

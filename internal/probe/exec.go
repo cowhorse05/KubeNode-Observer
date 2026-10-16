@@ -17,13 +17,24 @@ import (
 
 const taskCommLen = 16
 
-// ExecEvent is emitted after a process successfully replaces its executable.
+type EventType uint32
+
+const (
+	EventTypeExec EventType = 1
+	EventTypeExit EventType = 2
+)
+
+// ExecEvent represents a process lifecycle event emitted by the kernel.
 type ExecEvent struct {
 	TimestampNS uint64
 	CgroupID    uint64
 	PID         uint32
 	TGID        uint32
+	PPID        uint32
+	Type        EventType
+	ExitCode    int32
 	Comm        [taskCommLen]byte
+	Reserved    uint32
 }
 
 func (e ExecEvent) Command() string {
@@ -33,10 +44,17 @@ func (e ExecEvent) Command() string {
 	return string(e.Comm[:])
 }
 
+func (e ExecEvent) Kind() string {
+	if e.Type == EventTypeExit {
+		return "exit"
+	}
+	return "exec"
+}
+
 // ExecProbe owns the loaded eBPF objects and the tracepoint attachment.
 type ExecProbe struct {
 	objects bpfgen.ExecObjects
-	link    link.Link
+	links   []link.Link
 	reader  *ringbuf.Reader
 	close   sync.Once
 }
@@ -51,22 +69,41 @@ func NewExecProbe() (*ExecProbe, error) {
 		return nil, fmt.Errorf("load exec eBPF objects: %w", err)
 	}
 
-	tracepoint, err := link.Tracepoint("sched", "sched_process_exec", probe.objects.TraceExec, nil)
+	execTracepoint, err := link.Tracepoint("sched", "sched_process_exec", probe.objects.TraceExec, nil)
 	if err != nil {
 		probe.objects.Close()
 		return nil, fmt.Errorf("attach sched_process_exec tracepoint: %w", err)
 	}
-	probe.link = tracepoint
+	probe.links = append(probe.links, execTracepoint)
+
+	exitTracepoint, err := link.Tracepoint("sched", "sched_process_exit", probe.objects.TraceExit, nil)
+	if err != nil {
+		execTracepoint.Close()
+		probe.objects.Close()
+		return nil, fmt.Errorf("attach sched_process_exit tracepoint: %w", err)
+	}
+	probe.links = append(probe.links, exitTracepoint)
 
 	reader, err := ringbuf.NewReader(probe.objects.ExecEvents)
 	if err != nil {
-		probe.link.Close()
+		for _, current := range probe.links {
+			current.Close()
+		}
 		probe.objects.Close()
 		return nil, fmt.Errorf("open exec event ring buffer: %w", err)
 	}
 	probe.reader = reader
 
 	return probe, nil
+}
+
+func (p *ExecProbe) LostEvents() (uint64, error) {
+	key := uint32(0)
+	var lost uint64
+	if err := p.objects.EventStats.Lookup(&key, &lost); err != nil {
+		return 0, fmt.Errorf("read lost event count: %w", err)
+	}
+	return lost, nil
 }
 
 func (p *ExecProbe) Run(ctx context.Context, handle func(ExecEvent)) error {
@@ -100,8 +137,8 @@ func (p *ExecProbe) Close() error {
 				closeErr = err
 			}
 		}
-		if p.link != nil {
-			if err := p.link.Close(); closeErr == nil && err != nil {
+		for _, current := range p.links {
+			if err := current.Close(); closeErr == nil && err != nil {
 				closeErr = err
 			}
 		}

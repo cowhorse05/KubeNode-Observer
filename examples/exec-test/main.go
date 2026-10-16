@@ -1,26 +1,33 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"os/exec"
 	"time"
 )
 
-const childArgument = "--child"
-
 func main() {
-	if len(os.Args) == 2 && os.Args[1] == childArgument {
-		return
+	child := flag.Bool("child", false, "exit immediately after exec")
+	childExitCode := flag.Int("child-exit-code", 0, "exit code used by child processes")
+	iterations := flag.Int("iterations", 5, "number of child execs")
+	interval := flag.Duration("interval", 500*time.Millisecond, "delay between child execs")
+	flag.Parse()
+
+	if *child {
+		os.Exit(*childExitCode)
 	}
 
-	for i := 0; i < 5; i++ {
-		command := exec.Command("/workload", childArgument)
+	for i := 0; i < *iterations; i++ {
+		command := exec.Command("/workload", "--child", fmt.Sprintf("--child-exit-code=%d", *childExitCode))
 		if err := command.Run(); err != nil {
-			fmt.Fprintf(os.Stderr, "run child %d: %v\n", i, err)
-			os.Exit(1)
+			if command.ProcessState == nil || command.ProcessState.ExitCode() != *childExitCode {
+				fmt.Fprintf(os.Stderr, "run child %d: %v\n", i, err)
+				os.Exit(1)
+			}
 		}
 		fmt.Printf("generated exec event %d\n", i)
-		time.Sleep(500 * time.Millisecond)
+		time.Sleep(*interval)
 	}
 }

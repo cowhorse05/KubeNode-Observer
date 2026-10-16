@@ -1,10 +1,10 @@
 # 开发与验证环境
 
-本文记录 M0 可行性验证使用的环境，便于后续在个人电脑和公司集群复现实验。
+本文记录 M0-M3 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
 
 ## 已验证环境
 
-验证日期：2026-10-13
+验证日期：2026-10-14
 
 | 组件 | 版本或状态 |
 | --- | --- |
@@ -27,6 +27,10 @@
 - `/healthz` 能报告 eBPF 加载状态、运行时间与事件总数；
 - Agent 与 smoke workload 都可通过本地静态二进制构建，不依赖 Docker Hub 运行时镜像。
 - CRI、Kubernetes Informer、procfs 与 cgroup v2 的拓扑结果已完成三方校验；测试 cgroup inode 与 eBPF 事件中的 cgroup ID 一致。
+- `sched_process_exec` 与 `sched_process_exit` 可同时加载，CLI 能按 namespace、Pod 和事件类型查询结果；
+- 生命周期事件包含 PID、TGID、PPID，并能补全 Pod、Container 和镜像身份；
+- 非零退出码验证中，内核原始 wait status `512` 被归一化为 `exitCode=2`，同时保留 `rawExitCode=512`；
+- 连续测试期间 `/healthz` 报告 `eventsLost=0`。
 
 Minikube 容器需要显式挂载节点的 `/sys/kernel/tracing`。仅设置 `privileged: true` 不会把宿主机 tracefs 自动带入容器的 mount namespace。
 

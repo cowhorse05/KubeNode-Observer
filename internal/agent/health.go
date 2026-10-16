@@ -10,12 +10,14 @@ import (
 type Health struct {
 	startedAt  time.Time
 	eventsSeen atomic.Uint64
+	eventsLost atomic.Uint64
 }
 
 type HealthResponse struct {
 	Status     string `json:"status"`
 	EBPFLoaded bool   `json:"ebpfLoaded"`
 	EventsSeen uint64 `json:"eventsSeen"`
+	EventsLost uint64 `json:"eventsLost"`
 	Uptime     string `json:"uptime"`
 	Component  string `json:"component"`
 }
@@ -28,6 +30,10 @@ func (h *Health) RecordEvent() {
 	h.eventsSeen.Add(1)
 }
 
+func (h *Health) SetEventsLost(value uint64) {
+	h.eventsLost.Store(value)
+}
+
 func (h *Health) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", func(writer http.ResponseWriter, _ *http.Request) {
@@ -36,6 +42,7 @@ func (h *Health) Handler() http.Handler {
 			Status:     "ok",
 			EBPFLoaded: true,
 			EventsSeen: h.eventsSeen.Load(),
+			EventsLost: h.eventsLost.Load(),
 			Uptime:     time.Since(h.startedAt).Round(time.Second).String(),
 			Component:  "kno-agent",
 		})

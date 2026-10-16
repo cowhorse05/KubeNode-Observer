@@ -10,6 +10,7 @@ import (
 func TestHealthHandler(t *testing.T) {
 	health := NewHealth()
 	health.RecordEvent()
+	health.SetEventsLost(2)
 
 	request := httptest.NewRequest(http.MethodGet, "/healthz", nil)
 	recorder := httptest.NewRecorder()
@@ -23,7 +24,7 @@ func TestHealthHandler(t *testing.T) {
 	if err := json.NewDecoder(recorder.Body).Decode(&response); err != nil {
 		t.Fatalf("decode response: %v", err)
 	}
-	if response.Status != "ok" || !response.EBPFLoaded || response.EventsSeen != 1 {
+	if response.Status != "ok" || !response.EBPFLoaded || response.EventsSeen != 1 || response.EventsLost != 2 {
 		t.Fatalf("unexpected response: %+v", response)
 	}
 }

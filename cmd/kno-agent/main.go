@@ -10,10 +10,12 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 	"time"
 
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
+	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
 )
@@ -61,11 +63,31 @@ func main() {
 	topologyCollector := topology.NewCollector(*nodeName, criClient, topology.NewProcFS(*hostProc, *cgroupRoot), resolver)
 	topologyStore := topology.NewStore(topologyCollector)
 	go topologyStore.Run(ctx, *topologyInterval)
+	events := eventstore.NewStore(4096, topologyStore)
+
+	refreshRequests := make(chan struct{}, 1)
+	var unresolvedMu sync.Mutex
+	unresolvedUntil := make(map[uint64]time.Time)
+	go func() {
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-refreshRequests:
+				refreshContext, refreshCancel := context.WithTimeout(ctx, 3*time.Second)
+				if err := topologyStore.Refresh(refreshContext); err != nil && ctx.Err() == nil {
+					logger.Debug("on-demand topology refresh failed", "error", err)
+				}
+				refreshCancel()
+			}
+		}
+	}()
 
 	health := agent.NewHealth()
 	handler := http.NewServeMux()
 	handler.Handle("/healthz", health.Handler())
 	handler.Handle("/api/v1/topology", topologyStore)
+	handler.Handle("/api/v1/events", events)
 	server := &http.Server{
 		Addr:              *listenAddress,
 		Handler:           handler,
@@ -82,22 +104,42 @@ func main() {
 
 	probeErrors := make(chan error, 1)
 	go func() {
-		probeErrors <- execProbe.Run(ctx, func(event probe.ExecEvent) {
+		probeErrors <- execProbe.Run(ctx, func(kernelEvent probe.ExecEvent) {
 			health.RecordEvent()
-			payload := map[string]any{
-				"type":        "exec",
-				"timestampNs": event.TimestampNS,
-				"cgroupId":    event.CgroupID,
-				"pid":         event.PID,
-				"tgid":        event.TGID,
-				"comm":        event.Command(),
+			record := events.Add(kernelEvent)
+			if record.Workload == nil && kernelEvent.Type == probe.EventTypeExec {
+				now := time.Now()
+				unresolvedMu.Lock()
+				if now.After(unresolvedUntil[kernelEvent.CgroupID]) {
+					unresolvedUntil[kernelEvent.CgroupID] = now.Add(30 * time.Second)
+					select {
+					case refreshRequests <- struct{}{}:
+					default:
+					}
+				}
+				unresolvedMu.Unlock()
 			}
-			encoded, _ := json.Marshal(payload)
+			encoded, _ := json.Marshal(record)
 			fmt.Println(string(encoded))
 		})
 	}()
 
-	logger.Info("kno-agent started", "probe", "sched_process_exec", "runtimeEndpoint", *runtimeEndpoint, "node", *nodeName)
+	go func() {
+		ticker := time.NewTicker(5 * time.Second)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-ticker.C:
+				if lost, err := execProbe.LostEvents(); err == nil {
+					health.SetEventsLost(lost)
+				}
+			}
+		}
+	}()
+
+	logger.Info("kno-agent started", "probes", "sched_process_exec,sched_process_exit", "runtimeEndpoint", *runtimeEndpoint, "node", *nodeName)
 	select {
 	case <-ctx.Done():
 		logger.Info("shutdown requested")

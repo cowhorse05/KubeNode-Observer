@@ -27,6 +27,28 @@ cgroup v2 下，`bpf_get_current_cgroup_id()` 返回的 ID 可与 cgroup 目录 
 - Informer 持续 watch 当前节点的 Pod 和 Node；
 - Pod UID 不一致时保留 CRI 记录，但在 `issues` 中显式报告；
 - 容器退出后不再出现在下一次 CRI 快照中；
+- 被删除的 cgroup 身份保留为 5 分钟 tombstone，用于归属延迟到达或稍后查询的生命周期事件；
 - 单个容器的 procfs/cgroup 读取失败不会丢弃整个节点快照。
 
-当前实现首先保证身份正确性和可验证性。大规模节点上的刷新开销、事件驱动增量更新和历史 tombstone 将在基准测试后优化。
+## 进程生命周期事件流
+
+```text
+sched_process_exec / sched_process_exit
+          │
+          ▼
+  eBPF ring buffer ──丢失计数──> /healthz eventsLost
+          │
+          ▼
+  Event Store（4096 条内存环）
+          │ cgroup ID
+          ├──> 当前 Topology Store
+          ├──> 5 分钟 tombstone
+          └──> 未命中时限频触发拓扑刷新
+          │
+          ▼
+ /api/v1/events ──> kno events
+```
+
+事件先以稳定的 cgroup ID 入库，查询时会再次尝试补全尚未命中的身份。这使短生命周期进程不依赖 `/proc/<pid>` 在事件消费时仍然存在。API 支持按 namespace、Pod 和事件类型过滤；内存环只用于短期诊断，不承担持久化职责。
+
+当前实现首先保证身份正确性和可验证性。大规模节点上的刷新开销、事件驱动增量更新和 tombstone 容量将在基准测试后继续优化。
