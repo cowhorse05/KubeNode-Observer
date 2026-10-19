@@ -1,0 +1,41 @@
+docs/plan.md
+  s_6e6fc63242599e::t_30c5fd40376ef3 295
+  s_6e6fc63242599e::t_aa0fba6cfe5053 296,372,374,376,378-380
+  s_6e6fc63242599e::t_ab201dd6e0a225 377
+docs/demo.md
+  s_6e6fc63242599e::t_23a61dea41675d 1-72,74-82
+  s_6e6fc63242599e::t_30c5fd40376ef3 73
+docs/development-environment.md
+  s_6e6fc63242599e::t_aa0fba6cfe5053 3,7,42
+  s_6e6fc63242599e::t_ab201dd6e0a225 44-46
+  s_6e6fc63242599e::t_ee6955fab1516e 43
+README.md
+  s_6e6fc63242599e::t_ab201dd6e0a225 125
+  s_6e6fc63242599e::t_23a61dea41675d 6,19,22-40,81,119-124,131
+docs/architecture.md
+  s_6e6fc63242599e::t_aa0fba6cfe5053 100-112
+  s_6e6fc63242599e::t_33f26333487842 1-99
+docs/support-matrix.md
+  s_6e6fc63242599e::t_23a61dea41675d 1-31,34-37,39-45
+  s_6e6fc63242599e::t_ab201dd6e0a225 32-33,38
+log/2026-10-19-v0.1.0.md
+  s_6e6fc63242599e::t_688ef64ab0aeff 1-22,24-31,33-34,37-46,48
+  s_6e6fc63242599e::t_b5a580f7e9f7a4 23
+  s_6e6fc63242599e::t_ab201dd6e0a225 32,35-36,47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "fc3b937d7cd1973cdf549762aa67c25967068741",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
