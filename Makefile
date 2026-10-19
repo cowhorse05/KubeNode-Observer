@@ -9,7 +9,7 @@ MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
 
-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image smoke cpu-smoke runqlat-smoke deploy undeploy
+.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image smoke cpu-smoke runqlat-smoke integration install-minikube uninstall-minikube demo deploy undeploy
 
 generate:
 	go generate ./internal/bpfgen
@@ -57,10 +57,22 @@ runqlat-smoke: build contention-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CONTENTION_IMAGE)
 	bash hack/runqlat-test.sh
 
+integration:
+	bash hack/integration-test.sh
+
+install-minikube:
+	bash hack/install-minikube.sh
+
+uninstall-minikube:
+	bash hack/uninstall-minikube.sh
+
+demo:
+	bash hack/demo.sh
+
 deploy:
-	kubectl apply -f deploy/minikube/kno-agent.yaml
+	kubectl --context $(MINIKUBE_PROFILE) apply -f deploy/minikube/kno-agent.yaml
 
 undeploy:
-	kubectl delete -f deploy/minikube/kno-agent.yaml --ignore-not-found
+	kubectl --context $(MINIKUBE_PROFILE) delete -f deploy/minikube/kno-agent.yaml --ignore-not-found
 
 

@@ -41,6 +41,10 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: kno-agent
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "18080"
     spec:
       serviceAccountName: kno-agent
       hostNetwork: true
