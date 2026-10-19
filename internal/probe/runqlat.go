@@ -106,6 +106,27 @@ func (p *RunQLatProbe) Snapshot() ([]RunQLatHistogram, error) {
 	return result, nil
 }
 
+func (p *RunQLatProbe) MapStats() ([]BPFMapStats, error) {
+	definitions := []struct {
+		name  string
+		value *ebpf.Map
+	}{
+		{name: "runqlat_runnable_since", value: p.objects.RunnableSince},
+		{name: "runqlat_task_identity", value: p.objects.TaskIdentity},
+		{name: "runqlat_latency_stats", value: p.objects.LatencyStats},
+		{name: "runqlat_latency_histogram", value: p.objects.LatencyHistogram},
+	}
+	result := make([]BPFMapStats, 0, len(definitions))
+	for _, definition := range definitions {
+		stats, err := readMapStats(definition.name, definition.value, true)
+		if err != nil {
+			return nil, err
+		}
+		result = append(result, stats)
+	}
+	return result, nil
+}
+
 func (p *RunQLatProbe) Close() error {
 	var closeErr error
 	p.close.Do(func() {

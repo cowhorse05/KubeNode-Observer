@@ -22,6 +22,11 @@ type HealthResponse struct {
 	Component  string `json:"component"`
 }
 
+type HealthStats struct {
+	EventsSeen uint64
+	EventsLost uint64
+}
+
 func NewHealth() *Health {
 	return &Health{startedAt: time.Now()}
 }
@@ -32,6 +37,10 @@ func (h *Health) RecordEvent() {
 
 func (h *Health) SetEventsLost(value uint64) {
 	h.eventsLost.Store(value)
+}
+
+func (h *Health) Stats() HealthStats {
+	return HealthStats{EventsSeen: h.eventsSeen.Load(), EventsLost: h.eventsLost.Load()}
 }
 
 func (h *Health) Handler() http.Handler {

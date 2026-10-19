@@ -81,6 +81,14 @@ func (p *CPUProbe) Snapshot() ([]CPURuntime, error) {
 	return result, nil
 }
 
+func (p *CPUProbe) MapStats() ([]BPFMapStats, error) {
+	stats, err := readMapStats("cpu_runtime", p.objects.CpuRuntime, true)
+	if err != nil {
+		return nil, err
+	}
+	return []BPFMapStats{stats}, nil
+}
+
 func (p *CPUProbe) Close() error {
 	var closeErr error
 	p.close.Do(func() {

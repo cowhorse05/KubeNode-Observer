@@ -106,6 +106,18 @@ func (p *ExecProbe) LostEvents() (uint64, error) {
 	return lost, nil
 }
 
+func (p *ExecProbe) MapStats() ([]BPFMapStats, error) {
+	events, err := readMapStats("exec_events", p.objects.ExecEvents, false)
+	if err != nil {
+		return nil, err
+	}
+	stats, err := readMapStats("event_stats", p.objects.EventStats, true)
+	if err != nil {
+		return nil, err
+	}
+	return []BPFMapStats{events, stats}, nil
+}
+
 func (p *ExecProbe) Run(ctx context.Context, handle func(ExecEvent)) error {
 	go func() {
 		<-ctx.Done()

@@ -17,6 +17,7 @@ import (
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
 	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
+	"github.com/cowhorse05/KubeNode-Observer/internal/metrics"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
@@ -108,6 +109,7 @@ func main() {
 	health := agent.NewHealth()
 	handler := http.NewServeMux()
 	handler.Handle("/healthz", health.Handler())
+	handler.Handle("/metrics", metrics.NewHandler(health, []probe.MapStatsSource{execProbe, cpuProbe, runQLatProbe}, "/proc"))
 	handler.Handle("/api/v1/topology", topologyStore)
 	handler.Handle("/api/v1/events", events)
 	handler.Handle("/api/v1/cpu", cpuCollector)
