@@ -1,0 +1,38 @@
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_7182efd5155897 20,112
+log/2026-10-19-m6-self-metrics.md
+  s_6e6fc63242599e::t_32629689d345e0 1-46
+internal/probe/cpu.go
+  s_6e6fc63242599e::t_f322794dcab748 84-91
+internal/metrics/handler_test.go
+  s_6e6fc63242599e::t_abec84b7952b47 1-46,48-61
+  s_6e6fc63242599e::t_f4673d21efc346 47
+internal/probe/metrics.go
+  s_6e6fc63242599e::t_f322794dcab748 1-50
+internal/probe/exec.go
+  s_6e6fc63242599e::t_f322794dcab748 109-120
+internal/probe/runqlat.go
+  s_6e6fc63242599e::t_f322794dcab748 109-110,112-129
+  s_6e6fc63242599e::t_c23e773d2943a7 111
+internal/agent/health.go
+  s_6e6fc63242599e::t_abec84b7952b47 25-29,42-43
+internal/metrics/handler.go
+  s_6e6fc63242599e::t_abec84b7952b47 1-37,40-42,44-47,49-53,55,60-67,71-72,74-102,108-109,112-113,116-122
+  s_6e6fc63242599e::t_f4673d21efc346 38-39,43,48,54,56-59,68-70,73,103-107,110-111,114-115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "98e55a616c7eea668ed0b13982f7d01b9a0b54c2",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
