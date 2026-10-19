@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strconv"
 	"strings"
@@ -39,7 +40,7 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	writeMetric(writer, "kno_agent_events_lost_total", "Process lifecycle events dropped in the kernel ring buffer.", "counter", float64(stats.EventsLost))
 
 	collectionErrors := 0
-	if cpuNS, err := readUintFile(h.procRoot + "/self/schedstat"); err == nil {
+	if cpuNS, err := readProcessCPU(h.procRoot); err == nil {
 		writeMetric(writer, "kno_agent_cpu_seconds_total", "CPU time consumed by the agent process.", "counter", float64(cpuNS)/1e9)
 	} else {
 		collectionErrors++
@@ -83,6 +84,28 @@ func readUintFile(path string) (uint64, error) {
 		return 0, fmt.Errorf("%s is empty", path)
 	}
 	return strconv.ParseUint(fields[0], 10, 64)
+}
+
+func readProcessCPU(procRoot string) (uint64, error) {
+	paths, err := filepath.Glob(filepath.Join(procRoot, "self", "task", "*", "schedstat"))
+	if err != nil {
+		return 0, err
+	}
+	if len(paths) == 0 {
+		return 0, fmt.Errorf("no task schedstat files found")
+	}
+	var total uint64
+	for _, path := range paths {
+		value, err := readUintFile(path)
+		if os.IsNotExist(err) {
+			continue
+		}
+		if err != nil {
+			return 0, err
+		}
+		total += value
+	}
+	return total, nil
 }
 
 func readRSS(path string) (uint64, error) {

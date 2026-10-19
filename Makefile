@@ -5,11 +5,12 @@ IMAGE ?= kubenode-observer/kno-agent:dev
 WORKLOAD_IMAGE ?= kubenode-observer/exec-test:dev
 CPU_HOG_IMAGE ?= kubenode-observer/cpu-hog:dev
 CONTENTION_IMAGE ?= kubenode-observer/cpu-contention:dev
+BENCHMARK_IMAGE ?= kubenode-observer/observer-benchmark:dev
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
 
-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image smoke cpu-smoke runqlat-smoke integration install-minikube uninstall-minikube demo deploy undeploy
+.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image smoke cpu-smoke runqlat-smoke benchmark integration install-minikube uninstall-minikube demo deploy undeploy
 
 generate:
 	go generate ./internal/bpfgen
@@ -22,7 +23,7 @@ test:
 	go test ./...
 
 fmt:
-	gofmt -w cmd internal examples/exec-test examples/cpu-hog examples/cpu-contention
+	gofmt -w cmd internal examples/exec-test examples/cpu-hog examples/cpu-contention examples/observer-benchmark
 
 check:
 	bash hack/check-env.sh
@@ -45,6 +46,10 @@ contention-image:
 	$(GO_BUILD_ENV) go build $(GO_BUILD_FLAGS) -o $(BINARY_DIR)/kno-cpu-contention ./examples/cpu-contention
 	docker build -f examples/cpu-contention/Dockerfile.local -t $(CONTENTION_IMAGE) .
 
+benchmark-image:
+	$(GO_BUILD_ENV) go build $(GO_BUILD_FLAGS) -o $(BINARY_DIR)/kno-observer-benchmark ./examples/observer-benchmark
+	docker build -f examples/observer-benchmark/Dockerfile.local -t $(BENCHMARK_IMAGE) .
+
 smoke: workload-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WORKLOAD_IMAGE)
 	bash hack/smoke-test.sh
@@ -56,6 +61,10 @@ cpu-smoke: build cpu-hog-image
 runqlat-smoke: build contention-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CONTENTION_IMAGE)
 	bash hack/runqlat-test.sh
+
+benchmark: benchmark-image
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
+	bash hack/benchmark-observer.sh
 
 integration:
 	bash hack/integration-test.sh

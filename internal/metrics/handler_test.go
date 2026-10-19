@@ -24,10 +24,16 @@ func (fakeMaps) MapStats() ([]probe.BPFMapStats, error) {
 
 func TestHandler(t *testing.T) {
 	procRoot := t.TempDir()
-	if err := os.Mkdir(filepath.Join(procRoot, "self"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(procRoot, "self", "task", "1"), 0o755); err != nil {
 		t.Fatal(err)
 	}
-	if err := os.WriteFile(filepath.Join(procRoot, "self", "schedstat"), []byte("2500000000 0 0\n"), 0o644); err != nil {
+	if err := os.MkdirAll(filepath.Join(procRoot, "self", "task", "2"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(procRoot, "self", "task", "1", "schedstat"), []byte("1500000000 0 0\n"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(procRoot, "self", "task", "2", "schedstat"), []byte("1000000000 0 0\n"), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	if err := os.WriteFile(filepath.Join(procRoot, "self", "statm"), []byte("100 10 0 0 0 0 0\n"), 0o644); err != nil {

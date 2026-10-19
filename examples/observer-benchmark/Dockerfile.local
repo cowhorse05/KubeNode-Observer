@@ -1,0 +1,3 @@
+FROM scratch
+COPY bin/kno-observer-benchmark /benchmark
+ENTRYPOINT ["/benchmark"]
