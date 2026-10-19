@@ -5,6 +5,7 @@ go 1.22.0
 require (
 	github.com/cilium/ebpf v0.17.3
 	github.com/spf13/cobra v1.10.2
+	golang.org/x/sys v0.30.0
 	google.golang.org/grpc v1.67.1
 	k8s.io/api v0.31.4
 	k8s.io/apimachinery v0.31.4
@@ -37,7 +38,6 @@ require (
 	github.com/x448/float16 v0.8.4 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/oauth2 v0.22.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/term v0.27.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.3.0 // indirect

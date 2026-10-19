@@ -1,6 +1,6 @@
 # 开发与验证环境
 
-本文记录 M0-M4 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
+本文记录 M0-M5 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
 
 ## 已验证环境
 
@@ -35,6 +35,10 @@
 - 单 worker CPU hog 稳定排在 default namespace 热点首位，稳定窗口实测约 `99.48%`，趋势与 cgroup v2 `cpu.stat` 的单核占用一致；
 - `kno top pods`、`kno top containers` 和 `kno top processes` 返回相同 runtime 的逐层归属，进程名在 exec 后正确刷新为 `workload`；
 - `make cpu-smoke` 会同时验证热点排名、70%-110% 的单 worker 合理区间以及 Container/Process 下钻结果。
+- run queue latency 的三个 raw tracepoint 可在当前内核加载，5 秒实验中不向用户态传输逐调度事件；
+- 1-worker 单核 baseline 的 P95 为 `31us`，8-worker 同核 contention 的 P95 为 `1023us`（另一轮为 `2047us`），差异超过 30 倍；
+- 同一轮 cgroup v2 `cpu.pressure` 的 `some total` 增量分别为 `89510us` 和 `5940045us`，与 runqlat 上升趋势一致；
+- Minikube 节点未安装 `perf`，因此自动对照选择 cgroup PSI；`make runqlat-smoke` 会同时验证两种信号。
 
 Minikube 容器需要显式挂载节点的 `/sys/kernel/tracing`。仅设置 `privileged: true` 不会把宿主机 tracefs 自动带入容器的 mount namespace。
 

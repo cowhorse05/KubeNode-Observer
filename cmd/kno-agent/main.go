@@ -18,6 +18,7 @@ import (
 	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
+	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
 )
 
@@ -51,6 +52,12 @@ func main() {
 		os.Exit(1)
 	}
 	defer cpuProbe.Close()
+	runQLatProbe, err := probe.NewRunQLatProbe()
+	if err != nil {
+		logger.Error("failed to initialize run queue latency eBPF probe", "error", err)
+		os.Exit(1)
+	}
+	defer runQLatProbe.Close()
 
 	criClient, err := topology.NewCRIClient(*runtimeEndpoint)
 	if err != nil {
@@ -78,6 +85,7 @@ func main() {
 	events := eventstore.NewStore(4096, topologyStore)
 	cpuCollector := cpu.NewCollector(cpuProbe, topologyStore)
 	go cpuCollector.Run(ctx, *cpuInterval)
+	runQLatHandler := runqlat.NewHandler(runQLatProbe, topologyStore)
 
 	refreshRequests := make(chan struct{}, 1)
 	var unresolvedMu sync.Mutex
@@ -103,6 +111,7 @@ func main() {
 	handler.Handle("/api/v1/topology", topologyStore)
 	handler.Handle("/api/v1/events", events)
 	handler.Handle("/api/v1/cpu", cpuCollector)
+	handler.Handle("/api/v1/runqlat", runQLatHandler)
 	server := &http.Server{
 		Addr:              *listenAddress,
 		Handler:           handler,
@@ -154,7 +163,7 @@ func main() {
 		}
 	}()
 
-	logger.Info("kno-agent started", "probes", "sched_process_exec,sched_process_exit,sched_switch", "runtimeEndpoint", *runtimeEndpoint, "node", *nodeName)
+	logger.Info("kno-agent started", "probes", "sched_process_exec,sched_process_exit,sched_switch,sched_wakeup,sched_wakeup_new", "runtimeEndpoint", *runtimeEndpoint, "node", *nodeName)
 	select {
 	case <-ctx.Done():
 		logger.Info("shutdown requested")

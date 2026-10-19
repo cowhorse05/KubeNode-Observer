@@ -266,6 +266,8 @@ kno top processes -n default -p demo
 
 目标：区分“正在消耗 CPU”和“想运行但得不到 CPU”。
 
+状态（2026-10-16）：已完成。内核程序覆盖 wakeup、新任务 wakeup 以及仍 runnable 的 switch-out，以微秒 log2 直方图按 cgroup ID、TGID、PID 聚合；API 通过起止快照提供独立测量窗口。单核实验中 1-worker baseline P95 为 31us，8-worker contention P95 为 1023-2047us；cgroup PSI 同步上升超过 60 倍，且无逐事件用户态传输。
+
 任务：
 
 - 使用 `sched_wakeup`/`sched_wakeup_new` 记录 runnable 时间。
@@ -369,14 +371,14 @@ microVM 工作在 MVP 完成后开始。
 
 只安排当前最近的一段工作，完成后再细化后续任务。
 
-1. 定义 `sched_wakeup` 到 `sched_switch` 的 run queue latency 语义和过滤规则。
-2. 设计内核侧 log2 直方图，避免逐事件上传。
-3. 实现可控 CPU contention workload 和 baseline 场景。
-4. 输出 P50、P95、P99 与原始 histogram bucket。
-5. 与 `perf sched` 或 cgroup CPU pressure 趋势对照。
-6. 实现 `kno trace runqlat --pod ... --duration ...`。
+1. 增加 Helm chart 或完整的一键安装/卸载流程。
+2. 采集 Agent 自身 CPU、RSS、BPF map 容量与事件丢失指标。
+3. 建立 Observer 开启/关闭时的 workload 吞吐和 P99 对照实验。
+4. 固化 exec、CPU hotspot、runqlat 三条集成测试流水线。
+5. 编写限制、支持矩阵和可重复演示文档。
+6. 准备 `v0.1.0` 发布产物。
 
-M5 完成前不进入 Kata 或 Web UI。
+M6 完成前不进入 Kata 或 Web UI。
 
 ## 11. 主要风险
 

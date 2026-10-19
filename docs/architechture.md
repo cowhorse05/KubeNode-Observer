@@ -76,3 +76,24 @@ sched_switch raw tracepoint
 高频 `sched_switch` 事件只在内核中更新 map，用户态每秒读取一次累计值。进程视图会把同一 TGID 的线程 runtime 相加，容器和 Pod 视图继续逐层汇总。`cpuPercent = 窗口内 runtime / 实际墙钟窗口 × 100`，因此多线程工作负载可以超过 100%。
 
 当前窗口是 Agent 最近一次约 1 秒的采样，不是长期平均值。误差主要来自窗口边界上的任务创建/退出、BPF map 并发读取、Agent 自身调度延迟和短暂的元数据未命中；collector 使用实际读取时间而非 ticker 的预定时间作为分母，避免 Agent 被限流时放大结果。
+
+## Run queue latency
+
+```text
+sched_wakeup / sched_wakeup_new ──> runnable_since[PID] = timestamp
+                                      ▲
+sched_switch（prev 仍 runnable）───────┘
+          │ next task 真正获得 CPU
+          ▼
+ latency = switch-in - runnable_since
+          │
+          ├──> latency_stats[cgroup ID, TGID, PID]
+          └──> latency_histogram[..., log2(latency_us)]
+                         │ 按需读取起止快照并做差
+                         ▼
+ /api/v1/runqlat ──> kno trace runqlat
+```
+
+任务从睡眠被唤醒时记录 runnable 起点；时间片结束但仍可运行的任务，则在 switch-out 时重新进入等待。下一次 switch-in 结算等待时长。因为 `bpf_get_current_cgroup_id()` 在 `sched_switch` 中只能可靠表示 prev task，程序另外维护 PID → cgroup/TGID 身份缓存，首次尚未建立身份的调度样本会被跳过。
+
+每次等待只更新内核 LRU map，不经过 ring buffer。直方图以微秒为单位，bucket `n` 表示 `[2^n, 2^(n+1)-1]`；P50/P95/P99 返回命中 bucket 的上界，属于有界近似值。API 在请求开始与结束时读取累计 map 并做差，因此 `--duration` 是独立的按需实验窗口。

@@ -1,0 +1,3 @@
+FROM scratch
+COPY bin/kno-cpu-contention /workload
+ENTRYPOINT ["/workload"]

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-runqlat-contention
+spec:
+  restartPolicy: Never
+  containers:
+    - name: workload
+      image: kubenode-observer/cpu-contention:dev
+      imagePullPolicy: IfNotPresent
+      args:
+        - --workers=8
+        - --duration=120s

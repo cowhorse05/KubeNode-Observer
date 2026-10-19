@@ -218,6 +218,60 @@ func main() {
 	}
 	root.AddCommand(top)
 
+	var traceNamespace string
+	var tracePod string
+	var traceDuration time.Duration
+	trace := &cobra.Command{
+		Use:   "trace",
+		Short: "Run an on-demand kernel latency measurement",
+	}
+	runQLat := &cobra.Command{
+		Use:   "runqlat",
+		Short: "Measure run queue latency for a workload",
+		RunE: func(_ *cobra.Command, _ []string) error {
+			if traceDuration < 100*time.Millisecond || traceDuration > 5*time.Minute {
+				return fmt.Errorf("duration must be between 100ms and 5m")
+			}
+			query := url.Values{"duration": {traceDuration.String()}}
+			if traceNamespace != "" {
+				query.Set("namespace", traceNamespace)
+			}
+			if tracePod != "" {
+				query.Set("pod", tracePod)
+			}
+
+			ctx, cancel := context.WithTimeout(context.Background(), traceDuration+15*time.Second)
+			defer cancel()
+			request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint+"/api/v1/runqlat?"+query.Encode(), nil)
+			if err != nil {
+				return err
+			}
+			response, err := http.DefaultClient.Do(request)
+			if err != nil {
+				return err
+			}
+			defer response.Body.Close()
+			body, err := io.ReadAll(response.Body)
+			if err != nil {
+				return err
+			}
+			if response.StatusCode != http.StatusOK {
+				return fmt.Errorf("agent returned %s: %s", response.Status, body)
+			}
+			var formatted bytes.Buffer
+			if err := json.Indent(&formatted, body, "", "  "); err != nil {
+				return fmt.Errorf("decode run queue latency response: %w", err)
+			}
+			fmt.Println(formatted.String())
+			return nil
+		},
+	}
+	runQLat.Flags().StringVarP(&traceNamespace, "namespace", "n", "", "filter by namespace")
+	runQLat.Flags().StringVarP(&tracePod, "pod", "p", "", "filter by pod name")
+	runQLat.Flags().DurationVar(&traceDuration, "duration", 10*time.Second, "measurement duration")
+	trace.AddCommand(runQLat)
+	root.AddCommand(trace)
+
 	if err := root.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
