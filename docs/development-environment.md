@@ -1,10 +1,10 @@
 # 开发与验证环境
 
-本文记录 M0-M5 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
+本文记录 M0-M6 验证使用的环境，便于后续在个人电脑和公司集群复现实验。
 
 ## 已验证环境
 
-验证日期：2026-10-16
+验证日期：2026-10-19
 
 | 组件 | 版本或状态 |
 | --- | --- |
@@ -39,6 +39,11 @@
 - 1-worker 单核 baseline 的 P95 为 `31us`，8-worker 同核 contention 的 P95 为 `1023us`（另一轮为 `2047us`），差异超过 30 倍；
 - 同一轮 cgroup v2 `cpu.pressure` 的 `some total` 增量分别为 `89510us` 和 `5940045us`，与 runqlat 上升趋势一致；
 - Minikube 节点未安装 `perf`，因此自动对照选择 cgroup PSI；`make runqlat-smoke` 会同时验证两种信号。
+- `make demo` 已完整通过，并验证卸载后项目资源不存在、重新安装后 Agent Ready `1/1`；
+- `/metrics` 实测可读取 Agent 多线程 CPU、RSS、事件丢失和 8 张 eBPF map 的 entries/capacity/memlock；
+- 发现旧 CPU map 配置在约 3 小时 45 分钟后触发 128 MiB OOM；将 task/runtime map 从 32,768/65,536 缩至 8,192/8,192；
+- 两轮共 40,000 个短进程 churn 后继续运行完整 integration，Agent restart count 与 events lost 均为 0，CRI working set 约 `101.6MiB`；
+- 修复后 Observer off/on 各 5 轮基准的吞吐中位数差异为 `-3.67%`，P99 均为 `26us`，Agent 用户态 CPU 为 `2.353%`，BPF map memlock 为 `7.0MiB`。
 
 Minikube 容器需要显式挂载节点的 `/sys/kernel/tracing`。仅设置 `privileged: true` 不会把宿主机 tracefs 自动带入容器的 mount namespace。
 

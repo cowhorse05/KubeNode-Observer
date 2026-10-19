@@ -3,7 +3,7 @@
 Kubernetes 节点出现热点时，节点级指标只能说明“哪里变慢了”，很难直接回答“哪个 Pod、容器和进程导致了问题”。
 KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测项目，目标是建立 Node → Pod → Container → Process 的关联，并为后续的 microVM/Kata Containers 隔离开销研究提供可复现实验基础。
 
-当前已经完成进程生命周期、CPU 热点和 run queue latency 观测闭环：节点 DaemonSet 捕获 exec/exit 与调度事件，通过 cgroup ID 关联 Kubernetes Workload，并提供 Pod → Container → Process 逐层下钻。
+当前 v0.1.0 已完成进程生命周期、CPU 热点和 run queue latency 观测闭环：节点 DaemonSet 捕获 exec/exit 与调度事件，通过 cgroup ID 关联 Kubernetes Workload，并提供 Pod → Container → Process 逐层下钻。
 
 ## 当前能力
 
@@ -16,7 +16,27 @@ KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测
 - 以特权 DaemonSet 运行，并最小化挂载节点 tracefs；
 - 提供 `/healthz`、`/api/v1/topology`、`/api/v1/events`、`/api/v1/cpu`、`/api/v1/runqlat` 以及对应 CLI；
 - 统计 ring buffer 预留失败造成的事件丢失，并通过 `eventsLost` 暴露；
+- 通过 `/metrics` 暴露 Agent CPU、RSS、Go heap、BPF map 占用和事件丢失；
 - 提供不依赖远端镜像仓库的本地端到端 smoke test。
+
+## 一键 Demo
+
+在满足 Linux BTF、cgroup v2、Docker、kubectl 和 Minikube 前置条件后：
+
+```bash
+make demo
+```
+
+该命令会构建本地静态二进制和无 registry 域名的镜像、注入 `kno-dev` Minikube、部署 Agent，并依次验证 lifecycle、CPU hotspot 和 run queue latency。它不会从 Docker Hub 拉取项目 workload 镜像。
+
+只安装或卸载项目资源：
+
+```bash
+make install-minikube
+make uninstall-minikube
+```
+
+完整操作步骤见 [Demo 指南](docs/demo.md)，支持边界见 [支持矩阵与限制](docs/support-matrix.md)。
 
 ## 本地开发
 
@@ -58,6 +78,7 @@ kubectl --context kno-dev -n kube-system logs -l app.kubernetes.io/name=kno-agen
 ```bash
 kubectl --context kno-dev -n kube-system port-forward service/kno-agent 18080:18080
 ./bin/kno health
+curl http://127.0.0.1:18080/metrics
 ```
 
 查询指定 Pod 的容器、cgroup 和进程拓扑：
@@ -95,9 +116,17 @@ kubectl --context kno-dev -n kube-system port-forward service/kno-agent 18080:18
 
 拓扑中的 `cgroupId` 是 cgroup v2 目录 inode，可直接与 `bpf_get_current_cgroup_id()` 返回值关联。CRI 负责提供容器 PID 和 Kubernetes 标签，Informer 负责验证 Pod UID、Phase 与 QoS，`/host/proc` 负责确认实际进程归属。
 
+重复运行 Observer off/on 性能基线：
+
+```bash
+make benchmark
+```
+
+当前 2 vCPU WSL2/Minikube 的 5 轮中位数结果为：吞吐差异 `-3.67%`、P99 无变化、Agent 用户态 CPU `2.353%`、RSS 约 `116 MiB`、BPF map memlock `7.0 MiB`。原始轮次和方法见 [实验记录](log/2026-10-19-m6-observer-benchmark.md)。
+
 ## 内网镜像约定
 
 项目中的基础镜像和示例镜像使用不带 registry 域名的短名称，例如 `library/golang:1.26-alpine` 和 `iclaw/busybox:1.37.0-musl`，由公司环境的容器运行时镜像仓库配置完成解析。标准 Minikube 会把短名称补全为 `docker.io/...`；在无法访问 Docker Hub 的个人环境中，优先使用 `Dockerfile.local`、`minikube image load` 和 `make smoke`，它们不需要拉取运行时镜像。
 
-完整的研究问题、里程碑与验收指标见 [docs/plan.md](docs/plan.md)。
+完整的研究问题、里程碑与验收指标见 [开发计划](docs/plan.md)，数据流见 [架构说明](docs/architecture.md)。
 

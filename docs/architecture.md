@@ -97,3 +97,16 @@ sched_switch（prev 仍 runnable）───────┘
 任务从睡眠被唤醒时记录 runnable 起点；时间片结束但仍可运行的任务，则在 switch-out 时重新进入等待。下一次 switch-in 结算等待时长。因为 `bpf_get_current_cgroup_id()` 在 `sched_switch` 中只能可靠表示 prev task，程序另外维护 PID → cgroup/TGID 身份缓存，首次尚未建立身份的调度样本会被跳过。
 
 每次等待只更新内核 LRU map，不经过 ring buffer。直方图以微秒为单位，bucket `n` 表示 `[2^n, 2^(n+1)-1]`；P50/P95/P99 返回命中 bucket 的上界，属于有界近似值。API 在请求开始与结束时读取累计 map 并做差，因此 `--duration` 是独立的按需实验窗口。
+
+## Observer 自监控
+
+```text
+/proc/self/task/*/schedstat ──> process CPU seconds ┐
+/proc/self/statm            ──> process RSS         │
+Go runtime                  ──> heap bytes          ├──> /metrics
+BPF_OBJ_GET_INFO_BY_FD      ──> map capacity/memlock│
+map iterator                ──> logical entries     │
+exec event_stats            ──> events lost         ┘
+```
+
+`/metrics` 使用 Prometheus text format，只观测 Agent 自身和项目 eBPF map，不重复实现 node-exporter。map entries 在 scrape 时线性遍历，因此定位为低频诊断指标；具体开销必须和 scrape 周期一起解释。

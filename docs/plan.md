@@ -292,6 +292,8 @@ kno trace runqlat --pod demo --duration 30s
 
 目标：形成可以安装、演示和重复测量的 v0.1.0。
 
+状态（2026-10-19）：已完成。一键 Minikube demo 连续通过 lifecycle、CPU hotspot、runqlat 三条链路，卸载/重装已验证；Agent 自监控覆盖 CPU、RSS、Go heap、map occupancy/memlock 和事件丢失；Observer off/on 各 5 轮基准已固化；40,000 短进程稳定性测试后无重启、无丢事件；支持矩阵和限制已公开。
+
 任务：
 
 - Helm chart 或完整 Minikube 部署脚本。
@@ -367,18 +369,15 @@ microVM 工作在 MVP 完成后开始。
 - 不同并发 Pod 数量下的缓存和采集开销。
 - Observer 开启前后的 workload throughput 和 P99 latency。
 
-## 10. 近期任务清单
+## 10. 下一阶段：性能优化
 
-只安排当前最近的一段工作，完成后再细化后续任务。
+M6 已完成，当前停在性能优化入口，不提前进入 Kata 或 Web UI。
 
-1. 增加 Helm chart 或完整的一键安装/卸载流程。
-2. 采集 Agent 自身 CPU、RSS、BPF map 容量与事件丢失指标。
-3. 建立 Observer 开启/关闭时的 workload 吞吐和 P99 对照实验。
-4. 固化 exec、CPU hotspot、runqlat 三条集成测试流水线。
-5. 编写限制、支持矩阵和可重复演示文档。
-6. 准备 `v0.1.0` 发布产物。
-
-M6 完成前不进入 Kata 或 Web UI。
+1. 将 CPU runtime map、runqlat map、拓扑刷新与 metrics scrape 的成本分项测量；
+2. 继续验证 CPU map 缩容后 128 MiB limit 下的长时内存平台，并拆分 Go heap 与内核 map charge；
+3. 使用更多轮次和 AB/BA 交替顺序重做吞吐/P99 统计；
+4. 每项优化必须同时通过 integration，并对比 events lost、map occupancy 与归属正确性；
+5. 性能结论稳定后再开始 M7 Kata Host 侧识别。
 
 ## 11. 主要风险
 
