@@ -37,28 +37,28 @@ struct latency_stats {
 
 struct {
     __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 65536);
+    __uint(max_entries, 16384);
     __type(key, __u32);
     __type(value, __u64);
 } runnable_since SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 65536);
+    __uint(max_entries, 16384);
     __type(key, __u32);
     __type(value, struct task_identity);
 } task_identity SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 16384);
+    __uint(max_entries, 4096);
     __type(key, struct latency_key);
     __type(value, struct latency_stats);
 } latency_stats SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 65536);
+    __uint(max_entries, 16384);
     __type(key, struct histogram_key);
     __type(value, __u64);
 } latency_histogram SEC(".maps");
