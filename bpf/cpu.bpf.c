@@ -23,14 +23,14 @@ struct cpu_value {
 
 struct {
     __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 32768);
+    __uint(max_entries, 8192);
     __type(key, __u32);
     __type(value, __u64);
 } task_start SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 65536);
+    __uint(max_entries, 8192);
     __type(key, struct cpu_key);
     __type(value, struct cpu_value);
 } cpu_runtime SEC(".maps");

@@ -16,7 +16,7 @@
 - off 通过删除 DaemonSet 确保 BPF link 关闭，on 重新部署并等待 Ready；
 - Agent CPU 用所有 `/proc/self/task/*/schedstat` 的窗口 delta 计算。
 
-## 结果
+## 首轮结果（CPU map 缩容前）
 
 | Observer | Throughput (ops/s) | P99 (us) |
 | --- | ---: | ---: |
@@ -45,11 +45,36 @@ events lost:         0
 agent restart count: 0
 ```
 
+## 长时稳定性发现与修复
+
+最终发布审计时发现 Agent 在旧配置下持续运行约 3 小时 45 分钟后 OOMKilled。此时 CPU runtime map 已持续积累退出进程，周期快照的用户态分配随 entries 增长。将 `cpu_task_start` 从 32,768 缩至 8,192、`cpu_runtime` 从 65,536 缩至 8,192，并把此前遗漏的 task-start map 纳入 `/metrics`。
+
+修复后用两轮共 40,000 个短进程快速填充 LRU map，再运行完整 integration：restart count `0`、events lost `0`，CRI working set 为 `106,524,672 bytes`（约 101.6 MiB），剩余 `27,693,056 bytes`。CPU runtime/task-start 分别稳定在 `7,529/8,192` 和 `7,158/8,192`。
+
+## 修复后最终基线
+
+| Observer | Throughput (ops/s) | P99 (us) |
+| --- | ---: | ---: |
+| off round 1 | 131,538.48 | 21 |
+| off round 2 | 114,183.02 | 28 |
+| off round 3 | 113,702.67 | 29 |
+| off round 4 | 128,754.44 | 26 |
+| off round 5 | 129,301.23 | 26 |
+| **off median** | **128,754.44** | **26** |
+| on round 1 | 130,874.77 | 24 |
+| on round 2 | 116,690.07 | 27 |
+| on round 3 | 118,163.84 | 26 |
+| on round 4 | 124,032.50 | 26 |
+| on round 5 | 126,220.32 | 25 |
+| **on median** | **124,032.50** | **26** |
+
+最终相对差异：吞吐 `-3.67%`，P99 `0%`；Agent 用户态平均 CPU `2.353%`、RSS `121,790,464 bytes`、BPF map memlock `7,364,896 bytes`，events lost 和 restart count 均为 0。两次 benchmark 的绝对吞吐差异较大，再次说明只能比较同一轮的 on/off，不能把共享 WSL2 的绝对值当作生产承诺。
+
 ## 阶段 Review
 
 - 初版 CPU 指标只读 main thread，benchmark 显示 0%，已定位并修复为全 task 汇总；
 - 初版 latency 使用 log2 桶，17/33 us 的跨桶导致百分比失真，已改为 1 us 线性桶；
 - 5 轮中 on round 3 有明显低吞吐，说明 WSL2/Minikube 上单次结果不可作为结论；中位数能抗单个异常点，但毕业设计正式实验仍应增加轮数并交替 AB/BA 顺序；
-- 当前数据没有显示可区分于噪声的吞吐下降，但 P99 有 1 us 增量；
-- RSS 已接近 128 MiB limit，且 BPF memlock 为 12.1 MiB，这比吞吐差异更值得优先优化；
+- 最终基线显示吞吐中位数下降 3.67%，P99 无变化；该幅度将作为下一阶段是否优化有效的比较基线；
+- CPU map 缩容后 BPF memlock 从 12.1 MiB 降至 7.0 MiB，高 churn 后 CRI working set 保持在约 101.6 MiB；
 - 至此已具备性能优化的 baseline。下一阶段应先拆分 map 占用、拓扑/CPU 采集周期和 scrape 迭代成本，再做参数优化，不应根据本轮噪声直接修改 eBPF 逻辑。

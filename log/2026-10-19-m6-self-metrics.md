@@ -45,4 +45,6 @@ kno_agent_metrics_collection_errors         0
 - BPF memlock 是内核报告值，比按 key/value 大小推算更可靠，但不等同于容器 working set；
 - 当前 map entries 在 scrape 时做线性迭代，适用于低频自监控；scrape 周期对 Agent CPU 的影响需要在后续性能基准中测量。
 
-性能基准首轮发现只读取 `/proc/self/schedstat` 会得到调用线程而非整个 Go 进程的 CPU 时间，因此数值在采样窗口内可能不变。实现已改为汇总所有 task，并用两个伪 task 的单元测试覆盖；修复后的 5 轮 benchmark 测得 Agent 平均 CPU 为 1.674%。
+性能基准首轮发现只读取 `/proc/self/schedstat` 会得到调用线程而非整个 Go 进程的 CPU 时间，因此数值在采样窗口内可能不变。实现已改为汇总所有 task，并用两个伪 task 的单元测试覆盖；CPU 统计修复后的首轮 5 轮 benchmark 测得 Agent 平均 CPU 为 1.674%。
+
+发布审计又发现 CPU probe 的 `task_start` map 未纳入指标，且旧的 32,768/65,536 容量会放大长时用户态快照。最终版本已同时暴露 `cpu_task_start`，并将两张 CPU map 限制为 8,192；最终 benchmark 的 BPF map memlock 总量为 `7,364,896 bytes`，Agent 平均 CPU 为 `2.353%`。

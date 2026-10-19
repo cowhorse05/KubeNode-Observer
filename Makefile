@@ -10,7 +10,7 @@ MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
 
-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image smoke cpu-smoke runqlat-smoke benchmark integration install-minikube uninstall-minikube demo deploy undeploy
+.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image smoke cpu-smoke runqlat-smoke benchmark stability integration install-minikube uninstall-minikube demo deploy undeploy
 
 generate:
 	go generate ./internal/bpfgen
@@ -65,6 +65,10 @@ runqlat-smoke: build contention-image
 benchmark: benchmark-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
 	bash hack/benchmark-observer.sh
+
+stability: workload-image
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WORKLOAD_IMAGE)
+	bash hack/stability-test.sh
 
 integration:
 	bash hack/integration-test.sh

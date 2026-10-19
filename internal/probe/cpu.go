@@ -82,11 +82,15 @@ func (p *CPUProbe) Snapshot() ([]CPURuntime, error) {
 }
 
 func (p *CPUProbe) MapStats() ([]BPFMapStats, error) {
+	starts, err := readMapStats("cpu_task_start", p.objects.TaskStart, true)
+	if err != nil {
+		return nil, err
+	}
 	stats, err := readMapStats("cpu_runtime", p.objects.CpuRuntime, true)
 	if err != nil {
 		return nil, err
 	}
-	return []BPFMapStats{stats}, nil
+	return []BPFMapStats{starts, stats}, nil
 }
 
 func (p *CPUProbe) Close() error {
