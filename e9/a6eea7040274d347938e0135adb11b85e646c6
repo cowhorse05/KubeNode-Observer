@@ -1,0 +1,32 @@
+log/2026-10-19-m6-demo-pipeline.md
+  s_6e6fc63242599e::t_b2d646cd7a57fd 1-47
+Makefile
+  s_6e6fc63242599e::t_b17f18ebf925ab 12,60-71,73,76
+hack/uninstall-minikube.sh
+  s_6e6fc63242599e::t_b17f18ebf925ab 1-11
+hack/install-minikube.sh
+  s_6e6fc63242599e::t_b17f18ebf925ab 1-22
+hack/integration-test.sh
+  s_6e6fc63242599e::t_b17f18ebf925ab 1-26
+hack/demo.sh
+  s_6e6fc63242599e::t_59eb40826177c4 7-9,13,18
+  s_6e6fc63242599e::t_b17f18ebf925ab 1-6,10-12,14-17,19-23
+deploy/minikube/kno-agent.yaml
+  s_6e6fc63242599e::t_b17f18ebf925ab 44-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "e9a6eea7040274d347938e0135adb11b85e646c6",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
