@@ -1,0 +1,35 @@
+bpf/cpu.bpf.c
+  s_6e6fc63242599e::t_c8be954fed84c7 26,33
+examples/exec-test/churn-local.yaml
+  s_6e6fc63242599e::t_c8be954fed84c7 1-24
+Makefile
+  s_6e6fc63242599e::t_fcaf3949bfc63b 13,69-71
+log/2026-10-19-m6-self-metrics.md
+  s_6e6fc63242599e::t_ab201dd6e0a225 49-50
+  s_6e6fc63242599e::t_30c5fd40376ef3 48
+log/2026-10-19-m6-long-run-stability.md
+  s_6e6fc63242599e::t_ab201dd6e0a225 1-49
+hack/stability-test.sh
+  s_6e6fc63242599e::t_fcaf3949bfc63b 1-30,46-66,68-69,77-81,84-90,92-93
+  s_6e6fc63242599e::t_dcfc397298c297 31-45,67,70-76,82-83,91
+log/2026-10-19-m6-observer-benchmark.md
+  s_6e6fc63242599e::t_ab201dd6e0a225 19,48-72,78-79
+internal/probe/cpu.go
+  s_6e6fc63242599e::t_c8be954fed84c7 85-88,93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "7f407f475ee1893c72ff3fdd6b863bb674a9be7f",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
