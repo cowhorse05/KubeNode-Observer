@@ -1,0 +1,23 @@
+bpf/runqlat.bpf.c
+  s_6e6fc63242599e::t_7892bd0c621601 40,47,54,61
+log/2026-10-19-m5-runqlat.md
+  s_6e6fc63242599e::t_5f0af3d38ea013 66-106
+  s_6e6fc63242599e::t_dfab0e9a8fafd9 3
+  s_6e6fc63242599e::t_7892bd0c621601 1-2,4-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "cd946da80e6a96ca3443d9d206e0a543cb180606",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
