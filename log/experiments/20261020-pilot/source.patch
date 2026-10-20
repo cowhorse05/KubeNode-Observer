@@ -1,0 +1,333 @@
+diff --git a/Makefile b/Makefile
+index 67fcd2f..b385da0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -10,7 +10,7 @@ MINIKUBE_PROFILE ?= kno-dev
+ GO_BUILD_ENV ?= CGO_ENABLED=0
+ GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
+ 
+-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image smoke cpu-smoke runqlat-smoke benchmark stability integration install-minikube uninstall-minikube demo deploy undeploy
++.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image experiment-build smoke cpu-smoke runqlat-smoke benchmark accuracy experiment stability integration install-minikube uninstall-minikube demo deploy undeploy
+ 
+ generate:
+ 	go generate ./internal/bpfgen
+@@ -62,9 +62,20 @@ runqlat-smoke: build contention-image
+ 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CONTENTION_IMAGE)
+ 	bash hack/runqlat-test.sh
+ 
+-benchmark: benchmark-image
++experiment-build:
++	$(GO_BUILD_ENV) go build $(GO_BUILD_FLAGS) -o $(BINARY_DIR)/kno-experiment ./cmd/kno-experiment
++
++benchmark: benchmark-image experiment-build
++	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
++	./bin/kno-experiment --mode paired --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
++
++accuracy: benchmark-image experiment-build
++	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
++	./bin/kno-experiment --mode accuracy --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
++
++experiment: benchmark-image experiment-build
+ 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
+-	bash hack/benchmark-observer.sh
++	./bin/kno-experiment --mode all --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
+ 
+ stability: workload-image
+ 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WORKLOAD_IMAGE)
+diff --git a/cmd/kno-agent/main.go b/cmd/kno-agent/main.go
+index 34b938c..dc214ca 100644
+--- a/cmd/kno-agent/main.go
++++ b/cmd/kno-agent/main.go
+@@ -113,6 +113,7 @@ func main() {
+ 	handler.Handle("/api/v1/topology", topologyStore)
+ 	handler.Handle("/api/v1/events", events)
+ 	handler.Handle("/api/v1/cpu", cpuCollector)
++	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpuProbe, topologyStore, *cgroupRoot))
+ 	handler.Handle("/api/v1/runqlat", runQLatHandler)
+ 	server := &http.Server{
+ 		Addr:              *listenAddress,
+diff --git a/examples/observer-benchmark/main.go b/examples/observer-benchmark/main.go
+index 336b307..5d969f3 100644
+--- a/examples/observer-benchmark/main.go
++++ b/examples/observer-benchmark/main.go
+@@ -6,6 +6,7 @@ import (
+ 	"flag"
+ 	"fmt"
+ 	"os"
++	"os/exec"
+ 	"runtime"
+ 	"sync"
+ 	"time"
+@@ -16,6 +17,9 @@ import (
+ const maxLatencyUS = 10_000
+ 
+ type result struct {
++	Mode            string  `json:"mode"`
++	WarmupSeconds   float64 `json:"warmupSeconds"`
++	LatencyOverflow uint64  `json:"latencyOverflow"`
+ 	DurationSeconds float64 `json:"durationSeconds"`
+ 	Workers         int     `json:"workers"`
+ 	WorkIterations  int     `json:"workIterations"`
+@@ -28,13 +32,29 @@ type result struct {
+ 
+ func main() {
+ 	duration := flag.Duration("duration", 8*time.Second, "measurement duration")
++	warmup := flag.Duration("warmup", 3*time.Second, "unrecorded warmup")
++	mode := flag.String("mode", "steady", "steady or churn workload")
++	listen := flag.String("listen", "", "serve controlled benchmark requests")
++	child := flag.Bool("child", false, "execute one short-lived operation")
+ 	workers := flag.Int("workers", 8, "locked OS worker threads")
+ 	workIterations := flag.Int("work-iterations", 64, "SHA-256 iterations per operation")
+ 	flag.Parse()
+-	if *duration <= 0 || *workers <= 0 || *workIterations <= 0 {
++	if *duration <= 0 || *workers <= 0 || *workers > 64 || *workIterations <= 0 || *warmup < 0 || (*mode != "steady" && *mode != "churn") {
+ 		fmt.Fprintln(os.Stderr, "duration, workers and work-iterations must be positive")
+ 		os.Exit(2)
+ 	}
++	if *child {
++		payload := sha256.Sum256([]byte("kno-child"))
++		for i := 0; i < *workIterations; i++ {
++			payload = sha256.Sum256(payload[:])
++		}
++		runtime.KeepAlive(payload)
++		return
++	}
++	if *listen != "" {
++		serve(*listen, *workIterations)
++		return
++	}
+ 
+ 	start := make(chan struct{})
+ 	deadline := time.Now().Add(*duration)
+@@ -43,6 +63,9 @@ func main() {
+ 		histograms[worker] = make([]uint64, maxLatencyUS+1)
+ 	}
+ 	counts := make([]uint64, *workers)
++	overflows := make([]uint64, *workers)
++	failures := make(chan error, *workers)
++	var measurementStart time.Time
+ 	var wait sync.WaitGroup
+ 	wait.Add(*workers)
+ 	for worker := 0; worker < *workers; worker++ {
+@@ -55,37 +78,56 @@ func main() {
+ 			payload := sha256.Sum256([]byte(fmt.Sprintf("kno-worker-%d", worker)))
+ 			for time.Now().Before(deadline) {
+ 				operationStart := time.Now()
+-				for iteration := 0; iteration < *workIterations; iteration++ {
+-					payload = sha256.Sum256(payload[:])
++				if *mode == "churn" {
++					command := exec.Command("/benchmark", "--child", fmt.Sprintf("--work-iterations=%d", *workIterations))
++					if err := command.Run(); err != nil {
++						failures <- err
++						return
++					}
++				} else {
++					for iteration := 0; iteration < *workIterations; iteration++ {
++						payload = sha256.Sum256(payload[:])
++					}
++					_, _, _ = unix.Syscall(unix.SYS_SCHED_YIELD, 0, 0, 0)
++				}
++				if operationStart.Before(measurementStart) {
++					continue
+ 				}
+-				_, _, _ = unix.Syscall(unix.SYS_SCHED_YIELD, 0, 0, 0)
+ 				elapsedUS := uint64((time.Since(operationStart) + time.Microsecond - 1) / time.Microsecond)
+ 				if elapsedUS > maxLatencyUS {
+ 					elapsedUS = maxLatencyUS
++					overflows[worker]++
+ 				}
+ 				histograms[worker][elapsedUS]++
+ 				counts[worker]++
+ 			}
+-			if payload[0] == 255 {
+-				fmt.Fprint(os.Stderr, "")
+-			}
++			runtime.KeepAlive(payload)
+ 		}()
+ 	}
+ 	startedAt := time.Now()
+-	deadline = startedAt.Add(*duration)
++	measurementStart = startedAt.Add(*warmup)
++	deadline = measurementStart.Add(*duration)
+ 	close(start)
+ 	wait.Wait()
+-	elapsed := time.Since(startedAt)
++	select {
++	case err := <-failures:
++		fmt.Fprintln(os.Stderr, err)
++		os.Exit(1)
++	default:
++	}
++	elapsed := time.Since(measurementStart)
+ 
+ 	histogram := make([]uint64, maxLatencyUS+1)
+-	var operations uint64
++	var operations, overflow uint64
+ 	for worker := range histograms {
+ 		operations += counts[worker]
++		overflow += overflows[worker]
+ 		for bucket, count := range histograms[worker] {
+ 			histogram[bucket] += count
+ 		}
+ 	}
+ 	response := result{
++		Mode: *mode, WarmupSeconds: warmup.Seconds(), LatencyOverflow: overflow,
+ 		DurationSeconds: elapsed.Seconds(),
+ 		Workers:         *workers,
+ 		WorkIterations:  *workIterations,
+diff --git a/hack/benchmark-observer.sh b/hack/benchmark-observer.sh
+deleted file mode 100755
+index dc8ef9b..0000000
+--- a/hack/benchmark-observer.sh
++++ /dev/null
+@@ -1,118 +0,0 @@
+-#!/usr/bin/env bash
+-set -euo pipefail
+-
+-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+-cd "${ROOT_DIR}"
+-
+-KUBE_CONTEXT="${KUBE_CONTEXT:-kno-dev}"
+-ROUNDS="${BENCHMARK_ROUNDS:-5}"
+-TEST_POD="kno-observer-benchmark"
+-TEST_TMP_DIR="$(mktemp -d)"
+-PORT_FORWARD_PID=""
+-
+-cleanup() {
+-  if [[ -n "${PORT_FORWARD_PID}" ]]; then
+-    kill "${PORT_FORWARD_PID}" 2>/dev/null || true
+-    wait "${PORT_FORWARD_PID}" 2>/dev/null || true
+-  fi
+-  kubectl --context "${KUBE_CONTEXT}" delete pod "${TEST_POD}" --ignore-not-found --wait=false >/dev/null
+-  kubectl --context "${KUBE_CONTEXT}" apply -f deploy/minikube/kno-agent.yaml >/dev/null
+-  rm -rf -- "${TEST_TMP_DIR}"
+-}
+-trap cleanup EXIT
+-
+-run_case() {
+-  local mode="$1"
+-  local round="$2"
+-  kubectl --context "${KUBE_CONTEXT}" delete pod "${TEST_POD}" --ignore-not-found >/dev/null
+-  kubectl --context "${KUBE_CONTEXT}" apply -f examples/observer-benchmark/pod-local.yaml >/dev/null
+-  for _ in $(seq 1 120); do
+-    phase="$(kubectl --context "${KUBE_CONTEXT}" get pod "${TEST_POD}" -o jsonpath='{.status.phase}')"
+-    if [[ "${phase}" == "Succeeded" ]]; then
+-      break
+-    fi
+-    if [[ "${phase}" == "Failed" ]]; then
+-      kubectl --context "${KUBE_CONTEXT}" logs "${TEST_POD}" >&2 || true
+-      echo "benchmark Pod failed" >&2
+-      exit 1
+-    fi
+-    sleep 1
+-  done
+-  if [[ "${phase}" != "Succeeded" ]]; then
+-    echo "benchmark Pod did not complete within 120 seconds (phase=${phase})" >&2
+-    exit 1
+-  fi
+-  local output throughput p99
+-  output="$(kubectl --context "${KUBE_CONTEXT}" logs "${TEST_POD}")"
+-  throughput="$(sed -n 's/.*"throughputOpsPerSecond":\([0-9.]*\).*/\1/p' <<<"${output}")"
+-  p99="$(sed -n 's/.*"p99Us":\([0-9]*\).*/\1/p' <<<"${output}")"
+-  if [[ -z "${throughput}" || -z "${p99}" ]]; then
+-    echo "invalid benchmark response: ${output}" >&2
+-    exit 1
+-  fi
+-  printf '%s %s %s\n' "${mode}" "${throughput}" "${p99}" >>"${TEST_TMP_DIR}/results"
+-  echo "${mode} round ${round}: throughput=${throughput} ops/s, p99=${p99} us"
+-}
+-
+-median() {
+-  sort -n | awk '{ values[NR]=$1 } END { if (NR % 2) print values[(NR+1)/2]; else print (values[NR/2]+values[NR/2+1])/2 }'
+-}
+-
+-kubectl --context "${KUBE_CONTEXT}" -n kube-system delete daemonset kno-agent --ignore-not-found >/dev/null
+-for _ in $(seq 1 60); do
+-  if [[ -z "$(kubectl --context "${KUBE_CONTEXT}" -n kube-system get pods -l app.kubernetes.io/name=kno-agent -o name)" ]]; then
+-    break
+-  fi
+-  sleep 1
+-done
+-for round in $(seq 1 "${ROUNDS}"); do
+-  run_case off "${round}"
+-done
+-
+-kubectl --context "${KUBE_CONTEXT}" apply -f deploy/minikube/kno-agent.yaml >/dev/null
+-kubectl --context "${KUBE_CONTEXT}" -n kube-system rollout status daemonset/kno-agent --timeout=120s >/dev/null
+-
+-kubectl --context "${KUBE_CONTEXT}" -n kube-system port-forward service/kno-agent 18084:18080 \
+-  >"${TEST_TMP_DIR}/port-forward.log" 2>&1 &
+-PORT_FORWARD_PID=$!
+-for _ in $(seq 1 20); do
+-  if curl -fsS http://127.0.0.1:18084/metrics >"${TEST_TMP_DIR}/metrics-before" 2>/dev/null; then
+-    break
+-  fi
+-  sleep 0.5
+-done
+-if [[ ! -s "${TEST_TMP_DIR}/metrics-before" ]]; then
+-  echo "agent metrics endpoint did not become ready" >&2
+-  exit 1
+-fi
+-agent_started="$(date +%s.%N)"
+-for round in $(seq 1 "${ROUNDS}"); do
+-  run_case on "${round}"
+-done
+-agent_finished="$(date +%s.%N)"
+-curl -fsS http://127.0.0.1:18084/metrics >"${TEST_TMP_DIR}/metrics-after"
+-
+-off_throughput="$(awk '$1 == "off" { print $2 }' "${TEST_TMP_DIR}/results" | median)"
+-on_throughput="$(awk '$1 == "on" { print $2 }' "${TEST_TMP_DIR}/results" | median)"
+-off_p99="$(awk '$1 == "off" { print $3 }' "${TEST_TMP_DIR}/results" | median)"
+-on_p99="$(awk '$1 == "on" { print $3 }' "${TEST_TMP_DIR}/results" | median)"
+-cpu_before="$(awk '$1 == "kno_agent_cpu_seconds_total" { print $2 }' "${TEST_TMP_DIR}/metrics-before")"
+-cpu_after="$(awk '$1 == "kno_agent_cpu_seconds_total" { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
+-rss="$(awk '$1 == "kno_agent_resident_memory_bytes" { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
+-memlock="$(awk '$1 ~ /^kno_agent_bpf_map_memlock_bytes{/ { total += $2 } END { print total }' "${TEST_TMP_DIR}/metrics-after")"
+-events_lost="$(awk '$1 == "kno_agent_events_lost_total" { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
+-restart_count="$(kubectl --context "${KUBE_CONTEXT}" -n kube-system get pods -l app.kubernetes.io/name=kno-agent -o jsonpath='{.items[0].status.containerStatuses[0].restartCount}')"
+-
+-awk -v off_t="${off_throughput}" -v on_t="${on_throughput}" \
+-  -v off_p="${off_p99}" -v on_p="${on_p99}" \
+-  -v cpu_before="${cpu_before}" -v cpu_after="${cpu_after}" \
+-  -v started="${agent_started}" -v finished="${agent_finished}" \
+-  -v rss="${rss}" -v memlock="${memlock}" \
+-  -v events_lost="${events_lost}" -v restart_count="${restart_count}" 'BEGIN {
+-    printf "median throughput: observer off=%.2f, on=%.2f ops/s, delta=%.2f%%\n", off_t, on_t, (on_t/off_t-1)*100
+-    printf "median p99: observer off=%.0f, on=%.0f us, delta=%.2f%%\n", off_p, on_p, (on_p/off_p-1)*100
+-    printf "agent average CPU during on rounds: %.3f%%\n", (cpu_after-cpu_before)/(finished-started)*100
+-    printf "agent RSS after benchmark: %.0f bytes\n", rss
+-    printf "BPF map memlock total: %.0f bytes\n", memlock
+-    printf "events lost: %.0f, agent restarts: %.0f\n", events_lost, restart_count
+-  }'
+diff --git a/internal/cpu/collector.go b/internal/cpu/collector.go
+index a28cf7c..260a2ff 100644
+--- a/internal/cpu/collector.go
++++ b/internal/cpu/collector.go
+@@ -121,10 +121,7 @@ func (c *Collector) Collect(now time.Time) error {
+ 		key := runtimeKey{runtime.CgroupID, runtime.TGID, runtime.PID}
+ 		current[key] = runtime.Runtime
+ 		previous, existed := c.previous[key]
+-		delta := runtime.Runtime
+-		if existed && runtime.Runtime >= previous {
+-			delta = runtime.Runtime - previous
+-		}
++		delta := runtimeDelta(runtime.Runtime, previous, existed)
+ 		if delta == 0 {
+ 			continue
+ 		}
+@@ -183,6 +180,15 @@ func (c *Collector) Collect(now time.Time) error {
+ 	return nil
+ }
+ 
++// runtimeDelta is shared by the production collector and the accuracy experiment.
++// New or reset keys are treated as cumulative values since their creation.
++func runtimeDelta(current, previous uint64, existed bool) uint64 {
++	if existed && current >= previous {
++		return current - previous
++	}
++	return current
++}
++
+ type resolvedContainer struct {
+ 	container topology.Container
+ 	source    string

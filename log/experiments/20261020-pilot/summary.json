@@ -1,0 +1,39 @@
+{
+  "status": "complete",
+  "config": {
+    "mode": "accuracy",
+    "context": "kno-dev",
+    "output": "log/experiments/20261020-pilot",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "pairs": 4,
+    "accuracyRepeats": 1,
+    "intervals": "1s",
+    "durationNs": 3000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000
+  },
+  "accuracyCases": [
+    {
+      "mode": "steady",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-1s-01.json",
+      "absoluteErrorPercent": 0.7723738124371438,
+      "signedErrorPercent": -0.7723738124371438,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-1s-01.json",
+      "absoluteErrorPercent": 2.8026225488685164,
+      "signedErrorPercent": -2.8026225488685164,
+      "referenceSkewPercent": 0.12732696187572176,
+      "missingKeys": 3390,
+      "resetKeys": 0
+    }
+  ]
+}

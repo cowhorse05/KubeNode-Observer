@@ -373,9 +373,11 @@ microVM 工作在 MVP 完成后开始。
 
 M6 已完成，当前停在性能优化入口，不提前进入 Kata 或 Web UI。
 
+2026-10-20 已实现可重复的 AB/BA 配对实验和 CPU runtime/cgroup 精度对照，完成 8 个独立配对及 12 个精度窗口，当前等待人工 review。方法见 [实验指南](experiments.md)，数据与限制见 [实验记录](../log/2026-10-20-paired-accuracy.md)。
+
 1. 将 CPU runtime map、runqlat map、拓扑刷新与 metrics scrape 的成本分项测量；
 2. 继续验证 CPU map 缩容后 128 MiB limit 下的长时内存平台，并拆分 Go heap 与内核 map charge；
-3. 使用更多轮次和 AB/BA 交替顺序重做吞吐/P99 统计；
+3. 使用已实现的 AB/BA 执行器，在更受控的 CPU 环境和更长窗口下复测吞吐/P99；
 4. 每项优化必须同时通过 integration，并对比 events lost、map occupancy 与归属正确性；
 5. 性能结论稳定后再开始 M7 Kata Host 侧识别。
 
