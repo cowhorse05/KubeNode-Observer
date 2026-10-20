@@ -121,10 +121,7 @@ func (c *Collector) Collect(now time.Time) error {
 		key := runtimeKey{runtime.CgroupID, runtime.TGID, runtime.PID}
 		current[key] = runtime.Runtime
 		previous, existed := c.previous[key]
-		delta := runtime.Runtime
-		if existed && runtime.Runtime >= previous {
-			delta = runtime.Runtime - previous
-		}
+		delta := runtimeDelta(runtime.Runtime, previous, existed)
 		if delta == 0 {
 			continue
 		}
@@ -181,6 +178,15 @@ func (c *Collector) Collect(now time.Time) error {
 	})
 	c.setError(nil)
 	return nil
+}
+
+// runtimeDelta is shared by the production collector and the accuracy experiment.
+// New or reset keys are treated as cumulative values since their creation.
+func runtimeDelta(current, previous uint64, existed bool) uint64 {
+	if existed && current >= previous {
+		return current - previous
+	}
+	return current
 }
 
 type resolvedContainer struct {

@@ -10,7 +10,7 @@ MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
 
-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image smoke cpu-smoke runqlat-smoke benchmark stability integration install-minikube uninstall-minikube demo deploy undeploy
+.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image experiment-build smoke cpu-smoke runqlat-smoke benchmark accuracy experiment stability integration install-minikube uninstall-minikube demo deploy undeploy
 
 generate:
 	go generate ./internal/bpfgen
@@ -62,9 +62,20 @@ runqlat-smoke: build contention-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CONTENTION_IMAGE)
 	bash hack/runqlat-test.sh
 
-benchmark: benchmark-image
+experiment-build:
+	$(GO_BUILD_ENV) go build $(GO_BUILD_FLAGS) -o $(BINARY_DIR)/kno-experiment ./cmd/kno-experiment
+
+benchmark: benchmark-image experiment-build
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
-	bash hack/benchmark-observer.sh
+	./bin/kno-experiment --mode paired --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
+
+accuracy: benchmark-image experiment-build
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
+	./bin/kno-experiment --mode accuracy --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
+
+experiment: benchmark-image experiment-build
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
+	./bin/kno-experiment --mode all --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
 
 stability: workload-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WORKLOAD_IMAGE)
