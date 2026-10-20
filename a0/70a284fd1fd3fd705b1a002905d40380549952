@@ -1,0 +1,22 @@
+.gitattributes
+  s_6e6fc63242599e::t_e05630659bf5fe 2
+  s_6e6fc63242599e::t_44bcdc5c6c933c 1,3
+hack/verify-metrics-cache.sh
+  s_6e6fc63242599e::t_e05630659bf5fe 12-15,57,60,70,74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "a070a284fd1fd3fd705b1a002905d40380549952",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
