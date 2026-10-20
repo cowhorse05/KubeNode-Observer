@@ -1,6 +1,7 @@
 package probe
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/cilium/ebpf"
@@ -37,14 +38,32 @@ func readMapStats(name string, current *ebpf.Map, countEntries bool) (BPFMapStat
 		return result, nil
 	}
 
-	key := make([]byte, info.KeySize)
-	value := make([]byte, info.ValueSize)
-	iterator := current.Iterate()
-	for iterator.Next(key, value) {
-		result.Entries++
-	}
-	if err := iterator.Err(); err != nil {
+	entries, err := countMapKeys(info.KeySize, info.MaxEntries, current.NextKey)
+	if err != nil {
 		return BPFMapStats{}, fmt.Errorf("count %s map entries: %w", name, err)
 	}
+	result.Entries = entries
 	return result, nil
+}
+
+// Like Map.Iterate, this is a non-atomic census under concurrent mutation.
+// Only keys are needed for occupancy. Do not Lookup/decode every value.
+// Deletion can restart traversal, so bound work and discard incomplete counts.
+func countMapKeys(keySize, capacity uint32, next func(any, any) error) (uint64, error) {
+	if keySize == 0 || capacity == 0 {
+		return 0, fmt.Errorf("invalid map key size/capacity")
+	}
+	var previous any
+	cursor := any(make([]byte, keySize))
+	for count := uint64(0); count <= uint64(capacity); count++ {
+		err := next(previous, cursor)
+		if errors.Is(err, ebpf.ErrKeyNotExist) {
+			return count, nil
+		}
+		if err != nil {
+			return 0, err
+		}
+		previous = cursor
+	}
+	return 0, ebpf.ErrIterationAborted
 }

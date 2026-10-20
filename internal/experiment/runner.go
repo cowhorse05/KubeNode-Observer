@@ -23,17 +23,20 @@ import (
 )
 
 type Config struct {
-	Mode       string        `json:"mode"`
-	Context    string        `json:"context"`
-	Output     string        `json:"output"`
-	Image      string        `json:"image"`
-	AgentImage string        `json:"costAgentImage,omitempty"`
-	Pairs      int           `json:"pairs"`
-	Repeats    int           `json:"accuracyRepeats"`
-	Intervals  string        `json:"intervals"`
-	Duration   time.Duration `json:"durationNs"`
-	Warmup     time.Duration `json:"warmupNs"`
-	Settle     time.Duration `json:"settleNs"`
+	Mode           string        `json:"mode"`
+	Context        string        `json:"context"`
+	Output         string        `json:"output"`
+	Image          string        `json:"image"`
+	AgentImage     string        `json:"costAgentImage,omitempty"`
+	BaselineImage  string        `json:"baselineAgentImage,omitempty"`
+	CandidateImage string        `json:"candidateAgentImage,omitempty"`
+	TestAgentImage string        `json:"testAgentImage,omitempty"`
+	Pairs          int           `json:"pairs"`
+	Repeats        int           `json:"accuracyRepeats"`
+	Intervals      string        `json:"intervals"`
+	Duration       time.Duration `json:"durationNs"`
+	Warmup         time.Duration `json:"warmupNs"`
+	Settle         time.Duration `json:"settleNs"`
 }
 
 type Workload struct {
@@ -74,6 +77,9 @@ type Summary struct {
 	P99Effect        *Effect        `json:"p99Effect,omitempty"`
 	Accuracy         []AccuracyCase `json:"accuracyCases,omitempty"`
 	Cost             []CostCase     `json:"costCases,omitempty"`
+	Metrics          []MetricsPair  `json:"metricsPairs,omitempty"`
+	MetricsCPUEffect *Effect        `json:"metricsCpuEffect,omitempty"`
+	MetricsP95Effect *Effect        `json:"metricsP95Effect,omitempty"`
 	Error            string         `json:"error,omitempty"`
 	RestoreError     string         `json:"restoreError,omitempty"`
 }
@@ -185,12 +191,21 @@ func Run(ctx context.Context, config Config) (runErr error) {
 	if config.Mode == "cost" {
 		return r.cost()
 	}
+	if config.Mode == "metrics" {
+		return r.metricsComparison()
+	}
 	return nil
 }
 
 func validate(c Config) ([]time.Duration, error) {
-	if c.Mode != "all" && c.Mode != "paired" && c.Mode != "accuracy" && c.Mode != "cost" {
-		return nil, fmt.Errorf("mode must be all, paired, accuracy or cost")
+	if c.Mode != "all" && c.Mode != "paired" && c.Mode != "accuracy" && c.Mode != "cost" && c.Mode != "metrics" {
+		return nil, fmt.Errorf("mode must be all, paired, accuracy, cost or metrics")
+	}
+	if c.Mode == "metrics" && (c.BaselineImage == "" || c.CandidateImage == "" || c.BaselineImage == c.CandidateImage || c.Duration < 20*time.Second) {
+		return nil, fmt.Errorf("metrics needs distinct baseline/candidate images and duration >=20s")
+	}
+	if c.TestAgentImage != "" && (c.Mode == "cost" || c.Mode == "metrics") {
+		return nil, fmt.Errorf("test-agent-image is for paired/accuracy/all only")
 	}
 	if c.Mode == "cost" && (c.AgentImage == "" || c.Duration%time.Second != 0) {
 		return nil, fmt.Errorf("cost needs an agent image and whole-second duration")
@@ -317,6 +332,15 @@ func (r *runner) prepare() error {
 	r.original, err = json.Marshal(ds)
 	if err != nil {
 		return err
+	}
+	if r.config.TestAgentImage != "" {
+		r.active, err = imageManifest(r.original, r.config.TestAgentImage)
+		if err != nil {
+			return err
+		}
+		if err := r.write("active-agent.json", r.active); err != nil {
+			return err
+		}
 	}
 	// Dedicated test pod name must be free; never replace a pre-existing user pod.
 	existing, err := r.kube(r.ctx, nil, "-n", "default", "get", "pod", "kno-observer-experiment", "--ignore-not-found", "-o", "name")

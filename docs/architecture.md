@@ -109,4 +109,6 @@ map iterator                ──> logical entries     │
 exec event_stats            ──> events lost         ┘
 ```
 
-`/metrics` 使用 Prometheus text format，只观测 Agent 自身和项目 eBPF map，不重复实现 node-exporter。map entries 在 scrape 时线性遍历，因此定位为低频诊断指标；具体开销必须和 scrape 周期一起解释。
+`/metrics` 使用 Prometheus text format，只观测 Agent 自身和项目 eBPF map，不重复实现 node-exporter。map stats 由单个后台 worker 首次立即采样，之后每次完成后等待 `--map-stats-interval`（默认 15s）再刷新。占用统计只遍历 key，不读取 value；最多执行 `MaxEntries+1` 次 next-key 调用，无法完成则报错，不输出被截断的计数。并发更新/删除下是非原子的近似 census，可能重复或漏计，不用于精确 eviction/丢失率。
+
+HTTP 抓取只读取不可变快照，不等待或触发 map 扫描。`bpf_map_stats_ready/age_seconds/last_success_timestamp_seconds/refresh_duration_seconds/refresh_error/refresh_errors_total` 描述各 source 的新鲜度和错误；标签固定为 exec/cpu/runqlat。刷新失败可暂时保留最近成功值，同时增加 collection errors；超过 3 倍刷新间隔后该 source 的 entries/capacity/memlock 全部停止输出，不能把缺失当成零。健康/lifecycle/process 指标仍在每次 scrape 时读取。退出时先停止并等待后台刷新，再关闭 map FD。

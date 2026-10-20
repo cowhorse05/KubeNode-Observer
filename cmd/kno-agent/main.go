@@ -34,6 +34,7 @@ func main() {
 	cgroupRoot := flag.String("cgroup-root", "/host/sys/fs/cgroup", "host cgroup v2 mount")
 	topologyInterval := flag.Duration("topology-interval", 10*time.Second, "topology refresh interval")
 	cpuInterval := flag.Duration("cpu-interval", time.Second, "CPU runtime sampling interval")
+	mapStatsInterval := flag.Duration("map-stats-interval", 15*time.Second, "background map statistics refresh delay (1s..1h)")
 	nodeName := flag.String("node-name", os.Getenv("NODE_NAME"), "Kubernetes node name")
 	flag.Parse()
 
@@ -49,8 +50,8 @@ func main() {
 	if *debugAddress != "" {
 		timing = &telemetry.Recorder{}
 	}
-	if *topologyInterval <= 0 || *cpuInterval <= 0 {
-		logger.Error("collection intervals must be positive", "topologyInterval", *topologyInterval, "cpuInterval", *cpuInterval)
+	if *topologyInterval <= 0 || *cpuInterval <= 0 || *mapStatsInterval < time.Second || *mapStatsInterval > time.Hour {
+		logger.Error("collection intervals must be positive; map stats interval must be 1s..1h", "topologyInterval", *topologyInterval, "cpuInterval", *cpuInterval, "mapStatsInterval", *mapStatsInterval)
 		os.Exit(2)
 	}
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
@@ -125,9 +126,20 @@ func main() {
 	}()
 
 	health := agent.NewHealth()
+	mapCache, err := metrics.NewMapCache([]probe.MapStatsSource{execProbe, cpuProbe, runQLatProbe}, *mapStatsInterval)
+	if err != nil {
+		logger.Error("invalid map stats configuration", "error", err)
+		return
+	}
+	mapCache.Timing = timing
+	metricsCtx, stopMetrics := context.WithCancel(ctx)
+	metricsDone := make(chan struct{})
+	go func() { defer close(metricsDone); mapCache.Run(metricsCtx) }()
+	// Join before deferred probe.Close calls: no refresh may use closed maps.
+	defer func() { stopMetrics(); <-metricsDone }()
 	handler := http.NewServeMux()
 	handler.Handle("/healthz", health.Handler())
-	metricsHandler := metrics.NewHandler(health, []probe.MapStatsSource{execProbe, cpuProbe, runQLatProbe}, "/proc")
+	metricsHandler := metrics.NewHandler(health, mapCache, "/proc")
 	metricsHandler.Timing = timing
 	handler.Handle("/metrics", metricsHandler)
 	handler.Handle("/api/v1/topology", topologyStore)

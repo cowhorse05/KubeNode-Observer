@@ -81,6 +81,8 @@ kubectl --context kno-dev -n kube-system port-forward service/kno-agent 18080:18
 curl http://127.0.0.1:18080/metrics
 ```
 
+BPF map 指标现在由后台默认每 15 秒刷新，抓取不会触发遍历。请同时查看 `kno_agent_bpf_map_stats_ready`、`age_seconds` 和 `refresh_error`；首次未就绪或过期时省略 map 数值，而不是报告为零。可用 `--map-stats-interval` 调整刷新间隔，详见 [架构说明](docs/architecture.md)。
+
 查询指定 Pod 的容器、cgroup 和进程拓扑：
 
 ```bash
@@ -125,6 +127,8 @@ make benchmark
 `make benchmark` 现采用 off/on、on/off 交替的配对实验，`make accuracy` 对照 eBPF CPU runtime 与同窗口的 cgroup `cpu.stat`；`make experiment` 连续运行两者。每轮参数、环境、源码快照和原始数据保存在 `log/experiments/`。具体方法见 [配对实验与精度对照](docs/experiments.md)。
 
 `make cost` 单独运行采集成本诊断：steady/churn × Agent 200m/1 CPU，记录分阶段墙钟耗时、CPU profile、分配量和 Agent cgroup 限流。使用独立 `:cost` 镜像，结束恢复原部署；此模式启用额外扫描和 profiling，不作为业务开销基准。
+
+`make metrics-compare` 使用已预加载的旧 `:cost` 和新 `:metrics-cache` 镜像，交替 AB/BA 比较持续 churn、每秒抓取一次 metrics 时的 CPU 和抓取延迟。此模式不开 profile/accuracy 请求，默认每个窗口 30 秒，包含后台刷新成本。
 
 v0.1.0 旧版顺序实验在 2 vCPU WSL2/Minikube 的 5 轮中位数结果为：吞吐差异 `-3.67%`、P99 无变化、Agent 用户态 CPU `2.353%`、RSS 约 `116 MiB`、BPF map memlock `7.0 MiB`。该数据保留作历史记录，不与新的配对差值直接等同；见 [实验记录](log/2026-10-19-m6-observer-benchmark.md)。
 

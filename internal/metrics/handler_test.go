@@ -1,12 +1,14 @@
 package metrics
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
@@ -42,7 +44,12 @@ func TestHandler(t *testing.T) {
 
 	recorder := httptest.NewRecorder()
 	request := httptest.NewRequest(http.MethodGet, "/metrics", nil)
-	NewHandler(fakeHealth{agent.HealthStats{EventsSeen: 3, EventsLost: 1}}, []probe.MapStatsSource{fakeMaps{}}, procRoot).ServeHTTP(recorder, request)
+	cache, err := NewMapCache([]probe.MapStatsSource{fakeMaps{}}, 15*time.Second)
+	if err != nil {
+		t.Fatal(err)
+	}
+	cache.Refresh(context.Background())
+	NewHandler(fakeHealth{agent.HealthStats{EventsSeen: 3, EventsLost: 1}}, cache, procRoot).ServeHTTP(recorder, request)
 	body := recorder.Body.String()
 	for _, expected := range []string{
 		"kno_agent_cpu_seconds_total 2.5",

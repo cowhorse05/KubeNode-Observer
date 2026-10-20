@@ -118,3 +118,22 @@ Agent cgroup 从 `/proc/self/cgroup` 定位，再读挂载的主机 cgroup v2 `c
 Stage 在操作完成时记账，快照差统计的是窗口内完成的操作；跨边界的操作不会按时间切片。诊断快照、profile 和精度窗口也不是原子对齐的，不应把它们当作逐毫秒的因果追踪。
 
 原始数据包含 `cost-*-agent-manifest.json`、`*-diagnostics-before/after.json`、`*-accuracy.json`、`*-cpu.pb.gz`、`*-cpu-top.txt`、`*-metrics.txt` 与负载/Pod 状态。`summary.costCases[].stageDeltas` 的 `maxNs` / `lastNs` 为 0（未定义窗口最大/末次），窗口最大读耗时来自独立精度采样的 `accuracyReadMaxSeconds`，其中包含前后 `cpu.stat` 读取。profile 和额外扫描会改变被测系统，该矩阵只用于诊断；要评价优化后的业务收益，仍须使用不启用诊断的 AB/BA 基准。
+
+## Metrics 优化的版本配对对照
+
+```bash
+# baseline 是优化前提交 87a126e 的独立镜像，须提前构建并加载，不能覆盖。
+make metrics-compare EXPERIMENT_FLAGS='--pairs=4'
+# 完成构建/加载后，单独测量：
+./bin/kno-experiment --mode metrics --context kno-dev --duration=30s --pairs=4 \
+  --baseline-agent-image kubenode-observer/kno-agent:cost \
+  --candidate-agent-image kubenode-observer/kno-agent:metrics-cache
+```
+
+两版本都使用 200m limit / 100m request、相同内存配置与 workload Pod。每个 case 新 Agent、settle 5s，确认 churn 正在运行并预热 3s；持续抓取 30s，每次开始间隔至少 1s、同一时间最多一个请求，慢请求不累积追赶队列。不采集 CPU profile，不发 accuracy 或 runqlat 请求；仅窗口前后读取 diagnostics，以 cgroup CPU 时间/实际窗口墙钟时间计算 CPU rate。旧版每次 scrape 线性遍历，新版默认 15s 后台刷新；窗口长度至少 20s，必须纳入后台刷新成本，不能只比较缓存命中延迟。
+
+单次 `clientSeconds` 为客户端 GET、完整响应接收和原始文件/命令记录的总墙钟耗时，包含 port-forward 和落盘成本，不是精确服务端耗时；服务端可用 `metrics.scrape` 阶段均值交叉验证。P50/P95 用 nearest-rank，样本少时不解释为稳定服务 SLO。报告各 case、配对百分比变化的中位数及固定 seed 的探索性 bootstrap；CPU 比较按实际窗口归一化，不因慢请求使窗口略长而直接比较 CPU 秒。
+
+每次 scrape 原文、cache 就绪 source 数/最大年龄/错误、生命周期丢失计数、实际 image ID、同 UID/零重启状态、恢复状态和源码归档均保存。baseline 无缓存指标时 source 数为 0；candidate 必须提供三组 source。`collectionErrors` 或缓存未就绪不会使实验数据被丢弃，应在报告中单独解释，不能将流程完成视作质量门限通过。summary 内的 workload 吞吐来自覆盖预热/测量/收尾的整个有限负载，**不是精确 scrape 窗口的业务吞吐**，不用于声称业务收益。
+
+对候选镜像运行原有精度/开销实验可显式指定 `--test-agent-image=kubenode-observer/kno-agent:metrics-cache`。只复制并替换临时 Agent 镜像、设为预加载，不改变原部署，结束时仍恢复原 DaemonSet。
