@@ -1,0 +1,140 @@
+log/experiments/20261020-collection-cost/cost-1-churn-01-cpu-cumulative-top.txt
+  s_6e6fc63242599e::t_f7fa2186a623d0 1-57
+log/experiments/20261020-collection-cost/cost-200m-steady-02-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/experiments/20261020-collection-cost/cost-1-churn-02-debug-forward.txt
+  s_6e6fc63242599e::t_287a6386342f06 2
+log/experiments/20261020-collection-cost/cost-200m-steady-01-metrics.txt
+  s_6e6fc63242599e::t_097ae6fbf47b00 1-48
+log/experiments/20261020-collection-cost/cost-1-churn-01-after-agent-state.json
+  s_6e6fc63242599e::t_ff12f6f1f6e27e 1-416
+log/experiments/20261020-cost-profile-interrupt/commands.jsonl
+  s_6e6fc63242599e::t_74c9d180de10a3 18-31
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-start.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1
+log/experiments/20261020-collection-cost/cost-1-steady-01-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/2026-10-20-cost-integration-end.json
+  s_6e6fc63242599e::t_a7ef9fe7e0229f 1-616
+log/experiments/20261020-collection-cost/cost-200m-churn-01-cpu-cumulative-top.txt
+  s_6e6fc63242599e::t_f7fa2186a623d0 1-57
+log/2026-10-20-cost-go-checks.txt
+  s_6e6fc63242599e::t_ccace14bcba86b 1-17
+  s_6e6fc63242599e::t_96670d1cd15a10 18-22
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-diagnostics-before.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1
+log/experiments/20261020-cost-profile-interrupt/restored-agent.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1-616
+log/experiments/20261020-collection-cost/cost-200m-churn-01-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/experiments/20261020-collection-cost/cost-200m-churn-02-after-agent-state.json
+  s_6e6fc63242599e::t_f071d7f99f1b8b 1-416
+log/experiments/20261020-collection-cost/cost-200m-steady-02-accuracy.json
+  s_6e6fc63242599e::t_9b8b3d8bd7bf1a 1
+log/experiments/20261020-collection-cost/cost-1-churn-02-diagnostics-before.json
+  s_6e6fc63242599e::t_287a6386342f06 1
+log/experiments/20261020-collection-cost/cost-200m-steady-02-end.json
+  s_6e6fc63242599e::t_9b8b3d8bd7bf1a 1
+log/experiments/20261020-collection-cost/cost-200m-steady-02-workload.json
+  s_6e6fc63242599e::t_6b12dbdded6c71 1
+log/experiments/20261020-collection-cost/cost-200m-churn-02-workload.json
+  s_6e6fc63242599e::t_f071d7f99f1b8b 1
+log/experiments/20261020-collection-cost/commands.jsonl
+  s_6e6fc63242599e::t_6b12dbdded6c71 154-168
+  s_6e6fc63242599e::t_9b8b3d8bd7bf1a 150-153
+  s_6e6fc63242599e::t_cf5300208b3abd 42-46
+  s_6e6fc63242599e::t_097ae6fbf47b00 24
+  s_6e6fc63242599e::t_ff12f6f1f6e27e 83-88
+  s_6e6fc63242599e::t_a91779cb1787b2 65-68
+  s_6e6fc63242599e::t_287a6386342f06 94
+  s_6e6fc63242599e::t_f071d7f99f1b8b 136-140
+log/experiments/20261020-collection-cost/cost-1-churn-02-cpu-cumulative-top.txt
+  s_6e6fc63242599e::t_f7fa2186a623d0 1-57
+log/experiments/20261020-collection-cost/summary.json
+  s_6e6fc63242599e::t_6b12dbdded6c71 2,755-860
+  s_6e6fc63242599e::t_f071d7f99f1b8b 652-754,861-863
+  s_6e6fc63242599e::t_a91779cb1787b2 228-333
+  s_6e6fc63242599e::t_ff12f6f1f6e27e 334-439
+log/2026-10-20-cost-integration-restored.json
+  s_6e6fc63242599e::t_5a0a097e9f4405 1-616
+log/experiments/20261020-collection-cost/cost-200m-churn-02-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/experiments/20261020-collection-cost/cost-200m-churn-01-metrics.txt
+  s_6e6fc63242599e::t_cf5300208b3abd 1-48
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-before-agent-state.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1-416
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-health.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1
+log/experiments/20261020-collection-cost/cost-200m-steady-02-agent-manifest.json
+  s_6e6fc63242599e::t_f071d7f99f1b8b 1
+log/experiments/20261020-collection-cost/cost-200m-steady-01-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/experiments/20261020-collection-cost/cost-200m-steady-02-after-agent-state.json
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-416
+log/experiments/20261020-collection-cost/cost-200m-churn-02-cpu-cumulative-top.txt
+  s_6e6fc63242599e::t_f7fa2186a623d0 1-57
+log/2026-10-20-collection-cost.md
+  s_6e6fc63242599e::t_7ec0f4560ed3ef 80
+  s_6e6fc63242599e::t_6e76d77e59d66c 1-79,81-84
+log/experiments/20261020-collection-cost/cost-1-steady-01-after-agent-state.json
+  s_6e6fc63242599e::t_a91779cb1787b2 1-416
+log/experiments/20261020-collection-cost/cost-1-churn-01-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/experiments/20261020-collection-cost/cost-1-churn-01-workload.json
+  s_6e6fc63242599e::t_ff12f6f1f6e27e 1
+log/experiments/20261020-collection-cost/cost-1-churn-02-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/2026-10-20-cost-integration.txt
+  s_6e6fc63242599e::t_773b9e69bfdec4 73-92
+  s_6e6fc63242599e::t_76014182eab3e0 119
+  s_6e6fc63242599e::t_f7fa2186a623d0 98-115
+  s_6e6fc63242599e::t_a7ef9fe7e0229f 120-301
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-debug-forward.txt
+  s_6e6fc63242599e::t_74c9d180de10a3 1-2
+log/experiments/20261020-collection-cost/cost-200m-churn-01-accuracy.json
+  s_6e6fc63242599e::t_cf5300208b3abd 1
+log/experiments/20261020-collection-cost/cost-1-steady-01-workload.json
+  s_6e6fc63242599e::t_a91779cb1787b2 1
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-topology.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1
+log/experiments/20261020-collection-cost/cost-200m-steady-01-agent-forward.txt
+  s_6e6fc63242599e::t_097ae6fbf47b00 3
+log/experiments/20261020-collection-cost/cost-1-churn-01-agent-manifest.json
+  s_6e6fc63242599e::t_a91779cb1787b2 1
+docs/plan.md
+  s_6e6fc63242599e::t_6e76d77e59d66c 376-378
+log/experiments/20261020-cost-profile-interrupt/cost-200m-steady-01-agent-forward.txt
+  s_6e6fc63242599e::t_74c9d180de10a3 1-2
+docs/experiments.md
+  s_6e6fc63242599e::t_c22472dfdc8be5 118-119
+log/experiments/20261020-collection-cost/cost-1-steady-02-cpu-top.txt
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-32
+log/experiments/20261020-collection-cost/restored-agent.json
+  s_6e6fc63242599e::t_6b12dbdded6c71 1-616
+log/2026-10-20-cost-debug-listen-validation.txt
+  s_6e6fc63242599e::t_c6fcf3a59cb6e3 1
+log/experiments/20261020-collection-cost/cost-1-churn-02-agent-manifest.json
+  s_6e6fc63242599e::t_ff12f6f1f6e27e 1
+log/experiments/20261020-collection-cost/cost-200m-steady-02-diagnostics-after.json
+  s_6e6fc63242599e::t_9b8b3d8bd7bf1a 1
+log/experiments/20261020-cost-profile-interrupt/workload-port-forward.txt
+  s_6e6fc63242599e::t_74c9d180de10a3 2-3
+log/experiments/20261020-cost-profile-interrupt/summary.json
+  s_6e6fc63242599e::t_74c9d180de10a3 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "87a126e22f28cfa04fa99e82686bdf0422a0b192",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
