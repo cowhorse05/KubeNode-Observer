@@ -1,0 +1,65 @@
+README.md
+  s_6e6fc63242599e::t_a61f3aa08988bf 84-85,131
+internal/probe/metrics_test.go
+  s_6e6fc63242599e::t_49b292d7f0bf61 12-17,19-21,24-26,31-42
+  s_6e6fc63242599e::t_3c9df262b94687 1-11,18,22-23,27-30,43
+internal/metrics/handler_test.go
+  s_6e6fc63242599e::t_49b292d7f0bf61 4,47-50
+  s_6e6fc63242599e::t_3c9df262b94687 11,51-52
+internal/experiment/metrics_test.go
+  s_6e6fc63242599e::t_cdf6b02a1482d3 1-7,21-22,35
+  s_6e6fc63242599e::t_69006e13744823 8-20,23-34
+internal/probe/metrics.go
+  s_6e6fc63242599e::t_3f2d17f21264dd 4,41-42,45,48-52,56-59,66-68
+  s_6e6fc63242599e::t_49b292d7f0bf61 53-55,60-65
+internal/metrics/cache.go
+  s_6e6fc63242599e::t_49b292d7f0bf61 16-17,19-20,23,28-31,33,37-47,54-60,67-79,81-86,94-97
+  s_6e6fc63242599e::t_31a978fc60dee8 80
+  s_6e6fc63242599e::t_3f2d17f21264dd 1-15,18,21-22,24-27,32,34-36,48-53,61-66,87-93,98
+internal/experiment/metrics.go
+  s_6e6fc63242599e::t_cdf6b02a1482d3 9-10
+  s_6e6fc63242599e::t_69006e13744823 20-27,31-38,42-47,50,52-75,80-92,94-103,105-133,137-190,192-248,250-253,257-259,261,263-302
+  s_6e6fc63242599e::t_31a978fc60dee8 1-8,11-19,28-30,39-41,48-49,51,76-79,93,104,134-136,191,249,254-256,260,262,303
+internal/probe/metrics_linux_test.go
+  s_6e6fc63242599e::t_49b292d7f0bf61 13-34,36-48
+  s_6e6fc63242599e::t_3c9df262b94687 1-12,35,49-51
+cmd/kno-experiment/main.go
+  s_6e6fc63242599e::t_31a978fc60dee8 17
+  s_6e6fc63242599e::t_69006e13744823 22-24
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_3f2d17f21264dd 37,53,138,142
+  s_6e6fc63242599e::t_69006e13744823 54
+  s_6e6fc63242599e::t_49b292d7f0bf61 129-137,139
+Makefile
+  s_6e6fc63242599e::t_cdf6b02a1482d3 10,15,88-93
+docs/experiments.md
+  s_6e6fc63242599e::t_a61f3aa08988bf 121-139
+docs/architecture.md
+  s_6e6fc63242599e::t_a61f3aa08988bf 112-114
+internal/metrics/cache_test.go
+  s_6e6fc63242599e::t_e24669e5aed38e 142-150,153-154,156-160
+  s_6e6fc63242599e::t_3c9df262b94687 1-15,17,20,23-26,42,49,58,66,77-80,90-91,121-123,137,141
+  s_6e6fc63242599e::t_49b292d7f0bf61 16,18-19,21-22,27-41,43-48,50-57,59-65,67-76,81-89,92-120,124-136,138-140
+internal/metrics/handler.go
+  s_6e6fc63242599e::t_3f2d17f21264dd 23,25,29,60,64,86,93,97,102,105-107
+  s_6e6fc63242599e::t_49b292d7f0bf61 65-75,77-85,87-92,94-96,98-101,108-112
+internal/experiment/runner.go
+  s_6e6fc63242599e::t_69006e13744823 26-39,80-82,194-196,203-205,207-208,336-343
+  s_6e6fc63242599e::t_31a978fc60dee8 201-202,206
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.50-trip",
+  "base_commit_sha": "de31ec4da141f691cf2ec489d70cac52aaef565c",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
