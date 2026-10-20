@@ -113,6 +113,7 @@ func main() {
 	handler.Handle("/api/v1/topology", topologyStore)
 	handler.Handle("/api/v1/events", events)
 	handler.Handle("/api/v1/cpu", cpuCollector)
+	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpuProbe, topologyStore, *cgroupRoot))
 	handler.Handle("/api/v1/runqlat", runQLatHandler)
 	server := &http.Server{
 		Addr:              *listenAddress,

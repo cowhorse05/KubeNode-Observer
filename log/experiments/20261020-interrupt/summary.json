@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "config": {
+    "mode": "paired",
+    "context": "kno-dev",
+    "output": "log/experiments/20261020-interrupt",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "pairs": 2,
+    "accuracyRepeats": 2,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 10000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000
+  },
+  "error": "Get \"http://127.0.0.1:46519/run?mode=steady\u0026duration=10s\u0026warmup=3s\u0026workers=8\": context canceled"
+}

@@ -72,6 +72,7 @@ make install-minikube
 make integration
 make stability           # 40,000 个短进程，约 2 分钟
 make benchmark
+make accuracy
 make uninstall-minikube
 ```
 
@@ -80,3 +81,5 @@ make uninstall-minikube
 ## 结果定位
 
 可重复实验记录位于 `log/`：M5 runqlat 与 PSI 对照、M6 自身指标、一键 demo 流水线以及 Observer off/on 原始轮次均保留为独立记录。
+
+新的配对实验和精度测量会自动保存机器可读原始数据，见 [实验指南](experiments.md)。

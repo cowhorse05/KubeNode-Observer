@@ -1,0 +1,205 @@
+{
+  "status": "complete",
+  "config": {
+    "mode": "paired",
+    "context": "kno-dev",
+    "output": "log/experiments/20261020-paired-isolated",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "pairs": 8,
+    "accuracyRepeats": 2,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 10000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000
+  },
+  "pairedRounds": [
+    {
+      "number": 1,
+      "order": "off/on",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.076840338,
+        "operations": 1123734,
+        "throughputOpsPerSecond": 111516.50341847462,
+        "p99Us": 26,
+        "latencyOverflow": 1050
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.072235752,
+        "operations": 1372510,
+        "throughputOpsPerSecond": 136266.66748020338,
+        "p99Us": 19,
+        "latencyOverflow": 1104
+      },
+      "throughputDeltaPercent": 22.19417153786807,
+      "p99DeltaPercent": -26.923076923076927
+    },
+    {
+      "number": 2,
+      "order": "on/off",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.000013035,
+        "operations": 1446323,
+        "throughputOpsPerSecond": 144632.11147204268,
+        "p99Us": 19,
+        "latencyOverflow": 1080
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.04849472,
+        "operations": 1535209,
+        "throughputOpsPerSecond": 152779.99767909516,
+        "p99Us": 17,
+        "latencyOverflow": 991
+      },
+      "throughputDeltaPercent": 5.633525034049902,
+      "p99DeltaPercent": -10.526315789473683
+    },
+    {
+      "number": 3,
+      "order": "off/on",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.000011734,
+        "operations": 1518556,
+        "throughputOpsPerSecond": 151855.42181284804,
+        "p99Us": 17,
+        "latencyOverflow": 1452
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.041652344,
+        "operations": 1334411,
+        "throughputOpsPerSecond": 132887.59203034206,
+        "p99Us": 21,
+        "latencyOverflow": 1089
+      },
+      "throughputDeltaPercent": -12.490716206289033,
+      "p99DeltaPercent": 23.529411764705888
+    },
+    {
+      "number": 4,
+      "order": "on/off",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.017671729,
+        "operations": 1456058,
+        "throughputOpsPerSecond": 145348.94328638067,
+        "p99Us": 18,
+        "latencyOverflow": 1457
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.000038926,
+        "operations": 1562755,
+        "throughputOpsPerSecond": 156274.89168435664,
+        "p99Us": 17,
+        "latencyOverflow": 1053
+      },
+      "throughputDeltaPercent": 7.517047011789146,
+      "p99DeltaPercent": -5.555555555555558
+    },
+    {
+      "number": 5,
+      "order": "off/on",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.070539259,
+        "operations": 1136087,
+        "throughputOpsPerSecond": 112812.92597957786,
+        "p99Us": 27,
+        "latencyOverflow": 929
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.000011304,
+        "operations": 1619816,
+        "throughputOpsPerSecond": 161981.41689620636,
+        "p99Us": 17,
+        "latencyOverflow": 1468
+      },
+      "throughputDeltaPercent": 43.58409330286257,
+      "p99DeltaPercent": -37.03703703703704
+    },
+    {
+      "number": 6,
+      "order": "on/off",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.00079741,
+        "operations": 1765618,
+        "throughputOpsPerSecond": 176547.7219081073,
+        "p99Us": 14,
+        "latencyOverflow": 1600
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.04464416,
+        "operations": 1136512,
+        "throughputOpsPerSecond": 113146.0688797561,
+        "p99Us": 37,
+        "latencyOverflow": 1005
+      },
+      "throughputDeltaPercent": -35.91190661828626,
+      "p99DeltaPercent": 164.28571428571428
+    },
+    {
+      "number": 7,
+      "order": "off/on",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.000014299,
+        "operations": 1639884,
+        "throughputOpsPerSecond": 163988.16551332214,
+        "p99Us": 17,
+        "latencyOverflow": 1192
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.044676982,
+        "operations": 1369274,
+        "throughputOpsPerSecond": 136318.37066077194,
+        "p99Us": 21,
+        "latencyOverflow": 974
+      },
+      "throughputDeltaPercent": -16.87304371381748,
+      "p99DeltaPercent": 23.529411764705888
+    },
+    {
+      "number": 8,
+      "order": "on/off",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.064454874,
+        "operations": 1546160,
+        "throughputOpsPerSecond": 153625.80679796883,
+        "p99Us": 16,
+        "latencyOverflow": 1034
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.078647127,
+        "operations": 1286882,
+        "throughputOpsPerSecond": 127684.00200782226,
+        "p99Us": 22,
+        "latencyOverflow": 1013
+      },
+      "throughputDeltaPercent": -16.886358699005754,
+      "p99DeltaPercent": 37.5
+    }
+  ],
+  "throughputEffect": {
+    "medianPercent": -3.4285955861195654,
+    "bootstrapLowerPercent": -16.886358699005754,
+    "bootstrapUpperPercent": 22.19417153786807,
+    "pairs": 8
+  },
+  "p99Effect": {
+    "medianPercent": 8.986928104575165,
+    "bootstrapLowerPercent": -26.923076923076927,
+    "bootstrapUpperPercent": 37.5,
+    "pairs": 8
+  }
+}

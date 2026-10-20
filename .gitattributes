@@ -1,0 +1,4 @@
+# Keep raw experiment bytes unchanged on Windows checkouts.
+log/experiments/** -text
+# Context lines in a recorded patch can end with a space; preserve the patch.
+log/experiments/**/source.patch -whitespace
