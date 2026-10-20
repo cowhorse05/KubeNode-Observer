@@ -137,3 +137,5 @@ make metrics-compare EXPERIMENT_FLAGS='--pairs=4'
 每次 scrape 原文、cache 就绪 source 数/最大年龄/错误、生命周期丢失计数、实际 image ID、同 UID/零重启状态、恢复状态和源码归档均保存。baseline 无缓存指标时 source 数为 0；candidate 必须提供三组 source。`collectionErrors` 或缓存未就绪不会使实验数据被丢弃，应在报告中单独解释，不能将流程完成视作质量门限通过。summary 内的 workload 吞吐来自覆盖预热/测量/收尾的整个有限负载，**不是精确 scrape 窗口的业务吞吐**，不用于声称业务收益。
 
 对候选镜像运行原有精度/开销实验可显式指定 `--test-agent-image=kubenode-observer/kno-agent:metrics-cache`。只复制并替换临时 Agent 镜像、设为预加载，不改变原部署，结束时仍恢复原 DaemonSet。
+
+完整功能与 churn 验收可运行 `VERIFY_OUTPUT=log/<新目录> bash hack/verify-metrics-cache.sh`。脚本占用同一实验锁，临时使用已加载的候选镜像、保持 debug 关闭，执行 integration 和两轮共 40000 次子进程 churn，保存指标与 Pod 状态并恢复原镜像。不要与性能测量或其他集群实验同时运行；SIGKILL/断电仍需人工按保存的 original 状态恢复。
