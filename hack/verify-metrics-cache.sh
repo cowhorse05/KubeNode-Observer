@@ -9,6 +9,10 @@ AGENT_IMAGE="${AGENT_IMAGE:-kubenode-observer/kno-agent:metrics-cache}"
 VERIFY_OUTPUT="${VERIFY_OUTPUT:-log/metrics-validation-$(date -u +%Y%m%dT%H%M%SZ)}"
 mkdir -- "${VERIFY_OUTPUT}"
 kube() { kubectl --context "${KUBE_CONTEXT}" "$@"; }
+node_count="$(kube get nodes -o name | wc -l)"
+if [[ "${node_count}" -ne 1 ]]; then echo "requires a single-node development cluster" >&2; exit 1; fi
+existing="$(kube -n default get pods kno-exec-test-local kno-cpu-hog-local kno-runqlat-baseline kno-runqlat-contention kno-process-churn-local --ignore-not-found -o name)"
+if [[ -n "${existing}" ]]; then echo "test Pod already exists; refusing to replace it" >&2; exit 1; fi
 kube -n kube-system create configmap kno-experiment-lock --from-literal=run="${VERIFY_OUTPUT}"
 original_image=""
 forward_pid=""
@@ -50,10 +54,10 @@ cache_ready() {
        $1 == "kno_agent_metrics_collection_errors" {errors=$2; found=1}
        END {exit !(n==3 && ready==3 && found && errors==0)}' "$1"
 }
-curl -fsS "${endpoint}/metrics" >"${VERIFY_OUTPUT}/metrics-before.txt"
+curl --connect-timeout 2 --max-time 5 -fsS "${endpoint}/metrics" >"${VERIFY_OUTPUT}/metrics-before.txt"
 cache_ready "${VERIFY_OUTPUT}/metrics-before.txt"
 for path in diagnostics debug/pprof/; do
-  status="$(curl -sS -o "${VERIFY_OUTPUT}/public-${path//\//_}.txt" -w '%{http_code}' "${endpoint}/${path}")"
+  status="$(curl --connect-timeout 2 --max-time 5 -sS -o "${VERIFY_OUTPUT}/public-${path//\//_}.txt" -w '%{http_code}' "${endpoint}/${path}")"
   if [[ "${status}" != "404" ]]; then echo "diagnostics exposed on normal API: ${path}" >&2; exit 1; fi
 done
 
@@ -63,11 +67,11 @@ KUBE_CONTEXT="${KUBE_CONTEXT}" CHURN_ROUNDS=2 make stability 2>&1 | tee "${VERIF
 ready=false
 for attempt in $(seq 1 65); do
   file="${VERIFY_OUTPUT}/metrics-after-${attempt}.txt"
-  curl -fsS "${endpoint}/metrics" >"${file}"
+  curl --connect-timeout 2 --max-time 5 -fsS "${endpoint}/metrics" >"${file}"
   if cache_ready "${file}"; then ready=true; break; fi
   sleep 0.5
 done
-if [[ "${ready}" != "true" ]]; then echo "map cache did not recover within 32s" >&2; exit 1; fi
+if [[ "${ready}" != "true" ]]; then echo "map cache did not recover within 65 attempts" >&2; exit 1; fi
 kube -n kube-system get ds,pods -l app.kubernetes.io/name=kno-agent -o json >"${VERIFY_OUTPUT}/after-agent.json"
 after_uid="$(kube -n kube-system get pods -l app.kubernetes.io/name=kno-agent -o jsonpath='{.items[0].metadata.uid}')"
 restarts="$(kube -n kube-system get pods -l app.kubernetes.io/name=kno-agent -o jsonpath='{.items[0].status.containerStatuses[0].restartCount}')"
