@@ -9,9 +9,11 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
+	"github.com/cowhorse05/KubeNode-Observer/internal/telemetry"
 )
 
 type HealthSource interface {
@@ -19,6 +21,7 @@ type HealthSource interface {
 }
 
 type Handler struct {
+	Timing   *telemetry.Recorder // Set before serving; sources are exec, CPU, runqlat.
 	health   HealthSource
 	maps     []probe.MapStatsSource
 	procRoot string
@@ -33,6 +36,7 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 		http.Error(writer, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	defer h.Timing.Observe(telemetry.MetricsScrape, time.Now())
 
 	writer.Header().Set("Content-Type", "text/plain; version=0.0.4; charset=utf-8")
 	stats := h.health.Stats()
@@ -58,8 +62,12 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	writeMetricHeader(writer, "kno_agent_bpf_map_max_entries", "Configured eBPF map entry capacity; ring buffers use bytes.", "gauge")
 	writeMetricHeader(writer, "kno_agent_bpf_map_memlock_bytes", "Kernel-reported locked memory for an eBPF map.", "gauge")
 
-	for _, source := range h.maps {
+	for index, source := range h.maps {
+		started := time.Now()
 		maps, err := source.MapStats()
+		if index < 3 {
+			h.Timing.Observe(telemetry.MetricsExec+telemetry.Operation(index), started)
+		}
 		if err != nil {
 			collectionErrors++
 			continue

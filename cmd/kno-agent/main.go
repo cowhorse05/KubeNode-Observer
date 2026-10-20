@@ -7,7 +7,9 @@ import (
 	"flag"
 	"fmt"
 	"log/slog"
+	"net"
 	"net/http"
+	"net/http/pprof"
 	"os"
 	"os/signal"
 	"sync"
@@ -20,11 +22,13 @@ import (
 	"github.com/cowhorse05/KubeNode-Observer/internal/metrics"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
+	"github.com/cowhorse05/KubeNode-Observer/internal/telemetry"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
 )
 
 func main() {
 	listenAddress := flag.String("listen", ":18080", "health API listen address")
+	debugAddress := flag.String("debug-listen", "", "opt-in loopback-only diagnostics and pprof address (e.g. 127.0.0.1:18090)")
 	runtimeEndpoint := flag.String("runtime-endpoint", "unix:///run/containerd/containerd.sock", "CRI runtime endpoint")
 	hostProc := flag.String("host-proc", "/host/proc", "host procfs mount")
 	cgroupRoot := flag.String("cgroup-root", "/host/sys/fs/cgroup", "host cgroup v2 mount")
@@ -34,6 +38,17 @@ func main() {
 	flag.Parse()
 
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	if *debugAddress != "" {
+		host, _, err := net.SplitHostPort(*debugAddress)
+		if err != nil || net.ParseIP(host) == nil || !net.ParseIP(host).IsLoopback() {
+			logger.Error("debug-listen must use a literal loopback IP and port")
+			os.Exit(2)
+		}
+	}
+	var timing *telemetry.Recorder
+	if *debugAddress != "" {
+		timing = &telemetry.Recorder{}
+	}
 	if *topologyInterval <= 0 || *cpuInterval <= 0 {
 		logger.Error("collection intervals must be positive", "topologyInterval", *topologyInterval, "cpuInterval", *cpuInterval)
 		os.Exit(2)
@@ -81,10 +96,13 @@ func main() {
 	}
 
 	topologyCollector := topology.NewCollector(*nodeName, criClient, topology.NewProcFS(*hostProc, *cgroupRoot), resolver)
+	topologyCollector.Timing = timing
 	topologyStore := topology.NewStore(topologyCollector)
+	topologyStore.Timing = timing
 	go topologyStore.Run(ctx, *topologyInterval)
 	events := eventstore.NewStore(4096, topologyStore)
-	cpuCollector := cpu.NewCollector(cpuProbe, topologyStore)
+	cpuCollector := cpu.NewCollector(cpu.TimedSource{Source: cpuProbe, Recorder: timing, Operation: telemetry.CPUScan}, topologyStore)
+	cpuCollector.Timing = timing
 	go cpuCollector.Run(ctx, *cpuInterval)
 	runQLatHandler := runqlat.NewHandler(runQLatProbe, topologyStore)
 
@@ -109,11 +127,13 @@ func main() {
 	health := agent.NewHealth()
 	handler := http.NewServeMux()
 	handler.Handle("/healthz", health.Handler())
-	handler.Handle("/metrics", metrics.NewHandler(health, []probe.MapStatsSource{execProbe, cpuProbe, runQLatProbe}, "/proc"))
+	metricsHandler := metrics.NewHandler(health, []probe.MapStatsSource{execProbe, cpuProbe, runQLatProbe}, "/proc")
+	metricsHandler.Timing = timing
+	handler.Handle("/metrics", metricsHandler)
 	handler.Handle("/api/v1/topology", topologyStore)
 	handler.Handle("/api/v1/events", events)
 	handler.Handle("/api/v1/cpu", cpuCollector)
-	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpuProbe, topologyStore, *cgroupRoot))
+	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpu.TimedSource{Source: cpuProbe, Recorder: timing, Operation: telemetry.AccuracyScan}, topologyStore, *cgroupRoot))
 	handler.Handle("/api/v1/runqlat", runQLatHandler)
 	server := &http.Server{
 		Addr:              *listenAddress,
@@ -121,7 +141,21 @@ func main() {
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
-	serverErrors := make(chan error, 1)
+	serverErrors := make(chan error, 2)
+	var debugServer *http.Server
+	if *debugAddress != "" {
+		debugMux := http.NewServeMux()
+		debugMux.Handle("/diagnostics", telemetry.Handler(timing, "/proc", *cgroupRoot))
+		debugMux.HandleFunc("/debug/pprof/", pprof.Index)
+		debugMux.HandleFunc("/debug/pprof/profile", pprof.Profile)
+		debugServer = &http.Server{Addr: *debugAddress, Handler: debugMux, ReadHeaderTimeout: 5 * time.Second}
+		go func() {
+			logger.Info("diagnostics listening (profiling changes collection cost)", "address", *debugAddress)
+			if err := debugServer.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+				serverErrors <- err
+			}
+		}()
+	}
 	go func() {
 		logger.Info("health API listening", "address", *listenAddress)
 		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
@@ -182,5 +216,8 @@ func main() {
 	defer shutdownCancel()
 	if err := server.Shutdown(shutdownContext); err != nil {
 		logger.Error("health API shutdown failed", "error", err)
+	}
+	if debugServer != nil {
+		_ = debugServer.Shutdown(shutdownContext)
 	}
 }

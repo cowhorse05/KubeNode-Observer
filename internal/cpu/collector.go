@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
+	"github.com/cowhorse05/KubeNode-Observer/internal/telemetry"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
 )
 
@@ -58,6 +59,7 @@ type processKey struct {
 }
 
 type Collector struct {
+	Timing   *telemetry.Recorder // Set before Run; nil disables timing.
 	source   RuntimeSource
 	resolver Resolver
 
@@ -96,6 +98,7 @@ func (c *Collector) Collect(now time.Time) error {
 		c.setError(err)
 		return err
 	}
+	defer c.Timing.Observe(telemetry.CPUAggregate, time.Now())
 
 	current := make(map[runtimeKey]uint64, len(runtimes))
 	if c.lastAt.IsZero() {

@@ -23,16 +23,17 @@ import (
 )
 
 type Config struct {
-	Mode      string        `json:"mode"`
-	Context   string        `json:"context"`
-	Output    string        `json:"output"`
-	Image     string        `json:"image"`
-	Pairs     int           `json:"pairs"`
-	Repeats   int           `json:"accuracyRepeats"`
-	Intervals string        `json:"intervals"`
-	Duration  time.Duration `json:"durationNs"`
-	Warmup    time.Duration `json:"warmupNs"`
-	Settle    time.Duration `json:"settleNs"`
+	Mode       string        `json:"mode"`
+	Context    string        `json:"context"`
+	Output     string        `json:"output"`
+	Image      string        `json:"image"`
+	AgentImage string        `json:"costAgentImage,omitempty"`
+	Pairs      int           `json:"pairs"`
+	Repeats    int           `json:"accuracyRepeats"`
+	Intervals  string        `json:"intervals"`
+	Duration   time.Duration `json:"durationNs"`
+	Warmup     time.Duration `json:"warmupNs"`
+	Settle     time.Duration `json:"settleNs"`
 }
 
 type Workload struct {
@@ -72,6 +73,7 @@ type Summary struct {
 	ThroughputEffect *Effect        `json:"throughputEffect,omitempty"`
 	P99Effect        *Effect        `json:"p99Effect,omitempty"`
 	Accuracy         []AccuracyCase `json:"accuracyCases,omitempty"`
+	Cost             []CostCase     `json:"costCases,omitempty"`
 	Error            string         `json:"error,omitempty"`
 	RestoreError     string         `json:"restoreError,omitempty"`
 }
@@ -81,10 +83,12 @@ type runner struct {
 	ctx           context.Context
 	dir           string
 	original      []byte
+	active        []byte
 	node          string
 	commands      *os.File
 	commandMu     sync.Mutex
 	agentForward  *exec.Cmd
+	debugForward  *exec.Cmd
 	workForward   *exec.Cmd
 	workEndpoint  string
 	agentEndpoint string
@@ -121,6 +125,7 @@ func Run(ctx context.Context, config Config) (runErr error) {
 	r := &runner{ctx: ctx, config: config, dir: config.Output, commands: commands, intervals: intervals, summary: Summary{Status: "running", Config: config}}
 	fmt.Println("Experiment artifacts:", config.Output)
 	defer func() {
+		r.stopForward(&r.debugForward)
 		r.stopForward(&r.workForward)
 		r.stopForward(&r.agentForward)
 		if r.original != nil {
@@ -177,12 +182,18 @@ func Run(ctx context.Context, config Config) (runErr error) {
 			return err
 		}
 	}
+	if config.Mode == "cost" {
+		return r.cost()
+	}
 	return nil
 }
 
 func validate(c Config) ([]time.Duration, error) {
-	if c.Mode != "all" && c.Mode != "paired" && c.Mode != "accuracy" {
-		return nil, fmt.Errorf("mode must be all, paired or accuracy")
+	if c.Mode != "all" && c.Mode != "paired" && c.Mode != "accuracy" && c.Mode != "cost" {
+		return nil, fmt.Errorf("mode must be all, paired, accuracy or cost")
+	}
+	if c.Mode == "cost" && (c.AgentImage == "" || c.Duration%time.Second != 0) {
+		return nil, fmt.Errorf("cost needs an agent image and whole-second duration")
 	}
 	if c.Context == "" || c.Pairs < 2 || c.Pairs%2 != 0 || c.Repeats < 1 || c.Duration < time.Second || c.Duration > time.Minute || c.Warmup < time.Second || c.Warmup > 20*time.Second || c.Settle < time.Second {
 		return nil, fmt.Errorf("need an explicit context, even pairs >=2, repeats >=1, duration 1s..1m, warmup 1s..20s, settle >=1s")
@@ -426,6 +437,7 @@ func (r *runner) get(ctx context.Context, endpoint, name string, target any) err
 }
 
 func (r *runner) agent(mode, prefix string) error {
+	r.stopForward(&r.debugForward)
 	r.stopForward(&r.agentForward)
 	if _, err := r.kube(r.ctx, nil, "-n", "kube-system", "delete", "ds", "kno-agent", "--ignore-not-found", "--wait=true", "--timeout=60s"); err != nil {
 		return err
@@ -450,7 +462,11 @@ func (r *runner) agent(mode, prefix string) error {
 	if mode == "off" {
 		return nil
 	}
-	if _, err := r.kube(r.ctx, r.original, "apply", "-f", "-"); err != nil {
+	manifest := r.original
+	if r.active != nil {
+		manifest = r.active
+	}
+	if _, err := r.kube(r.ctx, manifest, "apply", "-f", "-"); err != nil {
 		return err
 	}
 	if _, err := r.kube(r.ctx, nil, "-n", "kube-system", "rollout", "status", "daemonset/kno-agent", "--timeout=90s"); err != nil {
