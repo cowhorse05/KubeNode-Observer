@@ -1,0 +1,32 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:09pm (CST)
+Duration: 10s, Total samples = 110ms ( 1.10%)
+Showing nodes accounting for 110ms, 100% of 110ms total
+Showing top 25 nodes out of 56
+      flat  flat%   sum%        cum   cum%
+      60ms 54.55% 54.55%       60ms 54.55%  runtime/internal/syscall.Syscall6
+      10ms  9.09% 63.64%       80ms 72.73%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.measureAccuracy
+      10ms  9.09% 72.73%       10ms  9.09%  runtime.cheaprand
+      10ms  9.09% 81.82%       10ms  9.09%  runtime.futex
+      10ms  9.09% 90.91%       10ms  9.09%  sync.(*Map).Load
+      10ms  9.09%   100%       70ms 63.64%  syscall.RawSyscall6
+         0     0%   100%       10ms  9.09%  encoding/binary.Size
+         0     0%   100%       10ms  9.09%  encoding/binary.dataSize
+         0     0%   100%       30ms 27.27%  github.com/cilium/ebpf.(*Map).Lookup (inline)
+         0     0%   100%       30ms 27.27%  github.com/cilium/ebpf.(*Map).LookupWithFlags
+         0     0%   100%       30ms 27.27%  github.com/cilium/ebpf.(*Map).NextKey
+         0     0%   100%       20ms 18.18%  github.com/cilium/ebpf.(*Map).lookup
+         0     0%   100%       30ms 27.27%  github.com/cilium/ebpf.(*Map).nextKey
+         0     0%   100%       60ms 54.55%  github.com/cilium/ebpf.(*MapIterator).Next
+         0     0%   100%       10ms  9.09%  github.com/cilium/ebpf.makeMapSyscallOutput
+         0     0%   100%       50ms 45.45%  github.com/cilium/ebpf/internal/sys.BPF
+         0     0%   100%       30ms 27.27%  github.com/cilium/ebpf/internal/sys.MapGetNextKey (inline)
+         0     0%   100%       20ms 18.18%  github.com/cilium/ebpf/internal/sys.MapLookupElem (inline)
+         0     0%   100%       10ms  9.09%  github.com/cilium/ebpf/internal/sysenc.SyscallOutput
+         0     0%   100%       10ms  9.09%  github.com/cilium/ebpf/internal/sysenc.unsafeBackingMemory
+         0     0%   100%       50ms 45.45%  github.com/cilium/ebpf/internal/unix.Syscall (inline)
+         0     0%   100%       80ms 72.73%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*AccuracyHandler).ServeHTTP
+         0     0%   100%       60ms 54.55%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.TimedSource.Snapshot
+         0     0%   100%       10ms  9.09%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.readCPUStat
+         0     0%   100%       10ms  9.09%  github.com/cowhorse05/KubeNode-Observer/internal/metrics.(*Handler).ServeHTTP

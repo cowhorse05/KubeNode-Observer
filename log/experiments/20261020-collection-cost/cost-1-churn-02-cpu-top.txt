@@ -1,0 +1,32 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:07pm (CST)
+Duration: 10.07s, Total samples = 1.70s (16.89%)
+Showing nodes accounting for 1.27s, 74.71% of 1.70s total
+Showing top 25 nodes out of 213
+      flat  flat%   sum%        cum   cum%
+     0.59s 34.71% 34.71%      0.59s 34.71%  runtime/internal/syscall.Syscall6
+     0.09s  5.29% 40.00%      0.30s 17.65%  runtime.scanobject
+     0.06s  3.53% 43.53%      0.07s  4.12%  runtime.findObject
+     0.06s  3.53% 47.06%      0.06s  3.53%  runtime.memmove
+     0.04s  2.35% 49.41%      0.04s  2.35%  github.com/cilium/ebpf/internal/sysenc.Marshal
+     0.04s  2.35% 51.76%      0.04s  2.35%  runtime.evacuate
+     0.04s  2.35% 54.12%      0.04s  2.35%  runtime.futex
+     0.03s  1.76% 55.88%      0.03s  1.76%  runtime.casgstatus
+     0.03s  1.76% 57.65%      0.11s  6.47%  runtime.greyobject
+     0.03s  1.76% 59.41%      0.07s  4.12%  runtime.mapassign
+     0.02s  1.18% 60.59%      0.10s  5.88%  github.com/cilium/ebpf.makeMapSyscallOutput
+     0.02s  1.18% 61.76%      0.02s  1.18%  reflect.Value.Elem
+     0.02s  1.18% 62.94%      0.03s  1.76%  runtime.(*gcBits).bitp (inline)
+     0.02s  1.18% 64.12%      0.02s  1.18%  runtime.(*mspan).heapBitsSmallForAddr
+     0.02s  1.18% 65.29%      0.02s  1.18%  runtime.arenaIndex (inline)
+     0.02s  1.18% 66.47%      0.02s  1.18%  runtime.asyncPreempt
+     0.02s  1.18% 67.65%      0.02s  1.18%  runtime.evacuated (inline)
+     0.02s  1.18% 68.82%      0.04s  2.35%  runtime.exitsyscallfast
+     0.02s  1.18% 70.00%      0.11s  6.47%  runtime.mapaccess2
+     0.02s  1.18% 71.18%      0.02s  1.18%  runtime.memhash64
+     0.02s  1.18% 72.35%      0.04s  2.35%  runtime.nilinterhash
+     0.01s  0.59% 72.94%      0.01s  0.59%  encoding/json.(*decodeState).skip
+     0.01s  0.59% 73.53%      0.01s  0.59%  encoding/json.appendString[go.shape.string]
+     0.01s  0.59% 74.12%      0.37s 21.76%  github.com/cilium/ebpf.(*Map).LookupWithFlags
+     0.01s  0.59% 74.71%      0.05s  2.94%  github.com/cilium/ebpf.(*Map).marshalKey

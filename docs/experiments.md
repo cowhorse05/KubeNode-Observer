@@ -115,4 +115,6 @@ Agent 的 `--debug-listen=127.0.0.1:18090` 默认关闭，仅接受字面量 loo
 
 Agent cgroup 从 `/proc/self/cgroup` 定位，再读挂载的主机 cgroup v2 `cpu.stat` / `cpu.max`，不假设 `/sys/fs/cgroup` 根目录就是容器。前后差记录 `usage_usec`、`nr_throttled`、`throttled_usec`，以及 Go `TotalAlloc` 差值。限流时长是内核 cgroup 口径，可能包含多 CPU 累计，不能直接作为墙钟停顿百分比。CPU profile 用于定位 Agent 进程的采样热点，不覆盖其他任务上下文中的全部 eBPF 执行成本；`TotalAlloc` 是累计分配量，不是 RSS 增长。
 
+Stage 在操作完成时记账，快照差统计的是窗口内完成的操作；跨边界的操作不会按时间切片。诊断快照、profile 和精度窗口也不是原子对齐的，不应把它们当作逐毫秒的因果追踪。
+
 原始数据包含 `cost-*-agent-manifest.json`、`*-diagnostics-before/after.json`、`*-accuracy.json`、`*-cpu.pb.gz`、`*-cpu-top.txt`、`*-metrics.txt` 与负载/Pod 状态。`summary.costCases[].stageDeltas` 的 `maxNs` / `lastNs` 为 0（未定义窗口最大/末次），窗口最大读耗时来自独立精度采样的 `accuracyReadMaxSeconds`，其中包含前后 `cpu.stat` 读取。profile 和额外扫描会改变被测系统，该矩阵只用于诊断；要评价优化后的业务收益，仍须使用不启用诊断的 AB/BA 基准。

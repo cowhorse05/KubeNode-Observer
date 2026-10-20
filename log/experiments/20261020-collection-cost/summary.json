@@ -1,0 +1,866 @@
+{
+  "status": "complete",
+  "config": {
+    "mode": "cost",
+    "context": "kno-dev",
+    "output": "log/experiments/20261020-collection-cost",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "costAgentImage": "kubenode-observer/kno-agent:cost",
+    "pairs": 4,
+    "accuracyRepeats": 2,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 10000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000
+  },
+  "costCases": [
+    {
+      "mode": "steady",
+      "cpuLimit": "200m",
+      "repeat": 1,
+      "prefix": "cost-200m-steady-01",
+      "windowSeconds": 10.019365607,
+      "agentCpuSeconds": 0.205948,
+      "throttledSeconds": 0.013838,
+      "throttledPeriods": 1,
+      "allocatedBytes": 12097672,
+      "accuracyReadMaxSeconds": 0.007465609,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -0.6705745687129672,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 57550628,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 10,
+          "totalNs": 1651669,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 10,
+          "totalNs": 13105231,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 2523702,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 182393,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 8470108,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 15110694,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 2,
+          "totalNs": 54674611,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 2,
+          "totalNs": 65972023,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 2,
+          "totalNs": 120675839,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "churn",
+      "cpuLimit": "200m",
+      "repeat": 1,
+      "prefix": "cost-200m-churn-01",
+      "windowSeconds": 10.76447285,
+      "agentCpuSeconds": 1.981779,
+      "throttledSeconds": 26.070523,
+      "throttledPeriods": 88,
+      "allocatedBytes": 106268440,
+      "accuracyReadMaxSeconds": 1.044194031,
+      "accuracyReadCount": 30,
+      "signedErrorPercent": -2.7936543676497783,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 30,
+          "totalNs": 5637010741,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 15,
+          "over250ms": 7,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 10,
+          "totalNs": 357584807,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 10,
+          "totalNs": 2679570541,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 7,
+          "over250ms": 6,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 428107059,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 342069,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 1400248472,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 1
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 2104531464,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 1
+        },
+        "topology.cri": {
+          "count": 2,
+          "totalNs": 508122765,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 2,
+          "over250ms": 1,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 2,
+          "totalNs": 367148878,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 2,
+          "totalNs": 875307371,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 2,
+          "over250ms": 1,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "steady",
+      "cpuLimit": "1",
+      "repeat": 1,
+      "prefix": "cost-1-steady-01",
+      "windowSeconds": 10.023189747,
+      "agentCpuSeconds": 0.16303,
+      "throttledSeconds": 0,
+      "throttledPeriods": 0,
+      "allocatedBytes": 14049936,
+      "accuracyReadMaxSeconds": 0.002869623,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -0.7169230555395312,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 42455933,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 10,
+          "totalNs": 1248310,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 10,
+          "totalNs": 9989621,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 1308454,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 92309,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 3600309,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 6821363,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 3,
+          "totalNs": 43227383,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 3,
+          "totalNs": 15139579,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 3,
+          "totalNs": 58402696,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "churn",
+      "cpuLimit": "1",
+      "repeat": 1,
+      "prefix": "cost-1-churn-01",
+      "windowSeconds": 10.07499275,
+      "agentCpuSeconds": 1.858162,
+      "throttledSeconds": 0.522324,
+      "throttledPeriods": 2,
+      "allocatedBytes": 134941976,
+      "accuracyReadMaxSeconds": 0.023328052,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -2.524337133186627,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 523171199,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 10,
+          "totalNs": 18187475,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 10,
+          "totalNs": 123790526,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 24321263,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 151398,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 136421842,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 164933059,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 2,
+          "totalNs": 33432546,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 2,
+          "totalNs": 14698640,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 2,
+          "totalNs": 48162874,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "churn",
+      "cpuLimit": "1",
+      "repeat": 2,
+      "prefix": "cost-1-churn-02",
+      "windowSeconds": 10.090463157,
+      "agentCpuSeconds": 2.134339,
+      "throttledSeconds": 0.409123,
+      "throttledPeriods": 4,
+      "allocatedBytes": 115458424,
+      "accuracyReadMaxSeconds": 0.053697628,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -0.3882730261583256,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 686020782,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 11,
+          "totalNs": 21260808,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 11,
+          "totalNs": 178456040,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 30441479,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 150413,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 58453799,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 93756055,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 3,
+          "totalNs": 64015453,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 2,
+          "totalNs": 16326993,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 2,
+          "totalNs": 62808281,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "steady",
+      "cpuLimit": "1",
+      "repeat": 2,
+      "prefix": "cost-1-steady-02",
+      "windowSeconds": 10.024852398,
+      "agentCpuSeconds": 0.140317,
+      "throttledSeconds": 0,
+      "throttledPeriods": 0,
+      "allocatedBytes": 12143536,
+      "accuracyReadMaxSeconds": 0.002325473,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -0.721799803750367,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 42718951,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 11,
+          "totalNs": 1283715,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 11,
+          "totalNs": 10542736,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 1256785,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 88564,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 3550000,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 7917669,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 2,
+          "totalNs": 24480608,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 2,
+          "totalNs": 6154062,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 2,
+          "totalNs": 30653325,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "churn",
+      "cpuLimit": "200m",
+      "repeat": 2,
+      "prefix": "cost-200m-churn-02",
+      "windowSeconds": 10.526107411,
+      "agentCpuSeconds": 1.598004,
+      "throttledSeconds": 12.329069,
+      "throttledPeriods": 47,
+      "allocatedBytes": 135967576,
+      "accuracyReadMaxSeconds": 0.504463038,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -2.949697164197207,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 1610415803,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 4,
+          "over250ms": 1,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 9,
+          "totalNs": 20695313,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 10,
+          "totalNs": 258194493,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 95697784,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 80613,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 207015536,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 305703880,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 2,
+          "totalNs": 424194507,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 2,
+          "totalNs": 101839233,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 2,
+          "totalNs": 526056648,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 1,
+          "over250ms": 1,
+          "over1s": 0
+        }
+      }
+    },
+    {
+      "mode": "steady",
+      "cpuLimit": "200m",
+      "repeat": 2,
+      "prefix": "cost-200m-steady-02",
+      "windowSeconds": 10.043681947,
+      "agentCpuSeconds": 0.177464,
+      "throttledSeconds": 0,
+      "throttledPeriods": 0,
+      "allocatedBytes": 14013208,
+      "accuracyReadMaxSeconds": 0.003125315,
+      "accuracyReadCount": 41,
+      "signedErrorPercent": -0.4146020642308512,
+      "stageDeltas": {
+        "accuracy.scan": {
+          "count": 41,
+          "totalNs": 49564835,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.aggregate": {
+          "count": 10,
+          "totalNs": 1333097,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "cpu.scan": {
+          "count": 10,
+          "totalNs": 12148728,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.cpu_maps": {
+          "count": 1,
+          "totalNs": 1404435,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.exec_maps": {
+          "count": 1,
+          "totalNs": 182884,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.runqlat_maps": {
+          "count": 1,
+          "totalNs": 4817019,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "metrics.scrape": {
+          "count": 1,
+          "totalNs": 9218696,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.cri": {
+          "count": 3,
+          "totalNs": 41964207,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.enrich": {
+          "count": 3,
+          "totalNs": 11218316,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        },
+        "topology.refresh": {
+          "count": 3,
+          "totalNs": 53212965,
+          "maxNs": 0,
+          "lastNs": 0,
+          "over100ms": 0,
+          "over250ms": 0,
+          "over1s": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:06pm (CST)
+Duration: 10s, Total samples = 100ms (    1%)
+Showing nodes accounting for 100ms, 100% of 100ms total
+Showing top 25 nodes out of 62
+      flat  flat%   sum%        cum   cum%
+      50ms 50.00% 50.00%       50ms 50.00%  runtime/internal/syscall.Syscall6
+      10ms 10.00% 60.00%       20ms 20.00%  github.com/cilium/ebpf.(*Map).NextKey
+      10ms 10.00% 70.00%       50ms 50.00%  github.com/cilium/ebpf.(*MapIterator).Next
+      10ms 10.00% 80.00%       10ms 10.00%  path/filepath.(*lazybuf).append (inline)
+      10ms 10.00% 90.00%       10ms 10.00%  runtime.(*spanSet).push
+      10ms 10.00%   100%       10ms 10.00%  runtime.casgstatus
+         0     0%   100%       20ms 20.00%  bufio.(*Scanner).Scan
+         0     0%   100%       20ms 20.00%  github.com/cilium/ebpf.(*Map).Lookup (inline)
+         0     0%   100%       20ms 20.00%  github.com/cilium/ebpf.(*Map).LookupWithFlags
+         0     0%   100%       20ms 20.00%  github.com/cilium/ebpf.(*Map).lookup
+         0     0%   100%       10ms 10.00%  github.com/cilium/ebpf.(*Map).nextKey
+         0     0%   100%       30ms 30.00%  github.com/cilium/ebpf/internal/sys.BPF
+         0     0%   100%       10ms 10.00%  github.com/cilium/ebpf/internal/sys.MapGetNextKey (inline)
+         0     0%   100%       20ms 20.00%  github.com/cilium/ebpf/internal/sys.MapLookupElem (inline)
+         0     0%   100%       30ms 30.00%  github.com/cilium/ebpf/internal/unix.Syscall (inline)
+         0     0%   100%       50ms 50.00%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*AccuracyHandler).ServeHTTP
+         0     0%   100%       40ms 40.00%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.TimedSource.Snapshot
+         0     0%   100%       50ms 50.00%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.measureAccuracy
+         0     0%   100%       10ms 10.00%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.readCPUStat
+         0     0%   100%       10ms 10.00%  github.com/cowhorse05/KubeNode-Observer/internal/metrics.(*Handler).ServeHTTP
+         0     0%   100%       10ms 10.00%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*CPUProbe).MapStats
+         0     0%   100%       40ms 40.00%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*CPUProbe).Snapshot
+         0     0%   100%       10ms 10.00%  github.com/cowhorse05/KubeNode-Observer/internal/probe.readMapStats
+         0     0%   100%       30ms 30.00%  github.com/cowhorse05/KubeNode-Observer/internal/topology.(*Collector).Snapshot
+         0     0%   100%       30ms 30.00%  github.com/cowhorse05/KubeNode-Observer/internal/topology.(*ProcFS).CgroupPath
