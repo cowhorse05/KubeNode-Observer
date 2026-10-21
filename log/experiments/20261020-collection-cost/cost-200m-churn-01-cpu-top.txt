@@ -1,0 +1,32 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:05pm (CST)
+Duration: 10.06s, Total samples = 1.57s (15.61%)
+Showing nodes accounting for 1.30s, 82.80% of 1.57s total
+Showing top 25 nodes out of 199
+      flat  flat%   sum%        cum   cum%
+     0.57s 36.31% 36.31%      0.57s 36.31%  runtime/internal/syscall.Syscall6
+     0.09s  5.73% 42.04%      0.20s 12.74%  runtime.scanobject
+     0.07s  4.46% 46.50%      0.07s  4.46%  runtime.asyncPreempt
+     0.07s  4.46% 50.96%      0.07s  4.46%  runtime.memmove
+     0.05s  3.18% 54.14%      0.06s  3.82%  runtime.findObject
+     0.04s  2.55% 56.69%      0.04s  2.55%  runtime.futex
+     0.04s  2.55% 59.24%      0.12s  7.64%  runtime.mapaccess2
+     0.04s  2.55% 61.78%      0.04s  2.55%  runtime.typePointers.next
+     0.03s  1.91% 63.69%      0.03s  1.91%  internal/abi.(*Type).Kind (inline)
+     0.03s  1.91% 65.61%      0.08s  5.10%  runtime.mapassign
+     0.02s  1.27% 66.88%      0.35s 22.29%  github.com/cilium/ebpf.(*Map).nextKey
+     0.02s  1.27% 68.15%      0.06s  3.82%  github.com/cilium/ebpf/internal/sysenc.hasUnexportedFields
+     0.02s  1.27% 69.43%      0.03s  1.91%  reflect.unpackEface
+     0.02s  1.27% 70.70%      0.02s  1.27%  runtime.(*gcBits).bitp (inline)
+     0.02s  1.27% 71.97%      0.02s  1.27%  runtime.(*mspan).base (inline)
+     0.02s  1.27% 73.25%      0.02s  1.27%  runtime.(*mspan).heapBitsSmallForAddr
+     0.02s  1.27% 74.52%      0.02s  1.27%  runtime.(*mspan).init
+     0.02s  1.27% 75.80%      0.02s  1.27%  runtime.acquirem
+     0.02s  1.27% 77.07%      0.02s  1.27%  runtime.casgstatus
+     0.02s  1.27% 78.34%      0.02s  1.27%  runtime.evacuate
+     0.02s  1.27% 79.62%      0.02s  1.27%  runtime.evacuated (inline)
+     0.02s  1.27% 80.89%      0.03s  1.91%  runtime.nilinterhash
+     0.01s  0.64% 81.53%      0.01s  0.64%  aeshashbody
+     0.01s  0.64% 82.17%      0.01s  0.64%  encoding/binary.intDataSize
+     0.01s  0.64% 82.80%      0.03s  1.91%  errors.Is

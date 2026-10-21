@@ -1,0 +1,57 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:07pm (CST)
+Duration: 10.06s, Total samples = 1.49s (14.82%)
+Showing nodes accounting for 0.91s, 61.07% of 1.49s total
+Showing top 50 nodes out of 198
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      0.69s 46.31%  net/http.(*ServeMux).ServeHTTP
+         0     0%     0%      0.69s 46.31%  net/http.(*conn).serve
+         0     0%     0%      0.69s 46.31%  net/http.serverHandler.ServeHTTP
+         0     0%     0%      0.65s 43.62%  github.com/cilium/ebpf.(*MapIterator).Next
+         0     0%     0%      0.63s 42.28%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.TimedSource.Snapshot
+     0.01s  0.67%  0.67%      0.63s 42.28%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*CPUProbe).Snapshot
+         0     0%  0.67%      0.61s 40.94%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*AccuracyHandler).ServeHTTP
+         0     0%  0.67%      0.61s 40.94%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.measureAccuracy
+     0.01s  0.67%  1.34%      0.56s 37.58%  syscall.Syscall
+     0.54s 36.24% 37.58%      0.54s 36.24%  runtime/internal/syscall.Syscall6
+         0     0% 37.58%      0.53s 35.57%  syscall.RawSyscall6
+         0     0% 37.58%      0.41s 27.52%  github.com/cilium/ebpf/internal/sys.BPF
+         0     0% 37.58%      0.41s 27.52%  github.com/cilium/ebpf/internal/unix.Syscall (inline)
+     0.01s  0.67% 38.26%      0.37s 24.83%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*ExecProbe).Run
+         0     0% 38.26%      0.37s 24.83%  main.main.func5
+         0     0% 38.26%      0.31s 20.81%  github.com/cilium/ebpf.(*Map).NextKey
+         0     0% 38.26%      0.25s 16.78%  github.com/cilium/ebpf.(*Map).Lookup (inline)
+         0     0% 38.26%      0.25s 16.78%  github.com/cilium/ebpf.(*Map).LookupWithFlags
+     0.01s  0.67% 38.93%      0.25s 16.78%  main.main.func5.1
+         0     0% 38.93%      0.24s 16.11%  github.com/cilium/ebpf.(*Map).nextKey
+         0     0% 38.93%      0.23s 15.44%  github.com/cilium/ebpf/internal/sys.MapGetNextKey (inline)
+         0     0% 38.93%      0.23s 15.44%  runtime.systemstack
+         0     0% 38.93%      0.21s 14.09%  runtime.gcBgMarkWorker
+         0     0% 38.93%      0.21s 14.09%  runtime.gcBgMarkWorker.func2
+     0.01s  0.67% 39.60%      0.21s 14.09%  runtime.gcDrain
+     0.06s  4.03% 43.62%      0.20s 13.42%  runtime.scanobject
+         0     0% 43.62%      0.19s 12.75%  github.com/cilium/ebpf.(*Map).lookup
+         0     0% 43.62%      0.18s 12.08%  github.com/cilium/ebpf/internal/sys.MapLookupElem (inline)
+     0.01s  0.67% 44.30%      0.17s 11.41%  github.com/cilium/ebpf/internal/sysenc.unsafeBackingMemory
+     0.15s 10.07% 54.36%      0.15s 10.07%  runtime.memmove
+         0     0% 54.36%      0.13s  8.72%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Collect
+         0     0% 54.36%      0.13s  8.72%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Run
+         0     0% 54.36%      0.13s  8.72%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).Add
+         0     0% 54.36%      0.13s  8.72%  internal/poll.ignoringEINTRIO (inline)
+     0.01s  0.67% 55.03%      0.12s  8.05%  github.com/cilium/ebpf.makeMapSyscallOutput
+         0     0% 55.03%      0.12s  8.05%  runtime.typedslicecopy
+         0     0% 55.03%      0.11s  7.38%  encoding/binary.Size
+         0     0% 55.03%      0.11s  7.38%  github.com/cilium/ebpf/internal/sysenc.SyscallOutput
+         0     0% 55.03%      0.11s  7.38%  runtime.gcDrainMarkWorkerIdle (inline)
+         0     0% 55.03%      0.10s  6.71%  fmt.Fprintln
+         0     0% 55.03%      0.10s  6.71%  fmt.Println (inline)
+         0     0% 55.03%      0.10s  6.71%  internal/poll.(*FD).Write
+         0     0% 55.03%      0.10s  6.71%  runtime.gcDrainMarkWorkerDedicated (inline)
+     0.06s  4.03% 59.06%      0.10s  6.71%  runtime.mapaccess2
+         0     0% 59.06%      0.10s  6.71%  syscall.Write (inline)
+         0     0% 59.06%      0.10s  6.71%  syscall.write
+         0     0% 59.06%      0.09s  6.04%  os.(*File).Write
+         0     0% 59.06%      0.09s  6.04%  os.(*File).write (inline)
+     0.03s  2.01% 61.07%      0.08s  5.37%  encoding/binary.dataSize
+         0     0% 61.07%      0.08s  5.37%  github.com/cilium/ebpf/internal/sysenc.Unmarshal

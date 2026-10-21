@@ -4,9 +4,12 @@ import (
 	"context"
 	"fmt"
 	"time"
+
+	"github.com/cowhorse05/KubeNode-Observer/internal/telemetry"
 )
 
 type Collector struct {
+	Timing   *telemetry.Recorder // Set before Snapshot is called.
 	nodeName string
 	runtime  Runtime
 	proc     *ProcFS
@@ -18,10 +21,13 @@ func NewCollector(nodeName string, runtime Runtime, proc *ProcFS, resolver Resou
 }
 
 func (c *Collector) Snapshot(ctx context.Context) (Snapshot, error) {
+	started := time.Now()
 	runtimeContainers, err := c.runtime.Containers(ctx)
+	c.Timing.Observe(telemetry.TopologyCRI, started)
 	if err != nil {
 		return Snapshot{}, err
 	}
+	defer c.Timing.Observe(telemetry.TopologyEnrich, time.Now())
 
 	snapshot := Snapshot{
 		GeneratedAt: time.Now().UTC(),

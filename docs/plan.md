@@ -373,7 +373,9 @@ microVM 工作在 MVP 完成后开始。
 
 M6 已完成，当前停在性能优化入口，不提前进入 Kata 或 Web UI。
 
-2026-10-20 已实现可重复的 AB/BA 配对实验和 CPU runtime/cgroup 精度对照，完成 8 个独立配对及 12 个精度窗口，当前等待人工 review。方法见 [实验指南](experiments.md)，数据与限制见 [实验记录](../log/2026-10-20-paired-accuracy.md)。
+2026-10-20 已实现可重复的 AB/BA 配对实验和 CPU runtime/cgroup 精度对照，完成 8 个独立配对及 12 个精度窗口，并通过 PR #1 合入 main。方法见 [实验指南](experiments.md)，数据与限制见 [实验记录](../log/2026-10-20-paired-accuracy.md)。
+
+采集成本诊断已完成 8 个 case：区分生产/额外精度扫描、拓扑与 metrics 成本，保存 profile 和 Agent cgroup 限流；200m 下复现 churn 长扫描，1 CPU 对照明显缩短读耗时。详见 [成本分解报告](../log/2026-10-20-collection-cost.md)。尚未修改采集算法；优先优化 metrics 的全量 map 统计，再复测精度与业务影响。
 
 1. 将 CPU runtime map、runqlat map、拓扑刷新与 metrics scrape 的成本分项测量；
 2. 继续验证 CPU map 缩容后 128 MiB limit 下的长时内存平台，并拆分 Go heap 与内核 map charge；

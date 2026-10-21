@@ -96,3 +96,25 @@ reference skew = (upper - lower) / reference × 100%
 - `commands.jsonl`：命令、HTTP 请求的执行时间和错误信息。
 
 复现的是相同实验方法与配置，不承诺共享 WSL2 环境每次得到相同的数值。
+
+## 采集成本诊断
+
+```bash
+make cost EXPERIMENT_FLAGS='--duration=10s --accuracy-repeats=2'
+# 已构建并加载镜像时，无需再次构建：
+./bin/kno-experiment --mode cost --context kno-dev \
+  --cost-agent-image kubenode-observer/kno-agent:cost \
+  --duration=10s --accuracy-repeats=2
+```
+
+`cost` 不包含在 `all` 中，避免改变既有配对实验语义。当前固定矩阵为 steady/churn × Agent 200m/1 CPU，每个 case 都重建 Agent，偶数重复反转两因子的顺序，其他配置从原 DaemonSet 复制（CPU request 固定 100m，memory 保持原值）。独立镜像必须预加载，`imagePullPolicy=Never`；不会覆盖原 Agent 镜像。每个 case 内并行运行 250ms 精度扫描与 CPU profile，并在窗口中部抓取一次 `/metrics`，结束时校验 Agent UID、Ready、零重启以及负载仍在运行。所有 case 完成后才解析 profile，不在测量期间运行编译或测试。
+
+Agent 的 `--debug-listen=127.0.0.1:18090` 默认关闭，仅接受字面量 loopback IP。通过 `kubectl port-forward` 访问 `/diagnostics` 和 `/debug/pprof/`，不接入普通 API mux。诊断无鉴权，只用于受控测试环境；hostNetwork Pod 的节点本机进程也能访问。不要公开转发诊断端口。
+
+`/diagnostics` 提供进程启动以来固定标签的累计计时：production CPU map 扫描、accuracy 额外扫描、CPU 聚合、CRI 查询、拓扑 enrichment、含锁等待的拓扑刷新，以及 exec/CPU/runqlat 三组 map stats 与整个 metrics scrape。计数和总耗时在前后快照间做差，得到窗口次数、平均耗时与超过 100ms/250ms/1s 的次数。累计最大值只保留于原始快照，不错误地做差或当作窗口最大值。计时不在逐事件热路径内；debug 关闭时不记录。各 stage 可嵌套或并发，**不能相加视作 CPU 利用率**。
+
+Agent cgroup 从 `/proc/self/cgroup` 定位，再读挂载的主机 cgroup v2 `cpu.stat` / `cpu.max`，不假设 `/sys/fs/cgroup` 根目录就是容器。前后差记录 `usage_usec`、`nr_throttled`、`throttled_usec`，以及 Go `TotalAlloc` 差值。限流时长是内核 cgroup 口径，可能包含多 CPU 累计，不能直接作为墙钟停顿百分比。CPU profile 用于定位 Agent 进程的采样热点，不覆盖其他任务上下文中的全部 eBPF 执行成本；`TotalAlloc` 是累计分配量，不是 RSS 增长。
+
+Stage 在操作完成时记账，快照差统计的是窗口内完成的操作；跨边界的操作不会按时间切片。诊断快照、profile 和精度窗口也不是原子对齐的，不应把它们当作逐毫秒的因果追踪。
+
+原始数据包含 `cost-*-agent-manifest.json`、`*-diagnostics-before/after.json`、`*-accuracy.json`、`*-cpu.pb.gz`、`*-cpu-top.txt`、`*-metrics.txt` 与负载/Pod 状态。`summary.costCases[].stageDeltas` 的 `maxNs` / `lastNs` 为 0（未定义窗口最大/末次），窗口最大读耗时来自独立精度采样的 `accuracyReadMaxSeconds`，其中包含前后 `cpu.stat` 读取。profile 和额外扫描会改变被测系统，该矩阵只用于诊断；要评价优化后的业务收益，仍须使用不启用诊断的 AB/BA 基准。

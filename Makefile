@@ -6,11 +6,12 @@ WORKLOAD_IMAGE ?= kubenode-observer/exec-test:dev
 CPU_HOG_IMAGE ?= kubenode-observer/cpu-hog:dev
 CONTENTION_IMAGE ?= kubenode-observer/cpu-contention:dev
 BENCHMARK_IMAGE ?= kubenode-observer/observer-benchmark:dev
+COST_AGENT_IMAGE ?= kubenode-observer/kno-agent:cost
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
 
-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image experiment-build smoke cpu-smoke runqlat-smoke benchmark accuracy experiment stability integration install-minikube uninstall-minikube demo deploy undeploy
+.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image experiment-build smoke cpu-smoke runqlat-smoke benchmark accuracy experiment cost stability integration install-minikube uninstall-minikube demo deploy undeploy
 
 generate:
 	go generate ./internal/bpfgen
@@ -76,6 +77,12 @@ accuracy: benchmark-image experiment-build
 experiment: benchmark-image experiment-build
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
 	./bin/kno-experiment --mode all --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) $(EXPERIMENT_FLAGS)
+
+cost: benchmark-image experiment-build
+	$(MAKE) image-local IMAGE=$(COST_AGENT_IMAGE)
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(COST_AGENT_IMAGE)
+	./bin/kno-experiment --mode cost --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) --cost-agent-image $(COST_AGENT_IMAGE) $(EXPERIMENT_FLAGS)
 
 stability: workload-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WORKLOAD_IMAGE)

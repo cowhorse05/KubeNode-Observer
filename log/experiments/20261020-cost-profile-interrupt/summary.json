@@ -1,0 +1,17 @@
+{
+  "status": "failed",
+  "config": {
+    "mode": "cost",
+    "context": "kno-dev",
+    "output": "log/experiments/20261020-cost-profile-interrupt",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "costAgentImage": "kubenode-observer/kno-agent:cost",
+    "pairs": 4,
+    "accuracyRepeats": 1,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 30000000000,
+    "warmupNs": 1000000000,
+    "settleNs": 1000000000
+  },
+  "error": "context canceled"
+}

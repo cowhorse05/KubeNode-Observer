@@ -7,6 +7,8 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/cowhorse05/KubeNode-Observer/internal/telemetry"
 )
 
 type SnapshotCollector interface {
@@ -14,6 +16,7 @@ type SnapshotCollector interface {
 }
 
 type Store struct {
+	Timing    *telemetry.Recorder // Set before Run; includes refresh lock wait.
 	collector SnapshotCollector
 	snapshot  atomic.Pointer[Snapshot]
 	refreshMu sync.Mutex
@@ -52,6 +55,7 @@ func (s *Store) refresh(ctx context.Context) {
 }
 
 func (s *Store) Refresh(ctx context.Context) error {
+	defer s.Timing.Observe(telemetry.TopologyRefresh, time.Now())
 	s.refreshMu.Lock()
 	defer s.refreshMu.Unlock()
 

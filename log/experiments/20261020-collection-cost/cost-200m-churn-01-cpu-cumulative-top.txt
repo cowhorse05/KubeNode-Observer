@@ -1,0 +1,57 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:05pm (CST)
+Duration: 10.06s, Total samples = 1.57s (15.61%)
+Showing nodes accounting for 1.02s, 64.97% of 1.57s total
+Showing top 50 nodes out of 199
+      flat  flat%   sum%        cum   cum%
+         0     0%     0%      0.83s 52.87%  net/http.(*conn).serve
+         0     0%     0%      0.82s 52.23%  net/http.(*ServeMux).ServeHTTP
+         0     0%     0%      0.82s 52.23%  net/http.serverHandler.ServeHTTP
+         0     0%     0%      0.80s 50.96%  github.com/cilium/ebpf.(*MapIterator).Next
+         0     0%     0%      0.73s 46.50%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.TimedSource.Snapshot
+         0     0%     0%      0.73s 46.50%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*CPUProbe).Snapshot
+         0     0%     0%      0.69s 43.95%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*AccuracyHandler).ServeHTTP
+     0.01s  0.64%  0.64%      0.69s 43.95%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.measureAccuracy
+         0     0%  0.64%      0.60s 38.22%  syscall.Syscall
+     0.57s 36.31% 36.94%      0.57s 36.31%  runtime/internal/syscall.Syscall6
+         0     0% 36.94%      0.56s 35.67%  syscall.RawSyscall6
+         0     0% 36.94%      0.54s 34.39%  github.com/cilium/ebpf/internal/sys.BPF
+         0     0% 36.94%      0.54s 34.39%  github.com/cilium/ebpf/internal/unix.Syscall (inline)
+     0.01s  0.64% 37.58%      0.40s 25.48%  github.com/cilium/ebpf.(*Map).NextKey
+     0.02s  1.27% 38.85%      0.35s 22.29%  github.com/cilium/ebpf.(*Map).nextKey
+         0     0% 38.85%      0.33s 21.02%  github.com/cilium/ebpf.(*Map).Lookup (inline)
+         0     0% 38.85%      0.33s 21.02%  github.com/cilium/ebpf.(*Map).LookupWithFlags
+         0     0% 38.85%      0.31s 19.75%  github.com/cilium/ebpf/internal/sys.MapGetNextKey (inline)
+         0     0% 38.85%      0.28s 17.83%  runtime.systemstack
+         0     0% 38.85%      0.26s 16.56%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*ExecProbe).Run
+         0     0% 38.85%      0.26s 16.56%  main.main.func5
+     0.01s  0.64% 39.49%      0.25s 15.92%  github.com/cilium/ebpf.(*Map).lookup
+         0     0% 39.49%      0.23s 14.65%  github.com/cilium/ebpf/internal/sys.MapLookupElem (inline)
+         0     0% 39.49%      0.21s 13.38%  runtime.gcBgMarkWorker
+         0     0% 39.49%      0.21s 13.38%  runtime.gcBgMarkWorker.func2
+     0.01s  0.64% 40.13%      0.21s 13.38%  runtime.gcDrain
+         0     0% 40.13%      0.20s 12.74%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Collect
+         0     0% 40.13%      0.20s 12.74%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Run
+         0     0% 40.13%      0.20s 12.74%  main.main.func5.1
+     0.09s  5.73% 45.86%      0.20s 12.74%  runtime.scanobject
+     0.01s  0.64% 46.50%      0.16s 10.19%  github.com/cilium/ebpf/internal/sysenc.unsafeBackingMemory
+         0     0% 46.50%      0.15s  9.55%  runtime.gcDrainMarkWorkerDedicated (inline)
+         0     0% 46.50%      0.14s  8.92%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).Add
+         0     0% 46.50%      0.13s  8.28%  github.com/cowhorse05/KubeNode-Observer/internal/metrics.(*Handler).ServeHTTP
+         0     0% 46.50%      0.13s  8.28%  github.com/cowhorse05/KubeNode-Observer/internal/probe.readMapStats
+         0     0% 46.50%      0.12s  7.64%  github.com/cilium/ebpf.makeMapSyscallOutput
+     0.04s  2.55% 49.04%      0.12s  7.64%  runtime.mapaccess2
+         0     0% 49.04%      0.12s  7.64%  runtime.typedslicecopy
+         0     0% 49.04%      0.11s  7.01%  github.com/cilium/ebpf/internal/sysenc.SyscallOutput
+         0     0% 49.04%      0.10s  6.37%  runtime.mallocgc
+         0     0% 49.04%      0.09s  5.73%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*RunQLatProbe).MapStats
+     0.03s  1.91% 50.96%      0.08s  5.10%  runtime.mapassign
+     0.07s  4.46% 55.41%      0.07s  4.46%  runtime.asyncPreempt
+     0.07s  4.46% 59.87%      0.07s  4.46%  runtime.memmove
+     0.01s  0.64% 60.51%      0.07s  4.46%  sync.(*Map).Load
+     0.02s  1.27% 61.78%      0.06s  3.82%  github.com/cilium/ebpf/internal/sysenc.hasUnexportedFields
+         0     0% 61.78%      0.06s  3.82%  runtime.bulkBarrierPreWrite
+     0.05s  3.18% 64.97%      0.06s  3.82%  runtime.findObject
+         0     0% 64.97%      0.06s  3.82%  runtime.gcDrainMarkWorkerIdle (inline)
+         0     0% 64.97%      0.05s  3.18%  encoding/binary.Size

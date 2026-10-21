@@ -124,6 +124,8 @@ make benchmark
 
 `make benchmark` 现采用 off/on、on/off 交替的配对实验，`make accuracy` 对照 eBPF CPU runtime 与同窗口的 cgroup `cpu.stat`；`make experiment` 连续运行两者。每轮参数、环境、源码快照和原始数据保存在 `log/experiments/`。具体方法见 [配对实验与精度对照](docs/experiments.md)。
 
+`make cost` 单独运行采集成本诊断：steady/churn × Agent 200m/1 CPU，记录分阶段墙钟耗时、CPU profile、分配量和 Agent cgroup 限流。使用独立 `:cost` 镜像，结束恢复原部署；此模式启用额外扫描和 profiling，不作为业务开销基准。
+
 v0.1.0 旧版顺序实验在 2 vCPU WSL2/Minikube 的 5 轮中位数结果为：吞吐差异 `-3.67%`、P99 无变化、Agent 用户态 CPU `2.353%`、RSS 约 `116 MiB`、BPF map memlock `7.0 MiB`。该数据保留作历史记录，不与新的配对差值直接等同；见 [实验记录](log/2026-10-19-m6-observer-benchmark.md)。
 
 ## 内网镜像约定

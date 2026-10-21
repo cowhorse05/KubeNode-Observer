@@ -1,0 +1,32 @@
+File: kno-agent
+Type: cpu
+Time: Oct 20, 2026 at 4:08pm (CST)
+Duration: 10.20s, Total samples = 1.22s (11.96%)
+Showing nodes accounting for 1.01s, 82.79% of 1.22s total
+Showing top 25 nodes out of 187
+      flat  flat%   sum%        cum   cum%
+     0.44s 36.07% 36.07%      0.44s 36.07%  runtime/internal/syscall.Syscall6
+     0.13s 10.66% 46.72%      0.13s 10.66%  runtime.memmove
+     0.04s  3.28% 50.00%      0.04s  3.28%  runtime.(*mspan).base (inline)
+     0.04s  3.28% 53.28%      0.04s  3.28%  runtime.findObject
+     0.03s  2.46% 55.74%      0.03s  2.46%  runtime.futex
+     0.03s  2.46% 58.20%      0.16s 13.11%  runtime.scanobject
+     0.02s  1.64% 59.84%      0.03s  2.46%  encoding/json.structEncoder.encode
+     0.02s  1.64% 61.48%      0.49s 40.16%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*CPUProbe).Snapshot
+     0.02s  1.64% 63.11%      0.02s  1.64%  reflect.(*rtype).Size
+     0.02s  1.64% 64.75%      0.02s  1.64%  runtime.(*gcBits).bitp (inline)
+     0.02s  1.64% 66.39%      0.02s  1.64%  runtime.evacuate
+     0.02s  1.64% 68.03%      0.02s  1.64%  runtime.evacuated (inline)
+     0.02s  1.64% 69.67%      0.06s  4.92%  runtime.mapaccess2
+     0.02s  1.64% 71.31%      0.08s  6.56%  runtime.mapassign
+     0.02s  1.64% 72.95%      0.02s  1.64%  runtime.memclrNoHeapPointers
+     0.02s  1.64% 74.59%      0.02s  1.64%  runtime.nextFreeFast (inline)
+     0.02s  1.64% 76.23%      0.02s  1.64%  runtime.typePointers.nextFast (inline)
+     0.01s  0.82% 77.05%      0.03s  2.46%  encoding/binary.dataSize
+     0.01s  0.82% 77.87%      0.01s  0.82%  encoding/json.stateInString
+     0.01s  0.82% 78.69%      0.01s  0.82%  encoding/json.uintEncoder
+     0.01s  0.82% 79.51%      0.01s  0.82%  errors.Is
+     0.01s  0.82% 80.33%      0.18s 14.75%  github.com/cilium/ebpf.(*Map).lookup
+     0.01s  0.82% 81.15%      0.19s 15.57%  github.com/cilium/ebpf.(*Map).nextKey
+     0.01s  0.82% 81.97%      0.02s  1.64%  github.com/cilium/ebpf/internal/sysenc.Unmarshal
+     0.01s  0.82% 82.79%      0.03s  2.46%  github.com/cilium/ebpf/internal/sysenc.hasUnexportedFields
