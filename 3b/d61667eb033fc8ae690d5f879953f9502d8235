@@ -1,0 +1,40 @@
+cmd/kno-experiment/main.go
+  s_6e6fc63242599e::t_581e13acb93b8c 17
+  s_6e6fc63242599e::t_21395079af91ff 31-35
+internal/telemetry/handler.go
+  s_6e6fc63242599e::t_21395079af91ff 17-37,49-55,60-61,63
+  s_6e6fc63242599e::t_cc6d9fb709ed3c 10,62
+internal/telemetry/memory.go
+  s_6e6fc63242599e::t_cc6d9fb709ed3c 1-13,19-20,45-46,57-58,60-61,72,112-113,128
+  s_6e6fc63242599e::t_21395079af91ff 14-18,21-44,47-56,59,62-71,73-111,114-127
+internal/experiment/memory.go
+  s_6e6fc63242599e::t_21395079af91ff 17-31,35-40,43-50,52-70,76-88,90-92,94-104,107-118,122-126,128-130,132-169,171-173,175-187,189-253
+  s_6e6fc63242599e::t_581e13acb93b8c 1-16,32-34,41-42,51,71-75,89,93,105-106,119-121,127,131,170,174,188,254
+internal/experiment/memory_test.go
+  s_6e6fc63242599e::t_21395079af91ff 10-16,18-46,49-61
+  s_6e6fc63242599e::t_6b6af0048a4868 1-9,17,47-48,62
+internal/experiment/runner.go
+  s_6e6fc63242599e::t_581e13acb93b8c 44,211
+  s_6e6fc63242599e::t_21395079af91ff 40-43,88,203-205,210,213-226,231
+internal/telemetry/memory_test.go
+  s_6e6fc63242599e::t_21395079af91ff 9-45
+  s_6e6fc63242599e::t_cc6d9fb709ed3c 1-8,46
+internal/telemetry/recorder_test.go
+  s_6e6fc63242599e::t_21395079af91ff 46-53,72-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "3bd61667eb033fc8ae690d5f879953f9502d8235",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
