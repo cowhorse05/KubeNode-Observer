@@ -1,0 +1,7 @@
+ M README.md
+ M docs/architecture.md
+ M docs/experiments.md
+ M docs/plan.md
+ M internal/telemetry/memory_test.go
+ M internal/telemetry/recorder_test.go
+ M log/2026-10-20-metrics-cache.md

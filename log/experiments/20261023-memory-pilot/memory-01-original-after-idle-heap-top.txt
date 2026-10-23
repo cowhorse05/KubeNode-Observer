@@ -1,0 +1,31 @@
+File: kno-agent
+Type: inuse_space
+Time: Oct 23, 2026 at 3:51pm (CST)
+Showing nodes accounting for 38800.67kB, 100% of 38800.67kB total
+Showing top 25 nodes out of 69
+      flat  flat%   sum%        cum   cum%
+12074.25kB 31.12% 31.12% 15663.13kB 40.37%  github.com/cilium/ebpf/btf.readAndInflateTypes
+11696.13kB 30.14% 61.26% 11696.13kB 30.14%  github.com/cilium/ebpf/btf.indexTypes
+ 4096.07kB 10.56% 71.82%  4096.07kB 10.56%  bufio.(*Scanner).Text (inline)
+ 3588.88kB  9.25% 81.07%  3588.88kB  9.25%  github.com/cilium/ebpf/btf.readAndInflateTypes.func2
+ 3437.68kB  8.86% 89.93%  7533.75kB 19.42%  github.com/cilium/ebpf/btf.readStringTable
+  768.26kB  1.98% 91.91%   768.26kB  1.98%  github.com/cowhorse05/KubeNode-Observer/internal/event.NewStore
+  540.51kB  1.39% 93.30%   540.51kB  1.39%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Collect
+  532.26kB  1.37% 94.67%   532.26kB  1.37%  google.golang.org/protobuf/internal/filedesc.(*File).initDecls
+  520.04kB  1.34% 96.01%   520.04kB  1.34%  google.golang.org/grpc/mem.NewTieredBufferPool.newSizedBufferPool.func1
+  519.03kB  1.34% 97.35%   519.03kB  1.34%  sync.(*Map).Swap
+     515kB  1.33% 98.68%      515kB  1.33%  golang.org/x/net/http2/hpack.init
+  512.56kB  1.32%   100%   512.56kB  1.32%  compress/flate.newHuffmanEncoder (inline)
+         0     0%   100%   512.56kB  1.32%  compress/flate.generateFixedLiteralEncoding
+         0     0%   100%   512.56kB  1.32%  compress/flate.init
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign.func1
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf.(*collectionLoader).loadProgram
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf.applyRelocations
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf.assignValues
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf.newProgramWithOptions
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf/btf.LoadKernelSpec
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf/btf.loadKernelSpec
+         0     0%   100% 34893.01kB 89.93%  github.com/cilium/ebpf/btf.loadRawSpec
+         0     0%   100% 23196.88kB 59.78%  github.com/cilium/ebpf/btf.parseBTF
+         0     0%   100% 34893.01kB 89.93%  github.com/cowhorse05/KubeNode-Observer/internal/bpfgen.LoadExecObjects

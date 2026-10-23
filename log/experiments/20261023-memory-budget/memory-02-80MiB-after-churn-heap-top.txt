@@ -1,0 +1,31 @@
+File: kno-agent
+Type: inuse_space
+Time: Oct 23, 2026 at 4:04pm (CST)
+Showing nodes accounting for 41694.86kB, 100% of 41694.86kB total
+Showing top 25 nodes out of 59
+      flat  flat%   sum%        cum   cum%
+13610.17kB 32.64% 32.64% 17708.45kB 42.47%  github.com/cilium/ebpf/btf.readAndInflateTypes
+12208.14kB 29.28% 61.92% 12208.14kB 29.28%  github.com/cilium/ebpf/btf.indexTypes
+ 4098.28kB  9.83% 71.75%  4098.28kB  9.83%  github.com/cilium/ebpf/btf.readAndInflateTypes.func2
+ 2546.26kB  6.11% 77.86%  4594.31kB 11.02%  github.com/cilium/ebpf/btf.readStringTable
+ 2048.22kB  4.91% 82.77%  2048.22kB  4.91%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).enrich
+ 2048.05kB  4.91% 87.68%  2048.05kB  4.91%  bufio.(*Scanner).Text (inline)
+ 1024.47kB  2.46% 90.14%  1024.47kB  2.46%  encoding/json.Marshal
+  768.26kB  1.84% 91.98%   768.26kB  1.84%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Collect
+  768.26kB  1.84% 93.82%   768.26kB  1.84%  github.com/cowhorse05/KubeNode-Observer/internal/event.NewStore
+  520.04kB  1.25% 95.07%   520.04kB  1.25%  google.golang.org/grpc/mem.NewTieredBufferPool.newSizedBufferPool.func1
+  516.01kB  1.24% 96.31%   516.01kB  1.24%  regexp/syntax.appendRange
+     514kB  1.23% 97.54%      514kB  1.23%  bufio.(*Scanner).Scan
+  512.56kB  1.23% 98.77%   512.56kB  1.23%  runtime.allgadd
+  512.14kB  1.23%   100%   512.14kB  1.23%  k8s.io/api/core/v1.init
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign.func1
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf.(*collectionLoader).loadProgram
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf.applyRelocations
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf.assignValues
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf.newProgramWithOptions
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf/btf.LoadKernelSpec
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf/btf.loadKernelSpec
+         0     0%   100% 34510.90kB 82.77%  github.com/cilium/ebpf/btf.loadRawSpec
+         0     0%   100% 22302.76kB 53.49%  github.com/cilium/ebpf/btf.parseBTF
+         0     0%   100% 34510.90kB 82.77%  github.com/cowhorse05/KubeNode-Observer/internal/bpfgen.LoadExecObjects

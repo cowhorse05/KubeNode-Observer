@@ -77,6 +77,18 @@ func TestDiagnosticsCgroup(t *testing.T) {
 	if w.Code != 405 {
 		t.Fatalf("status %d", w.Code)
 	}
+	if err := os.Remove(filepath.Join(cgroup, "pod", "agent", "memory.current")); err != nil {
+		t.Fatal(err)
+	}
+	w = httptest.NewRecorder()
+	h.ServeHTTP(w, httptest.NewRequest("GET", "/diagnostics", nil))
+	result = Snapshot{}
+	if err := json.Unmarshal(w.Body.Bytes(), &result); err != nil {
+		t.Fatal(err)
+	}
+	if result.Error != "" || result.CPUStat["usage_usec"] != 123 || result.MemoryError == "" || result.Memory != nil {
+		t.Fatalf("memory failure corrupted CPU diagnostics: %+v", result)
+	}
 	if err := os.WriteFile(filepath.Join(proc, "self", "cgroup"), []byte("0::/../../escape\n"), 0644); err != nil {
 		t.Fatal(err)
 	}

@@ -139,3 +139,20 @@ make metrics-compare EXPERIMENT_FLAGS='--pairs=4'
 对候选镜像运行原有精度/开销实验可显式指定 `--test-agent-image=kubenode-observer/kno-agent:metrics-cache`。只复制并替换临时 Agent 镜像、设为预加载，不改变原部署，结束时仍恢复原 DaemonSet。
 
 完整功能与 churn 验收可运行 `VERIFY_OUTPUT=log/<新目录> bash hack/verify-metrics-cache.sh`。脚本占用同一实验锁，临时使用已加载的候选镜像、保持 debug 关闭，执行 integration 和两轮共 40000 次子进程 churn，保存指标与 Pod 状态并恢复原镜像。不要与性能测量或其他集群实验同时运行；SIGKILL/断电仍需人工按保存的 original 状态恢复。
+
+## 内存预算观测
+
+```bash
+make image-local IMAGE=kubenode-observer/kno-agent:memory
+make experiment-build
+minikube -p kno-dev image load --overwrite=true kubenode-observer/kno-agent:memory
+./bin/kno-experiment --mode memory --context kno-dev --duration=1m \
+  --memory-pulses=5 --memory-idle=1m --memory-interval=5s \
+  --memory-go-limits=original,80MiB --output log/experiments/<新目录>
+```
+
+同一个诊断镜像，两次新 Agent，临时固定 128 MiB memory / 200m CPU limit、32 MiB / 100m request。`original` 保留原配置的 GOMEMLIMIT（如有），另一 case 显式覆盖为 `80MiB`；不是两版不同代码。每次连续执行 5 个有限的 60s churn 子任务并观察 60s idle，约 6 分钟/配置。pulse 之间存在控制请求间隙，不能称为严格恒定到达速率；不强制 GC，heap profile 使用 `gc=0`，所有 profile 解析都在负载结束后执行。失败/中断保留部分样本并恢复原配置，Agent cgroup 改变、重启或 OOM 都会使实验失败。
+
+每 5s 保存完整 diagnostics 和 metrics，区分：RSS；HeapAlloc/HeapInuse/HeapIdle/HeapReleased/StackInuse；Go managed 估计 `Sys-HeapReleased` 与当前软限制；实际 Agent cgroup 的 `memory.current/max/peak/stat/events`。`memory.peak` 不支持时省略而不是返回零，关键计数缺失时报错。Go 的 GOMEMLIMIT 不覆盖所有进程/内核内存，也不是硬上限；kernel/slab/anon/file 字段有包含关系，map memlock 也不能简单加到 cgroup current 上。不同文件非原子读取，单次采样可能错位。
+
+`memory.peak` 为新 cgroup 自创建以来的高水位，不是每个 phase 的独立峰值。`gcCpuFraction` 也是进程生命周期累计口径，不能拿相邻差直接当窗口 GC CPU 百分比。实验只是有限窗口的工程观测，不证明泄漏不存在或生产环境永不 OOM；默认部署是否调整须依据实测余量、GC/CPU 代价和更长观察，不因给了 soft limit 就宣称预算已解决。

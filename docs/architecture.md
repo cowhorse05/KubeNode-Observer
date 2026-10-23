@@ -112,3 +112,11 @@ exec event_stats            ──> events lost         ┘
 `/metrics` 使用 Prometheus text format，只观测 Agent 自身和项目 eBPF map，不重复实现 node-exporter。map stats 由单个后台 worker 首次立即采样，之后每次完成后等待 `--map-stats-interval`（默认 15s）再刷新。占用统计只遍历 key，不读取 value；最多执行 `MaxEntries+1` 次 next-key 调用，无法完成则报错，不输出被截断的计数。并发更新/删除下是非原子的近似 census，可能重复或漏计，不用于精确 eviction/丢失率。
 
 HTTP 抓取只读取不可变快照，不等待或触发 map 扫描。`bpf_map_stats_ready/age_seconds/last_success_timestamp_seconds/refresh_duration_seconds/refresh_error/refresh_errors_total` 描述各 source 的新鲜度和错误；标签固定为 exec/cpu/runqlat。刷新失败可暂时保留最近成功值，同时增加 collection errors；超过 3 倍刷新间隔后该 source 的 entries/capacity/memlock 全部停止输出，不能把缺失当成零。健康/lifecycle/process 指标仍在每次 scrape 时读取。退出时先停止并等待后台刷新，再关闭 map FD。
+
+## 内存诊断与 BTF 生命周期
+
+Agent 完成 exec、CPU、runqlat 三组程序的 CO-RE relocation 和 attach 后，调用依赖库的 `btf.FlushKernelSpec()`，释放 Go 全局缓存对内核 BTF 类型图的引用。这不是卸载 BPF 程序，也不关闭 map/program FD；未来再加载程序时，库会按需重新读取 BTF。这里不强制 GC，由 Go 的正常回收和 scavenging 释放内存；若以后引入动态 probe，应重新评估加载频率与缓存生命周期。
+
+仅在显式启用本地诊断端口时，`/diagnostics` 才额外输出 Agent 自身 cgroup 的 `memory.current/max/peak/stat/events`、RSS、Go heap/stack、`Sys-HeapReleased` 和当前 GOMEMLIMIT。内存读取错误与 CPU 诊断错误分别报告，缺失值不伪装成零。`memory.peak` 是 cgroup 创建以来的高水位；不支持时省略。
+
+RSS、Go managed memory 和 cgroup charge 是不同口径，不能互相替代；kernel/slab 有包含关系，也不能把 map memlock 再加到 cgroup current。GOMEMLIMIT 是 Go runtime 的软限制，不覆盖所有进程和内核内存。默认部署不设置该变量；实验可显式对照 `original,80MiB`，但有限窗口没有 OOM 不等于长期预算有保证。操作方法见 [内存预算观测](experiments.md#内存预算观测)。
