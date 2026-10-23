@@ -1,0 +1,21 @@
+log/2026-10-20-metrics-cache.md
+  s_6e6fc63242599e::t_80ceb617c30321 88-97
+log/2026-10-23-metrics-go-checks.txt
+  s_6e6fc63242599e::t_9b55350266ba8f 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "4eedff346f2b3fb6422d4c93d8b9cdccbafc5090",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
