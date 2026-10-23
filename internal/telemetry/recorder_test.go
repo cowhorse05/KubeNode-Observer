@@ -43,9 +43,14 @@ func TestDiagnosticsCgroup(t *testing.T) {
 	proc := filepath.Join(root, "proc")
 	cgroup := filepath.Join(root, "cgroup")
 	for name, content := range map[string]string{
-		filepath.Join(proc, "self", "cgroup"):             "0::/pod/agent\n",
-		filepath.Join(cgroup, "pod", "agent", "cpu.max"):  "20000 100000\n",
-		filepath.Join(cgroup, "pod", "agent", "cpu.stat"): "usage_usec 123\nnr_throttled 4\nthrottled_usec 90\n",
+		filepath.Join(proc, "self", "cgroup"):                   "0::/pod/agent\n",
+		filepath.Join(cgroup, "pod", "agent", "cpu.max"):        "20000 100000\n",
+		filepath.Join(cgroup, "pod", "agent", "cpu.stat"):       "usage_usec 123\nnr_throttled 4\nthrottled_usec 90\n",
+		filepath.Join(proc, "self", "statm"):                    "200 10 0 0 0 0 0\n",
+		filepath.Join(cgroup, "pod", "agent", "memory.current"): "12345\n",
+		filepath.Join(cgroup, "pod", "agent", "memory.max"):     "134217728\n",
+		filepath.Join(cgroup, "pod", "agent", "memory.stat"):    "anon 100\nfile 20\nkernel 30\n",
+		filepath.Join(cgroup, "pod", "agent", "memory.events"):  "oom 0\noom_kill 0\n",
 	} {
 		if err := os.MkdirAll(filepath.Dir(name), 0755); err != nil {
 			t.Fatal(err)
@@ -63,6 +68,9 @@ func TestDiagnosticsCgroup(t *testing.T) {
 	}
 	if result.Error != "" || result.CPUMax != "20000 100000" || result.CPUStat["usage_usec"] != 123 || result.CgroupPath != "/pod/agent" {
 		t.Fatalf("unexpected diagnostics: %+v", result)
+	}
+	if result.MemoryError != "" || result.Memory == nil || result.Memory.Current != 12345 || result.RSS != uint64(10*os.Getpagesize()) || result.RSSError != "" || result.GoMemoryLimit <= 0 {
+		t.Fatalf("memory diagnostics: %+v", result)
 	}
 	w = httptest.NewRecorder()
 	h.ServeHTTP(w, httptest.NewRequest("POST", "/diagnostics", nil))

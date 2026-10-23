@@ -37,6 +37,11 @@ type Config struct {
 	Duration       time.Duration `json:"durationNs"`
 	Warmup         time.Duration `json:"warmupNs"`
 	Settle         time.Duration `json:"settleNs"`
+	MemoryImage    string        `json:"memoryAgentImage,omitempty"`
+	MemoryGoLimits string        `json:"memoryGoLimits,omitempty"`
+	MemoryPulses   int           `json:"memoryPulses,omitempty"`
+	MemoryIdle     time.Duration `json:"memoryIdleNs,omitempty"`
+	MemoryInterval time.Duration `json:"memoryIntervalNs,omitempty"`
 }
 
 type Workload struct {
@@ -80,6 +85,7 @@ type Summary struct {
 	Metrics          []MetricsPair  `json:"metricsPairs,omitempty"`
 	MetricsCPUEffect *Effect        `json:"metricsCpuEffect,omitempty"`
 	MetricsP95Effect *Effect        `json:"metricsP95Effect,omitempty"`
+	Memory           []MemoryCase   `json:"memoryCases,omitempty"`
 	Error            string         `json:"error,omitempty"`
 	RestoreError     string         `json:"restoreError,omitempty"`
 }
@@ -194,17 +200,35 @@ func Run(ctx context.Context, config Config) (runErr error) {
 	if config.Mode == "metrics" {
 		return r.metricsComparison()
 	}
+	if config.Mode == "memory" {
+		return r.memory()
+	}
 	return nil
 }
 
 func validate(c Config) ([]time.Duration, error) {
-	if c.Mode != "all" && c.Mode != "paired" && c.Mode != "accuracy" && c.Mode != "cost" && c.Mode != "metrics" {
-		return nil, fmt.Errorf("mode must be all, paired, accuracy, cost or metrics")
+	if c.Mode != "all" && c.Mode != "paired" && c.Mode != "accuracy" && c.Mode != "cost" && c.Mode != "metrics" && c.Mode != "memory" {
+		return nil, fmt.Errorf("mode must be all, paired, accuracy, cost, metrics or memory")
+	}
+	if c.Mode == "memory" {
+		if c.Duration < 10*time.Second {
+			return nil, fmt.Errorf("memory pulse duration must be at least 10s")
+		}
+		if c.MemoryImage == "" || c.MemoryPulses < 1 || c.MemoryPulses > 20 || c.MemoryIdle < 10*time.Second || c.MemoryIdle > 5*time.Minute || c.MemoryInterval < time.Second || c.MemoryInterval > 30*time.Second {
+			return nil, fmt.Errorf("memory needs an image, 1..20 pulses, idle 10s..5m and interval 1s..30s")
+		}
+		seen := map[string]bool{}
+		for _, setting := range strings.Split(c.MemoryGoLimits, ",") {
+			if (setting != "original" && setting != "80MiB") || seen[setting] {
+				return nil, fmt.Errorf("memory go limits must be unique original and/or 80MiB")
+			}
+			seen[setting] = true
+		}
 	}
 	if c.Mode == "metrics" && (c.BaselineImage == "" || c.CandidateImage == "" || c.BaselineImage == c.CandidateImage || c.Duration < 20*time.Second) {
 		return nil, fmt.Errorf("metrics needs distinct baseline/candidate images and duration >=20s")
 	}
-	if c.TestAgentImage != "" && (c.Mode == "cost" || c.Mode == "metrics") {
+	if c.TestAgentImage != "" && (c.Mode == "cost" || c.Mode == "metrics" || c.Mode == "memory") {
 		return nil, fmt.Errorf("test-agent-image is for paired/accuracy/all only")
 	}
 	if c.Mode == "cost" && (c.AgentImage == "" || c.Duration%time.Second != 0) {
