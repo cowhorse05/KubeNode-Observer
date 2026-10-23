@@ -1,0 +1,53 @@
+README.md
+  s_6e6fc63242599e::t_79393c194821ca 133-134
+log/memory-flush-validation-20261023/integration.txt
+  s_6e6fc63242599e::t_892293ce9bdb37 6
+log/2026-10-23-memory-flush-accuracy-console.txt
+  s_6e6fc63242599e::t_ee123422544b25 3
+  s_6e6fc63242599e::t_f57cf0bbd1070f 8
+  s_6e6fc63242599e::t_261bddc9c14276 12-13
+log/2026-10-20-metrics-cache.md
+  s_6e6fc63242599e::t_ee2e287612bf26 3-4
+  s_6e6fc63242599e::t_38fb5b9f2136d6 55
+log/2026-10-23-memory-interrupt-console.txt
+  s_6e6fc63242599e::t_bb7dbd45775221 2
+docs/experiments.md
+  s_6e6fc63242599e::t_e12e4475ccab81 142-158
+docs/architecture.md
+  s_6e6fc63242599e::t_79393c194821ca 115-122
+internal/telemetry/memory_test.go
+  s_6e6fc63242599e::t_83d62e818e935a 47-87
+docs/plan.md
+  s_6e6fc63242599e::t_bace402a2303ff 382-385
+log/2026-10-23-memory-flush-validation-console.txt
+  s_6e6fc63242599e::t_892293ce9bdb37 11
+  s_6e6fc63242599e::t_b25df6877c3bc8 332-333
+  s_6e6fc63242599e::t_8b545070091d74 334-335
+internal/telemetry/recorder_test.go
+  s_6e6fc63242599e::t_83d62e818e935a 80-91
+log/2026-10-23-memory-budget.md
+  s_6e6fc63242599e::t_49c1cbce7b33e0 62
+  s_6e6fc63242599e::t_6de850bd6c87b3 56-57
+  s_6e6fc63242599e::t_0143e2e62c3782 1-47,49-55,63-64
+  s_6e6fc63242599e::t_b2fd4955bc44b9 58-59
+  s_6e6fc63242599e::t_bace402a2303ff 48
+  s_6e6fc63242599e::t_88a927a20bb8f0 60-61
+log/memory-flush-validation-20261023/restored-agent.json
+  s_6e6fc63242599e::t_8b545070091d74 1-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "577a3688a41132542c4efc6097fef156dc37136a",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
