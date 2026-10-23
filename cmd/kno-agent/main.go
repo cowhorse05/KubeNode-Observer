@@ -16,6 +16,8 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/cilium/ebpf/btf"
+
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
 	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
@@ -75,6 +77,11 @@ func main() {
 		os.Exit(1)
 	}
 	defer runQLatProbe.Close()
+	// All CO-RE relocations and attachments are complete. The library's global
+	// kernel type cache is no longer needed by our static probes. Drop only the
+	// Go type metadata, not program/map FDs; a future loader can reload the spec.
+	// Do not force GC: normal runtime collection/scavenging reclaims the memory.
+	btf.FlushKernelSpec()
 
 	criClient, err := topology.NewCRIClient(*runtimeEndpoint)
 	if err != nil {

@@ -148,6 +148,7 @@ func (r *runner) memoryCase(item *MemoryCase, endpoint string) error {
 			return fmt.Errorf("Agent cgroup changed during memory case")
 		}
 		last = current
+		metricAt := time.Now()
 		if err := r.get(r.ctx, r.agentEndpoint+"/metrics", name+"-metrics.txt", nil); err != nil {
 			return err
 		}
@@ -159,6 +160,7 @@ func (r *runner) memoryCase(item *MemoryCase, endpoint string) error {
 		if err != nil {
 			return err
 		}
+		metrics.At, metrics.ClientSeconds = metricAt.UTC(), time.Since(metricAt).Seconds()
 		m := current.Memory
 		item.Samples = append(item.Samples, MemoryPoint{At: current.At, Phase: phase, RawFile: name + ".json", RSS: current.RSS, Heap: current.HeapAlloc, GoManaged: current.GoManaged, GoLimit: current.GoMemoryLimit, Current: m.Current, Peak: m.Peak, Anon: m.Stat["anon"], File: m.Stat["file"], Kernel: m.Stat["kernel"], NumGC: current.NumGC, Events: m.Events, Metrics: metrics})
 		if err := r.writeJSON("summary.json", r.summary); err != nil {

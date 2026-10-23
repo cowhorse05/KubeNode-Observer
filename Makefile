@@ -8,11 +8,12 @@ CONTENTION_IMAGE ?= kubenode-observer/cpu-contention:dev
 BENCHMARK_IMAGE ?= kubenode-observer/observer-benchmark:dev
 COST_AGENT_IMAGE ?= kubenode-observer/kno-agent:cost
 METRICS_AGENT_IMAGE ?= kubenode-observer/kno-agent:metrics-cache
+MEMORY_AGENT_IMAGE ?= kubenode-observer/kno-agent:memory
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
 
-.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image experiment-build smoke cpu-smoke runqlat-smoke benchmark accuracy experiment cost metrics-compare stability integration install-minikube uninstall-minikube demo deploy undeploy
+.PHONY: generate build test fmt check image image-local workload-image cpu-hog-image contention-image benchmark-image experiment-build smoke cpu-smoke runqlat-smoke benchmark accuracy experiment cost metrics-compare memory stability integration install-minikube uninstall-minikube demo deploy undeploy
 
 generate:
 	go generate ./internal/bpfgen
@@ -91,6 +92,12 @@ metrics-compare: benchmark-image experiment-build
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(METRICS_AGENT_IMAGE)
 	./bin/kno-experiment --mode metrics --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) --baseline-agent-image $(COST_AGENT_IMAGE) --candidate-agent-image $(METRICS_AGENT_IMAGE) --duration=30s $(EXPERIMENT_FLAGS)
+
+memory: benchmark-image experiment-build
+	$(MAKE) image-local IMAGE=$(MEMORY_AGENT_IMAGE)
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(BENCHMARK_IMAGE)
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(MEMORY_AGENT_IMAGE)
+	./bin/kno-experiment --mode memory --context $(MINIKUBE_PROFILE) --image $(BENCHMARK_IMAGE) --memory-agent-image $(MEMORY_AGENT_IMAGE) --duration=1m $(EXPERIMENT_FLAGS)
 
 stability: workload-image
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WORKLOAD_IMAGE)
