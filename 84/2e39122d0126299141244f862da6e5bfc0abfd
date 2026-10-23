@@ -1,0 +1,23 @@
+internal/experiment/memory.go
+  s_6e6fc63242599e::t_82c8aed8ccd339 151,163
+Makefile
+  s_6e6fc63242599e::t_2c1fbe4833c16d 11,16,96-100
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_2c1fbe4833c16d 19-20,80-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "842e39122d0126299141244f862da6e5bfc0abfd",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
