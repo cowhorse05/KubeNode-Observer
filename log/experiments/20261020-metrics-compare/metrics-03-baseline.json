@@ -1,0 +1,343 @@
+{
+  "image": "kubenode-observer/kno-agent:cost",
+  "prefix": "metrics-03-baseline",
+  "p50Seconds": 1.196943036,
+  "p95Seconds": 2.1728768450000002,
+  "maxSeconds": 2.61166761,
+  "reads": [
+    {
+      "at": "2026-10-20T09:20:36.139260438Z",
+      "clientSeconds": 0.89136391,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:37.139893097Z",
+      "clientSeconds": 1.38406588,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:38.530235332Z",
+      "clientSeconds": 1.192023416,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:39.726539954Z",
+      "clientSeconds": 1.196943036,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:40.926930061Z",
+      "clientSeconds": 2.61166761,
+      "collectionErrors": 1,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:43.542345945Z",
+      "clientSeconds": 2.072535646,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:45.617835309Z",
+      "clientSeconds": 1.3312135330000001,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:46.955061068Z",
+      "clientSeconds": 1.464966455,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:48.423746093Z",
+      "clientSeconds": 1.409760846,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:49.843890761Z",
+      "clientSeconds": 2.1728768450000002,
+      "collectionErrors": 1,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:52.020093707Z",
+      "clientSeconds": 1.193730405,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:53.216975075Z",
+      "clientSeconds": 0.505250975,
+      "collectionErrors": 1,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:54.21795166Z",
+      "clientSeconds": 1.269106731,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:55.5261142Z",
+      "clientSeconds": 1.092743673,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:56.635019758Z",
+      "clientSeconds": 1.391447917,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:58.065042364Z",
+      "clientSeconds": 1.594849844,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:59.671593903Z",
+      "clientSeconds": 1.8471828179999998,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:01.522521694Z",
+      "clientSeconds": 1.097738957,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:02.622989456Z",
+      "clientSeconds": 0.695193838,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:03.623659377Z",
+      "clientSeconds": 0.591493583,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:04.624544463Z",
+      "clientSeconds": 0.563648839,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:05.625621268Z",
+      "clientSeconds": 0.387267991,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    }
+  ],
+  "cost": {
+    "mode": "",
+    "cpuLimit": "",
+    "repeat": 0,
+    "prefix": "",
+    "windowSeconds": 30.501406101,
+    "agentCpuSeconds": 5.873623,
+    "throttledSeconds": 47.944578,
+    "throttledPeriods": 286,
+    "allocatedBytes": 147607752,
+    "accuracyReadMaxSeconds": 0,
+    "accuracyReadCount": 0,
+    "signedErrorPercent": 0,
+    "stageDeltas": {
+      "accuracy.scan": {
+        "count": 0,
+        "totalNs": 0,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "cpu.aggregate": {
+        "count": 30,
+        "totalNs": 881642133,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 3,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "cpu.scan": {
+        "count": 30,
+        "totalNs": 9289928205,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 28,
+        "over250ms": 20,
+        "over1s": 0
+      },
+      "metrics.cpu_maps": {
+        "count": 22,
+        "totalNs": 7471589835,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 21,
+        "over250ms": 12,
+        "over1s": 0
+      },
+      "metrics.exec_maps": {
+        "count": 22,
+        "totalNs": 4078713,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "metrics.runqlat_maps": {
+        "count": 22,
+        "totalNs": 19656474093,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 22,
+        "over250ms": 22,
+        "over1s": 7
+      },
+      "metrics.scrape": {
+        "count": 22,
+        "totalNs": 27513392952,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 22,
+        "over250ms": 22,
+        "over1s": 16
+      },
+      "topology.cri": {
+        "count": 8,
+        "totalNs": 2262831680,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 8,
+        "over250ms": 4,
+        "over1s": 0
+      },
+      "topology.enrich": {
+        "count": 8,
+        "totalNs": 1098671297,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 7,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "topology.refresh": {
+        "count": 8,
+        "totalNs": 3664555059,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 8,
+        "over250ms": 8,
+        "over1s": 0
+      }
+    }
+  },
+  "workload": {
+    "mode": "churn",
+    "durationSeconds": 43.091391963,
+    "operations": 9567,
+    "throughputOpsPerSecond": 222.01649944876718,
+    "p99Us": 10000,
+    "latencyOverflow": 3939
+  }
+}

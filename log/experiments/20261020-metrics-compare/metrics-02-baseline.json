@@ -1,0 +1,423 @@
+{
+  "image": "kubenode-observer/kno-agent:cost",
+  "prefix": "metrics-02-baseline",
+  "p50Seconds": 0.525517732,
+  "p95Seconds": 1.09216734,
+  "maxSeconds": 1.105835507,
+  "reads": [
+    {
+      "at": "2026-10-20T09:19:37.820338053Z",
+      "clientSeconds": 0.419610467,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:38.820674054Z",
+      "clientSeconds": 0.436141982,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:39.823692946Z",
+      "clientSeconds": 0.525517732,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:40.824169519Z",
+      "clientSeconds": 0.823432015,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:41.825196906Z",
+      "clientSeconds": 0.806040916,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:42.825705305Z",
+      "clientSeconds": 0.510484964,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:43.825981139Z",
+      "clientSeconds": 0.903330168,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:44.827130758Z",
+      "clientSeconds": 0.607773136,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:45.827807366Z",
+      "clientSeconds": 0.404238721,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:46.828804369Z",
+      "clientSeconds": 0.412585321,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:47.82897299Z",
+      "clientSeconds": 0.30617171,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:48.829381564Z",
+      "clientSeconds": 0.403883995,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:49.829767453Z",
+      "clientSeconds": 0.451083158,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:50.830661129Z",
+      "clientSeconds": 1.105835507,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:51.939319046Z",
+      "clientSeconds": 0.488785152,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:52.940336013Z",
+      "clientSeconds": 0.438727349,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:53.940490242Z",
+      "clientSeconds": 0.291292328,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:54.940841103Z",
+      "clientSeconds": 0.297557035,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:55.940953252Z",
+      "clientSeconds": 0.298707494,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:56.942054099Z",
+      "clientSeconds": 0.336529141,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:57.943105945Z",
+      "clientSeconds": 1.035787858,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:58.981907456Z",
+      "clientSeconds": 0.551805743,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:19:59.982815591Z",
+      "clientSeconds": 0.724334302,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:00.983756941Z",
+      "clientSeconds": 0.602935416,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:01.984849978Z",
+      "clientSeconds": 0.601782831,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:02.985241365Z",
+      "clientSeconds": 0.700459933,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:03.986459974Z",
+      "clientSeconds": 1.09216734,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:05.082080031Z",
+      "clientSeconds": 0.898214773,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:06.082692176Z",
+      "clientSeconds": 0.699075303,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:20:07.083801747Z",
+      "clientSeconds": 0.60679637,
+      "collectionErrors": 0,
+      "cacheSources": 0,
+      "readySources": 0,
+      "maxAgeSeconds": 0,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    }
+  ],
+  "cost": {
+    "mode": "",
+    "cpuLimit": "",
+    "repeat": 0,
+    "prefix": "",
+    "windowSeconds": 30.272572462,
+    "agentCpuSeconds": 4.835674,
+    "throttledSeconds": 27.628149,
+    "throttledPeriods": 199,
+    "allocatedBytes": 172423752,
+    "accuracyReadMaxSeconds": 0,
+    "accuracyReadCount": 0,
+    "signedErrorPercent": 0,
+    "stageDeltas": {
+      "accuracy.scan": {
+        "count": 0,
+        "totalNs": 0,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "cpu.aggregate": {
+        "count": 29,
+        "totalNs": 419689003,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "cpu.scan": {
+        "count": 30,
+        "totalNs": 3556672461,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 13,
+        "over250ms": 3,
+        "over1s": 0
+      },
+      "metrics.cpu_maps": {
+        "count": 30,
+        "totalNs": 3209664559,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 14,
+        "over250ms": 1,
+        "over1s": 0
+      },
+      "metrics.exec_maps": {
+        "count": 30,
+        "totalNs": 4153263,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "metrics.runqlat_maps": {
+        "count": 30,
+        "totalNs": 14062636436,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 30,
+        "over250ms": 30,
+        "over1s": 0
+      },
+      "metrics.scrape": {
+        "count": 30,
+        "totalNs": 17485480703,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 30,
+        "over250ms": 30,
+        "over1s": 3
+      },
+      "topology.cri": {
+        "count": 7,
+        "totalNs": 1098771325,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 3,
+        "over250ms": 2,
+        "over1s": 0
+      },
+      "topology.enrich": {
+        "count": 7,
+        "totalNs": 287421103,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 1,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "topology.refresh": {
+        "count": 7,
+        "totalNs": 1386308170,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 4,
+        "over250ms": 2,
+        "over1s": 0
+      }
+    }
+  },
+  "workload": {
+    "mode": "churn",
+    "durationSeconds": 43.001424185,
+    "operations": 12306,
+    "throughputOpsPerSecond": 286.1765681773082,
+    "p99Us": 10000,
+    "latencyOverflow": 3646
+  }
+}

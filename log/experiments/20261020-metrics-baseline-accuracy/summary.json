@@ -1,0 +1,153 @@
+{
+  "status": "complete",
+  "config": {
+    "mode": "accuracy",
+    "context": "kno-dev",
+    "output": "log/experiments/20261020-metrics-baseline-accuracy",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "costAgentImage": "kubenode-observer/kno-agent:cost",
+    "baselineAgentImage": "kubenode-observer/kno-agent:cost",
+    "candidateAgentImage": "kubenode-observer/kno-agent:metrics-cache",
+    "testAgentImage": "kubenode-observer/kno-agent:cost",
+    "pairs": 4,
+    "accuracyRepeats": 2,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 10000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000
+  },
+  "accuracyCases": [
+    {
+      "mode": "steady",
+      "interval": "250ms",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-250ms-01.json",
+      "absoluteErrorPercent": 0.856769113898892,
+      "signedErrorPercent": -0.856769113898892,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-1s-01.json",
+      "absoluteErrorPercent": 0.6932658324357521,
+      "signedErrorPercent": -0.6932658324357521,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "2s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-2s-01.json",
+      "absoluteErrorPercent": 0.5536568759390348,
+      "signedErrorPercent": -0.5536568759390348,
+      "referenceSkewPercent": 0.03598550720942491,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "250ms",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-250ms-01.json",
+      "absoluteErrorPercent": 3.6390259180301365,
+      "signedErrorPercent": -3.6390259180301365,
+      "referenceSkewPercent": 0.00021178939803452379,
+      "missingKeys": 20061,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-1s-01.json",
+      "absoluteErrorPercent": 3.0754812602262427,
+      "signedErrorPercent": -3.0754812602262427,
+      "referenceSkewPercent": 0.10163846054150462,
+      "missingKeys": 19640,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "2s",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-2s-01.json",
+      "absoluteErrorPercent": 2.2356469415769964,
+      "signedErrorPercent": -2.2356469415769964,
+      "referenceSkewPercent": 0.5615946577718269,
+      "missingKeys": 15974,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "2s",
+      "repeat": 2,
+      "rawFile": "accuracy-churn-2s-02.json",
+      "absoluteErrorPercent": 2.8391026439942957,
+      "signedErrorPercent": -2.8391026439942957,
+      "referenceSkewPercent": 0,
+      "missingKeys": 19068,
+      "resetKeys": 1
+    },
+    {
+      "mode": "churn",
+      "interval": "1s",
+      "repeat": 2,
+      "rawFile": "accuracy-churn-1s-02.json",
+      "absoluteErrorPercent": 2.736636302087625,
+      "signedErrorPercent": -2.736636302087625,
+      "referenceSkewPercent": 0.005049424645274139,
+      "missingKeys": 19325,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "250ms",
+      "repeat": 2,
+      "rawFile": "accuracy-churn-250ms-02.json",
+      "absoluteErrorPercent": 3.2241755164544084,
+      "signedErrorPercent": -3.2241755164544084,
+      "referenceSkewPercent": 0.02891961264647607,
+      "missingKeys": 21030,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "2s",
+      "repeat": 2,
+      "rawFile": "accuracy-steady-2s-02.json",
+      "absoluteErrorPercent": 0.7614883964446872,
+      "signedErrorPercent": -0.7614883964446872,
+      "referenceSkewPercent": 0.0006099542839264197,
+      "missingKeys": 115,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "1s",
+      "repeat": 2,
+      "rawFile": "accuracy-steady-1s-02.json",
+      "absoluteErrorPercent": 0.7269537793554881,
+      "signedErrorPercent": -0.7269537793554881,
+      "referenceSkewPercent": 0.17496345013526673,
+      "missingKeys": 248,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "250ms",
+      "repeat": 2,
+      "rawFile": "accuracy-steady-250ms-02.json",
+      "absoluteErrorPercent": 0.8513618166795967,
+      "signedErrorPercent": -0.8513618166795967,
+      "referenceSkewPercent": 0.07640869637769376,
+      "missingKeys": 119,
+      "resetKeys": 0
+    }
+  ]
+}
