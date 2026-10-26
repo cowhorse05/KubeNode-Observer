@@ -1,0 +1,45 @@
+bpf/cpu.bpf.c
+  s_6e6fc63242599e::t_4efac2bb156b03 49-58,74-75,93-99
+internal/cpu/collector_test.go
+  s_6e6fc63242599e::t_3b23fff6514d62 19,24
+internal/probe/cpu_linux_test.go
+  s_6e6fc63242599e::t_663e177eeefe1e 96
+  s_6e6fc63242599e::t_ea4f360e4f1629 82-95,97-104
+internal/cpu/timed.go
+  s_6e6fc63242599e::t_3b23fff6514d62 17
+internal/bpfgen/cpu_bpfel.go
+  s_6e6fc63242599e::t_ab970e7b4c7825 81-83,112-114,119
+log/2026-10-26-cpu-kernel-final.txt
+  s_6e6fc63242599e::t_663e177eeefe1e 1-11
+internal/probe/cpu.go
+  s_6e6fc63242599e::t_ab970e7b4c7825 99-106
+  s_6e6fc63242599e::t_4a112c6abee420 95,97,113-115
+  s_6e6fc63242599e::t_3b23fff6514d62 5,8,10,17-29,80-85,88-94,96,98,107-112,116,118,130-134
+internal/cpu/collector.go
+  s_6e6fc63242599e::t_d69dcb922b4aff 258,297,300,310
+  s_6e6fc63242599e::t_3b23fff6514d62 20,47,69,77,98,104-111,119,184-198,200-201,204,210,296,298-299,302
+  s_6e6fc63242599e::t_ab970e7b4c7825 67-68,70-73,199
+hack/stability-test.sh
+  s_6e6fc63242599e::t_d69dcb922b4aff 86
+internal/cpu/accuracy.go
+  s_6e6fc63242599e::t_d69dcb922b4aff 41,45-46,149,173-186,188,202-203,207
+  s_6e6fc63242599e::t_6dd722d75301e0 204-206,231-236
+internal/cpu/totals_test.go
+  s_6e6fc63242599e::t_6dd722d75301e0 1-12,14-17,20-63,65-90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "b266aee953f991c3710c8175b8f1b171554235bb",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
