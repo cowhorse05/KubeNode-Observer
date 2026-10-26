@@ -51,6 +51,12 @@ func TestCPURuntimeRetentionKernel(t *testing.T) {
 			usage := child.ProcessState.SysUsage().(*syscall.Rusage)
 			reference += uint64(usage.Utime.Nano() + usage.Stime.Nano())
 		}
+		// Freeze writers before inspecting retention. The tiny map otherwise
+		// keeps evicting keys for unrelated host tasks while we iterate it.
+		if err := attached.Close(); err != nil {
+			objects.Close()
+			t.Fatal(err)
+		}
 		var key cpuKey
 		var value cpuValue
 		var observed uint64
@@ -65,7 +71,6 @@ func TestCPURuntimeRetentionKernel(t *testing.T) {
 			}
 		}
 		err = iterator.Err()
-		attached.Close()
 		objects.Close()
 		if err != nil {
 			t.Fatal(err)

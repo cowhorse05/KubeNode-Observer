@@ -59,21 +59,27 @@ sched_process_exec / sched_process_exit
 sched_switch raw tracepoint
           │ switch-out task
           ▼
- task_start LRU map ──> runtime delta
+ task_start PerCPUArray ──> scheduler runtime delta
           │
           ▼
- cpu_runtime LRU map
- key: cgroup ID + TGID + PID
- value: cumulative runtime_ns + comm
+ ├── cpu_runtime LRU map（8192 条进程明细）
+ │   key: cgroup ID + TGID + PID
+ └── cgroup_runtime LRU map（1024 条 cgroup 累计量）
+     key: cgroup ID
           │ 每秒读取累计值并做差
           ▼
- CPU Collector ──Topology Store──> Pod / Container / Process
+ CPU Collector ──Topology Store──> Pod / Container（cgroup 累计差）
+                                 Process（进程明细差）
           │
           ▼
  /api/v1/cpu ──> kno top pods|containers|processes
 ```
 
-高频 `sched_switch` 事件只在内核中更新 map，用户态每秒读取一次累计值。进程视图会把同一 TGID 的线程 runtime 相加，容器和 Pod 视图继续逐层汇总。`cpuPercent = 窗口内 runtime / 实际墙钟窗口 × 100`，因此多线程工作负载可以超过 100%。
+高频 `sched_switch` 事件只在内核中更新 map，用户态每秒读取一次累计值。每 CPU 一个 baseline slot 保存切入任务的 PID 和 `se.sum_exec_runtime`，切出时取调度器累计 runtime 差，不再用两次 tracepoint 的墙钟差近似 CPU 时间。PID 匹配和单 CPU 上的切换序列避免基线依赖 PID LRU 保留；Agent 刚附着时尚未建立基线的首个切片会跳过。
+
+同一 delta 分别累加到 cgroup 总量和进程明细。Pod/Container 不再依赖进程 map 中仍保留哪些 key；进程视图仍按 TGID 汇总线程，受 8192 条明细容量限制，因此不保证下钻列表之和等于容器总量。响应的 `accounting=cgroup|process` 标明来源。cgroup map 本身也有 1024 条工作集上限，不提供无限历史或逐次 eviction 计数。
+
+进程 map 使用 batch lookup 游标，保留最终 `ErrKeyNotExist` 同时返回的有效条目，读取仍非原子；不支持 batch 或遇到错误时显式失败，不静默换回不可靠遍历。生产窗口使用 cgroup 快照读完的时间戳，不把后面的进程扫描耗时误作本次计数的时间点。`cpuPercent = 窗口内 runtime / 实际墙钟窗口 × 100`，多线程工作负载可以超过 100%。
 
 当前窗口是 Agent 最近一次约 1 秒的采样，不是长期平均值。误差主要来自窗口边界上的任务创建/退出、BPF map 并发读取、Agent 自身调度延迟和短暂的元数据未命中；collector 使用实际读取时间而非 ticker 的预定时间作为分母，避免 Agent 被限流时放大结果。
 

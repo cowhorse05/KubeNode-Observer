@@ -1,5 +1,7 @@
 # 配对开销实验与 CPU 统计精度对照
 
+2026-10-26 CPU 记账修正后，生产 Pod/Container 视图使用独立 cgroup 累计量；Process 仍使用有限明细。accuracy 响应的 `accounting` 标识主结果来源，`processRuntimeNs` 保留同窗口进程明细的累计差，供与主结果比较；各 sample 的 `cgroupRuntimeNs` 为独立累计值。原有 new/missing/reset keys 仍描述进程明细，不是 cgroup 丢失率。旧报告主结果为进程加总，不能不注明语义变化便直接拼接时间序列。
+
 这组实验回答两个独立的问题：Observer 对业务的吞吐/尾延迟影响有多大；CPU runtime 的统计结果与同一容器 cgroup 的 `cpu.stat` 相差多少。
 
 ## 使用方法
@@ -156,3 +158,14 @@ minikube -p kno-dev image load --overwrite=true kubenode-observer/kno-agent:memo
 每 5s 保存完整 diagnostics 和 metrics，区分：RSS；HeapAlloc/HeapInuse/HeapIdle/HeapReleased/StackInuse；Go managed 估计 `Sys-HeapReleased` 与当前软限制；实际 Agent cgroup 的 `memory.current/max/peak/stat/events`。`memory.peak` 不支持时省略而不是返回零，关键计数缺失时报错。Go 的 GOMEMLIMIT 不覆盖所有进程/内核内存，也不是硬上限；kernel/slab/anon/file 字段有包含关系，map memlock 也不能简单加到 cgroup current 上。不同文件非原子读取，单次采样可能错位。
 
 `memory.peak` 为新 cgroup 自创建以来的高水位，不是每个 phase 的独立峰值。`gcCpuFraction` 也是进程生命周期累计口径，不能拿相邻差直接当窗口 GC CPU 百分比。实验只是有限窗口的工程观测，不证明泄漏不存在或生产环境永不 OOM；默认部署是否调整须依据实测余量、GC/CPU 代价和更长观察，不因给了 soft limit 就宣称预算已解决。
+
+## 无诊断模式的有限稳定性观察
+
+```bash
+# 镜像须先本地构建、加载，测试期间不编译或运行其他实验。
+SOAK_SECONDS=1800 SOAK_OUTPUT=log/soak-<新目录> bash hack/soak-test.sh
+```
+
+只支持已验证的单节点 Docker-backed Minikube，依赖 jq。使用相同实验锁，拒绝覆盖已有 `kno-soak-test` namespace。临时仅替换 Agent 镜像，要求原配置没有 debug-listen 且实际 cgroup memory.max 为 128 MiB。每轮创建一个 2000 子进程的 Pod，保存 Pod UID/Container ID，并确认查到的事件身份与该轮一致，删除 Pod 后采样，再等待 10s；最后跨越原定观察时长才结束。
+
+从 Kubernetes 确认 Agent container ID，再经节点 CRI 确认 PID、读取该 PID 的实际 cgroup，外部读取 current/peak/events，不依赖 Agent diagnostics。每轮保存 metrics、Pod 状态和内存，检查同 UID、零重启、Ready、eventsLost=0、无 max/OOM/kill。namespace 创建后由脚本负责清理，并恢复原 DaemonSet；SIGINT/SIGTERM 也执行清理，SIGKILL/断电仍需人工恢复。它不提供恒定到达率或业务开销结论，也不把事件环中保留的子集声称为完整进程历史。
