@@ -18,7 +18,7 @@ kube() { kubectl --context "${KUBE_CONTEXT}" "$@"; }
 mkdir -- "${SOAK_OUTPUT}"
 git rev-parse HEAD >"${SOAK_OUTPUT}/source-head.txt"
 git diff HEAD -- bpf cmd internal hack >"${SOAK_OUTPUT}/source.patch"
-sha256sum bpf/cpu.bpf.c internal/probe/cpu.go internal/cpu/collector.go hack/soak-test.sh >"${SOAK_OUTPUT}/source-sha256.txt"
+sha256sum bpf/cpu.bpf.c internal/probe/cpu.go internal/cpu/collector.go cmd/kno-agent/main.go internal/topology/refresh_queue.go hack/soak-test.sh >"${SOAK_OUTPUT}/source-sha256.txt"
 jq -n --arg context "${KUBE_CONTEXT}" --arg node "${NODE_CONTAINER}" --arg image "${AGENT_IMAGE}" --argjson duration "${SOAK_SECONDS}" '{context:$context,nodeContainer:$node,agentImage:$image,durationSeconds:$duration,childrenPerPod:2000,pauseSeconds:10,eventLimit:32}' >"${SOAK_OUTPUT}/config.json"
 kube -n kube-system create configmap kno-experiment-lock --from-literal=run="${SOAK_OUTPUT}"
 original_saved=false
@@ -27,6 +27,12 @@ forward_pid=""
 cleanup() {
   result=$?
   trap - EXIT INT TERM
+  if [[ "${result}" != 0 && -n "${endpoint:-}" ]]; then
+    kube -n kube-system get pods -l app.kubernetes.io/name=kno-agent -o json >"${SOAK_OUTPUT}/failure-agent.json" 2>&1 || true
+    kube -n kube-system logs ds/kno-agent --tail=2000 >"${SOAK_OUTPUT}/failure-agent-logs.txt" 2>&1 || true
+    curl --max-time 5 -sS "${endpoint}/api/v1/events?limit=1000" >"${SOAK_OUTPUT}/failure-events.json" || true
+    curl --max-time 5 -sS "${endpoint}/api/v1/topology" >"${SOAK_OUTPUT}/failure-topology.json" || true
+  fi
   if [[ -n "${forward_pid}" ]]; then kill "${forward_pid}" 2>/dev/null || true; wait "${forward_pid}" 2>/dev/null || true; fi
   if [[ "${namespace_owned}" == true ]]; then
     if ! kube delete ns "${namespace}" --wait=true --timeout=90s; then result=1; fi
@@ -105,7 +111,7 @@ while (( SECONDS-started < SOAK_SECONDS )); do
     if jq -e --arg uid "${pod_uid}" --arg cid "${pod_cid}" '(.events|length>0) and all(.events[]; .workload.podUid==$uid and .workload.containerId==$cid)' "${events}" >/dev/null; then matched=true; break; fi
     sleep 1
   done
-  [[ "${matched}" == true ]]
+  if [[ "${matched}" != true ]]; then echo "no retained matching events for ${pod} uid=${pod_uid}" >&2; exit 1; fi
   kube -n "${namespace}" delete pod "${pod}" --wait=true >/dev/null
   sample "${tag}"
   echo "soak round=${round} elapsed=$((SECONDS-started))s: 2000 children, identities matched, Agent healthy"

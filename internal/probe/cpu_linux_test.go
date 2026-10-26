@@ -92,18 +92,27 @@ func TestCPUBatchSnapshotKernel(t *testing.T) {
 	if err := rlimit.RemoveMemlock(); err != nil {
 		t.Fatal(err)
 	}
-	p, err := NewCPUProbe()
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer p.Close()
-	for i := uint32(0); i < 8192; i++ {
-		if err := p.objects.CpuRuntime.Put(cpuKey{CgroupID: 999, TGID: i + 1000000, PID: i + 1000000}, cpuValue{Runtime: uint64(i + 1)}); err != nil {
+	for _, size := range []uint32{0, 3, 8192} {
+		// Load without attaching: freeze writers to check every decoded value,
+		// including a final partial batch returned together with EOF.
+		p := &CPUProbe{}
+		if err := bpfgen.LoadCPUObjects(&p.objects, nil); err != nil {
 			t.Fatal(err)
 		}
-	}
-	snapshot, err := p.Snapshot()
-	if err != nil || len(snapshot.Processes) == 0 || snapshot.Totals == nil || snapshot.CapturedAt.IsZero() {
-		t.Fatalf("batch snapshot: processes=%d totals=%d err=%v", len(snapshot.Processes), len(snapshot.Totals), err)
+		for i := uint32(0); i < size; i++ {
+			if err := p.objects.CpuRuntime.Put(cpuKey{CgroupID: 999, TGID: i + 1000000, PID: i + 1000000}, cpuValue{Runtime: uint64(i + 1)}); err != nil {
+				p.Close()
+				t.Fatal(err)
+			}
+		}
+		snapshot, err := p.Snapshot()
+		p.Close()
+		var sum uint64
+		for _, value := range snapshot.Processes {
+			sum += value.Runtime
+		}
+		if err != nil || len(snapshot.Processes) != int(size) || sum != uint64(size)*uint64(size+1)/2 || snapshot.Totals == nil || snapshot.CapturedAt.IsZero() {
+			t.Fatalf("batch size=%d: processes=%d sum=%d err=%v", size, len(snapshot.Processes), sum, err)
+		}
 	}
 }

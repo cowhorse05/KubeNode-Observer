@@ -12,7 +12,6 @@ import (
 	"net/http/pprof"
 	"os"
 	"os/signal"
-	"sync"
 	"syscall"
 	"time"
 
@@ -114,23 +113,14 @@ func main() {
 	go cpuCollector.Run(ctx, *cpuInterval)
 	runQLatHandler := runqlat.NewHandler(runQLatProbe, topologyStore)
 
-	refreshRequests := make(chan struct{}, 1)
-	var unresolvedMu sync.Mutex
-	unresolvedUntil := make(map[uint64]time.Time)
+	refreshQueue := topology.NewRefreshQueue(topologyStore)
+	refreshContext, stopRefresh := context.WithCancel(ctx)
+	refreshDone := make(chan struct{})
 	go func() {
-		for {
-			select {
-			case <-ctx.Done():
-				return
-			case <-refreshRequests:
-				refreshContext, refreshCancel := context.WithTimeout(ctx, 3*time.Second)
-				if err := topologyStore.Refresh(refreshContext); err != nil && ctx.Err() == nil {
-					logger.Debug("on-demand topology refresh failed", "error", err)
-				}
-				refreshCancel()
-			}
-		}
+		defer close(refreshDone)
+		refreshQueue.Run(refreshContext)
 	}()
+	defer func() { stopRefresh(); <-refreshDone }()
 
 	health := agent.NewHealth()
 	mapCache, err := metrics.NewMapCache([]probe.MapStatsSource{execProbe, cpuProbe, runQLatProbe}, *mapStatsInterval)
@@ -188,16 +178,7 @@ func main() {
 			health.RecordEvent()
 			record := events.Add(kernelEvent)
 			if record.Workload == nil && kernelEvent.Type == probe.EventTypeExec {
-				now := time.Now()
-				unresolvedMu.Lock()
-				if now.After(unresolvedUntil[kernelEvent.CgroupID]) {
-					unresolvedUntil[kernelEvent.CgroupID] = now.Add(30 * time.Second)
-					select {
-					case refreshRequests <- struct{}{}:
-					default:
-					}
-				}
-				unresolvedMu.Unlock()
+				refreshQueue.Request(kernelEvent.CgroupID)
 			}
 			encoded, _ := json.Marshal(record)
 			fmt.Println(string(encoded))
