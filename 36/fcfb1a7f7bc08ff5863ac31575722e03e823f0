@@ -1,0 +1,23 @@
+log/2026-10-26-cpu-scheduler-counter.txt
+  s_6e6fc63242599e::t_89c32c2da2f2de 1-5
+internal/bpfgen/cpu_bpfel.go
+  s_6e6fc63242599e::t_89c32c2da2f2de 21-26
+bpf/cpu.bpf.c
+  s_6e6fc63242599e::t_106b2ecdedf8fa 7-10,15,29-34,36-37,39,58-59,63,68-69,71-76,94-97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "36fcfb1a7f7bc08ff5863ac31575722e03e823f0",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
