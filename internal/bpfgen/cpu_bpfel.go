@@ -18,6 +18,12 @@ type CPUCpuKey struct {
 	Pid      uint32
 }
 
+type CPUCpuStart struct {
+	RuntimeNs uint64
+	Pid       uint32
+	Pad       uint32
+}
+
 type CPUCpuValue struct {
 	RuntimeNs uint64
 	Comm      [16]int8

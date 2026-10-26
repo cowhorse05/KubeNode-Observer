@@ -4,10 +4,15 @@
 
 #define TASK_COMM_LEN 16
 
+struct sched_entity {
+    __u64 sum_exec_runtime;
+} __attribute__((preserve_access_index));
+
 struct task_struct {
     int pid;
     int tgid;
     char comm[TASK_COMM_LEN];
+    struct sched_entity se;
 } __attribute__((preserve_access_index));
 
 struct cpu_key {
@@ -21,11 +26,17 @@ struct cpu_value {
     char comm[TASK_COMM_LEN];
 };
 
+struct cpu_start {
+    __u64 runtime_ns;
+    __u32 pid;
+    __u32 pad;
+};
+
 struct {
-    __uint(type, BPF_MAP_TYPE_LRU_HASH);
-    __uint(max_entries, 8192);
+    __uint(type, BPF_MAP_TYPE_PERCPU_ARRAY);
+    __uint(max_entries, 1);
     __type(key, __u32);
-    __type(value, __u64);
+    __type(value, struct cpu_start);
 } task_start SEC(".maps");
 
 struct {
@@ -44,20 +55,25 @@ int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
     struct cpu_value *value;
     struct cpu_key key = {};
     __u64 pid_tgid;
-    __u64 *started;
-    __u64 now;
+    struct cpu_start *started;
+    __u64 runtime;
     __u64 delta;
     __u32 prev_pid;
     __u32 next_pid;
+    __u32 zero = 0;
 
-    now = bpf_ktime_get_ns();
     prev_pid = BPF_CORE_READ(prev, pid);
     next_pid = BPF_CORE_READ(next, pid);
 
-    started = bpf_map_lookup_elem(&task_start, &prev_pid);
+    started = bpf_map_lookup_elem(&task_start, &zero);
+    runtime = BPF_CORE_READ(prev, se.sum_exec_runtime);
     pid_tgid = bpf_get_current_pid_tgid();
-    if (prev_pid != 0 && started && now > *started && (__u32)pid_tgid == prev_pid) {
-        delta = now - *started;
+    if (prev_pid != 0 && started && started->pid == prev_pid &&
+        runtime >= started->runtime_ns && (__u32)pid_tgid == prev_pid) {
+        // Use scheduler-accounted runtime, not time between tracepoint calls.
+        // One CPU-local slot follows the incoming task, so PID reuse and LRU
+        // eviction cannot corrupt the current slice's baseline.
+        delta = runtime - started->runtime_ns;
         key.cgroup_id = bpf_get_current_cgroup_id();
         key.tgid = BPF_CORE_READ(prev, tgid);
         key.pid = prev_pid;
@@ -75,8 +91,10 @@ int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
         }
     }
 
-    if (next_pid != 0)
-        bpf_map_update_elem(&task_start, &next_pid, &now, BPF_ANY);
+    if (started) {
+        started->pid = next_pid;
+        started->runtime_ns = BPF_CORE_READ(next, se.sum_exec_runtime);
+    }
 
     return 0;
 }
