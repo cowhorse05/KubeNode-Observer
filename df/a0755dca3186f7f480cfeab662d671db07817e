@@ -1,0 +1,23 @@
+internal/probe/cpu_linux_test.go
+  s_6e6fc63242599e::t_283de23988655e 1-5,7-38,43-44,46-59,63-81
+  s_6e6fc63242599e::t_e32f44049d144f 6,39-42,45,60-62
+log/2026-10-26-cpu-retention.txt
+  s_6e6fc63242599e::t_6feb4c10ad9057 2-5
+  s_6e6fc63242599e::t_0f0ee4d356e723 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "dfa0755dca3186f7f480cfeab662d671db07817e",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
