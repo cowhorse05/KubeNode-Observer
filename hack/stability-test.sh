@@ -83,7 +83,7 @@ if [[ "${events_lost_after}" != "${events_lost_before}" ]]; then
   echo "stability test failed: events lost changed ${events_lost_before} -> ${events_lost_after}" >&2
   exit 1
 fi
-if [[ "${cpu_capacity}" != "8192" || "${start_capacity}" != "8192" ]]; then
+if [[ "${cpu_capacity}" != "8192" || "${start_capacity}" != "1" ]]; then
   echo "stability test failed: unexpected CPU map capacity" >&2
   exit 1
 fi

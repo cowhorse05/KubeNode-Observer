@@ -79,3 +79,26 @@ func TestCPURuntimeRetentionKernel(t *testing.T) {
 		}
 	}
 }
+
+func TestCPUBatchSnapshotKernel(t *testing.T) {
+	if os.Getenv("KNO_BPF_TEST") != "1" {
+		t.Skip("set KNO_BPF_TEST=1 with BPF privileges")
+	}
+	if err := rlimit.RemoveMemlock(); err != nil {
+		t.Fatal(err)
+	}
+	p, err := NewCPUProbe()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer p.Close()
+	for i := uint32(0); i < 8192; i++ {
+		if err := p.objects.CpuRuntime.Put(cpuKey{CgroupID: 999, TGID: i + 1000000, PID: i + 1000000}, cpuValue{Runtime: uint64(i + 1)}); err != nil {
+			t.Fatal(err)
+		}
+	}
+	snapshot, err := p.Snapshot()
+	if err != nil || len(snapshot.Processes) == 0 || snapshot.Totals == nil || snapshot.CapturedAt.IsZero() {
+		t.Fatalf("batch snapshot: processes=%d totals=%d err=%v", len(snapshot.Processes), len(snapshot.Totals), err)
+	}
+}

@@ -2,14 +2,30 @@ package probe
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"sync"
+	"time"
 
+	"github.com/cilium/ebpf"
 	"github.com/cilium/ebpf/link"
 	"github.com/cowhorse05/KubeNode-Observer/internal/bpfgen"
 )
 
 const cpuCommLen = 16
+
+type CgroupRuntime struct {
+	CgroupID uint64
+	Runtime  uint64
+}
+
+// Process detail is bounded independently of container totals. CapturedAt is
+// taken after the small totals scan, not before a potentially slow detail scan.
+type CPUSnapshot struct {
+	Processes  []CPURuntime
+	Totals     []CgroupRuntime
+	CapturedAt time.Time
+}
 
 type CPURuntime struct {
 	CgroupID uint64
@@ -61,24 +77,45 @@ func NewCPUProbe() (*CPUProbe, error) {
 	return probe, nil
 }
 
-func (p *CPUProbe) Snapshot() ([]CPURuntime, error) {
-	iterator := p.objects.CpuRuntime.Iterate()
-	result := make([]CPURuntime, 0)
-	var key cpuKey
-	var value cpuValue
-	for iterator.Next(&key, &value) {
-		result = append(result, CPURuntime{
-			CgroupID: key.CgroupID,
-			TGID:     key.TGID,
-			PID:      key.PID,
-			Runtime:  value.Runtime,
-			Comm:     value.Comm,
-		})
+func (p *CPUProbe) Snapshot() (CPUSnapshot, error) {
+	result := CPUSnapshot{Totals: make([]CgroupRuntime, 0)}
+	var cgroup, total uint64
+	iterator := p.objects.CgroupRuntime.Iterate()
+	for iterator.Next(&cgroup, &total) {
+		result.Totals = append(result.Totals, CgroupRuntime{cgroup, total})
 	}
 	if err := iterator.Err(); err != nil {
-		return nil, fmt.Errorf("iterate CPU runtime map: %w", err)
+		return CPUSnapshot{}, fmt.Errorf("iterate cgroup runtime map: %w", err)
 	}
-	return result, nil
+	result.CapturedAt = time.Now()
+	// Batch cursors avoid next-key traversal restarting when a short process
+	// key is evicted during a scan. This is still not an atomic snapshot.
+	keys, values := make([]cpuKey, 256), make([]cpuValue, 256)
+	var cursor ebpf.MapBatchCursor
+	for scanned := 0; scanned <= 8192; {
+		n, err := p.objects.CpuRuntime.BatchLookup(&cursor, keys, values, nil)
+		scanned += n
+		for i := 0; i < n; i++ {
+			key, value := keys[i], values[i]
+			result.Processes = append(result.Processes, CPURuntime{
+				CgroupID: key.CgroupID,
+				TGID:     key.TGID,
+				PID:      key.PID,
+				Runtime:  value.Runtime,
+				Comm:     value.Comm,
+			})
+		}
+		if errors.Is(err, ebpf.ErrKeyNotExist) {
+			return result, nil
+		}
+		if err != nil {
+			return CPUSnapshot{}, fmt.Errorf("batch read CPU runtime map: %w", err)
+		}
+		if n == 0 {
+			return CPUSnapshot{}, fmt.Errorf("CPU batch cursor made no progress")
+		}
+	}
+	return CPUSnapshot{}, fmt.Errorf("batch read CPU runtime map: %w", ebpf.ErrIterationAborted)
 }
 
 func (p *CPUProbe) MapStats() ([]BPFMapStats, error) {
@@ -90,7 +127,11 @@ func (p *CPUProbe) MapStats() ([]BPFMapStats, error) {
 	if err != nil {
 		return nil, err
 	}
-	return []BPFMapStats{starts, stats}, nil
+	totals, err := readMapStats("cpu_cgroup_runtime", p.objects.CgroupRuntime, true)
+	if err != nil {
+		return nil, err
+	}
+	return []BPFMapStats{starts, stats, totals}, nil
 }
 
 func (p *CPUProbe) Close() error {

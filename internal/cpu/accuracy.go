@@ -38,9 +38,12 @@ type AccuracySample struct {
 	NewKeys           int       `json:"newKeys"`
 	MissingKeys       int       `json:"missingKeys"`
 	ResetKeys         int       `json:"resetKeys"`
+	CgroupRuntimeNS   *uint64   `json:"cgroupRuntimeNs,omitempty"`
 }
 
 type AccuracyResponse struct {
+	Accounting           string           `json:"accounting"`
+	ProcessRuntimeNS     uint64           `json:"processRuntimeNs"`
 	CgroupID             uint64           `json:"cgroupId"`
 	ContainerID          string           `json:"containerId"`
 	CgroupPath           string           `json:"cgroupPath"`
@@ -143,7 +146,7 @@ func readCPUStat(path string, id uint64) (usageUS, throttledUS uint64, err error
 }
 
 func measureAccuracy(ctx context.Context, source RuntimeSource, path string, id uint64, duration, interval time.Duration) (AccuracyResponse, error) {
-	response := AccuracyResponse{CgroupID: id, IntervalSeconds: interval.Seconds()}
+	response := AccuracyResponse{Accounting: "process", CgroupID: id, IntervalSeconds: interval.Seconds()}
 	previous := map[runtimeKey]uint64{}
 	started := time.Now()
 	deadline := started.Add(duration)
@@ -167,9 +170,22 @@ func measureAccuracy(ctx context.Context, source RuntimeSource, path string, id 
 		if after < before {
 			return response, fmt.Errorf("cgroup counter regressed during map read")
 		}
-		sample := AccuracySample{At: readStart, ReadSeconds: time.Since(readStart).Seconds(), ReferenceBeforeUS: before, ReferenceAfterUS: after, ThrottledUS: throttled, MapEntries: len(values)}
+		sample := AccuracySample{At: readStart, ReadSeconds: time.Since(readStart).Seconds(), ReferenceBeforeUS: before, ReferenceAfterUS: after, ThrottledUS: throttled, MapEntries: len(values.Processes)}
+		if values.Totals != nil {
+			response.Accounting = "cgroup"
+			for _, total := range values.Totals {
+				if total.CgroupID == id {
+					v := total.Runtime
+					sample.CgroupRuntimeNS = &v
+					break
+				}
+			}
+			if sample.CgroupRuntimeNS == nil {
+				return response, fmt.Errorf("target cgroup total unavailable")
+			}
+		}
 		current := make(map[runtimeKey]uint64)
-		for _, value := range values {
+		for _, value := range values.Processes {
 			if value.CgroupID != id {
 				continue
 			}
@@ -183,6 +199,12 @@ func measureAccuracy(ctx context.Context, source RuntimeSource, path string, id 
 				return response, fmt.Errorf("cgroup counter regressed")
 			}
 			applyAccuracyDelta(&sample, current, previous)
+			response.ProcessRuntimeNS += sample.ObservedRuntimeNS
+			if sample.CgroupRuntimeNS != nil {
+				if err := applyCgroupDelta(&sample, last); err != nil {
+					return response, err
+				}
+			}
 			response.ObservedRuntimeNS += sample.ObservedRuntimeNS
 		}
 		response.Samples = append(response.Samples, sample)
@@ -204,6 +226,14 @@ func measureAccuracy(ctx context.Context, source RuntimeSource, path string, id 
 		}
 	}
 	return summarizeAccuracy(response)
+}
+
+func applyCgroupDelta(sample *AccuracySample, last AccuracySample) error {
+	if sample.CgroupRuntimeNS == nil || last.CgroupRuntimeNS == nil || *sample.CgroupRuntimeNS < *last.CgroupRuntimeNS {
+		return fmt.Errorf("cgroup runtime reset or accounting source changed")
+	}
+	sample.ObservedRuntimeNS = *sample.CgroupRuntimeNS - *last.CgroupRuntimeNS
+	return nil
 }
 
 func applyAccuracyDelta(sample *AccuracySample, current, previous map[runtimeKey]uint64) {

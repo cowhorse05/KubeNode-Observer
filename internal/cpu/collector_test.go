@@ -16,12 +16,12 @@ type fakeSource struct {
 	index     int
 }
 
-func (f *fakeSource) Snapshot() ([]probe.CPURuntime, error) {
+func (f *fakeSource) Snapshot() (probe.CPUSnapshot, error) {
 	result := f.snapshots[f.index]
 	if f.index < len(f.snapshots)-1 {
 		f.index++
 	}
-	return result, nil
+	return probe.CPUSnapshot{Processes: result}, nil
 }
 
 type fakeResolver struct{}

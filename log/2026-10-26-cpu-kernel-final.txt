@@ -1,0 +1,11 @@
+=== RUN   TestCPURuntimeRetentionKernel
+    cpu_linux_test.go:73: capacity=8192 children=128 retained=128 runtime=100696815ns wait4_CPU=100637000ns ratio=1.0006
+    cpu_linux_test.go:73: capacity=16 children=128 retained=3 runtime=3094828ns wait4_CPU=107535000ns ratio=0.0288
+--- PASS: TestCPURuntimeRetentionKernel (0.46s)
+=== RUN   TestCPUBatchSnapshotKernel
+--- PASS: TestCPUBatchSnapshotKernel (0.04s)
+=== RUN   TestCPURuntimeCommand
+--- PASS: TestCPURuntimeCommand (0.00s)
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+PASS

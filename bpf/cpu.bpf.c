@@ -46,6 +46,16 @@ struct {
     __type(value, struct cpu_value);
 } cpu_runtime SEC(".maps");
 
+// Container totals must not depend on retention of short-lived process keys.
+// Bounded separately from process detail; eviction/reset remains a documented
+// limit when a node exceeds this cgroup working set.
+struct {
+    __uint(type, BPF_MAP_TYPE_LRU_HASH);
+    __uint(max_entries, 1024);
+    __type(key, __u64);
+    __type(value, __u64);
+} cgroup_runtime SEC(".maps");
+
 SEC("raw_tracepoint/sched_switch")
 int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
 {
@@ -61,6 +71,8 @@ int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
     __u32 prev_pid;
     __u32 next_pid;
     __u32 zero = 0;
+    __u64 *total;
+    __u64 initial_total = 0;
 
     prev_pid = BPF_CORE_READ(prev, pid);
     next_pid = BPF_CORE_READ(next, pid);
@@ -77,6 +89,14 @@ int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
         key.cgroup_id = bpf_get_current_cgroup_id();
         key.tgid = BPF_CORE_READ(prev, tgid);
         key.pid = prev_pid;
+
+        total = bpf_map_lookup_elem(&cgroup_runtime, &key.cgroup_id);
+        if (!total) {
+            bpf_map_update_elem(&cgroup_runtime, &key.cgroup_id, &initial_total, BPF_NOEXIST);
+            total = bpf_map_lookup_elem(&cgroup_runtime, &key.cgroup_id);
+        }
+        if (total)
+            __sync_fetch_and_add(total, delta);
 
         value = bpf_map_lookup_elem(&cpu_runtime, &key);
         if (!value) {
