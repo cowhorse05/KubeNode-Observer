@@ -7,21 +7,34 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"runtime/debug"
 	"strconv"
 	"strings"
 	"time"
 )
 
 type Snapshot struct {
-	At         time.Time         `json:"at"`
-	Stages     map[string]Stage  `json:"stages"`
-	TotalAlloc uint64            `json:"totalAllocBytes"`
-	HeapAlloc  uint64            `json:"heapAllocBytes"`
-	NumGC      uint32            `json:"numGc"`
-	CgroupPath string            `json:"cgroupPath"`
-	CPUMax     string            `json:"cpuMax"`
-	CPUStat    map[string]uint64 `json:"cpuStat"`
-	Error      string            `json:"error,omitempty"`
+	At            time.Time         `json:"at"`
+	Stages        map[string]Stage  `json:"stages"`
+	TotalAlloc    uint64            `json:"totalAllocBytes"`
+	HeapAlloc     uint64            `json:"heapAllocBytes"`
+	HeapInuse     uint64            `json:"heapInuseBytes"`
+	HeapIdle      uint64            `json:"heapIdleBytes"`
+	HeapReleased  uint64            `json:"heapReleasedBytes"`
+	StackInuse    uint64            `json:"stackInuseBytes"`
+	GoSys         uint64            `json:"goSysBytes"`
+	GoManaged     uint64            `json:"goManagedBytes"`
+	GoMemoryLimit int64             `json:"goMemoryLimitBytes"`
+	GCCPUFraction float64           `json:"gcCpuFraction"`
+	RSS           uint64            `json:"rssBytes"`
+	RSSError      string            `json:"rssError,omitempty"`
+	Memory        *Memory           `json:"memory,omitempty"`
+	MemoryError   string            `json:"memoryError,omitempty"`
+	NumGC         uint32            `json:"numGc"`
+	CgroupPath    string            `json:"cgroupPath"`
+	CPUMax        string            `json:"cpuMax"`
+	CPUStat       map[string]uint64 `json:"cpuStat"`
+	Error         string            `json:"error,omitempty"`
 }
 
 func Handler(recorder *Recorder, procRoot, cgroupRoot string) http.Handler {
@@ -33,10 +46,21 @@ func Handler(recorder *Recorder, procRoot, cgroupRoot string) http.Handler {
 		var memory runtime.MemStats
 		runtime.ReadMemStats(&memory)
 		result := Snapshot{At: time.Now().UTC(), Stages: recorder.Snapshot(), TotalAlloc: memory.TotalAlloc, HeapAlloc: memory.HeapAlloc, NumGC: memory.NumGC}
+		result.HeapInuse, result.HeapIdle, result.HeapReleased, result.StackInuse = memory.HeapInuse, memory.HeapIdle, memory.HeapReleased, memory.StackInuse
+		result.GoSys, result.GoManaged, result.GoMemoryLimit, result.GCCPUFraction = memory.Sys, memory.Sys-memory.HeapReleased, debug.SetMemoryLimit(-1), memory.GCCPUFraction
+		if rss, err := readRSS(procRoot); err != nil {
+			result.RSSError = err.Error()
+		} else {
+			result.RSS = rss
+		}
 		path, maximum, stat, err := readSelfCgroup(procRoot, cgroupRoot)
 		result.CgroupPath, result.CPUMax, result.CPUStat = path, maximum, stat
 		if err != nil {
 			result.Error = err.Error()
+		} else if usage, err := readMemory(cgroupRoot, path); err != nil {
+			result.MemoryError = err.Error()
+		} else {
+			result.Memory = usage
 		}
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(result)

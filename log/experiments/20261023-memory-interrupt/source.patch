@@ -1,0 +1,72 @@
+diff --git a/internal/telemetry/memory_test.go b/internal/telemetry/memory_test.go
+index a1ed066..aebb16d 100644
+--- a/internal/telemetry/memory_test.go
++++ b/internal/telemetry/memory_test.go
+@@ -44,3 +44,44 @@ func TestMemoryReader(t *testing.T) {
+ 		t.Fatal("invalid stat accepted")
+ 	}
+ }
++
++func TestMemoryReaderRejectsIncompleteCounters(t *testing.T) {
++	for _, tc := range []struct{ name, file, content string }{
++		{"current", "memory.current", "not-a-number"},
++		{"maximum", "memory.max", ""},
++		{"peak", "memory.peak", "invalid"},
++		{"stat-fields", "memory.stat", "anon 1\nfile 2\n"},
++		{"event-fields", "memory.events", "oom 0\n"},
++		{"negative", "memory.events", "oom -1\noom_kill 0\n"},
++		{"extra-column", "memory.events", "oom 0 extra\noom_kill 0\n"},
++	} {
++		t.Run(tc.name, func(t *testing.T) {
++			root := t.TempDir()
++			files := map[string]string{"memory.current": "1", "memory.max": "max", "memory.stat": "anon 1\nfile 2\nkernel 3\n", "memory.events": "oom 0\noom_kill 0\n"}
++			files[tc.file] = tc.content
++			for name, content := range files {
++				if err := os.WriteFile(filepath.Join(root, name), []byte(content), 0644); err != nil {
++					t.Fatal(err)
++				}
++			}
++			if _, err := readMemory(root, "/"); err == nil {
++				t.Fatal("incomplete memory data accepted")
++			}
++		})
++	}
++}
++
++func TestRSSReader(t *testing.T) {
++	root := t.TempDir()
++	if err := os.Mkdir(filepath.Join(root, "self"), 0755); err != nil {
++		t.Fatal(err)
++	}
++	for _, input := range []string{"", "123", "123 invalid", "123 -1"} {
++		if err := os.WriteFile(filepath.Join(root, "self", "statm"), []byte(input), 0644); err != nil {
++			t.Fatal(err)
++		}
++		if _, err := readRSS(root); err == nil {
++			t.Fatalf("invalid statm accepted: %q", input)
++		}
++	}
++}
+diff --git a/internal/telemetry/recorder_test.go b/internal/telemetry/recorder_test.go
+index 88edc2c..f930db4 100644
+--- a/internal/telemetry/recorder_test.go
++++ b/internal/telemetry/recorder_test.go
+@@ -77,6 +77,18 @@ func TestDiagnosticsCgroup(t *testing.T) {
+ 	if w.Code != 405 {
+ 		t.Fatalf("status %d", w.Code)
+ 	}
++	if err := os.Remove(filepath.Join(cgroup, "pod", "agent", "memory.current")); err != nil {
++		t.Fatal(err)
++	}
++	w = httptest.NewRecorder()
++	h.ServeHTTP(w, httptest.NewRequest("GET", "/diagnostics", nil))
++	result = Snapshot{}
++	if err := json.Unmarshal(w.Body.Bytes(), &result); err != nil {
++		t.Fatal(err)
++	}
++	if result.Error != "" || result.CPUStat["usage_usec"] != 123 || result.MemoryError == "" || result.Memory != nil {
++		t.Fatalf("memory failure corrupted CPU diagnostics: %+v", result)
++	}
+ 	if err := os.WriteFile(filepath.Join(proc, "self", "cgroup"), []byte("0::/../../escape\n"), 0644); err != nil {
+ 		t.Fatal(err)
+ 	}

@@ -1,0 +1,423 @@
+{
+  "image": "kubenode-observer/kno-agent:metrics-cache",
+  "prefix": "metrics-03-candidate",
+  "p50Seconds": 0.009489246,
+  "p95Seconds": 0.060803951,
+  "maxSeconds": 0.074397056,
+  "reads": [
+    {
+      "at": "2026-10-20T09:21:35.037664785Z",
+      "clientSeconds": 0.012128685,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 14.437436359,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:36.038058262Z",
+      "clientSeconds": 0.010756716,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 0.435213114,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:37.039154412Z",
+      "clientSeconds": 0.008617097,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 1.435458546,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:38.039297618Z",
+      "clientSeconds": 0.008145225,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 2.435407684,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:39.040148007Z",
+      "clientSeconds": 0.00826614,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 3.43645667,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:40.041008951Z",
+      "clientSeconds": 0.01395307,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 4.4378499829999996,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:41.041380532Z",
+      "clientSeconds": 0.009224379,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 5.43766584,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:42.041981464Z",
+      "clientSeconds": 0.010146962,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 6.439408969,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:43.042050406Z",
+      "clientSeconds": 0.009823725,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 7.439162131,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:44.042859609Z",
+      "clientSeconds": 0.010363047,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 8.440149134,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:45.043495576Z",
+      "clientSeconds": 0.009489246,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 9.440746027,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:46.043914051Z",
+      "clientSeconds": 0.008207666,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 10.440459307,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:47.044055053Z",
+      "clientSeconds": 0.009367968,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 11.440839068,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:48.045218002Z",
+      "clientSeconds": 0.00828435,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 12.441595058,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:49.045768242Z",
+      "clientSeconds": 0.0082366,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 13.442195234,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:50.045999999Z",
+      "clientSeconds": 0.008158424,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 14.44262137,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:51.047102056Z",
+      "clientSeconds": 0.060803951,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 0.285944555,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:52.047379003Z",
+      "clientSeconds": 0.007614866,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 1.234660962,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:53.047885027Z",
+      "clientSeconds": 0.008808919,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 2.235088385,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:54.048978917Z",
+      "clientSeconds": 0.074397056,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 3.301852246,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:55.049929588Z",
+      "clientSeconds": 0.009411416,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 4.237149859,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:56.05007357Z",
+      "clientSeconds": 0.009675018,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 5.237478957,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:57.05026369Z",
+      "clientSeconds": 0.007532124,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 6.237136618,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:58.05113486Z",
+      "clientSeconds": 0.014273866,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 7.23931833,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:21:59.051757007Z",
+      "clientSeconds": 0.00797251,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 8.238855867,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:22:00.052394825Z",
+      "clientSeconds": 0.010695803,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 9.24049176,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:22:01.053075937Z",
+      "clientSeconds": 0.010972475,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 10.241569593,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:22:02.053183158Z",
+      "clientSeconds": 0.013899927,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 11.241586647,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:22:03.053570748Z",
+      "clientSeconds": 0.015227242,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 12.242386044,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    },
+    {
+      "at": "2026-10-20T09:22:04.053677525Z",
+      "clientSeconds": 0.016342661,
+      "collectionErrors": 0,
+      "cacheSources": 3,
+      "readySources": 3,
+      "maxAgeSeconds": 13.243139817,
+      "refreshErrors": 0,
+      "eventsLost": 0
+    }
+  ],
+  "cost": {
+    "mode": "",
+    "cpuLimit": "",
+    "repeat": 0,
+    "prefix": "",
+    "windowSeconds": 30.025023433,
+    "agentCpuSeconds": 2.846182,
+    "throttledSeconds": 6.347116,
+    "throttledPeriods": 29,
+    "allocatedBytes": 108334424,
+    "accuracyReadMaxSeconds": 0,
+    "accuracyReadCount": 0,
+    "signedErrorPercent": 0,
+    "stageDeltas": {
+      "accuracy.scan": {
+        "count": 0,
+        "totalNs": 0,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "cpu.aggregate": {
+        "count": 30,
+        "totalNs": 203201178,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "cpu.scan": {
+        "count": 30,
+        "totalNs": 992970160,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 4,
+        "over250ms": 1,
+        "over1s": 0
+      },
+      "metrics.cpu_maps": {
+        "count": 2,
+        "totalNs": 111715993,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 1,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "metrics.exec_maps": {
+        "count": 2,
+        "totalNs": 438117,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "metrics.runqlat_maps": {
+        "count": 2,
+        "totalNs": 302726313,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 2,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "metrics.scrape": {
+        "count": 30,
+        "totalNs": 99893701,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "topology.cri": {
+        "count": 8,
+        "totalNs": 213225675,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 1,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "topology.enrich": {
+        "count": 8,
+        "totalNs": 233566134,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 0,
+        "over250ms": 0,
+        "over1s": 0
+      },
+      "topology.refresh": {
+        "count": 8,
+        "totalNs": 446900110,
+        "maxNs": 0,
+        "lastNs": 0,
+        "over100ms": 2,
+        "over250ms": 0,
+        "over1s": 0
+      }
+    }
+  },
+  "workload": {
+    "mode": "churn",
+    "durationSeconds": 43.05423416,
+    "operations": 12547,
+    "throughputOpsPerSecond": 291.4231374636069,
+    "p99Us": 10000,
+    "latencyOverflow": 4333
+  }
+}

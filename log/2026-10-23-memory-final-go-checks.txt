@@ -1,0 +1,32 @@
++ gofmt -w internal/telemetry/memory_test.go internal/telemetry/recorder_test.go
++ go test ./...
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-agent	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-experiment	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-contention	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-hog	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/exec-test	[no test files]
+ok  	github.com/cowhorse05/KubeNode-Observer/examples/observer-benchmark	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/agent	(cached)
+?   	github.com/cowhorse05/KubeNode-Observer/internal/bpfgen	[no test files]
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/event	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/runqlat	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	0.022s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	(cached)
++ go vet ./...
++ go test -race ./internal/metrics ./internal/experiment ./internal/probe ./internal/telemetry ./internal/cpu
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	1.034s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	1.048s
++ go test -c -o bin/probe-metrics.test ./internal/probe
++ sudo -n env KNO_BPF_TEST=1 ./bin/probe-metrics.test -test.run TestMapStatsKernel -test.v
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+PASS
++ git diff --check

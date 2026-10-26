@@ -1,0 +1,416 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Pod",
+            "metadata": {
+                "annotations": {
+                    "kubectl.kubernetes.io/restartedAt": "2026-10-20T11:53:01+08:00",
+                    "prometheus.io/path": "/metrics",
+                    "prometheus.io/port": "18080",
+                    "prometheus.io/scrape": "true"
+                },
+                "creationTimestamp": "2026-10-23T07:51:01Z",
+                "generateName": "kno-agent-",
+                "generation": 1,
+                "labels": {
+                    "app.kubernetes.io/name": "kno-agent",
+                    "controller-revision-hash": "747b6f4747",
+                    "pod-template-generation": "14"
+                },
+                "name": "kno-agent-sv4vx",
+                "namespace": "kube-system",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "blockOwnerDeletion": true,
+                        "controller": true,
+                        "kind": "DaemonSet",
+                        "name": "kno-agent",
+                        "uid": "2986e5ed-7ad7-443b-8d2c-90b67a1c72c4"
+                    }
+                ],
+                "resourceVersion": "424811",
+                "uid": "2cfa0559-3c24-4a0a-abf0-1ea77ec3428e"
+            },
+            "spec": {
+                "affinity": {
+                    "nodeAffinity": {
+                        "requiredDuringSchedulingIgnoredDuringExecution": {
+                            "nodeSelectorTerms": [
+                                {
+                                    "matchFields": [
+                                        {
+                                            "key": "metadata.name",
+                                            "operator": "In",
+                                            "values": [
+                                                "kno-dev"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                },
+                "containers": [
+                    {
+                        "args": [
+                            "--listen=:18080",
+                            "--runtime-endpoint=unix:///run/containerd/containerd.sock",
+                            "--host-proc=/host/proc",
+                            "--cgroup-root=/host/sys/fs/cgroup",
+                            "--topology-interval=5s",
+                            "--cpu-interval=1s",
+                            "--debug-listen=127.0.0.1:18090"
+                        ],
+                        "env": [
+                            {
+                                "name": "NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            }
+                        ],
+                        "image": "kubenode-observer/kno-agent:memory",
+                        "imagePullPolicy": "Never",
+                        "livenessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/healthz",
+                                "port": "health",
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 5,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "name": "agent",
+                        "ports": [
+                            {
+                                "containerPort": 18080,
+                                "hostPort": 18080,
+                                "name": "health",
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "readinessProbe": {
+                            "failureThreshold": 3,
+                            "httpGet": {
+                                "path": "/healthz",
+                                "port": "health",
+                                "scheme": "HTTP"
+                            },
+                            "initialDelaySeconds": 2,
+                            "periodSeconds": 5,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {
+                            "limits": {
+                                "cpu": "200m",
+                                "memory": "128Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "32Mi"
+                            }
+                        },
+                        "securityContext": {
+                            "privileged": true,
+                            "runAsUser": 0
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/sys/kernel/tracing",
+                                "name": "tracefs",
+                                "readOnly": true
+                            },
+                            {
+                                "mountPath": "/run/containerd/containerd.sock",
+                                "name": "containerd-socket"
+                            },
+                            {
+                                "mountPath": "/host/proc",
+                                "name": "host-proc",
+                                "readOnly": true
+                            },
+                            {
+                                "mountPath": "/host/sys/fs/cgroup",
+                                "name": "host-cgroup",
+                                "readOnly": true
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-swvdc",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirstWithHostNet",
+                "enableServiceLinks": true,
+                "hostNetwork": true,
+                "hostPID": true,
+                "nodeName": "kno-dev",
+                "preemptionPolicy": "PreemptLowerPriority",
+                "priority": 0,
+                "restartPolicy": "Always",
+                "schedulerName": "default-scheduler",
+                "securityContext": {},
+                "serviceAccount": "kno-agent",
+                "serviceAccountName": "kno-agent",
+                "terminationGracePeriodSeconds": 30,
+                "tolerations": [
+                    {
+                        "effect": "NoSchedule",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoExecute",
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoSchedule",
+                        "key": "node.kubernetes.io/disk-pressure",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoSchedule",
+                        "key": "node.kubernetes.io/memory-pressure",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoSchedule",
+                        "key": "node.kubernetes.io/pid-pressure",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoSchedule",
+                        "key": "node.kubernetes.io/unschedulable",
+                        "operator": "Exists"
+                    },
+                    {
+                        "effect": "NoSchedule",
+                        "key": "node.kubernetes.io/network-unavailable",
+                        "operator": "Exists"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "hostPath": {
+                            "path": "/sys/kernel/tracing",
+                            "type": "Directory"
+                        },
+                        "name": "tracefs"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/run/containerd/containerd.sock",
+                            "type": "Socket"
+                        },
+                        "name": "containerd-socket"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/proc",
+                            "type": "Directory"
+                        },
+                        "name": "host-proc"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/sys/fs/cgroup",
+                            "type": "Directory"
+                        },
+                        "name": "host-cgroup"
+                    },
+                    {
+                        "name": "kube-api-access-swvdc",
+                        "projected": {
+                            "defaultMode": 420,
+                            "sources": [
+                                {
+                                    "serviceAccountToken": {
+                                        "expirationSeconds": 3607,
+                                        "path": "token"
+                                    }
+                                },
+                                {
+                                    "configMap": {
+                                        "items": [
+                                            {
+                                                "key": "ca.crt",
+                                                "path": "ca.crt"
+                                            }
+                                        ],
+                                        "name": "kube-root-ca.crt"
+                                    }
+                                },
+                                {
+                                    "downwardAPI": {
+                                        "items": [
+                                            {
+                                                "fieldRef": {
+                                                    "apiVersion": "v1",
+                                                    "fieldPath": "metadata.namespace"
+                                                },
+                                                "path": "namespace"
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-23T07:51:03Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodReadyToStartContainers"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-23T07:51:01Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-23T07:51:04Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-23T07:51:04Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "ContainersReady"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2026-10-23T07:51:01Z",
+                        "observedGeneration": 1,
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "allocatedResources": {
+                            "cpu": "100m",
+                            "memory": "32Mi"
+                        },
+                        "containerID": "containerd://68be39e9a87e43349c01e3057449d281ca71cd728ebc35788eeeb092fd6ab92b",
+                        "image": "docker.io/kubenode-observer/kno-agent:memory",
+                        "imageID": "sha256:b1b49f5a31ef0e92369a2afb0e1275693f0a1b2e4ccf57f45e15194a61a13084",
+                        "lastState": {},
+                        "name": "agent",
+                        "ready": true,
+                        "resources": {
+                            "limits": {
+                                "cpu": "200m",
+                                "memory": "128Mi"
+                            },
+                            "requests": {
+                                "cpu": "100m",
+                                "memory": "32Mi"
+                            }
+                        },
+                        "restartCount": 0,
+                        "started": true,
+                        "state": {
+                            "running": {
+                                "startedAt": "2026-10-23T07:51:02Z"
+                            }
+                        },
+                        "user": {
+                            "linux": {
+                                "gid": 0,
+                                "supplementalGroups": [
+                                    0
+                                ],
+                                "uid": 0
+                            }
+                        },
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/sys/kernel/tracing",
+                                "name": "tracefs",
+                                "readOnly": true,
+                                "recursiveReadOnly": "Disabled"
+                            },
+                            {
+                                "mountPath": "/run/containerd/containerd.sock",
+                                "name": "containerd-socket"
+                            },
+                            {
+                                "mountPath": "/host/proc",
+                                "name": "host-proc",
+                                "readOnly": true,
+                                "recursiveReadOnly": "Disabled"
+                            },
+                            {
+                                "mountPath": "/host/sys/fs/cgroup",
+                                "name": "host-cgroup",
+                                "readOnly": true,
+                                "recursiveReadOnly": "Disabled"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "kube-api-access-swvdc",
+                                "readOnly": true,
+                                "recursiveReadOnly": "Disabled"
+                            }
+                        ]
+                    }
+                ],
+                "hostIP": "192.168.49.2",
+                "hostIPs": [
+                    {
+                        "ip": "192.168.49.2"
+                    }
+                ],
+                "observedGeneration": 1,
+                "phase": "Running",
+                "podIP": "192.168.49.2",
+                "podIPs": [
+                    {
+                        "ip": "192.168.49.2"
+                    }
+                ],
+                "qosClass": "Burstable",
+                "startTime": "2026-10-23T07:51:01Z"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

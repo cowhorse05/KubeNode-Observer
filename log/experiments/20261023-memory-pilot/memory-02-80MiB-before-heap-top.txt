@@ -1,0 +1,31 @@
+File: kno-agent
+Type: inuse_space
+Time: Oct 23, 2026 at 3:51pm (CST)
+Showing nodes accounting for 43654.10kB, 100% of 43654.10kB total
+Showing top 25 nodes out of 44
+      flat  flat%   sum%        cum   cum%
+15658.27kB 35.87% 35.87% 24376.38kB 55.84%  github.com/cilium/ebpf/btf.readAndInflateTypes
+11696.13kB 26.79% 62.66% 11696.13kB 26.79%  github.com/cilium/ebpf/btf.indexTypes
+ 8718.11kB 19.97% 82.63%  8718.11kB 19.97%  github.com/cilium/ebpf/btf.readAndInflateTypes.func2
+ 3437.68kB  7.87% 90.51%  4973.71kB 11.39%  github.com/cilium/ebpf/btf.readStringTable
+ 1536.03kB  3.52% 94.03%  1536.03kB  3.52%  bufio.(*Scanner).Text (inline)
+  553.04kB  1.27% 95.29%   553.04kB  1.27%  github.com/gogo/protobuf/proto.RegisterType
+     515kB  1.18% 96.47%      515kB  1.18%  golang.org/x/net/http2/hpack.init
+  514.63kB  1.18% 97.65%   514.63kB  1.18%  regexp/syntax.appendRange
+     513kB  1.18% 98.83%      513kB  1.18%  runtime.allocm
+  512.20kB  1.17%   100%   512.20kB  1.17%  k8s.io/client-go/plugin/pkg/client/auth/exec.init
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign.func1
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf.(*collectionLoader).loadProgram
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf.applyRelocations
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf.assignValues
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf.newProgramWithOptions
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf/btf.LoadKernelSpec
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf/btf.loadKernelSpec
+         0     0%   100% 41046.22kB 94.03%  github.com/cilium/ebpf/btf.loadRawSpec
+         0     0%   100% 29350.09kB 67.23%  github.com/cilium/ebpf/btf.parseBTF
+         0     0%   100% 41046.22kB 94.03%  github.com/cowhorse05/KubeNode-Observer/internal/bpfgen.LoadExecObjects
+         0     0%   100% 41046.22kB 94.03%  github.com/cowhorse05/KubeNode-Observer/internal/probe.NewExecProbe
+         0     0%   100%   514.63kB  1.18%  github.com/google/go-cmp/cmp/internal/function.init
+         0     0%   100%   553.04kB  1.27%  k8s.io/api/flowcontrol/v1beta3.init.0
+         0     0%   100% 41046.22kB 94.03%  main.main

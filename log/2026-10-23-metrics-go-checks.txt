@@ -1,0 +1,24 @@
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-agent	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-experiment	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-contention	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-hog	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/exec-test	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/internal/bpfgen	[no test files]
+ok  	github.com/cowhorse05/KubeNode-Observer/examples/observer-benchmark	0.012s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/agent	0.011s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	0.034s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/event	0.030s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	0.043s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	0.089s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	0.009s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/runqlat	0.018s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	0.013s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	0.025s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	1.123s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	1.087s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	1.026s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	1.035s
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+PASS

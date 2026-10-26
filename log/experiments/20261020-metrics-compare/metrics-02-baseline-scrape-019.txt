@@ -1,0 +1,48 @@
+# HELP kno_agent_events_seen_total Process lifecycle events consumed by the agent.
+# TYPE kno_agent_events_seen_total counter
+kno_agent_events_seen_total 11284
+# HELP kno_agent_events_lost_total Process lifecycle events dropped in the kernel ring buffer.
+# TYPE kno_agent_events_lost_total counter
+kno_agent_events_lost_total 0
+# HELP kno_agent_cpu_seconds_total CPU time consumed by the agent process.
+# TYPE kno_agent_cpu_seconds_total counter
+kno_agent_cpu_seconds_total 3.501280687
+# HELP kno_agent_resident_memory_bytes Resident memory used by the agent process.
+# TYPE kno_agent_resident_memory_bytes gauge
+kno_agent_resident_memory_bytes 1.30187264e+08
+# HELP kno_agent_go_heap_alloc_bytes Currently allocated Go heap bytes.
+# TYPE kno_agent_go_heap_alloc_bytes gauge
+kno_agent_go_heap_alloc_bytes 7.4336664e+07
+# HELP kno_agent_bpf_map_entries Current logical entries in an eBPF map; ring buffers report zero.
+# TYPE kno_agent_bpf_map_entries gauge
+# HELP kno_agent_bpf_map_max_entries Configured eBPF map entry capacity; ring buffers use bytes.
+# TYPE kno_agent_bpf_map_max_entries gauge
+# HELP kno_agent_bpf_map_memlock_bytes Kernel-reported locked memory for an eBPF map.
+# TYPE kno_agent_bpf_map_memlock_bytes gauge
+kno_agent_bpf_map_entries{map="exec_events",type="RingBuf"} 0
+kno_agent_bpf_map_max_entries{map="exec_events",type="RingBuf"} 1.048576e+06
+kno_agent_bpf_map_memlock_bytes{map="exec_events",type="RingBuf"} 1.065368e+06
+kno_agent_bpf_map_entries{map="event_stats",type="Array"} 1
+kno_agent_bpf_map_max_entries{map="event_stats",type="Array"} 1
+kno_agent_bpf_map_memlock_bytes{map="event_stats",type="Array"} 392
+kno_agent_bpf_map_entries{map="cpu_task_start",type="LRUHash"} 7249
+kno_agent_bpf_map_max_entries{map="cpu_task_start",type="LRUHash"} 8192
+kno_agent_bpf_map_memlock_bytes{map="cpu_task_start",type="LRUHash"} 656640
+kno_agent_bpf_map_entries{map="cpu_runtime",type="LRUHash"} 7578
+kno_agent_bpf_map_max_entries{map="cpu_runtime",type="LRUHash"} 8192
+kno_agent_bpf_map_memlock_bytes{map="cpu_runtime",type="LRUHash"} 853248
+kno_agent_bpf_map_entries{map="runqlat_runnable_since",type="LRUHash"} 105
+kno_agent_bpf_map_max_entries{map="runqlat_runnable_since",type="LRUHash"} 16384
+kno_agent_bpf_map_memlock_bytes{map="runqlat_runnable_since",type="LRUHash"} 1.312e+06
+kno_agent_bpf_map_entries{map="runqlat_task_identity",type="LRUHash"} 15591
+kno_agent_bpf_map_max_entries{map="runqlat_task_identity",type="LRUHash"} 16384
+kno_agent_bpf_map_memlock_bytes{map="runqlat_task_identity",type="LRUHash"} 1.443072e+06
+kno_agent_bpf_map_entries{map="runqlat_latency_stats",type="LRUHash"} 3514
+kno_agent_bpf_map_max_entries{map="runqlat_latency_stats",type="LRUHash"} 4096
+kno_agent_bpf_map_memlock_bytes{map="runqlat_latency_stats",type="LRUHash"} 460032
+kno_agent_bpf_map_entries{map="runqlat_latency_histogram",type="LRUHash"} 15565
+kno_agent_bpf_map_max_entries{map="runqlat_latency_histogram",type="LRUHash"} 16384
+kno_agent_bpf_map_memlock_bytes{map="runqlat_latency_histogram",type="LRUHash"} 1.574144e+06
+# HELP kno_agent_metrics_collection_errors Metric sources which could not be read during this scrape.
+# TYPE kno_agent_metrics_collection_errors gauge
+kno_agent_metrics_collection_errors 0

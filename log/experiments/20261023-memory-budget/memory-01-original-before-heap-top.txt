@@ -1,0 +1,31 @@
+File: kno-agent
+Type: inuse_space
+Time: Oct 23, 2026 at 3:53pm (CST)
+Showing nodes accounting for 36434.72kB, 100% of 36434.72kB total
+Showing top 25 nodes out of 42
+      flat  flat%   sum%        cum   cum%
+13098.28kB 35.95% 35.95% 18224.73kB 50.02%  github.com/cilium/ebpf/btf.readAndInflateTypes
+11696.13kB 32.10% 68.05% 11696.13kB 32.10%  github.com/cilium/ebpf/btf.indexTypes
+ 5126.44kB 14.07% 82.12%  5126.44kB 14.07%  github.com/cilium/ebpf/btf.readAndInflateTypes.func2
+ 3437.68kB  9.44% 91.56%  5485.71kB 15.06%  github.com/cilium/ebpf/btf.readStringTable
+ 2048.04kB  5.62% 97.18%  2048.04kB  5.62%  bufio.(*Scanner).Text (inline)
+  516.01kB  1.42% 98.59%   516.01kB  1.42%  google.golang.org/protobuf/internal/strs.(*Builder).grow (inline)
+  512.14kB  1.41%   100%   512.14kB  1.41%  k8s.io/api/authorization/v1.init
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign.func1
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf.(*collectionLoader).loadProgram
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf.applyRelocations
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf.assignValues
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf.newProgramWithOptions
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf/btf.LoadKernelSpec
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf/btf.loadKernelSpec
+         0     0%   100% 35406.57kB 97.18%  github.com/cilium/ebpf/btf.loadRawSpec
+         0     0%   100% 23710.44kB 65.08%  github.com/cilium/ebpf/btf.parseBTF
+         0     0%   100% 35406.57kB 97.18%  github.com/cowhorse05/KubeNode-Observer/internal/bpfgen.LoadExecObjects
+         0     0%   100% 35406.57kB 97.18%  github.com/cowhorse05/KubeNode-Observer/internal/probe.NewExecProbe
+         0     0%   100%   516.01kB  1.42%  google.golang.org/protobuf/internal/filedesc.(*Field).unmarshalFull
+         0     0%   100%   516.01kB  1.42%  google.golang.org/protobuf/internal/filedesc.(*File).lazyInit (inline)
+         0     0%   100%   516.01kB  1.42%  google.golang.org/protobuf/internal/filedesc.(*File).lazyInitOnce
+         0     0%   100%   516.01kB  1.42%  google.golang.org/protobuf/internal/filedesc.(*File).lazyRawInit
+         0     0%   100%   516.01kB  1.42%  google.golang.org/protobuf/internal/filedesc.(*File).unmarshalFull
+         0     0%   100%   516.01kB  1.42%  google.golang.org/protobuf/internal/filedesc.(*Message).Fields

@@ -12,7 +12,6 @@ import (
 	"time"
 
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
-	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/telemetry"
 )
 
@@ -21,13 +20,13 @@ type HealthSource interface {
 }
 
 type Handler struct {
-	Timing   *telemetry.Recorder // Set before serving; sources are exec, CPU, runqlat.
+	Timing   *telemetry.Recorder // Set before serving.
 	health   HealthSource
-	maps     []probe.MapStatsSource
+	maps     *MapCache
 	procRoot string
 }
 
-func NewHandler(health HealthSource, maps []probe.MapStatsSource, procRoot string) *Handler {
+func NewHandler(health HealthSource, maps *MapCache, procRoot string) *Handler {
 	return &Handler{health: health, maps: maps, procRoot: procRoot}
 }
 
@@ -58,28 +57,59 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	runtime.ReadMemStats(&memory)
 	writeMetric(writer, "kno_agent_go_heap_alloc_bytes", "Currently allocated Go heap bytes.", "gauge", float64(memory.HeapAlloc))
 
-	writeMetricHeader(writer, "kno_agent_bpf_map_entries", "Current logical entries in an eBPF map; ring buffers report zero.", "gauge")
+	writeMetricHeader(writer, "kno_agent_bpf_map_entries", "Cached non-atomic map key census; ring buffers report zero. Omitted when stale or not ready.", "gauge")
 	writeMetricHeader(writer, "kno_agent_bpf_map_max_entries", "Configured eBPF map entry capacity; ring buffers use bytes.", "gauge")
 	writeMetricHeader(writer, "kno_agent_bpf_map_memlock_bytes", "Kernel-reported locked memory for an eBPF map.", "gauge")
 
-	for index, source := range h.maps {
-		started := time.Now()
-		maps, err := source.MapStats()
-		if index < 3 {
-			h.Timing.Observe(telemetry.MetricsExec+telemetry.Operation(index), started)
+	if h.maps != nil {
+		writeMetric(writer, "kno_agent_bpf_map_stats_refresh_interval_seconds", "Delay between background map refresh cycles.", "gauge", h.maps.interval.Seconds())
+		writeMetric(writer, "kno_agent_bpf_map_stats_max_age_seconds", "Cached map stats are omitted beyond this age.", "gauge", h.maps.ttl.Seconds())
+		for _, metric := range []struct{ name, help, kind string }{
+			{"ready", "One if a successful non-stale map sample is available.", "gauge"},
+			{"age_seconds", "Age since the start of the last successful map refresh; absent before first success.", "gauge"},
+			{"last_success_timestamp_seconds", "Start timestamp of last successful map refresh, zero before first success.", "gauge"},
+			{"refresh_duration_seconds", "Wall time of the last map refresh attempt.", "gauge"},
+			{"refresh_error", "One if the last map refresh attempt failed.", "gauge"},
+			{"refresh_errors_total", "Failed background map refresh attempts.", "counter"},
+		} {
+			writeMetricHeader(writer, "kno_agent_bpf_map_stats_"+metric.name, metric.help, metric.kind)
 		}
-		if err != nil {
-			collectionErrors++
-			continue
-		}
-		for _, current := range maps {
-			labels := fmt.Sprintf("map=\"%s\",type=\"%s\"", escapeLabel(current.Name), escapeLabel(current.Type))
-			writeLabeledMetric(writer, "kno_agent_bpf_map_entries", labels, float64(current.Entries))
-			writeLabeledMetric(writer, "kno_agent_bpf_map_max_entries", labels, float64(current.MaxEntries))
-			writeLabeledMetric(writer, "kno_agent_bpf_map_memlock_bytes", labels, float64(current.Memlock))
+		now := time.Now()
+		for index, sample := range h.maps.snapshot.Load().sources {
+			labels := fmt.Sprintf("source=\"%s\"", sourceName(index))
+			ready := !sample.success.IsZero() && now.Sub(sample.success) <= h.maps.ttl
+			writeLabeledMetric(writer, "kno_agent_bpf_map_stats_ready", labels, boolFloat(ready))
+			writeLabeledMetric(writer, "kno_agent_bpf_map_stats_refresh_error", labels, boolFloat(sample.failed))
+			writeLabeledMetric(writer, "kno_agent_bpf_map_stats_refresh_errors_total", labels, float64(sample.errors))
+			writeLabeledMetric(writer, "kno_agent_bpf_map_stats_refresh_duration_seconds", labels, sample.duration.Seconds())
+			lastSuccess := float64(0)
+			if !sample.success.IsZero() {
+				lastSuccess = float64(sample.success.UnixNano()) / 1e9
+				writeLabeledMetric(writer, "kno_agent_bpf_map_stats_age_seconds", labels, now.Sub(sample.success).Seconds())
+			}
+			writeLabeledMetric(writer, "kno_agent_bpf_map_stats_last_success_timestamp_seconds", labels, lastSuccess)
+			if !ready || sample.failed {
+				collectionErrors++
+			}
+			if !ready {
+				continue
+			}
+			for _, current := range sample.stats {
+				labels := fmt.Sprintf("map=\"%s\",type=\"%s\"", escapeLabel(current.Name), escapeLabel(current.Type))
+				writeLabeledMetric(writer, "kno_agent_bpf_map_entries", labels, float64(current.Entries))
+				writeLabeledMetric(writer, "kno_agent_bpf_map_max_entries", labels, float64(current.MaxEntries))
+				writeLabeledMetric(writer, "kno_agent_bpf_map_memlock_bytes", labels, float64(current.Memlock))
+			}
 		}
 	}
-	writeMetric(writer, "kno_agent_metrics_collection_errors", "Metric sources which could not be read during this scrape.", "gauge", float64(collectionErrors))
+	writeMetric(writer, "kno_agent_metrics_collection_errors", "Process read errors plus map sources not ready, stale, or failing their last refresh.", "gauge", float64(collectionErrors))
+}
+
+func boolFloat(value bool) float64 {
+	if value {
+		return 1
+	}
+	return 0
 }
 
 func readUintFile(path string) (uint64, error) {

@@ -1,0 +1,134 @@
+{
+  "status": "failed",
+  "config": {
+    "mode": "memory",
+    "context": "kno-dev",
+    "output": "log/experiments/20261023-memory-interrupt",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "costAgentImage": "kubenode-observer/kno-agent:cost",
+    "baselineAgentImage": "kubenode-observer/kno-agent:cost",
+    "candidateAgentImage": "kubenode-observer/kno-agent:metrics-cache",
+    "pairs": 4,
+    "accuracyRepeats": 2,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 60000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000,
+    "memoryAgentImage": "kubenode-observer/kno-agent:memory-flush",
+    "memoryGoLimits": "original",
+    "memoryPulses": 5,
+    "memoryIdleNs": 60000000000,
+    "memoryIntervalNs": 5000000000
+  },
+  "memoryCases": [
+    {
+      "setting": "original",
+      "prefix": "memory-01-original",
+      "samples": [
+        {
+          "at": "2026-10-23T08:19:27.160536949Z",
+          "phase": "before",
+          "rawFile": "memory-01-original-001-before.json",
+          "rssBytes": 114917376,
+          "heapAllocBytes": 3705784,
+          "goManagedBytes": 88752408,
+          "goMemoryLimitBytes": 9223372036854775807,
+          "cgroupCurrentBytes": 89788416,
+          "cgroupPeakBytes": 90198016,
+          "anonBytes": 80457728,
+          "fileBytes": 0,
+          "kernelBytes": 8572928,
+          "numGc": 6,
+          "memoryEvents": {
+            "high": 0,
+            "low": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_group_kill": 0,
+            "oom_kill": 0
+          },
+          "metrics": {
+            "at": "2026-10-23T08:19:27.166257203Z",
+            "clientSeconds": 0.009591019,
+            "collectionErrors": 0,
+            "cacheSources": 3,
+            "readySources": 3,
+            "maxAgeSeconds": 10.968206718,
+            "refreshErrors": 0,
+            "eventsLost": 0
+          }
+        },
+        {
+          "at": "2026-10-23T08:19:32.191544852Z",
+          "phase": "churn",
+          "rawFile": "memory-01-original-002-churn.json",
+          "rssBytes": 52006912,
+          "heapAllocBytes": 4248576,
+          "goManagedBytes": 21397784,
+          "goMemoryLimitBytes": 9223372036854775807,
+          "cgroupCurrentBytes": 26333184,
+          "cgroupPeakBytes": 91758592,
+          "anonBytes": 16490496,
+          "fileBytes": 0,
+          "kernelBytes": 9322496,
+          "numGc": 10,
+          "memoryEvents": {
+            "high": 0,
+            "low": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_group_kill": 0,
+            "oom_kill": 0
+          },
+          "metrics": {
+            "at": "2026-10-23T08:19:32.197568247Z",
+            "clientSeconds": 0.010564822,
+            "collectionErrors": 0,
+            "cacheSources": 3,
+            "readySources": 3,
+            "maxAgeSeconds": 0.997496349,
+            "refreshErrors": 0,
+            "eventsLost": 0
+          }
+        },
+        {
+          "at": "2026-10-23T08:19:37.190129951Z",
+          "phase": "churn",
+          "rawFile": "memory-01-original-003-churn.json",
+          "rssBytes": 52703232,
+          "heapAllocBytes": 5345512,
+          "goManagedBytes": 21979416,
+          "goMemoryLimitBytes": 9223372036854775807,
+          "cgroupCurrentBytes": 27070464,
+          "cgroupPeakBytes": 91758592,
+          "anonBytes": 17186816,
+          "fileBytes": 0,
+          "kernelBytes": 9367552,
+          "numGc": 14,
+          "memoryEvents": {
+            "high": 0,
+            "low": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_group_kill": 0,
+            "oom_kill": 0
+          },
+          "metrics": {
+            "at": "2026-10-23T08:19:37.195839246Z",
+            "clientSeconds": 0.010886545,
+            "collectionErrors": 0,
+            "cacheSources": 3,
+            "readySources": 3,
+            "maxAgeSeconds": 5.995798301,
+            "refreshErrors": 0,
+            "eventsLost": 0
+          }
+        }
+      ],
+      "pulses": null,
+      "cpuSeconds": 0,
+      "wallSeconds": 0
+    }
+  ],
+  "error": "context canceled"
+}

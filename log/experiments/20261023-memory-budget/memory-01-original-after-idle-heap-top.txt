@@ -1,0 +1,31 @@
+File: kno-agent
+Type: inuse_space
+Time: Oct 23, 2026 at 3:59pm (CST)
+Showing nodes accounting for 40279.06kB, 100% of 40279.06kB total
+Showing top 25 nodes out of 55
+      flat  flat%   sum%        cum   cum%
+13232.15kB 32.85% 32.85% 13232.15kB 32.85%  github.com/cilium/ebpf/btf.indexTypes
+13098.28kB 32.52% 65.37% 18224.73kB 45.25%  github.com/cilium/ebpf/btf.readAndInflateTypes
+ 5126.44kB 12.73% 78.10%  5126.44kB 12.73%  github.com/cilium/ebpf/btf.readAndInflateTypes.func2
+ 3437.68kB  8.53% 86.63%  5485.71kB 13.62%  github.com/cilium/ebpf/btf.readStringTable
+ 2048.04kB  5.08% 91.72%  2048.04kB  5.08%  bufio.(*Scanner).Text (inline)
+    1028kB  2.55% 94.27%     1028kB  2.55%  bufio.(*Scanner).Scan
+  768.26kB  1.91% 96.18%   768.26kB  1.91%  github.com/cowhorse05/KubeNode-Observer/internal/event.NewStore
+  516.01kB  1.28% 97.46%   516.01kB  1.28%  google.golang.org/protobuf/internal/strs.(*Builder).grow
+  512.14kB  1.27% 98.73%   512.14kB  1.27%  k8s.io/api/authorization/v1.init
+  512.05kB  1.27%   100%   512.05kB  1.27%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).enrich
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf.(*CollectionSpec).LoadAndAssign.func1
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf.(*collectionLoader).loadProgram
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf.applyRelocations
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf.assignValues
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf.newProgramWithOptions
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf/btf.LoadKernelSpec
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf/btf.loadKernelSpec
+         0     0%   100% 36942.60kB 91.72%  github.com/cilium/ebpf/btf.loadRawSpec
+         0     0%   100% 23710.44kB 58.87%  github.com/cilium/ebpf/btf.parseBTF
+         0     0%   100% 36942.60kB 91.72%  github.com/cowhorse05/KubeNode-Observer/internal/bpfgen.LoadExecObjects
+         0     0%   100%   512.05kB  1.27%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).Add
+         0     0%   100%   512.05kB  1.27%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*ExecProbe).Run
+         0     0%   100% 36942.60kB 91.72%  github.com/cowhorse05/KubeNode-Observer/internal/probe.NewExecProbe
+         0     0%   100%     1028kB  2.55%  github.com/cowhorse05/KubeNode-Observer/internal/topology.(*Collector).Snapshot

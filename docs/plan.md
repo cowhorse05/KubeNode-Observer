@@ -375,10 +375,14 @@ M6 已完成，当前停在性能优化入口，不提前进入 Kata 或 Web UI�
 
 2026-10-20 已实现可重复的 AB/BA 配对实验和 CPU runtime/cgroup 精度对照，完成 8 个独立配对及 12 个精度窗口，并通过 PR #1 合入 main。方法见 [实验指南](experiments.md)，数据与限制见 [实验记录](../log/2026-10-20-paired-accuracy.md)。
 
-采集成本诊断已完成 8 个 case：区分生产/额外精度扫描、拓扑与 metrics 成本，保存 profile 和 Agent cgroup 限流；200m 下复现 churn 长扫描，1 CPU 对照明显缩短读耗时。详见 [成本分解报告](../log/2026-10-20-collection-cost.md)。尚未修改采集算法；优先优化 metrics 的全量 map 统计，再复测精度与业务影响。
+采集成本诊断已完成 8 个 case，并通过 PR #2 合入 main：区分生产/额外精度扫描、拓扑与 metrics 成本，保存 profile 和 Agent cgroup 限流；200m 下复现 churn 长扫描，1 CPU 对照明显缩短读耗时。详见 [成本分解报告](../log/2026-10-20-collection-cost.md)。
 
-1. 将 CPU runtime map、runqlat map、拓扑刷新与 metrics scrape 的成本分项测量；
-2. 继续验证 CPU map 缩容后 128 MiB limit 下的长时内存平台，并拆分 Go heap 与内核 map charge；
+Metrics 优化已完成 key-only 有界 census 与后台快照：4 个双版本配对在每秒抓取的压力场景下，Agent cgroup CPU rate 变化中位数 −44.69%、抓取 P95 −97.07%。普通 off/on 仍受噪声影响；新旧各 12 个精度窗口不构成等价性证明。完整 integration 和 40000 次 churn 已完成，详见 [优化与回归报告](../log/2026-10-20-metrics-cache.md)。
+
+2026-10-23 已完成内存预算诊断与三组有限观测：相同 128 MiB / 200m 下，原配置、80MiB soft limit、释放加载后 BTF 缓存三组的末点 cgroup current 分别为 105.93、80.06、26.22 MiB。BTF 释放不改变默认 GOMEMLIMIT 或 BPF map；启动峰值仍有 81.74 MiB，且小堆 GC 更频繁，不宣称长期 OOM 保证或 CPU 收益。详见 [内存预算与根因报告](../log/2026-10-23-memory-budget.md)。
+
+1. 已有成本分项与 metrics 优化结果，继续用相同质量门限约束后续优化；
+2. 延长无诊断模式的 128 MiB 内存观察，覆盖 Pod/元数据 churn，核对启动峰值与 GC/CPU 代价；
 3. 使用已实现的 AB/BA 执行器，在更受控的 CPU 环境和更长窗口下复测吞吐/P99；
 4. 每项优化必须同时通过 integration，并对比 events lost、map occupancy 与归属正确性；
 5. 性能结论稳定后再开始 M7 Kata Host 侧识别。

@@ -1,4 +1,6 @@
-# Keep raw experiment bytes unchanged on Windows checkouts.
-log/experiments/** -text
+# Keep shell scripts runnable through WSL on Windows checkouts.
+*.sh text eol=lf
+# Preserve raw experiment bytes and collapse generated captures in PR diffs.
+log/experiments/** -text linguist-generated=true
 # Context lines in a recorded patch can end with a space; preserve the patch.
 log/experiments/**/source.patch -whitespace

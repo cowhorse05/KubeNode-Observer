@@ -1,0 +1,31 @@
+File: kno-agent
+Type: inuse_space
+Time: Oct 23, 2026 at 4:14pm (CST)
+Showing nodes accounting for 6013.34kB, 100% of 6013.34kB total
+Showing top 25 nodes out of 26
+      flat  flat%   sum%        cum   cum%
+ 1367.99kB 22.75% 22.75%  1367.99kB 22.75%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*CPUProbe).Snapshot
+ 1024.11kB 17.03% 39.78%  1024.11kB 17.03%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).enrich
+  548.84kB  9.13% 48.91%   548.84kB  9.13%  k8s.io/apimachinery/pkg/runtime.(*Scheme).AddKnownTypeWithName
+  512.14kB  8.52% 57.42%   512.14kB  8.52%  k8s.io/api/admissionregistration/v1beta1.init
+  512.10kB  8.52% 65.94%   512.10kB  8.52%  unicode.init
+  512.09kB  8.52% 74.46%   512.09kB  8.52%  google.golang.org/protobuf/types/descriptorpb.init
+  512.05kB  8.52% 82.97%   512.05kB  8.52%  github.com/cowhorse05/KubeNode-Observer/internal/metrics.(*MapCache).Run
+  512.02kB  8.51% 91.49%   512.02kB  8.51%  fmt.Errorf
+  512.01kB  8.51%   100%   512.01kB  8.51%  github.com/cowhorse05/KubeNode-Observer/internal/probe.ExecEvent.Command
+         0     0%   100%  1367.99kB 22.75%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Collect
+         0     0%   100%  1367.99kB 22.75%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.(*Collector).Run
+         0     0%   100%  1367.99kB 22.75%  github.com/cowhorse05/KubeNode-Observer/internal/cpu.TimedSource.Snapshot
+         0     0%   100%  1536.12kB 25.55%  github.com/cowhorse05/KubeNode-Observer/internal/event.(*Store).Add
+         0     0%   100%  1536.12kB 25.55%  github.com/cowhorse05/KubeNode-Observer/internal/probe.(*ExecProbe).Run
+         0     0%   100%   512.02kB  8.51%  k8s.io/api/extensions/v1beta1.init
+         0     0%   100%   548.84kB  9.13%  k8s.io/api/flowcontrol/v1beta2.addKnownTypes
+         0     0%   100%   548.84kB  9.13%  k8s.io/apimachinery/pkg/apis/meta/v1.AddToGroupVersion
+         0     0%   100%   548.84kB  9.13%  k8s.io/apimachinery/pkg/runtime.(*Scheme).AddKnownTypes
+         0     0%   100%   548.84kB  9.13%  k8s.io/apimachinery/pkg/runtime.(*SchemeBuilder).AddToScheme
+         0     0%   100%   548.84kB  9.13%  k8s.io/client-go/kubernetes/scheme.init.0
+         0     0%   100%   512.05kB  8.52%  main.main.func3
+         0     0%   100%  1536.12kB 25.55%  main.main.func7
+         0     0%   100%  1536.12kB 25.55%  main.main.func7.1
+         0     0%   100%  2597.19kB 43.19%  runtime.doInit
+         0     0%   100%  2597.19kB 43.19%  runtime.doInit1
