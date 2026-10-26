@@ -1,0 +1,38 @@
+.gitattributes
+  s_6e6fc63242599e::t_28effdb83e891a 7-9
+hack/cpu-hotspot-test.sh
+  s_6e6fc63242599e::t_9c0275e48fe97b 48-50
+docs/experiments.md
+  s_6e6fc63242599e::t_476fecfb4b6414 3-4,161-171
+hack/stability-test.sh
+  s_6e6fc63242599e::t_476fecfb4b6414 77,87
+docs/support-matrix.md
+  s_6e6fc63242599e::t_28effdb83e891a 41,43-46
+  s_6e6fc63242599e::t_476fecfb4b6414 20,33-35,39
+hack/soak-test.sh
+  s_6e6fc63242599e::t_4d809634afdeff 22
+  s_6e6fc63242599e::t_51c5f6fa71e410 1-18,23-34,36-46,48-103,105-114,122
+  s_6e6fc63242599e::t_9133aacf0bfbef 35,47
+  s_6e6fc63242599e::t_cfbed979bf8b05 104,115-121
+  s_6e6fc63242599e::t_28effdb83e891a 19-21
+docs/architecture.md
+  s_6e6fc63242599e::t_476fecfb4b6414 62,65-68,71-72,78-82
+internal/probe/cpu_linux_test.go
+  s_6e6fc63242599e::t_e2c46bdbbdf52a 54-56,58-59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "9819e122f2831e494a9b835f084f0600a2ad0a3f",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
