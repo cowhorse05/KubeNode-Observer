@@ -1,0 +1,14 @@
+node/kno-dev condition met
+Linux kno-dev 6.6.114.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Mon Dec  1 20:46:23 UTC 2025 x86_64 GNU/Linux
+crw-rw---- 1 root kvm 10, 232 Oct 27 02:20 /dev/kvm
+crw-rw---- 1 root kvm 10, 238 Oct 27 02:20 /dev/vhost-net
+crw-rw---- 1 root kvm 10, 241 Oct 27 02:20 /dev/vhost-vsock
+{"apiVersion": 12, "createVM": true}
+cgroup2fs
+containerd containerd.io v2.2.1 dea7da592f5d1d2b7755e3a161be07f43fad8f75
+{
+  "defaultRuntime": "runc",
+  "runtimes": [
+    "runc"
+  ]
+}

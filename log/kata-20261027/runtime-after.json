@@ -1,0 +1,7 @@
+{
+  "defaultRuntime": "runc",
+  "runtimes": [
+    "kata-qemu",
+    "runc"
+  ]
+}

@@ -58,6 +58,14 @@ make kata-test
 手动演示时，先部署当前源码构建的 Agent，并显式设置上述参数，然后：
 
 ```bash
+make image-local IMAGE=kubenode-observer/kno-agent:kata-host
+minikube -p kno-dev image load --overwrite=true kubenode-observer/kno-agent:kata-host
+kubectl --context kno-dev -n kube-system set image ds/kno-agent agent=kubenode-observer/kno-agent:kata-host
+# 在原始部署参数列表追加一次；已设置该参数时无需重复追加。
+kubectl --context kno-dev -n kube-system patch ds kno-agent --type=json \
+  -p='[{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--kata-monitor=http://127.0.0.1:8090"}]'
+kubectl --context kno-dev -n kube-system rollout status ds/kno-agent
+
 kubectl --context kno-dev create namespace kno-kata-test
 kubectl --context kno-dev apply -f examples/kata-boundary/pods.yaml
 kubectl --context kno-dev -n kube-system port-forward service/kno-agent 18080:18080

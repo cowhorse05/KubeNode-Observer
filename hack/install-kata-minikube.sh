@@ -28,9 +28,12 @@ kubectl --context "${KUBE_CONTEXT}" -n kube-system create cm kno-experiment-lock
 trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
-node test ! -e /opt/kata
-node test ! -e /etc/containerd/config.toml.kno-before-kata
-node test ! -e /etc/containerd/kno-kata.toml
+for managed_path in /opt/kata /etc/containerd/config.toml.kno-before-kata /etc/containerd/kno-kata.toml; do
+  if node test -e "${managed_path}"; then
+    echo "refusing to overwrite existing ${managed_path}; inspect the prior installation/backup" >&2
+    exit 1
+  fi
+done
 if kubectl --context "${KUBE_CONTEXT}" get runtimeclass kno-kata-qemu >/dev/null 2>&1; then echo "RuntimeClass already exists" >&2; exit 1; fi
 node grep -qx 'version = 2' /etc/containerd/config.toml
 node grep -qx '# imports' /etc/containerd/config.toml
