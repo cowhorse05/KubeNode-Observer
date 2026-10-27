@@ -21,3 +21,23 @@ func TestRuntimePID(t *testing.T) {
 		})
 	}
 }
+
+func TestRuntimeTypeAndKataClassification(t *testing.T) {
+	if got := runtimeType(map[string]string{"info": `{"pid":42,"runtimeType":"io.containerd.kata.v2"}`}); got != "io.containerd.kata.v2" {
+		t.Fatal(got)
+	}
+	for _, tc := range []struct {
+		runtime, handler string
+		kata             bool
+	}{
+		{"io.containerd.kata.v2", "custom-handler", true},
+		{"io.containerd.kata-qemu.v2", "custom-handler", true},
+		{"", "kata-qemu", true},
+		{"io.containerd.runc.v2", "kata-misleading-name", false},
+		{"", "", false},
+	} {
+		if isKata(tc.runtime, tc.handler) != tc.kata {
+			t.Fatal(tc)
+		}
+	}
+}

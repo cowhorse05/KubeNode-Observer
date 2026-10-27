@@ -106,6 +106,9 @@ func (s *Store) updateTombstones(next *Snapshot) {
 }
 
 func (s *Store) Resolve(cgroupID uint64) (Container, string, bool) {
+	if cgroupID == 0 {
+		return Container{}, "unresolved", false
+	}
 	if current := s.snapshot.Load(); current != nil {
 		for _, container := range current.Containers {
 			if container.CgroupID == cgroupID {
@@ -156,7 +159,7 @@ func (s *Store) filteredSnapshot(request *http.Request) *Snapshot {
 		return &copy
 	}
 
-	filtered := &Snapshot{GeneratedAt: current.GeneratedAt, NodeName: current.NodeName, NodeUID: current.NodeUID, Containers: []Container{}}
+	filtered := &Snapshot{GeneratedAt: current.GeneratedAt, NodeName: current.NodeName, NodeUID: current.NodeUID, Containers: []Container{}, Sandboxes: []Sandbox{}}
 	for _, container := range current.Containers {
 		if namespace != "" && container.Namespace != namespace {
 			continue
@@ -166,5 +169,25 @@ func (s *Store) filteredSnapshot(request *http.Request) *Snapshot {
 		}
 		filtered.Containers = append(filtered.Containers, container)
 	}
+	for _, sandbox := range current.Sandboxes {
+		if namespace != "" && sandbox.Namespace != namespace {
+			continue
+		}
+		if pod != "" && sandbox.PodName != pod {
+			continue
+		}
+		filtered.Sandboxes = append(filtered.Sandboxes, sandbox)
+	}
 	return filtered
+}
+
+func (s *Store) HasSandbox(id string) bool {
+	if snapshot := s.snapshot.Load(); snapshot != nil {
+		for _, sandbox := range snapshot.Sandboxes {
+			if sandbox.ID == id {
+				return true
+			}
+		}
+	}
+	return false
 }

@@ -31,6 +31,7 @@ func main() {
 	listenAddress := flag.String("listen", ":18080", "health API listen address")
 	debugAddress := flag.String("debug-listen", "", "opt-in loopback-only diagnostics and pprof address (e.g. 127.0.0.1:18090)")
 	runtimeEndpoint := flag.String("runtime-endpoint", "unix:///run/containerd/containerd.sock", "CRI runtime endpoint")
+	kataMonitorEndpoint := flag.String("kata-monitor", "", "optional local Kata Monitor http://127.0.0.1:8090 endpoint")
 	hostProc := flag.String("host-proc", "/host/proc", "host procfs mount")
 	cgroupRoot := flag.String("cgroup-root", "/host/sys/fs/cgroup", "host cgroup v2 mount")
 	topologyInterval := flag.Duration("topology-interval", 10*time.Second, "topology refresh interval")
@@ -105,6 +106,11 @@ func main() {
 	topologyCollector := topology.NewCollector(*nodeName, criClient, topology.NewProcFS(*hostProc, *cgroupRoot), resolver)
 	topologyCollector.Timing = timing
 	topologyStore := topology.NewStore(topologyCollector)
+	kataMonitor, err := topology.NewKataMonitor(*kataMonitorEndpoint, topologyStore)
+	if err != nil {
+		logger.Error("invalid Kata Monitor endpoint", "error", err)
+		os.Exit(2)
+	}
 	topologyStore.Timing = timing
 	go topologyStore.Run(ctx, *topologyInterval)
 	events := eventstore.NewStore(4096, topologyStore)
@@ -140,6 +146,7 @@ func main() {
 	metricsHandler.Timing = timing
 	handler.Handle("/metrics", metricsHandler)
 	handler.Handle("/api/v1/topology", topologyStore)
+	handler.Handle("/api/v1/kata/metrics", kataMonitor)
 	handler.Handle("/api/v1/events", events)
 	handler.Handle("/api/v1/cpu", cpuCollector)
 	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpu.TimedSource{Source: cpuProbe, Recorder: timing, Operation: telemetry.AccuracyScan}, topologyStore, *cgroupRoot))

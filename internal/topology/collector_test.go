@@ -9,11 +9,12 @@ import (
 
 type fakeRuntime struct {
 	containers []RuntimeContainer
+	sandboxes  []Sandbox
 	err        error
 }
 
-func (f fakeRuntime) Containers(context.Context) ([]RuntimeContainer, error) {
-	return f.containers, f.err
+func (f fakeRuntime) Snapshot(context.Context) (RuntimeSnapshot, error) {
+	return RuntimeSnapshot{Containers: f.containers, Sandboxes: f.sandboxes}, f.err
 }
 
 type fakeResolver struct{}
