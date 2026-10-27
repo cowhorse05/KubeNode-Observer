@@ -1,0 +1,4 @@
+FROM scratch
+COPY bin/kno-exec-test /workload
+COPY bin/kno-exec-test /kno-boundary
+ENTRYPOINT ["/workload"]

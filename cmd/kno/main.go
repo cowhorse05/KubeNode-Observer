@@ -104,7 +104,7 @@ func main() {
 	var sandboxID string
 	kata := &cobra.Command{Use: "kata", Short: "Inspect Kata through the node's official Kata Monitor"}
 	kataMetrics := &cobra.Command{
-		Use: "metrics", Short: "Read Kata Monitor metrics for a local sandbox (not Guest Probe data)",
+		Use: "metrics", Short: "Read official Kata Monitor metrics for a local sandbox",
 		RunE: func(_ *cobra.Command, _ []string) error {
 			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 			defer cancel()

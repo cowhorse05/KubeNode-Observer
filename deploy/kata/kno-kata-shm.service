@@ -1,0 +1,12 @@
+[Unit]
+Description=KubeNode-Observer development Kata shared-memory capacity
+After=local-fs.target
+Before=containerd.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/mount -o remount,size=1G /dev/shm
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

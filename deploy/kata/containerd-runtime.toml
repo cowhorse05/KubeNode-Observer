@@ -1,0 +1,9 @@
+# Imported by the existing version=2 Minikube containerd configuration.
+# Do not change default_runtime_name: ordinary Pods must stay on runc.
+version = 2
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata-qemu]
+  runtime_type = "io.containerd.kata.v2"
+  runtime_path = "/opt/kata/bin/containerd-shim-kata-v2"
+  privileged_without_host_devices = true
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.kata-qemu.options]
+    ConfigPath = "/opt/kata/share/defaults/kata-containers/configuration-kno-qemu.toml"
