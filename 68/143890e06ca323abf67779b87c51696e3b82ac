@@ -1,0 +1,66 @@
+docs/plan.md
+  s_6e6fc63242599e::t_455762fa4ee9f6 318-319,386
+  s_6e6fc63242599e::t_9b4807c3b06426 387
+  s_6e6fc63242599e::t_43e2ca83e543d1 374,376,388-392
+log/soak-pilot-v2-20261026/exit.json
+  s_6e6fc63242599e::t_f43d6d224a77f1 1-3
+log/soak-pilot-v2-20261026/original-manifest.json
+  s_6e6fc63242599e::t_b1369e2bd63e0a 1-189
+README.md
+  s_6e6fc63242599e::t_455762fa4ee9f6 8-9
+  s_6e6fc63242599e::t_04c94ad16f9b73 113-114
+log/soak-pilot-20261026/001-pod.json
+  s_6e6fc63242599e::t_82196f2656cc4e 1-223
+log/2026-10-26-soak-pilot-console.txt
+  s_6e6fc63242599e::t_82196f2656cc4e 7-8
+internal/probe/cpu_linux_test.go
+  s_6e6fc63242599e::t_800449d0d94163 109-116,118-120,122-123,129
+docs/support-matrix.md
+  s_6e6fc63242599e::t_22dccb54cc3b6c 32
+  s_6e6fc63242599e::t_43e2ca83e543d1 45
+docs/architecture.md
+  s_6e6fc63242599e::t_23a7cf240bace8 56-57
+.gitattributes
+  s_6e6fc63242599e::t_572cb4e0859b33 10
+  s_6e6fc63242599e::t_41d02395f11c30 11
+log/2026-10-26-soak-pilot-v2-console.txt
+  s_6e6fc63242599e::t_f43d6d224a77f1 14-15
+  s_6e6fc63242599e::t_ab82e682210fdf 11-13
+  s_6e6fc63242599e::t_b1369e2bd63e0a 2-4
+log/2026-10-26-cpu-baseline-console.txt
+  s_6e6fc63242599e::t_83b611e8e2bc20 4
+log/2026-10-26-cpu-accounting.md
+  s_6e6fc63242599e::t_0bc5b82de383a8 14,51,53-54,68
+  s_6e6fc63242599e::t_5ee35b46ae891f 1-13,15-44,46,66-67,69
+  s_6e6fc63242599e::t_572cb4e0859b33 55-65
+  s_6e6fc63242599e::t_455762fa4ee9f6 70-74
+  s_6e6fc63242599e::t_23a7cf240bace8 45,47-50,52
+log/soak-pilot-20261026/forward.txt
+  s_6e6fc63242599e::t_82196f2656cc4e 5
+log/2026-10-26-cpu-v2-checks.txt
+  s_6e6fc63242599e::t_d8f0930633d141 1-40
+log/2026-10-26-soak-console.txt
+  s_6e6fc63242599e::t_adcefb196d137d 63
+  s_6e6fc63242599e::t_5bb49ea3718f2b 15
+  s_6e6fc63242599e::t_2f1bc64551ac76 34
+  s_6e6fc63242599e::t_185ee5e64b992f 71-73
+  s_6e6fc63242599e::t_44e908b2092140 12
+log/soak-pilot-v2-20261026/restored-agent.json
+  s_6e6fc63242599e::t_f43d6d224a77f1 1-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "68143890e06ca323abf67779b87c51696e3b82ac",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
