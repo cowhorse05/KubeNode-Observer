@@ -14,7 +14,7 @@ type TimedSource struct {
 	Operation telemetry.Operation
 }
 
-func (s TimedSource) Snapshot() ([]probe.CPURuntime, error) {
+func (s TimedSource) Snapshot() (probe.CPUSnapshot, error) {
 	defer s.Recorder.Observe(s.Operation, time.Now())
 	return s.Source.Snapshot()
 }

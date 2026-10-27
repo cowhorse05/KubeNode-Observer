@@ -1,0 +1,1 @@
+{"mode":"churn","warmupSeconds":0,"latencyOverflow":1368,"durationSeconds":17.02782088,"workers":8,"workIterations":64,"operations":7191,"throughputOpsPerSecond":422.30888207463926,"p50Us":2267,"p95Us":10000,"p99Us":10000}

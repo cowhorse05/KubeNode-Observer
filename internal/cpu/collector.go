@@ -17,7 +17,7 @@ import (
 )
 
 type RuntimeSource interface {
-	Snapshot() ([]probe.CPURuntime, error)
+	Snapshot() (probe.CPUSnapshot, error)
 }
 
 type Resolver interface {
@@ -44,6 +44,7 @@ type Snapshot struct {
 	SampledAt       time.Time      `json:"sampledAt"`
 	WindowSeconds   float64        `json:"windowSeconds"`
 	Processes       []ProcessUsage `json:"processes"`
+	Containers      []ProcessUsage `json:"-"`
 	UnresolvedTasks int            `json:"unresolvedTasks"`
 }
 
@@ -63,16 +64,17 @@ type Collector struct {
 	source   RuntimeSource
 	resolver Resolver
 
-	collectMu sync.Mutex
-	previous  map[runtimeKey]uint64
-	lastAt    time.Time
-	snapshot  atomic.Pointer[Snapshot]
-	errorMu   sync.RWMutex
-	lastError string
+	collectMu      sync.Mutex
+	previous       map[runtimeKey]uint64
+	previousTotals map[uint64]uint64
+	lastAt         time.Time
+	snapshot       atomic.Pointer[Snapshot]
+	errorMu        sync.RWMutex
+	lastError      string
 }
 
 func NewCollector(source RuntimeSource, resolver Resolver) *Collector {
-	return &Collector{source: source, resolver: resolver, previous: make(map[runtimeKey]uint64)}
+	return &Collector{source: source, resolver: resolver, previous: make(map[runtimeKey]uint64), previousTotals: make(map[uint64]uint64)}
 }
 
 func (c *Collector) Run(ctx context.Context, interval time.Duration) {
@@ -93,12 +95,20 @@ func (c *Collector) Collect(now time.Time) error {
 	c.collectMu.Lock()
 	defer c.collectMu.Unlock()
 
-	runtimes, err := c.source.Snapshot()
+	batch, err := c.source.Snapshot()
 	if err != nil {
 		c.setError(err)
 		return err
 	}
 	defer c.Timing.Observe(telemetry.CPUAggregate, time.Now())
+	runtimes := batch.Processes
+	if !batch.CapturedAt.IsZero() {
+		now = batch.CapturedAt
+	}
+	totals := make(map[uint64]uint64, len(batch.Totals))
+	for _, total := range batch.Totals {
+		totals[total.CgroupID] = total.Runtime
+	}
 
 	current := make(map[runtimeKey]uint64, len(runtimes))
 	if c.lastAt.IsZero() {
@@ -106,6 +116,7 @@ func (c *Collector) Collect(now time.Time) error {
 			current[runtimeKey{runtime.CgroupID, runtime.TGID, runtime.PID}] = runtime.Runtime
 		}
 		c.previous = current
+		c.previousTotals = totals
 		c.lastAt = now
 		c.snapshot.Store(&Snapshot{SampledAt: now, Processes: []ProcessUsage{}})
 		c.setError(nil)
@@ -170,13 +181,33 @@ func (c *Collector) Collect(now time.Time) error {
 		}
 		return result[i].CPUPercent > result[j].CPUPercent
 	})
+	var containers []ProcessUsage
+	if batch.Totals != nil {
+		containers = make([]ProcessUsage, 0, len(totals))
+		for id, total := range totals {
+			old, exists := c.previousTotals[id]
+			delta := runtimeDelta(total, old, exists)
+			if delta == 0 {
+				continue
+			}
+			container, source, ok := c.resolver.Resolve(id)
+			if !ok {
+				continue
+			}
+			containers = append(containers, ProcessUsage{Namespace: container.Namespace, PodName: container.PodName,
+				PodUID: container.PodUID, ContainerName: container.Name, ContainerID: container.ID, CgroupID: id,
+				RuntimeNS: delta, CPUPercent: float64(delta) / float64(window.Nanoseconds()) * 100, MetadataSource: source})
+		}
+	}
 
 	c.previous = current
+	c.previousTotals = totals
 	c.lastAt = now
 	c.snapshot.Store(&Snapshot{
 		SampledAt:       now,
 		WindowSeconds:   window.Seconds(),
 		Processes:       result,
+		Containers:      containers,
 		UnresolvedTasks: unresolved,
 	})
 	c.setError(nil)
@@ -224,6 +255,7 @@ type Usage struct {
 }
 
 type Response struct {
+	Accounting      string    `json:"accounting"`
 	SampledAt       time.Time `json:"sampledAt"`
 	WindowSeconds   float64   `json:"windowSeconds"`
 	Level           string    `json:"level"`
@@ -261,7 +293,13 @@ func (c *Collector) ServeHTTP(writer http.ResponseWriter, request *http.Request)
 		http.Error(writer, "CPU sample is not ready", http.StatusServiceUnavailable)
 		return
 	}
-	items := aggregate(snapshot.Processes, level, request.URL.Query().Get("namespace"), request.URL.Query().Get("pod"))
+	values := snapshot.Processes
+	accounting := "process"
+	if level != "process" && snapshot.Containers != nil {
+		values = snapshot.Containers
+		accounting = "cgroup"
+	}
+	items := aggregate(values, level, request.URL.Query().Get("namespace"), request.URL.Query().Get("pod"))
 	if len(items) > limit {
 		items = items[:limit]
 	}
@@ -269,6 +307,7 @@ func (c *Collector) ServeHTTP(writer http.ResponseWriter, request *http.Request)
 	lastError := c.lastError
 	c.errorMu.RUnlock()
 	response := Response{
+		Accounting:      accounting,
 		SampledAt:       snapshot.SampledAt,
 		WindowSeconds:   snapshot.WindowSeconds,
 		Level:           level,

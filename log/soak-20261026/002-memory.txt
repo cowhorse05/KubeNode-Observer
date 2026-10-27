@@ -1,0 +1,9 @@
+25194496
+88150016
+134217728
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0

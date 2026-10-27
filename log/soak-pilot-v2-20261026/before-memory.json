@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-26T07:16:25Z",
+  "elapsedSeconds": 1,
+  "currentBytes": 21975040,
+  "peakBytes": 84819968,
+  "maxBytes": "134217728",
+  "events": {
+    "low": 0,
+    "high": 0,
+    "max": 0,
+    "oom": 0,
+    "oom_kill": 0,
+    "oom_group_kill": 0
+  }
+}

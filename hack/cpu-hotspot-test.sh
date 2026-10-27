@@ -45,6 +45,9 @@ for _ in $(seq 1 20); do
       process_output="$(./bin/kno --endpoint "http://127.0.0.1:${LOCAL_PORT}" top processes --namespace default --pod "${TEST_POD}" --limit 1)"
       grep -q '"containerName": "workload"' <<<"${container_output}"
       grep -q '"command": "workload"' <<<"${process_output}"
+      grep -q '"accounting": "cgroup"' <<<"${output}"
+      grep -q '"accounting": "cgroup"' <<<"${container_output}"
+      grep -q '"accounting": "process"' <<<"${process_output}"
       echo "CPU hotspot test passed: kno-cpu-hog-local is hottest at ${cpu_percent}% CPU"
       echo "${output}"
       exit 0

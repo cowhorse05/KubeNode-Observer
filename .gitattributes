@@ -4,3 +4,8 @@
 log/experiments/** -text linguist-generated=true
 # Context lines in a recorded patch can end with a space; preserve the patch.
 log/experiments/**/source.patch -whitespace
+log/soak-*/** -text linguist-generated=true
+log/soak-*/source.patch -whitespace
+log/cpu-validation-*/** -text linguist-generated=true
+log/cpu-v2-validation-*/** -text linguist-generated=true
+log/*-console.txt -text -whitespace linguist-generated=true

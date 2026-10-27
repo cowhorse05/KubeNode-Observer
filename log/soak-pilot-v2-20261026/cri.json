@@ -1,0 +1,2416 @@
+{
+  "info": {
+    "config": {
+      "annotations": {
+        "io.kubernetes.container.hash": "22d2bc0c",
+        "io.kubernetes.container.ports": "[{\"name\":\"health\",\"hostPort\":18080,\"containerPort\":18080,\"protocol\":\"TCP\"}]",
+        "io.kubernetes.container.restartCount": "0",
+        "io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+        "io.kubernetes.container.terminationMessagePolicy": "File",
+        "io.kubernetes.pod.terminationGracePeriod": "30"
+      },
+      "args": [
+        "--listen=:18080",
+        "--runtime-endpoint=unix:///run/containerd/containerd.sock",
+        "--host-proc=/host/proc",
+        "--cgroup-root=/host/sys/fs/cgroup",
+        "--topology-interval=5s",
+        "--cpu-interval=1s"
+      ],
+      "envs": [
+        {
+          "key": "NODE_NAME",
+          "value": "kno-dev"
+        },
+        {
+          "key": "KNO_AGENT_SERVICE_PORT_HEALTH",
+          "value": "18080"
+        },
+        {
+          "key": "KUBE_DNS_SERVICE_PORT",
+          "value": "53"
+        },
+        {
+          "key": "KUBE_DNS_PORT",
+          "value": "udp://10.96.0.10:53"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_TCP",
+          "value": "tcp://10.96.0.10:53"
+        },
+        {
+          "key": "KUBE_DNS_PORT_9153_TCP_PORT",
+          "value": "9153"
+        },
+        {
+          "key": "KUBERNETES_SERVICE_HOST",
+          "value": "10.96.0.1"
+        },
+        {
+          "key": "KUBERNETES_SERVICE_PORT_HTTPS",
+          "value": "443"
+        },
+        {
+          "key": "KNO_AGENT_SERVICE_PORT",
+          "value": "18080"
+        },
+        {
+          "key": "KNO_AGENT_PORT_18080_TCP",
+          "value": "tcp://10.100.238.9:18080"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP_ADDR",
+          "value": "10.96.0.1"
+        },
+        {
+          "key": "KNO_AGENT_SERVICE_HOST",
+          "value": "10.100.238.9"
+        },
+        {
+          "key": "KUBE_DNS_SERVICE_PORT_DNS",
+          "value": "53"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_UDP_ADDR",
+          "value": "10.96.0.10"
+        },
+        {
+          "key": "KUBE_DNS_PORT_9153_TCP_PROTO",
+          "value": "tcp"
+        },
+        {
+          "key": "KNO_AGENT_PORT_18080_TCP_PORT",
+          "value": "18080"
+        },
+        {
+          "key": "KUBE_DNS_SERVICE_HOST",
+          "value": "10.96.0.10"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_TCP_ADDR",
+          "value": "10.96.0.10"
+        },
+        {
+          "key": "KUBERNETES_PORT",
+          "value": "tcp://10.96.0.1:443"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP",
+          "value": "tcp://10.96.0.1:443"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP_PORT",
+          "value": "443"
+        },
+        {
+          "key": "KNO_AGENT_PORT_18080_TCP_PROTO",
+          "value": "tcp"
+        },
+        {
+          "key": "KUBE_DNS_SERVICE_PORT_METRICS",
+          "value": "9153"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_UDP",
+          "value": "udp://10.96.0.10:53"
+        },
+        {
+          "key": "KUBE_DNS_SERVICE_PORT_DNS_TCP",
+          "value": "53"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_TCP_PROTO",
+          "value": "tcp"
+        },
+        {
+          "key": "KUBE_DNS_PORT_9153_TCP",
+          "value": "tcp://10.96.0.10:9153"
+        },
+        {
+          "key": "KUBERNETES_SERVICE_PORT",
+          "value": "443"
+        },
+        {
+          "key": "KNO_AGENT_PORT",
+          "value": "tcp://10.100.238.9:18080"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_UDP_PROTO",
+          "value": "udp"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_UDP_PORT",
+          "value": "53"
+        },
+        {
+          "key": "KUBE_DNS_PORT_53_TCP_PORT",
+          "value": "53"
+        },
+        {
+          "key": "KNO_AGENT_PORT_18080_TCP_ADDR",
+          "value": "10.100.238.9"
+        },
+        {
+          "key": "KUBE_DNS_PORT_9153_TCP_ADDR",
+          "value": "10.96.0.10"
+        },
+        {
+          "key": "KUBERNETES_PORT_443_TCP_PROTO",
+          "value": "tcp"
+        }
+      ],
+      "image": {
+        "image": "sha256:0d947e15c392075a63b77bf35bbc04b0a59d074c39f4e574e0bf1ba500b23ddf",
+        "user_specified_image": "kubenode-observer/kno-agent:cpu-accounting"
+      },
+      "labels": {
+        "io.kubernetes.container.name": "agent",
+        "io.kubernetes.pod.name": "kno-agent-8kpdx",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "15cdfb72-5e75-4d46-a8b6-90bb52734912"
+      },
+      "linux": {
+        "resources": {
+          "cpu_period": 100000,
+          "cpu_quota": 20000,
+          "cpu_shares": 20,
+          "hugepage_limits": [
+            {
+              "page_size": "2MB"
+            },
+            {
+              "page_size": "1GB"
+            }
+          ],
+          "memory_limit_in_bytes": 134217728,
+          "oom_score_adj": 999,
+          "unified": {
+            "memory.oom.group": "1",
+            "memory.swap.max": "0"
+          }
+        },
+        "security_context": {
+          "masked_paths": [
+            "/proc/asound",
+            "/proc/acpi",
+            "/proc/interrupts",
+            "/proc/kcore",
+            "/proc/keys",
+            "/proc/latency_stats",
+            "/proc/timer_list",
+            "/proc/timer_stats",
+            "/proc/sched_debug",
+            "/proc/scsi",
+            "/sys/firmware",
+            "/sys/devices/virtual/powercap"
+          ],
+          "namespace_options": {
+            "network": 2,
+            "pid": 2,
+            "userns_options": {
+              "mode": 2
+            }
+          },
+          "privileged": true,
+          "readonly_paths": [
+            "/proc/bus",
+            "/proc/fs",
+            "/proc/irq",
+            "/proc/sys",
+            "/proc/sysrq-trigger"
+          ],
+          "run_as_user": {},
+          "seccomp": {
+            "profile_type": 1
+          }
+        }
+      },
+      "log_path": "agent/0.log",
+      "metadata": {
+        "name": "agent"
+      },
+      "mounts": [
+        {
+          "container_path": "/sys/kernel/tracing",
+          "host_path": "/sys/kernel/tracing",
+          "readonly": true
+        },
+        {
+          "container_path": "/run/containerd/containerd.sock",
+          "host_path": "/run/containerd/containerd.sock"
+        },
+        {
+          "container_path": "/host/proc",
+          "host_path": "/proc",
+          "readonly": true
+        },
+        {
+          "container_path": "/host/sys/fs/cgroup",
+          "host_path": "/sys/fs/cgroup",
+          "readonly": true
+        },
+        {
+          "container_path": "/var/run/secrets/kubernetes.io/serviceaccount",
+          "host_path": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/volumes/kubernetes.io~projected/kube-api-access-2hzs9",
+          "readonly": true
+        },
+        {
+          "container_path": "/etc/hosts",
+          "host_path": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/etc-hosts"
+        },
+        {
+          "container_path": "/dev/termination-log",
+          "host_path": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/containers/agent/0ed034ad"
+        }
+      ]
+    },
+    "pid": 2290087,
+    "removing": false,
+    "runtimeOptions": {
+      "systemd_cgroup": true
+    },
+    "runtimeSpec": {
+      "annotations": {
+        "io.kubernetes.cri.container-name": "agent",
+        "io.kubernetes.cri.container-type": "container",
+        "io.kubernetes.cri.image-name": "kubenode-observer/kno-agent:cpu-accounting",
+        "io.kubernetes.cri.sandbox-id": "579215d09f238b06f32ca18d4afe9ff21439f78384a3a4b2166bc534284537ba",
+        "io.kubernetes.cri.sandbox-name": "kno-agent-8kpdx",
+        "io.kubernetes.cri.sandbox-namespace": "kube-system",
+        "io.kubernetes.cri.sandbox-uid": "15cdfb72-5e75-4d46-a8b6-90bb52734912"
+      },
+      "linux": {
+        "cgroupsPath": "kubepods-burstable-pod15cdfb72_5e75_4d46_a8b6_90bb52734912.slice:cri-containerd:78392a0e72f8a2aafccdf340607c551859b92d26177cc2b6bb720089926ed626",
+        "devices": [
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 235,
+            "path": "/dev/autofs",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 245,
+            "minor": 0,
+            "path": "/dev/bsg/0:0:0:0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 245,
+            "minor": 1,
+            "path": "/dev/bsg/0:0:0:1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 245,
+            "minor": 2,
+            "path": "/dev/bsg/0:0:0:2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 245,
+            "minor": 3,
+            "path": "/dev/bsg/0:0:0:3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 234,
+            "path": "/dev/btrfs-control",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 123,
+            "path": "/dev/cpu_dma_latency",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 203,
+            "path": "/dev/cuse",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 10,
+            "minor": 125,
+            "path": "/dev/dxg",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 1,
+            "minor": 7,
+            "path": "/dev/full",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 10,
+            "minor": 229,
+            "path": "/dev/fuse",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 228,
+            "path": "/dev/hpet",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 0,
+            "path": "/dev/hvc0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 1,
+            "path": "/dev/hvc1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 229,
+            "minor": 2,
+            "path": "/dev/hvc2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 3,
+            "path": "/dev/hvc3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 4,
+            "path": "/dev/hvc4",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 5,
+            "path": "/dev/hvc5",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 6,
+            "path": "/dev/hvc6",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 229,
+            "minor": 7,
+            "path": "/dev/hvc7",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 183,
+            "path": "/dev/hwrng",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 420,
+            "gid": 0,
+            "major": 1,
+            "minor": 11,
+            "path": "/dev/kmsg",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 104,
+            "major": 10,
+            "minor": 232,
+            "path": "/dev/kvm",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 10,
+            "minor": 237,
+            "path": "/dev/loop-control",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 0,
+            "path": "/dev/loop0",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 1,
+            "path": "/dev/loop1",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 2,
+            "path": "/dev/loop2",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 3,
+            "path": "/dev/loop3",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 4,
+            "path": "/dev/loop4",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 5,
+            "path": "/dev/loop5",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 6,
+            "path": "/dev/loop6",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 7,
+            "minor": 7,
+            "path": "/dev/loop7",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 236,
+            "path": "/dev/mapper/control",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 227,
+            "path": "/dev/mcelog",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 416,
+            "gid": 15,
+            "major": 1,
+            "minor": 1,
+            "path": "/dev/mem",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 220,
+            "path": "/dev/mptctl",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 10,
+            "minor": 200,
+            "path": "/dev/net/tun",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 1,
+            "minor": 3,
+            "path": "/dev/null",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 144,
+            "path": "/dev/nvram",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 108,
+            "minor": 0,
+            "path": "/dev/ppp",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 247,
+            "minor": 0,
+            "path": "/dev/ptp0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 0,
+            "path": "/dev/ram0",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 1,
+            "path": "/dev/ram1",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 10,
+            "path": "/dev/ram10",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 11,
+            "path": "/dev/ram11",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 12,
+            "path": "/dev/ram12",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 13,
+            "path": "/dev/ram13",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 14,
+            "path": "/dev/ram14",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 15,
+            "path": "/dev/ram15",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 2,
+            "path": "/dev/ram2",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 3,
+            "path": "/dev/ram3",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 4,
+            "path": "/dev/ram4",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 5,
+            "path": "/dev/ram5",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 6,
+            "path": "/dev/ram6",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 7,
+            "path": "/dev/ram7",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 8,
+            "path": "/dev/ram8",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 1,
+            "minor": 9,
+            "path": "/dev/ram9",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 1,
+            "minor": 8,
+            "path": "/dev/random",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 249,
+            "minor": 0,
+            "path": "/dev/rtc0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 8,
+            "minor": 0,
+            "path": "/dev/sda",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 8,
+            "minor": 16,
+            "path": "/dev/sdb",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 8,
+            "minor": 32,
+            "path": "/dev/sdc",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 8,
+            "minor": 48,
+            "path": "/dev/sdd",
+            "type": "b",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 21,
+            "minor": 0,
+            "path": "/dev/sg0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 21,
+            "minor": 1,
+            "path": "/dev/sg1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 21,
+            "minor": 2,
+            "path": "/dev/sg2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 6,
+            "major": 21,
+            "minor": 3,
+            "path": "/dev/sg3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 231,
+            "path": "/dev/snapshot",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 29,
+            "major": 116,
+            "minor": 33,
+            "path": "/dev/snd/timer",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 5,
+            "major": 5,
+            "minor": 0,
+            "path": "/dev/tty",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 0,
+            "path": "/dev/tty0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 1,
+            "path": "/dev/tty1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 10,
+            "path": "/dev/tty10",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 11,
+            "path": "/dev/tty11",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 12,
+            "path": "/dev/tty12",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 13,
+            "path": "/dev/tty13",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 14,
+            "path": "/dev/tty14",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 15,
+            "path": "/dev/tty15",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 16,
+            "path": "/dev/tty16",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 17,
+            "path": "/dev/tty17",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 18,
+            "path": "/dev/tty18",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 19,
+            "path": "/dev/tty19",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 2,
+            "path": "/dev/tty2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 20,
+            "path": "/dev/tty20",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 21,
+            "path": "/dev/tty21",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 22,
+            "path": "/dev/tty22",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 23,
+            "path": "/dev/tty23",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 24,
+            "path": "/dev/tty24",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 25,
+            "path": "/dev/tty25",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 26,
+            "path": "/dev/tty26",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 27,
+            "path": "/dev/tty27",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 28,
+            "path": "/dev/tty28",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 29,
+            "path": "/dev/tty29",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 3,
+            "path": "/dev/tty3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 30,
+            "path": "/dev/tty30",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 31,
+            "path": "/dev/tty31",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 32,
+            "path": "/dev/tty32",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 33,
+            "path": "/dev/tty33",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 34,
+            "path": "/dev/tty34",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 35,
+            "path": "/dev/tty35",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 36,
+            "path": "/dev/tty36",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 37,
+            "path": "/dev/tty37",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 38,
+            "path": "/dev/tty38",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 39,
+            "path": "/dev/tty39",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 4,
+            "path": "/dev/tty4",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 40,
+            "path": "/dev/tty40",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 41,
+            "path": "/dev/tty41",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 42,
+            "path": "/dev/tty42",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 43,
+            "path": "/dev/tty43",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 44,
+            "path": "/dev/tty44",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 45,
+            "path": "/dev/tty45",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 46,
+            "path": "/dev/tty46",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 47,
+            "path": "/dev/tty47",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 48,
+            "path": "/dev/tty48",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 49,
+            "path": "/dev/tty49",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 5,
+            "path": "/dev/tty5",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 50,
+            "path": "/dev/tty50",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 51,
+            "path": "/dev/tty51",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 52,
+            "path": "/dev/tty52",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 53,
+            "path": "/dev/tty53",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 54,
+            "path": "/dev/tty54",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 55,
+            "path": "/dev/tty55",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 56,
+            "path": "/dev/tty56",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 57,
+            "path": "/dev/tty57",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 58,
+            "path": "/dev/tty58",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 59,
+            "path": "/dev/tty59",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 6,
+            "path": "/dev/tty6",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 60,
+            "path": "/dev/tty60",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 61,
+            "path": "/dev/tty61",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 62,
+            "path": "/dev/tty62",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 63,
+            "path": "/dev/tty63",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 7,
+            "path": "/dev/tty7",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 8,
+            "path": "/dev/tty8",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 400,
+            "gid": 5,
+            "major": 4,
+            "minor": 9,
+            "path": "/dev/tty9",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 64,
+            "path": "/dev/ttyS0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 65,
+            "path": "/dev/ttyS1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 66,
+            "path": "/dev/ttyS2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 67,
+            "path": "/dev/ttyS3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 68,
+            "path": "/dev/ttyS4",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 69,
+            "path": "/dev/ttyS5",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 70,
+            "path": "/dev/ttyS6",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 20,
+            "major": 4,
+            "minor": 71,
+            "path": "/dev/ttyS7",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 223,
+            "path": "/dev/uinput",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 1,
+            "minor": 9,
+            "path": "/dev/urandom",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 126,
+            "path": "/dev/userfaultfd",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 0,
+            "path": "/dev/vcs",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 1,
+            "path": "/dev/vcs1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 2,
+            "path": "/dev/vcs2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 3,
+            "path": "/dev/vcs3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 4,
+            "path": "/dev/vcs4",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 5,
+            "path": "/dev/vcs5",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 6,
+            "path": "/dev/vcs6",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 128,
+            "path": "/dev/vcsa",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 129,
+            "path": "/dev/vcsa1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 130,
+            "path": "/dev/vcsa2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 131,
+            "path": "/dev/vcsa3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 132,
+            "path": "/dev/vcsa4",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 133,
+            "path": "/dev/vcsa5",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 134,
+            "path": "/dev/vcsa6",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 64,
+            "path": "/dev/vcsu",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 65,
+            "path": "/dev/vcsu1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 66,
+            "path": "/dev/vcsu2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 67,
+            "path": "/dev/vcsu3",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 68,
+            "path": "/dev/vcsu4",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 69,
+            "path": "/dev/vcsu5",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 5,
+            "major": 7,
+            "minor": 70,
+            "path": "/dev/vcsu6",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 196,
+            "path": "/dev/vfio/vfio",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 10,
+            "minor": 127,
+            "path": "/dev/vga_arbiter",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 104,
+            "major": 10,
+            "minor": 238,
+            "path": "/dev/vhost-net",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 432,
+            "gid": 104,
+            "major": 10,
+            "minor": 241,
+            "path": "/dev/vhost-vsock",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 244,
+            "minor": 0,
+            "path": "/dev/vport0p0",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 244,
+            "minor": 1,
+            "path": "/dev/vport0p1",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 384,
+            "gid": 0,
+            "major": 244,
+            "minor": 2,
+            "path": "/dev/vport0p2",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 10,
+            "minor": 124,
+            "path": "/dev/vsock",
+            "type": "c",
+            "uid": 0
+          },
+          {
+            "fileMode": 438,
+            "gid": 0,
+            "major": 1,
+            "minor": 5,
+            "path": "/dev/zero",
+            "type": "c",
+            "uid": 0
+          }
+        ],
+        "namespaces": [
+          {
+            "path": "/proc/2290063/ns/pid",
+            "type": "pid"
+          },
+          {
+            "path": "/proc/2290063/ns/ipc",
+            "type": "ipc"
+          },
+          {
+            "path": "/proc/2290063/ns/uts",
+            "type": "uts"
+          },
+          {
+            "type": "mount"
+          },
+          {
+            "path": "/proc/2290063/ns/net",
+            "type": "network"
+          }
+        ],
+        "resources": {
+          "cpu": {
+            "period": 100000,
+            "quota": 20000,
+            "shares": 20
+          },
+          "devices": [
+            {
+              "access": "rwm",
+              "allow": true
+            }
+          ],
+          "memory": {
+            "limit": 134217728,
+            "swap": 134217728
+          },
+          "unified": {
+            "memory.oom.group": "1",
+            "memory.swap.max": "0"
+          }
+        }
+      },
+      "mounts": [
+        {
+          "destination": "/proc",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev"
+          ],
+          "source": "proc",
+          "type": "proc"
+        },
+        {
+          "destination": "/dev",
+          "options": [
+            "nosuid",
+            "strictatime",
+            "mode=755",
+            "size=65536k"
+          ],
+          "source": "tmpfs",
+          "type": "tmpfs"
+        },
+        {
+          "destination": "/dev/pts",
+          "options": [
+            "nosuid",
+            "noexec",
+            "newinstance",
+            "ptmxmode=0666",
+            "mode=0620",
+            "gid=5"
+          ],
+          "source": "devpts",
+          "type": "devpts"
+        },
+        {
+          "destination": "/dev/mqueue",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev"
+          ],
+          "source": "mqueue",
+          "type": "mqueue"
+        },
+        {
+          "destination": "/sys",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev",
+            "rw"
+          ],
+          "source": "sysfs",
+          "type": "sysfs"
+        },
+        {
+          "destination": "/sys/fs/cgroup",
+          "options": [
+            "nosuid",
+            "noexec",
+            "nodev",
+            "relatime",
+            "rw"
+          ],
+          "source": "cgroup",
+          "type": "cgroup"
+        },
+        {
+          "destination": "/host/proc",
+          "options": [
+            "rbind",
+            "rprivate",
+            "ro"
+          ],
+          "source": "/proc",
+          "type": "bind"
+        },
+        {
+          "destination": "/etc/hosts",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ],
+          "source": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/etc-hosts",
+          "type": "bind"
+        },
+        {
+          "destination": "/dev/termination-log",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ],
+          "source": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/containers/agent/0ed034ad",
+          "type": "bind"
+        },
+        {
+          "destination": "/etc/hostname",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ],
+          "source": "/var/lib/containerd/io.containerd.grpc.v1.cri/sandboxes/579215d09f238b06f32ca18d4afe9ff21439f78384a3a4b2166bc534284537ba/hostname",
+          "type": "bind"
+        },
+        {
+          "destination": "/etc/resolv.conf",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ],
+          "source": "/var/lib/containerd/io.containerd.grpc.v1.cri/sandboxes/579215d09f238b06f32ca18d4afe9ff21439f78384a3a4b2166bc534284537ba/resolv.conf",
+          "type": "bind"
+        },
+        {
+          "destination": "/dev/shm",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ],
+          "source": "/run/containerd/io.containerd.grpc.v1.cri/sandboxes/579215d09f238b06f32ca18d4afe9ff21439f78384a3a4b2166bc534284537ba/shm",
+          "type": "bind"
+        },
+        {
+          "destination": "/sys/kernel/tracing",
+          "options": [
+            "rbind",
+            "rprivate",
+            "ro"
+          ],
+          "source": "/sys/kernel/tracing",
+          "type": "bind"
+        },
+        {
+          "destination": "/run/containerd/containerd.sock",
+          "options": [
+            "rbind",
+            "rprivate",
+            "rw"
+          ],
+          "source": "/run/containerd/containerd.sock",
+          "type": "bind"
+        },
+        {
+          "destination": "/host/sys/fs/cgroup",
+          "options": [
+            "rbind",
+            "rprivate",
+            "ro"
+          ],
+          "source": "/sys/fs/cgroup",
+          "type": "bind"
+        },
+        {
+          "destination": "/var/run/secrets/kubernetes.io/serviceaccount",
+          "options": [
+            "rbind",
+            "rprivate",
+            "ro"
+          ],
+          "source": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/volumes/kubernetes.io~projected/kube-api-access-2hzs9",
+          "type": "bind"
+        }
+      ],
+      "ociVersion": "1.3.0",
+      "process": {
+        "args": [
+          "/kno-agent",
+          "--listen=:18080",
+          "--runtime-endpoint=unix:///run/containerd/containerd.sock",
+          "--host-proc=/host/proc",
+          "--cgroup-root=/host/sys/fs/cgroup",
+          "--topology-interval=5s",
+          "--cpu-interval=1s"
+        ],
+        "capabilities": {
+          "bounding": [
+            "CAP_CHOWN",
+            "CAP_DAC_OVERRIDE",
+            "CAP_DAC_READ_SEARCH",
+            "CAP_FOWNER",
+            "CAP_FSETID",
+            "CAP_KILL",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETPCAP",
+            "CAP_LINUX_IMMUTABLE",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_NET_BROADCAST",
+            "CAP_NET_ADMIN",
+            "CAP_NET_RAW",
+            "CAP_IPC_LOCK",
+            "CAP_IPC_OWNER",
+            "CAP_SYS_MODULE",
+            "CAP_SYS_RAWIO",
+            "CAP_SYS_CHROOT",
+            "CAP_SYS_PTRACE",
+            "CAP_SYS_PACCT",
+            "CAP_SYS_ADMIN",
+            "CAP_SYS_BOOT",
+            "CAP_SYS_NICE",
+            "CAP_SYS_RESOURCE",
+            "CAP_SYS_TIME",
+            "CAP_SYS_TTY_CONFIG",
+            "CAP_MKNOD",
+            "CAP_LEASE",
+            "CAP_AUDIT_WRITE",
+            "CAP_AUDIT_CONTROL",
+            "CAP_SETFCAP",
+            "CAP_MAC_OVERRIDE",
+            "CAP_MAC_ADMIN",
+            "CAP_SYSLOG",
+            "CAP_WAKE_ALARM",
+            "CAP_BLOCK_SUSPEND",
+            "CAP_AUDIT_READ",
+            "CAP_PERFMON",
+            "CAP_BPF",
+            "CAP_CHECKPOINT_RESTORE"
+          ],
+          "effective": [
+            "CAP_CHOWN",
+            "CAP_DAC_OVERRIDE",
+            "CAP_DAC_READ_SEARCH",
+            "CAP_FOWNER",
+            "CAP_FSETID",
+            "CAP_KILL",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETPCAP",
+            "CAP_LINUX_IMMUTABLE",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_NET_BROADCAST",
+            "CAP_NET_ADMIN",
+            "CAP_NET_RAW",
+            "CAP_IPC_LOCK",
+            "CAP_IPC_OWNER",
+            "CAP_SYS_MODULE",
+            "CAP_SYS_RAWIO",
+            "CAP_SYS_CHROOT",
+            "CAP_SYS_PTRACE",
+            "CAP_SYS_PACCT",
+            "CAP_SYS_ADMIN",
+            "CAP_SYS_BOOT",
+            "CAP_SYS_NICE",
+            "CAP_SYS_RESOURCE",
+            "CAP_SYS_TIME",
+            "CAP_SYS_TTY_CONFIG",
+            "CAP_MKNOD",
+            "CAP_LEASE",
+            "CAP_AUDIT_WRITE",
+            "CAP_AUDIT_CONTROL",
+            "CAP_SETFCAP",
+            "CAP_MAC_OVERRIDE",
+            "CAP_MAC_ADMIN",
+            "CAP_SYSLOG",
+            "CAP_WAKE_ALARM",
+            "CAP_BLOCK_SUSPEND",
+            "CAP_AUDIT_READ",
+            "CAP_PERFMON",
+            "CAP_BPF",
+            "CAP_CHECKPOINT_RESTORE"
+          ],
+          "permitted": [
+            "CAP_CHOWN",
+            "CAP_DAC_OVERRIDE",
+            "CAP_DAC_READ_SEARCH",
+            "CAP_FOWNER",
+            "CAP_FSETID",
+            "CAP_KILL",
+            "CAP_SETGID",
+            "CAP_SETUID",
+            "CAP_SETPCAP",
+            "CAP_LINUX_IMMUTABLE",
+            "CAP_NET_BIND_SERVICE",
+            "CAP_NET_BROADCAST",
+            "CAP_NET_ADMIN",
+            "CAP_NET_RAW",
+            "CAP_IPC_LOCK",
+            "CAP_IPC_OWNER",
+            "CAP_SYS_MODULE",
+            "CAP_SYS_RAWIO",
+            "CAP_SYS_CHROOT",
+            "CAP_SYS_PTRACE",
+            "CAP_SYS_PACCT",
+            "CAP_SYS_ADMIN",
+            "CAP_SYS_BOOT",
+            "CAP_SYS_NICE",
+            "CAP_SYS_RESOURCE",
+            "CAP_SYS_TIME",
+            "CAP_SYS_TTY_CONFIG",
+            "CAP_MKNOD",
+            "CAP_LEASE",
+            "CAP_AUDIT_WRITE",
+            "CAP_AUDIT_CONTROL",
+            "CAP_SETFCAP",
+            "CAP_MAC_OVERRIDE",
+            "CAP_MAC_ADMIN",
+            "CAP_SYSLOG",
+            "CAP_WAKE_ALARM",
+            "CAP_BLOCK_SUSPEND",
+            "CAP_AUDIT_READ",
+            "CAP_PERFMON",
+            "CAP_BPF",
+            "CAP_CHECKPOINT_RESTORE"
+          ]
+        },
+        "cwd": "/",
+        "env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "HOSTNAME=kno-dev",
+          "NODE_NAME=kno-dev",
+          "KNO_AGENT_SERVICE_PORT_HEALTH=18080",
+          "KUBE_DNS_SERVICE_PORT=53",
+          "KUBE_DNS_PORT=udp://10.96.0.10:53",
+          "KUBE_DNS_PORT_53_TCP=tcp://10.96.0.10:53",
+          "KUBE_DNS_PORT_9153_TCP_PORT=9153",
+          "KUBERNETES_SERVICE_HOST=10.96.0.1",
+          "KUBERNETES_SERVICE_PORT_HTTPS=443",
+          "KNO_AGENT_SERVICE_PORT=18080",
+          "KNO_AGENT_PORT_18080_TCP=tcp://10.100.238.9:18080",
+          "KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1",
+          "KNO_AGENT_SERVICE_HOST=10.100.238.9",
+          "KUBE_DNS_SERVICE_PORT_DNS=53",
+          "KUBE_DNS_PORT_53_UDP_ADDR=10.96.0.10",
+          "KUBE_DNS_PORT_9153_TCP_PROTO=tcp",
+          "KNO_AGENT_PORT_18080_TCP_PORT=18080",
+          "KUBE_DNS_SERVICE_HOST=10.96.0.10",
+          "KUBE_DNS_PORT_53_TCP_ADDR=10.96.0.10",
+          "KUBERNETES_PORT=tcp://10.96.0.1:443",
+          "KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443",
+          "KUBERNETES_PORT_443_TCP_PORT=443",
+          "KNO_AGENT_PORT_18080_TCP_PROTO=tcp",
+          "KUBE_DNS_SERVICE_PORT_METRICS=9153",
+          "KUBE_DNS_PORT_53_UDP=udp://10.96.0.10:53",
+          "KUBE_DNS_SERVICE_PORT_DNS_TCP=53",
+          "KUBE_DNS_PORT_53_TCP_PROTO=tcp",
+          "KUBE_DNS_PORT_9153_TCP=tcp://10.96.0.10:9153",
+          "KUBERNETES_SERVICE_PORT=443",
+          "KNO_AGENT_PORT=tcp://10.100.238.9:18080",
+          "KUBE_DNS_PORT_53_UDP_PROTO=udp",
+          "KUBE_DNS_PORT_53_UDP_PORT=53",
+          "KUBE_DNS_PORT_53_TCP_PORT=53",
+          "KNO_AGENT_PORT_18080_TCP_ADDR=10.100.238.9",
+          "KUBE_DNS_PORT_9153_TCP_ADDR=10.96.0.10",
+          "KUBERNETES_PORT_443_TCP_PROTO=tcp"
+        ],
+        "oomScoreAdj": 999,
+        "user": {
+          "additionalGids": [
+            0
+          ],
+          "gid": 0,
+          "uid": 0
+        }
+      },
+      "root": {
+        "path": "rootfs"
+      }
+    },
+    "runtimeType": "io.containerd.runc.v2",
+    "sandboxID": "579215d09f238b06f32ca18d4afe9ff21439f78384a3a4b2166bc534284537ba",
+    "snapshotKey": "78392a0e72f8a2aafccdf340607c551859b92d26177cc2b6bb720089926ed626",
+    "snapshotter": "overlayfs"
+  },
+  "status": {
+    "annotations": {
+      "io.kubernetes.container.hash": "22d2bc0c",
+      "io.kubernetes.container.ports": "[{\"name\":\"health\",\"hostPort\":18080,\"containerPort\":18080,\"protocol\":\"TCP\"}]",
+      "io.kubernetes.container.restartCount": "0",
+      "io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+      "io.kubernetes.container.terminationMessagePolicy": "File",
+      "io.kubernetes.pod.terminationGracePeriod": "30"
+    },
+    "createdAt": "2026-10-26T07:16:16.213295869Z",
+    "exitCode": 0,
+    "finishedAt": "0001-01-01T00:00:00Z",
+    "id": "78392a0e72f8a2aafccdf340607c551859b92d26177cc2b6bb720089926ed626",
+    "image": {
+      "annotations": {},
+      "image": "docker.io/kubenode-observer/kno-agent:cpu-accounting",
+      "runtimeHandler": "",
+      "userSpecifiedImage": ""
+    },
+    "imageId": "",
+    "imageRef": "sha256:0d947e15c392075a63b77bf35bbc04b0a59d074c39f4e574e0bf1ba500b23ddf",
+    "labels": {
+      "io.kubernetes.container.name": "agent",
+      "io.kubernetes.pod.name": "kno-agent-8kpdx",
+      "io.kubernetes.pod.namespace": "kube-system",
+      "io.kubernetes.pod.uid": "15cdfb72-5e75-4d46-a8b6-90bb52734912"
+    },
+    "logPath": "/var/log/pods/kube-system_kno-agent-8kpdx_15cdfb72-5e75-4d46-a8b6-90bb52734912/agent/0.log",
+    "message": "",
+    "metadata": {
+      "attempt": 0,
+      "name": "agent"
+    },
+    "mounts": [
+      {
+        "containerPath": "/sys/kernel/tracing",
+        "gidMappings": [],
+        "hostPath": "/sys/kernel/tracing",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": true,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      },
+      {
+        "containerPath": "/run/containerd/containerd.sock",
+        "gidMappings": [],
+        "hostPath": "/run/containerd/containerd.sock",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": false,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      },
+      {
+        "containerPath": "/host/proc",
+        "gidMappings": [],
+        "hostPath": "/proc",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": true,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      },
+      {
+        "containerPath": "/host/sys/fs/cgroup",
+        "gidMappings": [],
+        "hostPath": "/sys/fs/cgroup",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": true,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      },
+      {
+        "containerPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+        "gidMappings": [],
+        "hostPath": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/volumes/kubernetes.io~projected/kube-api-access-2hzs9",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": true,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      },
+      {
+        "containerPath": "/etc/hosts",
+        "gidMappings": [],
+        "hostPath": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/etc-hosts",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": false,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      },
+      {
+        "containerPath": "/dev/termination-log",
+        "gidMappings": [],
+        "hostPath": "/var/lib/kubelet/pods/15cdfb72-5e75-4d46-a8b6-90bb52734912/containers/agent/0ed034ad",
+        "imageSubPath": "",
+        "propagation": "PROPAGATION_PRIVATE",
+        "readonly": false,
+        "recursiveReadOnly": false,
+        "selinuxRelabel": false,
+        "uidMappings": []
+      }
+    ],
+    "reason": "",
+    "resources": {
+      "linux": {
+        "cpuPeriod": "100000",
+        "cpuQuota": "20000",
+        "cpuShares": "20",
+        "cpusetCpus": "",
+        "cpusetMems": "",
+        "hugepageLimits": [],
+        "memoryLimitInBytes": "134217728",
+        "memorySwapLimitInBytes": "134217728",
+        "oomScoreAdj": "999",
+        "unified": {
+          "memory.oom.group": "1",
+          "memory.swap.max": "0"
+        }
+      }
+    },
+    "startedAt": "2026-10-26T07:16:16.501305135Z",
+    "state": "CONTAINER_RUNNING",
+    "stopSignal": "RUNTIME_DEFAULT",
+    "user": {
+      "linux": {
+        "gid": "0",
+        "supplementalGroups": [
+          "0"
+        ],
+        "uid": "0"
+      }
+    }
+  }
+}

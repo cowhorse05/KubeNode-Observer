@@ -1,0 +1,9 @@
+{
+  "context": "kno-dev",
+  "nodeContainer": "kno-dev",
+  "agentImage": "kubenode-observer/kno-agent:cpu-accounting",
+  "durationSeconds": 1800,
+  "childrenPerPod": 2000,
+  "pauseSeconds": 10,
+  "eventLimit": 32
+}

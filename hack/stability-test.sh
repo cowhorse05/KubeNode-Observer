@@ -74,6 +74,7 @@ cpu_entries="$(awk '$1 ~ /map="cpu_runtime"/ && $1 ~ /^kno_agent_bpf_map_entries
 cpu_capacity="$(awk '$1 ~ /map="cpu_runtime"/ && $1 ~ /^kno_agent_bpf_map_max_entries/ { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
 start_entries="$(awk '$1 ~ /map="cpu_task_start"/ && $1 ~ /^kno_agent_bpf_map_entries/ { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
 start_capacity="$(awk '$1 ~ /map="cpu_task_start"/ && $1 ~ /^kno_agent_bpf_map_max_entries/ { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
+total_capacity="$(awk '$1 ~ /map="cpu_cgroup_runtime"/ && $1 ~ /^kno_agent_bpf_map_max_entries/ { print $2 }' "${TEST_TMP_DIR}/metrics-after")"
 
 if [[ "${restart_after}" != "${restart_before}" ]]; then
   echo "stability test failed: agent restart count changed ${restart_before} -> ${restart_after}" >&2
@@ -83,7 +84,7 @@ if [[ "${events_lost_after}" != "${events_lost_before}" ]]; then
   echo "stability test failed: events lost changed ${events_lost_before} -> ${events_lost_after}" >&2
   exit 1
 fi
-if [[ "${cpu_capacity}" != "8192" || "${start_capacity}" != "8192" ]]; then
+if [[ "${cpu_capacity}" != "8192" || "${start_capacity}" != "1" || "${total_capacity}" != "1024" ]]; then
   echo "stability test failed: unexpected CPU map capacity" >&2
   exit 1
 fi

@@ -5,6 +5,8 @@ KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测
 
 当前 v0.1.0 已完成进程生命周期、CPU 热点和 run queue latency 观测闭环：节点 DaemonSet 捕获 exec/exit 与调度事件，通过 cgroup ID 关联 Kubernetes Workload，并提供 Pod → Container → Process 逐层下钻。
 
+2026-10-27：runc CPU 记账与有限稳定性验收已完成，当前停在 Kata 环境验证入口，尚未安装/支持 Kata。方法、失败记录与精度/性能边界见 [收尾报告](log/2026-10-26-cpu-accounting.md)。
+
 ## 当前能力
 
 - 基于 `cilium/ebpf` 加载 CO-RE eBPF 程序；
@@ -107,6 +109,8 @@ BPF map 指标现在由后台默认每 15 秒刷新，抓取不会触发遍历�
 ```
 
 `cpuPercent` 表示采样窗口内消耗的 CPU runtime 除以墙钟时间：100% 约等于持续占用一个逻辑 CPU，多线程容器和 Pod 可以超过 100%。`make cpu-smoke` 会构建本地 CPU hog 镜像，并验证它稳定排在热点首位。
+
+Pod/Container 总量使用独立的 cgroup 累计量，Process 使用有限的进程明细，响应中的 `accounting` 标明来源。因此进程列表之和不保证等于容器总量，尤其在大量短进程下；调度器计时方法与容量边界见 [架构说明](docs/architecture.md#cpu-runtime-聚合)。
 
 按需测量 Pod 的 run queue latency：
 

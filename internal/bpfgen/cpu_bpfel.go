@@ -18,6 +18,12 @@ type CPUCpuKey struct {
 	Pid      uint32
 }
 
+type CPUCpuStart struct {
+	RuntimeNs uint64
+	Pid       uint32
+	Pad       uint32
+}
+
 type CPUCpuValue struct {
 	RuntimeNs uint64
 	Comm      [16]int8
@@ -72,8 +78,9 @@ type CPUProgramSpecs struct {
 //
 // It can be passed ebpf.CollectionSpec.Assign.
 type CPUMapSpecs struct {
-	CpuRuntime *ebpf.MapSpec `ebpf:"cpu_runtime"`
-	TaskStart  *ebpf.MapSpec `ebpf:"task_start"`
+	CgroupRuntime *ebpf.MapSpec `ebpf:"cgroup_runtime"`
+	CpuRuntime    *ebpf.MapSpec `ebpf:"cpu_runtime"`
+	TaskStart     *ebpf.MapSpec `ebpf:"task_start"`
 }
 
 // CPUVariableSpecs contains global variables before they are loaded into the kernel.
@@ -102,12 +109,14 @@ func (o *CPUObjects) Close() error {
 //
 // It can be passed to LoadCPUObjects or ebpf.CollectionSpec.LoadAndAssign.
 type CPUMaps struct {
-	CpuRuntime *ebpf.Map `ebpf:"cpu_runtime"`
-	TaskStart  *ebpf.Map `ebpf:"task_start"`
+	CgroupRuntime *ebpf.Map `ebpf:"cgroup_runtime"`
+	CpuRuntime    *ebpf.Map `ebpf:"cpu_runtime"`
+	TaskStart     *ebpf.Map `ebpf:"task_start"`
 }
 
 func (m *CPUMaps) Close() error {
 	return _CPUClose(
+		m.CgroupRuntime,
 		m.CpuRuntime,
 		m.TaskStart,
 	)

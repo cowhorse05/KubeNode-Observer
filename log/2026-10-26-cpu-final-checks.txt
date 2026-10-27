@@ -1,0 +1,38 @@
++ go test ./...
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-agent	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-experiment	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-contention	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-hog	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/exec-test	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/internal/bpfgen	[no test files]
+ok  	github.com/cowhorse05/KubeNode-Observer/examples/observer-benchmark	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/agent	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/event	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/runqlat	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	(cached)
++ go vet ./...
++ go test -race ./internal/cpu ./internal/probe ./internal/experiment ./internal/metrics ./internal/telemetry
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	1.062s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	1.016s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	1.082s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	1.088s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	(cached)
++ go test -c -o bin/cpu-retention.test ./internal/probe
++ sudo -n env KNO_BPF_TEST=1 ./bin/cpu-retention.test -test.run 'TestCPU|TestMapStatsKernel' -test.v
+=== RUN   TestCPURuntimeRetentionKernel
+    cpu_linux_test.go:73: capacity=8192 children=128 retained=128 runtime=74325659ns wait4_CPU=74217000ns ratio=1.0015
+    cpu_linux_test.go:71: iteration aborted
+--- FAIL: TestCPURuntimeRetentionKernel (0.31s)
+=== RUN   TestCPUBatchSnapshotKernel
+--- PASS: TestCPUBatchSnapshotKernel (0.02s)
+=== RUN   TestCPURuntimeCommand
+--- PASS: TestCPURuntimeCommand (0.00s)
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+FAIL
