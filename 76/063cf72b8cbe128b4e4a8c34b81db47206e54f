@@ -1,0 +1,52 @@
+hack/install-kata-minikube.sh
+  s_6e6fc63242599e::t_10c98f2079ed59 20,53,58
+  s_6e6fc63242599e::t_ea3cc273c89b4b 44-47
+  s_6e6fc63242599e::t_972c934b25b492 1-13,31-43,48-52,54-57,59-64
+  s_6e6fc63242599e::t_5cdc470bbd80b8 14-19,21-30
+deploy/kata/kno-kata-monitor.service
+  s_6e6fc63242599e::t_972c934b25b492 1-12
+examples/exec-test/main.go
+  s_6e6fc63242599e::t_144db2fd36ce35 4,13,19-30
+examples/kata-boundary/pods.yaml
+  s_6e6fc63242599e::t_144db2fd36ce35 1-39
+hack/kata-test.sh
+  s_6e6fc63242599e::t_e0a5dbcde952d5 87-97
+cmd/kno/main.go
+  s_6e6fc63242599e::t_e0a5dbcde952d5 107
+docs/kata.md
+  s_6e6fc63242599e::t_e0a5dbcde952d5 1-84
+deploy/kata/kno-kata-shm.service
+  s_6e6fc63242599e::t_10c98f2079ed59 1-12
+examples/kata-boundary/Dockerfile.local
+  s_6e6fc63242599e::t_144db2fd36ce35 1-4
+hack/kata-preflight.sh
+  s_6e6fc63242599e::t_972c934b25b492 1-17,23-24
+  s_6e6fc63242599e::t_ea3cc273c89b4b 18-22
+hack/kata-kvm-check.py
+  s_6e6fc63242599e::t_91350beaa069f1 1-16
+deploy/kata/runtimeclass.yaml
+  s_6e6fc63242599e::t_972c934b25b492 1-11
+deploy/kata/containerd-runtime.toml
+  s_6e6fc63242599e::t_972c934b25b492 1-9
+Makefile
+  s_6e6fc63242599e::t_ebf971fcda7b78 12,133-137
+  s_6e6fc63242599e::t_a28233309e2aeb 125-132,138
+.gitattributes
+  s_6e6fc63242599e::t_a28233309e2aeb 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "76063cf72b8cbe128b4e4a8c34b81db47206e54f",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
