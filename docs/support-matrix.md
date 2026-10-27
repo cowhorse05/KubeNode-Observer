@@ -29,7 +29,7 @@
 
 - Agent 使用 privileged、hostPID、hostNetwork，并挂载 host procfs、cgroup v2、tracefs 和 containerd socket；只应部署到受信任的开发/研究集群；
 - HTTP API 当前无 TLS 和鉴权，Service 不应直接暴露到不可信网络；
-- 128 MiB memory limit 下，40,000 个短进程 churn 后继续运行完整 integration 无重启，CRI working set 约 101.6 MiB；
+- 历史版本 128 MiB limit 下 40000 短进程回归无重启、CRI working set 约 101.6 MiB，仅作历史记录；当前版本的独立 1816s debug-off 观察完成 93 Pods /186000 子进程，末点 cgroup current 26.98 MiB、启动以来 peak 80.36 MiB，无重启/OOM，不代表长期生产保证；
 - 旧版 BPF map memlock 实测约 7.0 MiB；当前 CPU baseline 为每 CPU 一个 slot，进程明细 8192 entries，cgroup 累计量 1024 entries；cgroup 工作集超过容量仍可能淘汰/重置，不保证无限历史；
 - `/metrics` 从后台快照读取 map 占用，默认每次刷新完成后等待 15s；并发 census 是近似值，需结合 ready/age/error 判断有效性，过期值省略；
 - CPU 进程读取要求内核支持 hash/LRU batch lookup，当前只在表中内核验证；尚未支持的内核明确报错，不提供未经验证的降级路径。
@@ -42,5 +42,5 @@
 
 1. 用已实现的成本分解和配对工具复测，不把 diagnostics 当业务开销基准；
 2. 对照调度器 runtime、cgroup 总量与有限进程明细，保留非原子读取和容量边界；
-3. 完成 debug-off 的 Pod/进程有限稳定性观察，检查内存、身份、重启和事件丢失；
+3. debug-off 的 Pod/进程有限稳定性观察已完成，内存、身份、重启和事件丢失证据见 [收尾报告](../log/2026-10-26-cpu-accounting.md)，不作无限期保证；
 4. runc 收尾后进入 Kata 环境 Go/No-Go 与 Host/VMM 身份归属；不以扩充指标替代推进功能。

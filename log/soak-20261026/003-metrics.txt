@@ -1,0 +1,87 @@
+# HELP kno_agent_events_seen_total Process lifecycle events consumed by the agent.
+# TYPE kno_agent_events_seen_total counter
+kno_agent_events_seen_total 13241
+# HELP kno_agent_events_lost_total Process lifecycle events dropped in the kernel ring buffer.
+# TYPE kno_agent_events_lost_total counter
+kno_agent_events_lost_total 0
+# HELP kno_agent_cpu_seconds_total CPU time consumed by the agent process.
+# TYPE kno_agent_cpu_seconds_total counter
+kno_agent_cpu_seconds_total 2.995008985
+# HELP kno_agent_resident_memory_bytes Resident memory used by the agent process.
+# TYPE kno_agent_resident_memory_bytes gauge
+kno_agent_resident_memory_bytes 5.2568064e+07
+# HELP kno_agent_go_heap_alloc_bytes Currently allocated Go heap bytes.
+# TYPE kno_agent_go_heap_alloc_bytes gauge
+kno_agent_go_heap_alloc_bytes 4.99676e+06
+# HELP kno_agent_bpf_map_entries Cached non-atomic map key census; ring buffers report zero. Omitted when stale or not ready.
+# TYPE kno_agent_bpf_map_entries gauge
+# HELP kno_agent_bpf_map_max_entries Configured eBPF map entry capacity; ring buffers use bytes.
+# TYPE kno_agent_bpf_map_max_entries gauge
+# HELP kno_agent_bpf_map_memlock_bytes Kernel-reported locked memory for an eBPF map.
+# TYPE kno_agent_bpf_map_memlock_bytes gauge
+# HELP kno_agent_bpf_map_stats_refresh_interval_seconds Delay between background map refresh cycles.
+# TYPE kno_agent_bpf_map_stats_refresh_interval_seconds gauge
+kno_agent_bpf_map_stats_refresh_interval_seconds 15
+# HELP kno_agent_bpf_map_stats_max_age_seconds Cached map stats are omitted beyond this age.
+# TYPE kno_agent_bpf_map_stats_max_age_seconds gauge
+kno_agent_bpf_map_stats_max_age_seconds 45
+# HELP kno_agent_bpf_map_stats_ready One if a successful non-stale map sample is available.
+# TYPE kno_agent_bpf_map_stats_ready gauge
+# HELP kno_agent_bpf_map_stats_age_seconds Age since the start of the last successful map refresh; absent before first success.
+# TYPE kno_agent_bpf_map_stats_age_seconds gauge
+# HELP kno_agent_bpf_map_stats_last_success_timestamp_seconds Start timestamp of last successful map refresh, zero before first success.
+# TYPE kno_agent_bpf_map_stats_last_success_timestamp_seconds gauge
+# HELP kno_agent_bpf_map_stats_refresh_duration_seconds Wall time of the last map refresh attempt.
+# TYPE kno_agent_bpf_map_stats_refresh_duration_seconds gauge
+# HELP kno_agent_bpf_map_stats_refresh_error One if the last map refresh attempt failed.
+# TYPE kno_agent_bpf_map_stats_refresh_error gauge
+# HELP kno_agent_bpf_map_stats_refresh_errors_total Failed background map refresh attempts.
+# TYPE kno_agent_bpf_map_stats_refresh_errors_total counter
+kno_agent_bpf_map_stats_ready{source="exec"} 1
+kno_agent_bpf_map_stats_refresh_error{source="exec"} 0
+kno_agent_bpf_map_stats_refresh_errors_total{source="exec"} 0
+kno_agent_bpf_map_stats_refresh_duration_seconds{source="exec"} 0.00017208
+kno_agent_bpf_map_stats_age_seconds{source="exec"} 8.85161442
+kno_agent_bpf_map_stats_last_success_timestamp_seconds{source="exec"} 1.7929993911153774e+09
+kno_agent_bpf_map_entries{map="exec_events",type="RingBuf"} 0
+kno_agent_bpf_map_max_entries{map="exec_events",type="RingBuf"} 1.048576e+06
+kno_agent_bpf_map_memlock_bytes{map="exec_events",type="RingBuf"} 1.065368e+06
+kno_agent_bpf_map_entries{map="event_stats",type="Array"} 1
+kno_agent_bpf_map_max_entries{map="event_stats",type="Array"} 1
+kno_agent_bpf_map_memlock_bytes{map="event_stats",type="Array"} 392
+kno_agent_bpf_map_stats_ready{source="cpu"} 1
+kno_agent_bpf_map_stats_refresh_error{source="cpu"} 0
+kno_agent_bpf_map_stats_refresh_errors_total{source="cpu"} 0
+kno_agent_bpf_map_stats_refresh_duration_seconds{source="cpu"} 0.003319964
+kno_agent_bpf_map_stats_age_seconds{source="cpu"} 8.851439872
+kno_agent_bpf_map_stats_last_success_timestamp_seconds{source="cpu"} 1.792999391115552e+09
+kno_agent_bpf_map_entries{map="cpu_task_start",type="PerCPUArray"} 1
+kno_agent_bpf_map_max_entries{map="cpu_task_start",type="PerCPUArray"} 1
+kno_agent_bpf_map_memlock_bytes{map="cpu_task_start",type="PerCPUArray"} 584
+kno_agent_bpf_map_entries{map="cpu_runtime",type="LRUHash"} 7401
+kno_agent_bpf_map_max_entries{map="cpu_runtime",type="LRUHash"} 8192
+kno_agent_bpf_map_memlock_bytes{map="cpu_runtime",type="LRUHash"} 853248
+kno_agent_bpf_map_entries{map="cpu_cgroup_runtime",type="LRUHash"} 48
+kno_agent_bpf_map_max_entries{map="cpu_cgroup_runtime",type="LRUHash"} 1024
+kno_agent_bpf_map_memlock_bytes{map="cpu_cgroup_runtime",type="LRUHash"} 83200
+kno_agent_bpf_map_stats_ready{source="runqlat"} 1
+kno_agent_bpf_map_stats_refresh_error{source="runqlat"} 0
+kno_agent_bpf_map_stats_refresh_errors_total{source="runqlat"} 0
+kno_agent_bpf_map_stats_refresh_duration_seconds{source="runqlat"} 0.017125616
+kno_agent_bpf_map_stats_age_seconds{source="runqlat"} 8.848118016
+kno_agent_bpf_map_stats_last_success_timestamp_seconds{source="runqlat"} 1.7929993911188736e+09
+kno_agent_bpf_map_entries{map="runqlat_runnable_since",type="LRUHash"} 108
+kno_agent_bpf_map_max_entries{map="runqlat_runnable_since",type="LRUHash"} 16384
+kno_agent_bpf_map_memlock_bytes{map="runqlat_runnable_since",type="LRUHash"} 1.312e+06
+kno_agent_bpf_map_entries{map="runqlat_task_identity",type="LRUHash"} 15636
+kno_agent_bpf_map_max_entries{map="runqlat_task_identity",type="LRUHash"} 16384
+kno_agent_bpf_map_memlock_bytes{map="runqlat_task_identity",type="LRUHash"} 1.443072e+06
+kno_agent_bpf_map_entries{map="runqlat_latency_stats",type="LRUHash"} 3228
+kno_agent_bpf_map_max_entries{map="runqlat_latency_stats",type="LRUHash"} 4096
+kno_agent_bpf_map_memlock_bytes{map="runqlat_latency_stats",type="LRUHash"} 460032
+kno_agent_bpf_map_entries{map="runqlat_latency_histogram",type="LRUHash"} 15650
+kno_agent_bpf_map_max_entries{map="runqlat_latency_histogram",type="LRUHash"} 16384
+kno_agent_bpf_map_memlock_bytes{map="runqlat_latency_histogram",type="LRUHash"} 1.574144e+06
+# HELP kno_agent_metrics_collection_errors Process read errors plus map sources not ready, stale, or failing their last refresh.
+# TYPE kno_agent_metrics_collection_errors gauge
+kno_agent_metrics_collection_errors 0

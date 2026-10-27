@@ -1,0 +1,33 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "namespace": "kno-soak-test",
+    "name": "churn-042"
+  },
+  "spec": {
+    "restartPolicy": "Never",
+    "containers": [
+      {
+        "name": "workload",
+        "image": "kubenode-observer/exec-test:dev",
+        "imagePullPolicy": "Never",
+        "args": [
+          "--iterations=2000",
+          "--interval=0s",
+          "--child-exit-code=0"
+        ],
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "8Mi"
+          },
+          "limits": {
+            "cpu": "1",
+            "memory": "32Mi"
+          }
+        }
+      }
+    ]
+  }
+}

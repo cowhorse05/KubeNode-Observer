@@ -1,0 +1,106 @@
+configmap/kno-experiment-lock created
+daemonset.apps/kno-agent image updated
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+namespace/kno-soak-test created
+soak round=1 elapsed=11s: 2000 children, identities matched, Agent healthy
+soak round=2 elapsed=31s: 2000 children, identities matched, Agent healthy
+soak round=3 elapsed=51s: 2000 children, identities matched, Agent healthy
+soak round=4 elapsed=71s: 2000 children, identities matched, Agent healthy
+soak round=5 elapsed=90s: 2000 children, identities matched, Agent healthy
+soak round=6 elapsed=111s: 2000 children, identities matched, Agent healthy
+soak round=7 elapsed=131s: 2000 children, identities matched, Agent healthy
+soak round=8 elapsed=153s: 2000 children, identities matched, Agent healthy
+soak round=9 elapsed=173s: 2000 children, identities matched, Agent healthy
+soak round=10 elapsed=193s: 2000 children, identities matched, Agent healthy
+soak round=11 elapsed=213s: 2000 children, identities matched, Agent healthy
+soak round=12 elapsed=235s: 2000 children, identities matched, Agent healthy
+soak round=13 elapsed=255s: 2000 children, identities matched, Agent healthy
+soak round=14 elapsed=275s: 2000 children, identities matched, Agent healthy
+soak round=15 elapsed=294s: 2000 children, identities matched, Agent healthy
+soak round=16 elapsed=313s: 2000 children, identities matched, Agent healthy
+soak round=17 elapsed=332s: 2000 children, identities matched, Agent healthy
+soak round=18 elapsed=352s: 2000 children, identities matched, Agent healthy
+soak round=19 elapsed=371s: 2000 children, identities matched, Agent healthy
+soak round=20 elapsed=391s: 2000 children, identities matched, Agent healthy
+soak round=21 elapsed=410s: 2000 children, identities matched, Agent healthy
+soak round=22 elapsed=428s: 2000 children, identities matched, Agent healthy
+soak round=23 elapsed=448s: 2000 children, identities matched, Agent healthy
+soak round=24 elapsed=468s: 2000 children, identities matched, Agent healthy
+soak round=25 elapsed=488s: 2000 children, identities matched, Agent healthy
+soak round=26 elapsed=507s: 2000 children, identities matched, Agent healthy
+soak round=27 elapsed=527s: 2000 children, identities matched, Agent healthy
+soak round=28 elapsed=546s: 2000 children, identities matched, Agent healthy
+soak round=29 elapsed=566s: 2000 children, identities matched, Agent healthy
+soak round=30 elapsed=585s: 2000 children, identities matched, Agent healthy
+soak round=31 elapsed=604s: 2000 children, identities matched, Agent healthy
+soak round=32 elapsed=623s: 2000 children, identities matched, Agent healthy
+soak round=33 elapsed=644s: 2000 children, identities matched, Agent healthy
+soak round=34 elapsed=662s: 2000 children, identities matched, Agent healthy
+soak round=35 elapsed=681s: 2000 children, identities matched, Agent healthy
+soak round=36 elapsed=700s: 2000 children, identities matched, Agent healthy
+soak round=37 elapsed=719s: 2000 children, identities matched, Agent healthy
+soak round=38 elapsed=739s: 2000 children, identities matched, Agent healthy
+soak round=39 elapsed=758s: 2000 children, identities matched, Agent healthy
+soak round=40 elapsed=777s: 2000 children, identities matched, Agent healthy
+soak round=41 elapsed=796s: 2000 children, identities matched, Agent healthy
+soak round=42 elapsed=815s: 2000 children, identities matched, Agent healthy
+soak round=43 elapsed=835s: 2000 children, identities matched, Agent healthy
+soak round=44 elapsed=854s: 2000 children, identities matched, Agent healthy
+soak round=45 elapsed=874s: 2000 children, identities matched, Agent healthy
+soak round=46 elapsed=893s: 2000 children, identities matched, Agent healthy
+soak round=47 elapsed=913s: 2000 children, identities matched, Agent healthy
+soak round=48 elapsed=932s: 2000 children, identities matched, Agent healthy
+soak round=49 elapsed=951s: 2000 children, identities matched, Agent healthy
+soak round=50 elapsed=970s: 2000 children, identities matched, Agent healthy
+soak round=51 elapsed=989s: 2000 children, identities matched, Agent healthy
+soak round=52 elapsed=1010s: 2000 children, identities matched, Agent healthy
+soak round=53 elapsed=1029s: 2000 children, identities matched, Agent healthy
+soak round=54 elapsed=1049s: 2000 children, identities matched, Agent healthy
+soak round=55 elapsed=1069s: 2000 children, identities matched, Agent healthy
+soak round=56 elapsed=1088s: 2000 children, identities matched, Agent healthy
+soak round=57 elapsed=1108s: 2000 children, identities matched, Agent healthy
+soak round=58 elapsed=1128s: 2000 children, identities matched, Agent healthy
+soak round=59 elapsed=1147s: 2000 children, identities matched, Agent healthy
+soak round=60 elapsed=1166s: 2000 children, identities matched, Agent healthy
+soak round=61 elapsed=1185s: 2000 children, identities matched, Agent healthy
+soak round=62 elapsed=1204s: 2000 children, identities matched, Agent healthy
+soak round=63 elapsed=1224s: 2000 children, identities matched, Agent healthy
+soak round=64 elapsed=1243s: 2000 children, identities matched, Agent healthy
+soak round=65 elapsed=1262s: 2000 children, identities matched, Agent healthy
+soak round=66 elapsed=1281s: 2000 children, identities matched, Agent healthy
+soak round=67 elapsed=1300s: 2000 children, identities matched, Agent healthy
+soak round=68 elapsed=1319s: 2000 children, identities matched, Agent healthy
+soak round=69 elapsed=1339s: 2000 children, identities matched, Agent healthy
+soak round=70 elapsed=1358s: 2000 children, identities matched, Agent healthy
+soak round=71 elapsed=1378s: 2000 children, identities matched, Agent healthy
+soak round=72 elapsed=1397s: 2000 children, identities matched, Agent healthy
+soak round=73 elapsed=1416s: 2000 children, identities matched, Agent healthy
+soak round=74 elapsed=1437s: 2000 children, identities matched, Agent healthy
+soak round=75 elapsed=1456s: 2000 children, identities matched, Agent healthy
+soak round=76 elapsed=1476s: 2000 children, identities matched, Agent healthy
+soak round=77 elapsed=1495s: 2000 children, identities matched, Agent healthy
+soak round=78 elapsed=1513s: 2000 children, identities matched, Agent healthy
+soak round=79 elapsed=1532s: 2000 children, identities matched, Agent healthy
+soak round=80 elapsed=1550s: 2000 children, identities matched, Agent healthy
+soak round=81 elapsed=1570s: 2000 children, identities matched, Agent healthy
+soak round=82 elapsed=1589s: 2000 children, identities matched, Agent healthy
+soak round=83 elapsed=1608s: 2000 children, identities matched, Agent healthy
+soak round=84 elapsed=1628s: 2000 children, identities matched, Agent healthy
+soak round=85 elapsed=1647s: 2000 children, identities matched, Agent healthy
+soak round=86 elapsed=1666s: 2000 children, identities matched, Agent healthy
+soak round=87 elapsed=1685s: 2000 children, identities matched, Agent healthy
+soak round=88 elapsed=1706s: 2000 children, identities matched, Agent healthy
+soak round=89 elapsed=1727s: 2000 children, identities matched, Agent healthy
+soak round=90 elapsed=1746s: 2000 children, identities matched, Agent healthy
+soak round=91 elapsed=1766s: 2000 children, identities matched, Agent healthy
+soak round=92 elapsed=1786s: 2000 children, identities matched, Agent healthy
+soak round=93 elapsed=1805s: 2000 children, identities matched, Agent healthy
+Soak passed: 93 Pods, 186000 children, 1816 seconds; restoring original Agent.
+namespace "kno-soak-test" deleted
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+configmap "kno-experiment-lock" deleted from kube-system namespace

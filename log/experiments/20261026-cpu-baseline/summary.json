@@ -1,0 +1,60 @@
+{
+  "status": "failed",
+  "config": {
+    "mode": "accuracy",
+    "context": "kno-dev",
+    "output": "log/experiments/20261026-cpu-baseline",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "costAgentImage": "kubenode-observer/kno-agent:cost",
+    "baselineAgentImage": "kubenode-observer/kno-agent:cost",
+    "candidateAgentImage": "kubenode-observer/kno-agent:metrics-cache",
+    "testAgentImage": "kubenode-observer/kno-agent:memory-flush",
+    "pairs": 4,
+    "accuracyRepeats": 1,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 10000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000,
+    "memoryAgentImage": "kubenode-observer/kno-agent:memory",
+    "memoryGoLimits": "original,80MiB",
+    "memoryPulses": 5,
+    "memoryIdleNs": 60000000000,
+    "memoryIntervalNs": 5000000000
+  },
+  "accuracyCases": [
+    {
+      "mode": "steady",
+      "interval": "250ms",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-250ms-01.json",
+      "absoluteErrorPercent": 0.9334068499701864,
+      "signedErrorPercent": -0.9334068499701864,
+      "referenceSkewPercent": 0.002958389157103957,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-1s-01.json",
+      "absoluteErrorPercent": 0.6154170412797866,
+      "signedErrorPercent": -0.6154170412797866,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "2s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-2s-01.json",
+      "absoluteErrorPercent": 1.090132664674348,
+      "signedErrorPercent": -1.090132664674348,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    }
+  ],
+  "error": "HTTP 503 Service Unavailable: iterate CPU runtime map: iteration aborted\n"
+}

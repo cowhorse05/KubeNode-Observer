@@ -1,0 +1,22 @@
+Experiment artifacts: log/experiments/20261027-cpu-accounting-v2
+pair 1 off: 160799.03 ops/s, p99 17 us
+pair 1 on: 171639.91 ops/s, p99 15 us
+pair 2 on: 167429.74 ops/s, p99 15 us
+pair 2 off: 172596.23 ops/s, p99 14 us
+pair 3 off: 173905.79 ops/s, p99 14 us
+pair 3 on: 165479.68 ops/s, p99 17 us
+pair 4 on: 171101.60 ops/s, p99 17 us
+pair 4 off: 165326.72 ops/s, p99 16 us
+paired median throughput delta 0.25% (exploratory 95% bootstrap [-4.85, 6.74])
+accuracy steady 250ms repeat 1: error -0.00%, reference bracket 0.00%, missing keys 0
+accuracy steady 1s repeat 1: error -0.00%, reference bracket 0.00%, missing keys 0
+accuracy steady 2s repeat 1: error +0.00%, reference bracket 0.00%, missing keys 0
+accuracy churn 250ms repeat 1: error -0.00%, reference bracket 0.00%, missing keys 19916
+accuracy churn 1s repeat 1: error -0.05%, reference bracket 0.08%, missing keys 20246
+accuracy churn 2s repeat 1: error +0.00%, reference bracket 0.00%, missing keys 20750
+accuracy churn 2s repeat 2: error -0.00%, reference bracket 0.00%, missing keys 19623
+accuracy churn 1s repeat 2: error +0.00%, reference bracket 0.00%, missing keys 18462
+accuracy churn 250ms repeat 2: error -0.00%, reference bracket 0.00%, missing keys 19522
+accuracy steady 2s repeat 2: error -0.00%, reference bracket 0.00%, missing keys 122
+accuracy steady 1s repeat 2: error -0.00%, reference bracket 0.00%, missing keys 244
+accuracy steady 250ms repeat 2: error -0.16%, reference bracket 0.30%, missing keys 0

@@ -106,12 +106,27 @@ func TestCPUBatchSnapshotKernel(t *testing.T) {
 			}
 		}
 		snapshot, err := p.Snapshot()
+		// LRU insertion can reclaim a batch before MaxEntries is reached.
+		// Compare with the actual frozen map, not attempted insertion count.
+		expectedCount := 0
+		var expectedSum uint64
+		var key cpuKey
+		var value cpuValue
+		iterator := p.objects.CpuRuntime.Iterate()
+		for iterator.Next(&key, &value) {
+			expectedCount++
+			expectedSum += value.Runtime
+		}
+		if e := iterator.Err(); e != nil {
+			p.Close()
+			t.Fatal(e)
+		}
 		p.Close()
 		var sum uint64
 		for _, value := range snapshot.Processes {
 			sum += value.Runtime
 		}
-		if err != nil || len(snapshot.Processes) != int(size) || sum != uint64(size)*uint64(size+1)/2 || snapshot.Totals == nil || snapshot.CapturedAt.IsZero() {
+		if err != nil || len(snapshot.Processes) != expectedCount || sum != expectedSum || snapshot.Totals == nil || snapshot.CapturedAt.IsZero() {
 			t.Fatalf("batch size=%d: processes=%d sum=%d err=%v", size, len(snapshot.Processes), sum, err)
 		}
 	}

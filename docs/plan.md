@@ -315,6 +315,8 @@ microVM 工作在 MVP 完成后开始。
 
 ### M7：Kata 环境验证与 Host 侧识别
 
+状态（2026-10-27）：已到达入口，尚未开始。runc 的 CPU 记账、配对/精度回归、完整集成与 40000 短进程回归，以及独立 30 分钟 debug-off Pod churn 有限验收已完成；按约定先通知用户，不自动安装 Kata 或修改运行时。
+
 - 使用 Minikube + containerd 部署 Kata QEMU 或 Cloud Hypervisor。
 - 通过 RuntimeClass 创建 Kata Pod。
 - 识别 Kata runtime handler、Sandbox ID、shim PID 和 hypervisor PID。
@@ -369,9 +371,9 @@ microVM 工作在 MVP 完成后开始。
 - 不同并发 Pod 数量下的缓存和采集开销。
 - Observer 开启前后的 workload throughput 和 P99 latency。
 
-## 10. 下一阶段：性能优化
+## 10. runc 性能收尾与 Kata 入口
 
-M6 已完成，当前停在性能优化入口，不提前进入 Kata 或 Web UI。
+M6 已完成。下列优化及有限验收用于收尾 runc，完成后停在 M7 Kata 入口，不自动安装运行时或扩展 Web UI。
 
 2026-10-20 已实现可重复的 AB/BA 配对实验和 CPU runtime/cgroup 精度对照，完成 8 个独立配对及 12 个精度窗口，并通过 PR #1 合入 main。方法见 [实验指南](experiments.md)，数据与限制见 [实验记录](../log/2026-10-20-paired-accuracy.md)。
 
@@ -381,11 +383,13 @@ Metrics 优化已完成 key-only 有界 census 与后台快照：4 个双版本�
 
 2026-10-23 已完成内存预算诊断与三组有限观测：相同 128 MiB / 200m 下，原配置、80MiB soft limit、释放加载后 BTF 缓存三组的末点 cgroup current 分别为 105.93、80.06、26.22 MiB。BTF 释放不改变默认 GOMEMLIMIT 或 BPF map；启动峰值仍有 81.74 MiB，且小堆 GC 更频繁，不宣称长期 OOM 保证或 CPU 收益。详见 [内存预算与根因报告](../log/2026-10-23-memory-budget.md)。
 
-1. 已有成本分项与 metrics 优化结果，继续用相同质量门限约束后续优化；
-2. 延长无诊断模式的 128 MiB 内存观察，覆盖 Pod/元数据 churn，核对启动峰值与 GC/CPU 代价；
-3. 使用已实现的 AB/BA 执行器，在更受控的 CPU 环境和更长窗口下复测吞吐/P99；
-4. 每项优化必须同时通过 integration，并对比 events lost、map occupancy 与归属正确性；
-5. 性能结论稳定后再开始 M7 Kata Host 侧识别。
+2026-10-26/27 runc 收尾：调度器 runtime 差值取代 tracepoint 墙钟差；Pod/Container 独立累计，不再依赖有限进程明细加总；进程 map 改为 batch 读取。首次长观察失败后修正启动 CRI 未命中的有界重试，独立重跑完成 93 Pods /186000 子进程 /1816s debug-off 观察，无重启/OOM，cgroup peak 80.36 MiB。最终镜像另跑 4 组业务配对和 12 个精度窗口，并通过完整 integration 和 40000 短进程回归，原部署已恢复。特定负载名义偏差收敛，但吞吐/P99 区间仍宽，不承诺零开销或跨负载精度。失败与成功记录均保留；详见 [CPU 记账与稳定性报告](../log/2026-10-26-cpu-accounting.md)。
+
+1. 保留现有成本分解、配对与精度工具，后续改动继续使用相同质量门限；
+2. 128 MiB 下有限的无诊断 Pod/元数据 churn 观察已完成，不将其扩张为长期生产保证；
+3. 更受控 CPU 环境、更长窗口和跨内核测量作为后续研究，不以无限优化阻塞功能；
+4. 每项优化必须同时通过 integration，并核对 events lost、map occupancy 与归属正确性；
+5. 到达 M7 入口后通知用户；KVM/nested virtualization 的 Go/No-Go、Kata 安装及 RuntimeClass 变更留待下一阶段明确启动。
 
 ## 11. 主要风险
 
