@@ -1,0 +1,264 @@
+log/kata-20261027/shm-resized.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-2
+log/kata-runc-validation-20261027/after-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+docs/plan.md
+  s_6e6fc63242599e::t_36f0a665ad8980 318,328
+  s_6e6fc63242599e::t_e631e19c1fd2d6 378,394
+log/kata-20261027/first-boot-journal.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-648
+log/kata-20261027/boundary-console.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-33
+log/kata-test-20261027/failure-agent.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-100
+log/kata-20261027/configuration-kno-qemu.toml
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-765
+log/kata-test-v2-20261027/topology-deleted-1.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v2-20261027/kata-identity.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v2-20261027/metrics-after.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-runc-validation-20261027/restored-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-runc-final-20261027/after-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-test-v2-20261027/runc-identity.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/cri-container-cpu.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-531
+log/kata-runc-validation-20261027/public-debug_pprof_.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-final-20261027/metrics-after-1.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-runc-validation-20261027/port-forward.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-5
+log/kata-test-v2-20261027/vmm-fds.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-134
+log/kata-test-v2-20261027/health-before.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-20261027/original-manifest.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-188
+log/kata-test-v2-20261027/metrics-before.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-20261027/install.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-27
+log/kata-runc-final-20261027/original-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-runc-final-20261027/stability.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-36
+log/kata-20261027/containerd-after.toml
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-70
+log/kata-test-20261027/forward.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-3
+log/kata-20261027/services-enabled.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-2
+log/kata-test-v3-20261027/topology-deleted-1.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-20261027/boundary-v3-console.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-37
+log/kata-runc-final-20261027/public-debug_pprof_.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/topology-1.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-20261027/download.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-4
+log/kata-test-v2-20261027/forward.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-9
+log/kata-runc-final-20261027/before-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-20261027/final-checks.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-28
+log/kata-runc-final-20261027/public-diagnostics.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-validation-20261027/metrics-after-1.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-test-20261027/original-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-201
+log/kata-test-v3-20261027/forward.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-9
+log/kata-test-v2-20261027/kata-metrics.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-1383
+log/kata-test-v2-20261027/boundary-events.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/original-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-201
+log/kata-test-20261027/failure-containerd.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-120
+log/kata-test-20261027/failure-describe.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-130
+log/kata-test-v3-20261027/runc-identity.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/pods.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-518
+hack/install-kata-minikube.sh
+  s_6e6fc63242599e::t_2e9238989efb7b 31-36
+log/kata-20261027/boundary-v2-console.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-34
+log/kata-test-v3-20261027/health-before.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-validation-20261027/stability.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-35
+log/kata-20261027/release.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-728
+log/kata-runc-final-20261027/integration.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-300
+docs/support-matrix.md
+  s_6e6fc63242599e::t_36f0a665ad8980 18-19
+log/kata-test-20261027/exit.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/after-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-618
+log/kata-test-v2-20261027/pods.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-518
+log/kata-test-v3-20261027/boundary-events.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/original-manifest.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-188
+log/kata-test-20261027/before-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-618
+log/kata-test-v3-20261027/vmm-exe.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/vmm-fds.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-134
+log/kata-test-v2-20261027/vmm-exe.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-final-20261027/restored-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-test-v3-20261027/test-manifest.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-189
+log/kata-test-v2-20261027/original-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-201
+log/kata-test-v2-20261027/exit.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-final-20261027/port-forward.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-5
+log/kata-test-v3-20261027/source-sha256.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-9
+log/kata-runc-validation-20261027/integration.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-299
+log/kata-test-v3-20261027/kata-metrics.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-1357
+log/kata-test-v2-20261027/topology-ready.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-20261027/config-after-refusal.sha256
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/2026-10-27-kata-host.md
+  s_6e6fc63242599e::t_e631e19c1fd2d6 1-62,64-68,71
+  s_6e6fc63242599e::t_be37a508556e7c 63
+  s_6e6fc63242599e::t_1aa291ad2b2408 69-70
+log/kata-test-v2-20261027/after-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-618
+log/kata-test-v2-20261027/test-manifest.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-189
+log/kata-20261027/final-build.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-31
+log/kata-20261027/docker-shm-size.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-20261027/failure-pods.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-468
+log/kata-test-v3-20261027/metrics-after.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-test-v2-20261027/topology-1.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v2-20261027/before-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-618
+log/kata-20261027/success-journal.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-854
+log/kata-20261027/runtime-after.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-7
+log/kata-test-v3-20261027/kata-identity.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-20261027/metrics-before.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-20261027/kvm.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/before-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-618
+log/kata-20261027/runc-regression-console.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-346
+log/kata-20261027/containerd-before.toml
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-69
+log/kata-20261027/preflight.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-14
+log/kata-test-v2-20261027/restored-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-20261027/services-active.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-2
+log/kata-test-v3-20261027/metrics-before.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+docs/kata.md
+  s_6e6fc63242599e::t_2e9238989efb7b 61-68
+log/kata-test-v2-20261027/original-manifest.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-188
+log/kata-test-v3-20261027/restored-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-runc-validation-20261027/before-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-test-v2-20261027/kata-host-cpu.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-validation-20261027/metrics-before.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-20261027/environment.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-33
+log/kata-20261027/shm-after-failure.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-2
+log/kata-test-v2-20261027/cri-sandbox.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-1028
+log/kata-20261027/config-before-refusal.sha256
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+docs/architecture.md
+  s_6e6fc63242599e::t_36f0a665ad8980 60-61
+log/kata-runc-validation-20261027/original-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+log/kata-test-v3-20261027/cri-sandbox.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-1028
+log/kata-test-v3-20261027/cri-container-exec.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-531
+log/kata-test-v3-20261027/source-head.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-20261027/runc-final-console.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-347
+log/kata-test-v3-20261027/exit.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-20261027/health-before.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v2-20261027/monitor-sandboxes.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-test-v3-20261027/kata-host-cpu.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+README.md
+  s_6e6fc63242599e::t_36f0a665ad8980 8,24
+log/kata-test-v3-20261027/topology-ready.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-runc-validation-20261027/public-diagnostics.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+.gitattributes
+  s_6e6fc63242599e::t_e2da3a83234ec2 12
+log/kata-runc-final-20261027/metrics-before.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-87
+log/kata-test-v3-20261027/monitor-sandboxes.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1
+log/kata-20261027/reinstall-refused.txt
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-21
+log/kata-test-20261027/test-manifest.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-189
+log/kata-test-20261027/restored-agent.json
+  s_6e6fc63242599e::t_f5c203fbc4dbd7 1-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "fa809c9b445d8ade722dd953b1f627be3d286a70",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
