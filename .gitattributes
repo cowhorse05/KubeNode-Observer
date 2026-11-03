@@ -9,3 +9,4 @@ log/soak-*/source.patch -whitespace
 log/cpu-validation-*/** -text linguist-generated=true
 log/cpu-v2-validation-*/** -text linguist-generated=true
 log/*-console.txt -text -whitespace linguist-generated=true
+log/kata-*/** -text -whitespace linguist-generated=true

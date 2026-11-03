@@ -1,0 +1,2 @@
+Filesystem      1B-blocks  Used  Available Use% Mounted on
+shm            1073741824 86016 1073655808   1% /dev/shm

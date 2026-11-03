@@ -1,0 +1,130 @@
+Name:                kno-boundary-kata
+Namespace:           kno-kata-test
+Priority:            0
+Runtime Class Name:  kno-kata-qemu
+Service Account:     default
+Node:                kno-dev/192.168.49.2
+Start Time:          Tue, 27 Oct 2026 15:52:19 +0800
+Labels:              <none>
+Annotations:         <none>
+Status:              Pending
+IP:                  
+IPs:                 <none>
+Containers:
+  exec:
+    Container ID:  
+    Image:         kubenode-observer/kata-boundary:dev
+    Image ID:      
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --iterations=600
+      --interval=1s
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  64Mi
+    Requests:
+      cpu:        20m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9tpjp (ro)
+  cpu:
+    Container ID:  
+    Image:         kubenode-observer/cpu-hog:dev
+    Image ID:      
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --duration=10m
+      --workers=1
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  128Mi
+    Requests:
+      cpu:        100m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9tpjp (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-9tpjp:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             kno-boundary-runc
+Namespace:        kno-kata-test
+Priority:         0
+Service Account:  default
+Node:             kno-dev/192.168.49.2
+Start Time:       Tue, 27 Oct 2026 15:52:19 +0800
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.1.52
+IPs:
+  IP:  10.244.1.52
+Containers:
+  exec:
+    Container ID:  containerd://d7dfd6c429982b5af139fd681073c40d920c31348d0704bb6f4587e6a7c20f9d
+    Image:         kubenode-observer/kata-boundary:dev
+    Image ID:      sha256:3930f04e61d7fa787031d60ed6e6b0344401b32ddd64f5e37943f339c11e5290
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --iterations=600
+      --interval=1s
+    State:          Running
+      Started:      Tue, 27 Oct 2026 15:52:21 +0800
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  64Mi
+    Requests:
+      cpu:        20m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-nsk5h (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-nsk5h:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-boundary-runc
+  namespace: kno-kata-test
+spec:
+  restartPolicy: Never
+  containers:
+    - name: exec
+      image: kubenode-observer/kata-boundary:dev
+      imagePullPolicy: Never
+      args: ["--iterations=600", "--interval=1s"]
+      resources:
+        requests: {cpu: 20m, memory: 32Mi}
+        limits: {cpu: 200m, memory: 64Mi}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-boundary-kata
+  namespace: kno-kata-test
+spec:
+  runtimeClassName: kno-kata-qemu
+  restartPolicy: Never
+  containers:
+    - name: exec
+      image: kubenode-observer/kata-boundary:dev
+      imagePullPolicy: Never
+      args: ["--iterations=600", "--interval=1s"]
+      resources:
+        requests: {cpu: 20m, memory: 32Mi}
+        limits: {cpu: 200m, memory: 64Mi}
+    - name: cpu
+      image: kubenode-observer/cpu-hog:dev
+      imagePullPolicy: Never
+      args: ["--duration=10m", "--workers=1"]
+      resources:
+        requests: {cpu: 100m, memory: 32Mi}
+        limits: {cpu: 500m, memory: 128Mi}

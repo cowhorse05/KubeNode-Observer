@@ -1,0 +1,12 @@
+[Unit]
+Description=KubeNode-Observer development Kata Monitor
+After=containerd.service
+Requires=containerd.service
+
+[Service]
+ExecStart=/opt/kata/bin/kata-monitor --listen-address 127.0.0.1:8090 --runtime-endpoint /run/containerd/containerd.sock
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

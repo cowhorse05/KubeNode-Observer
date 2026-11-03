@@ -57,6 +57,8 @@ sched_process_exec / sched_process_exit
 
 ## CPU runtime 聚合
 
+Kata 扩展见 [接入指南](kata.md)：CRI Ready Sandbox 独立进入 `snapshot.sandboxes`，经宿主可执行文件、完整 shim 参数、VMM 父子关系和启动 tick 核对身份。应用容器重启间隙不等于 VM 消失。Kata 的 CRI container PID 不在 Host procfs 中当作业务容器解析；Guest 容器返回 `processVisibility=guest-unavailable`。VMM 的 Host cgroup 不加入普通容器 Resolve 索引，因此不会把共享 VM 重复归属到多个容器。官方 Monitor 仅按需、按 Sandbox 查询，未合入普通自监控 `/metrics`，本阶段不改动 eBPF 记账或添加 Guest Probe。
+
 ```text
 sched_switch raw tracepoint
           │ switch-out task

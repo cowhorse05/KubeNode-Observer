@@ -1,0 +1,27 @@
+node/kno-dev condition met
+Linux kno-dev 6.6.114.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Mon Dec  1 20:46:23 UTC 2025 x86_64 GNU/Linux
+crw-rw---- 1 root kvm 10, 232 Oct 27 02:20 /dev/kvm
+crw-rw---- 1 root kvm 10, 238 Oct 27 02:20 /dev/vhost-net
+crw-rw---- 1 root kvm 10, 241 Oct 27 02:20 /dev/vhost-vsock
+{"apiVersion": 12, "createVM": true}
+cgroup2fs
+containerd containerd.io v2.2.1 dea7da592f5d1d2b7755e3a161be07f43fad8f75
+{
+  "defaultRuntime": "runc",
+  "runtimes": [
+    "runc"
+  ]
+}
+dist/kata-4.3.1/kata-go-static-4.3.1-amd64.tar.zst: OK
+kata-runtime  : 4.3.1
+   commit   : 03cf2ec06a5d302f23af811744f6bcea49988bfb
+   OCI specs: 1.2.1
+time="2026-10-27T07:50:28Z" level=warning msg="Not running network checks as super user" arch=amd64 name=kata-runtime pid=404957 source=runtime
+System is capable of running Kata Containers
+System can currently create Kata Containers
+time="2026-10-27T07:50:32Z" level=warning msg="Ignoring unknown key in TOML for plugin" error="strict mode: fields in the document are missing in the target struct" key="containerd untrusted_workload_runtime" plugin=io.containerd.cri.v1.runtime
+Created symlink /etc/systemd/system/multi-user.target.wants/kno-kata-monitor.service → /etc/systemd/system/kno-kata-monitor.service.
+node/kno-dev condition met
+true
+runtimeclass.node.k8s.io/kno-kata-qemu created
+Kata 4.3.1 Go/QEMU installed; default runtime remains runc. Monitor is loopback-only.

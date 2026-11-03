@@ -22,17 +22,19 @@ func NewCollector(nodeName string, runtime Runtime, proc *ProcFS, resolver Resou
 
 func (c *Collector) Snapshot(ctx context.Context) (Snapshot, error) {
 	started := time.Now()
-	runtimeContainers, err := c.runtime.Containers(ctx)
+	runtimeSnapshot, err := c.runtime.Snapshot(ctx)
 	c.Timing.Observe(telemetry.TopologyCRI, started)
 	if err != nil {
 		return Snapshot{}, err
 	}
 	defer c.Timing.Observe(telemetry.TopologyEnrich, time.Now())
+	runtimeContainers := runtimeSnapshot.Containers
 
 	snapshot := Snapshot{
 		GeneratedAt: time.Now().UTC(),
 		NodeName:    c.nodeName,
 		Containers:  make([]Container, 0, len(runtimeContainers)),
+		Sandboxes:   []Sandbox{},
 	}
 	if c.resolver != nil && c.resolver.Ready() {
 		if node, ok := c.resolver.Node(c.nodeName); ok {
@@ -41,16 +43,19 @@ func (c *Collector) Snapshot(ctx context.Context) (Snapshot, error) {
 	}
 	for _, current := range runtimeContainers {
 		container := Container{
-			ID:        current.ID,
-			SandboxID: current.SandboxID,
-			Name:      current.Name,
-			Image:     current.Image,
-			State:     current.State,
-			Namespace: current.Labels[LabelPodNamespace],
-			PodName:   current.Labels[LabelPodName],
-			PodUID:    current.Labels[LabelPodUID],
-			PID:       current.PID,
-			Processes: []Process{},
+			ID:                current.ID,
+			SandboxID:         current.SandboxID,
+			Name:              current.Name,
+			Image:             current.Image,
+			State:             current.State,
+			RuntimeType:       current.RuntimeType,
+			RuntimeHandler:    current.RuntimeHandler,
+			ProcessVisibility: "host",
+			Namespace:         current.Labels[LabelPodNamespace],
+			PodName:           current.Labels[LabelPodName],
+			PodUID:            current.Labels[LabelPodUID],
+			PID:               current.PID,
+			Processes:         []Process{},
 		}
 		if c.resolver != nil && c.resolver.Ready() {
 			if pod, ok := c.resolver.Pod(container.Namespace, container.PodName); !ok {
@@ -64,6 +69,14 @@ func (c *Collector) Snapshot(ctx context.Context) (Snapshot, error) {
 					container.Issues = append(container.Issues, fmt.Sprintf("pod uid mismatch: CRI=%s Kubernetes runtime identity=%s", container.PodUID, pod.RuntimeUID))
 				}
 			}
+		}
+		if isKata(current.RuntimeType, current.RuntimeHandler) {
+			// A Kata CRI PID may be a shim or a guest PID. Never dereference it
+			// in host procfs or attribute its cgroup to a guest container.
+			container.PID = 0
+			container.ProcessVisibility = "guest-unavailable"
+			snapshot.Containers = append(snapshot.Containers, container)
+			continue
 		}
 		if current.PID == 0 {
 			container.Issues = append(container.Issues, "CRI did not return a container pid")
@@ -91,5 +104,6 @@ func (c *Collector) Snapshot(ctx context.Context) (Snapshot, error) {
 		}
 		snapshot.Containers = append(snapshot.Containers, container)
 	}
+	snapshot.Sandboxes = c.proc.KataSandboxes(runtimeSnapshot.Sandboxes)
 	return snapshot, nil
 }

@@ -101,6 +101,40 @@ func main() {
 	topology.Flags().StringVarP(&namespace, "namespace", "n", "", "filter by namespace")
 	topology.Flags().StringVar(&pod, "pod", "", "filter by pod name")
 	root.AddCommand(topology)
+	var sandboxID string
+	kata := &cobra.Command{Use: "kata", Short: "Inspect Kata through the node's official Kata Monitor"}
+	kataMetrics := &cobra.Command{
+		Use: "metrics", Short: "Read official Kata Monitor metrics for a local sandbox",
+		RunE: func(_ *cobra.Command, _ []string) error {
+			ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			defer cancel()
+			request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint+"/api/v1/kata/metrics?"+url.Values{"sandbox": {sandboxID}}.Encode(), nil)
+			if err != nil {
+				return err
+			}
+			response, err := http.DefaultClient.Do(request)
+			if err != nil {
+				return err
+			}
+			defer response.Body.Close()
+			body, err := io.ReadAll(io.LimitReader(response.Body, (8<<20)+1))
+			if err != nil {
+				return err
+			}
+			if response.StatusCode != http.StatusOK {
+				return fmt.Errorf("agent returned %s: %s", response.Status, body)
+			}
+			if len(body) > 8<<20 {
+				return fmt.Errorf("metrics exceed 8 MiB")
+			}
+			fmt.Print(string(body))
+			return nil
+		},
+	}
+	kataMetrics.Flags().StringVar(&sandboxID, "sandbox", "", "full sandbox ID from kno topology")
+	_ = kataMetrics.MarkFlagRequired("sandbox")
+	kata.AddCommand(kataMetrics)
+	root.AddCommand(kata)
 
 	var eventNamespace string
 	var eventPod string

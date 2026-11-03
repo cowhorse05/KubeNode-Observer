@@ -1,0 +1,21 @@
+node/kno-dev condition met
+Linux kno-dev 6.6.114.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Mon Dec  1 20:46:23 UTC 2025 x86_64 GNU/Linux
+crw-rw---- 1 root kvm 10, 232 Oct 27 02:20 /dev/kvm
+crw-rw---- 1 root kvm 10, 238 Oct 27 02:20 /dev/vhost-net
+crw-rw---- 1 root kvm 10, 241 Oct 27 02:20 /dev/vhost-vsock
+{"apiVersion": 12, "createVM": true}
+cgroup2fs
+Filesystem      1B-blocks  Used  Available Use% Mounted on
+shm            1073741824 86016 1073655808   1% /dev/shm
+containerd containerd.io v2.2.1 dea7da592f5d1d2b7755e3a161be07f43fad8f75
+{
+  "defaultRuntime": "runc",
+  "runtimes": [
+    "kata-qemu",
+    "runc"
+  ]
+}
+dist/kata-4.3.1/kata-go-static-4.3.1-amd64.tar.zst: OK
+configmap/kno-experiment-lock created
+refusing to overwrite existing /opt/kata; inspect the prior installation/backup
+configmap "kno-experiment-lock" deleted from kube-system namespace

@@ -1,0 +1,28 @@
++ go test ./...
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-agent	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno-experiment	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-contention	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/cpu-hog	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/examples/exec-test	[no test files]
+?   	github.com/cowhorse05/KubeNode-Observer/internal/bpfgen	[no test files]
+ok  	github.com/cowhorse05/KubeNode-Observer/examples/observer-benchmark	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/agent	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/event	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/experiment	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/runqlat	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/telemetry	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	(cached)
++ go vet ./...
++ go test -race ./internal/topology ./internal/cpu ./internal/event ./internal/runqlat ./internal/probe ./internal/metrics
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	2.158s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/cpu	1.103s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/event	1.097s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/runqlat	1.086s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/metrics	(cached)
++ bash -n hack/kata-preflight.sh hack/install-kata-minikube.sh hack/kata-test.sh
++ git diff --check

@@ -315,7 +315,7 @@ microVM 工作在 MVP 完成后开始。
 
 ### M7：Kata 环境验证与 Host 侧识别
 
-状态（2026-10-27）：已到达入口，尚未开始。runc 的 CPU 记账、配对/精度回归、完整集成与 40000 短进程回归，以及独立 30 分钟 debug-off Pod churn 有限验收已完成；按约定先通知用户，不自动安装 Kata 或修改运行时。
+状态（2026-10-27）：用户确认启动后，已完成 Kata 4.3.1 Go/QEMU 的环境验证、RuntimeClass、双容器共享 VM 的 Host shim/VMM 身份和官方 Monitor 接入。首次真实启动暴露 Docker 节点 64 MiB `/dev/shm` 不足，保存失败后仅调整节点私有 tmpfs，独立重跑通过。Host/Guest exec 正负对照、删除后拓扑/Host PID/Monitor 清理已验证；Ready Sandbox 不依赖 Running 应用容器，避免重启间隙丢失 VM。复现与范围见 [Kata 指南](kata.md)，结果见 [M7 报告](../log/2026-10-27-kata-host.md)。没有自研 Guest Probe 或宣称性能收益。
 
 - 使用 Minikube + containerd 部署 Kata QEMU 或 Cloud Hypervisor。
 - 通过 RuntimeClass 创建 Kata Pod。
@@ -324,6 +324,8 @@ microVM 工作在 MVP 完成后开始。
 - 展示 Host 侧只能看到 VMM、无法看到 guest process 的可见性边界。
 
 ### M8：Host/VMM 资源归属
+
+状态：下一阶段，尚未实现。M7 的身份关联和官方 metrics 查询不等于已经实现 VMM/vCPU 的项目 eBPF 资源视图；不将共享 VMM 直接塞回普通容器 CPU 索引。
 
 - 将 hypervisor CPU、内存、线程和 IO 归属到 Pod。
 - 识别 hypervisor vCPU threads。
@@ -373,7 +375,7 @@ microVM 工作在 MVP 完成后开始。
 
 ## 10. runc 性能收尾与 Kata 入口
 
-M6 已完成。下列优化及有限验收用于收尾 runc，完成后停在 M7 Kata 入口，不自动安装运行时或扩展 Web UI。
+M6 已完成。下列优化及有限验收用于收尾 runc，当时按约定停在 M7 入口；用户随后明确授权接入 Kata，M7 进展见上节。不扩展 Web UI。
 
 2026-10-20 已实现可重复的 AB/BA 配对实验和 CPU runtime/cgroup 精度对照，完成 8 个独立配对及 12 个精度窗口，并通过 PR #1 合入 main。方法见 [实验指南](experiments.md)，数据与限制见 [实验记录](../log/2026-10-20-paired-accuracy.md)。
 
@@ -389,7 +391,7 @@ Metrics 优化已完成 key-only 有界 census 与后台快照：4 个双版本�
 2. 128 MiB 下有限的无诊断 Pod/元数据 churn 观察已完成，不将其扩张为长期生产保证；
 3. 更受控 CPU 环境、更长窗口和跨内核测量作为后续研究，不以无限优化阻塞功能；
 4. 每项优化必须同时通过 integration，并核对 events lost、map occupancy 与归属正确性；
-5. 到达 M7 入口后通知用户；KVM/nested virtualization 的 Go/No-Go、Kata 安装及 RuntimeClass 变更留待下一阶段明确启动。
+5. 已在 M7 入口通知用户，并在收到明确授权后完成上述 Kata 接入；下一阶段是 M8 Host/VMM 资源视图，不以无限优化阻塞功能。
 
 ## 11. 主要风险
 

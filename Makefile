@@ -9,6 +9,7 @@ BENCHMARK_IMAGE ?= kubenode-observer/observer-benchmark:dev
 COST_AGENT_IMAGE ?= kubenode-observer/kno-agent:cost
 METRICS_AGENT_IMAGE ?= kubenode-observer/kno-agent:metrics-cache
 MEMORY_AGENT_IMAGE ?= kubenode-observer/kno-agent:memory
+KATA_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-host
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
@@ -120,5 +121,19 @@ deploy:
 
 undeploy:
 	kubectl --context $(MINIKUBE_PROFILE) delete -f deploy/minikube/kno-agent.yaml --ignore-not-found
+
+.PHONY: kata-check kata-install kata-test
+kata-check:
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) bash hack/kata-preflight.sh
+
+# Requires the verified official archive; does not pull runtime images.
+kata-install:
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) bash hack/install-kata-minikube.sh
+
+kata-test: workload-image cpu-hog-image
+	$(MAKE) image-local IMAGE=$(KATA_AGENT_IMAGE)
+	docker build -f examples/kata-boundary/Dockerfile.local -t kubenode-observer/kata-boundary:dev .
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(KATA_AGENT_IMAGE) kubenode-observer/kata-boundary:dev $(CPU_HOG_IMAGE)
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) AGENT_IMAGE=$(KATA_AGENT_IMAGE) bash hack/kata-test.sh
 
 
