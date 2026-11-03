@@ -1,0 +1,83 @@
+internal/host/delta.go
+  s_6e6fc63242599e::t_1966120fd5423d 1-11,18,38,40,52,60,62,73,82-83,91,99,107,114,138-139,151,165,182-183
+  s_6e6fc63242599e::t_b9f496db24402f 12-17,19-37,39,41-51,53-59,61,63-72,74-81,84-90,92-96,98,100,102-106,108-113,115-137,140-150,152-155,162-164,166-181
+  s_6e6fc63242599e::t_dd2d0eb1bfb1c1 97,101,156-161
+internal/host/proc_test.go
+  s_6e6fc63242599e::t_d8d36b54b1b695 1-12,29,59-61,73,79-81,85,96,111-115,130
+  s_6e6fc63242599e::t_5735127295a6fd 13-28,30-58,62-72,74-78,82-84,86-95,97-110,116-129
+README.md
+  s_6e6fc63242599e::t_c19dc12297ea0a 8,26
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_b9f496db24402f 155
+  s_6e6fc63242599e::t_1966120fd5423d 23
+hack/kata-test.sh
+  s_6e6fc63242599e::t_f1873872deacb3 93-101
+  s_6e6fc63242599e::t_6fc76a83c1f6fa 112-115,124-127
+api/host-resources.openapi.yaml
+  s_6e6fc63242599e::t_cb1ba2304ef4f2 1-41
+  s_6e6fc63242599e::t_d8d36b54b1b695 42-44,67-68,75-149
+  s_6e6fc63242599e::t_2f0dc0a57c8605 45-66,69-74
+hack/kata-vmm-test.sh
+  s_6e6fc63242599e::t_6fc76a83c1f6fa 1-58
+.gitattributes
+  s_6e6fc63242599e::t_f5fc0fda082db7 13
+cmd/kno/main.go
+  s_6e6fc63242599e::t_1966120fd5423d 254,290,292
+  s_6e6fc63242599e::t_b9f496db24402f 255-289,291
+Makefile
+  s_6e6fc63242599e::t_f5fc0fda082db7 13,126,140-145
+internal/host/handler_test.go
+  s_6e6fc63242599e::t_612eadc502e7c8 1-192
+hack/validate-host-contract.py
+  s_6e6fc63242599e::t_2f0dc0a57c8605 1-32
+hack/vmm-reference.py
+  s_6e6fc63242599e::t_6fc76a83c1f6fa 1-19
+docs/support-matrix.md
+  s_6e6fc63242599e::t_c19dc12297ea0a 18
+examples/kata-boundary/contention.yaml
+  s_6e6fc63242599e::t_6fc76a83c1f6fa 1-15
+internal/runqlat/handler.go
+  s_6e6fc63242599e::t_ed91c1435bbe0a 265-268
+  s_6e6fc63242599e::t_b4d49ef1a97527 262-264,269-271
+internal/host/delta_test.go
+  s_6e6fc63242599e::t_612eadc502e7c8 1-132
+  s_6e6fc63242599e::t_2f0dc0a57c8605 133-165
+internal/topology/store.go
+  s_6e6fc63242599e::t_b4d49ef1a97527 6,195-206
+internal/topology/store_test.go
+  s_6e6fc63242599e::t_2f0dc0a57c8605 6,13-31
+internal/host/proc.go
+  s_6e6fc63242599e::t_ed91c1435bbe0a 17,21,23,28,30-33,38-39,42-43,48,51-52,56-79,81-84,86-107,109-157,159-161,181-220,223-233
+  s_6e6fc63242599e::t_dd2d0eb1bfb1c1 40,108
+  s_6e6fc63242599e::t_b4d49ef1a97527 1-16,18-20,22,24-27,29,34-37,41,44-47,49-50,53-54,80,221-222,234
+  s_6e6fc63242599e::t_a501cbddca2a55 55,85,158,162-163
+  s_6e6fc63242599e::t_b9f496db24402f 164-180
+internal/host/handler.go
+  s_6e6fc63242599e::t_b9f496db24402f 19-27,29-30,32,36-38,41-44,46-56,59-69,71-72,75-80,84-88,90-108,110-111,113-146,149-155,157,159-167,169-193,195-204,206,208,212-221,225-287,289-302,304-307,309-328
+  s_6e6fc63242599e::t_a501cbddca2a55 1-18,28,31,33-35,39-40,45,57-58,70,73-74,81-83,89,109,112,147-148,156,158,168,194,205,207,209-211,222-224,288,303,308,329-332
+docs/host-resources.md
+  s_6e6fc63242599e::t_f5fc0fda082db7 1-41,43-66
+  s_6e6fc63242599e::t_2f0dc0a57c8605 42,67-68
+docs/architecture.md
+  s_6e6fc63242599e::t_c19dc12297ea0a 60-62
+internal/topology/kata.go
+  s_6e6fc63242599e::t_b4d49ef1a97527 26-28,63,119
+docs/kata.md
+  s_6e6fc63242599e::t_c19dc12297ea0a 7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "a1ddcf21b0cb15a7024cd33e4e4600904ccdf411",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
