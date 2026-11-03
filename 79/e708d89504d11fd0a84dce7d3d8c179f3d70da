@@ -1,0 +1,694 @@
+log/experiments/m8-final-20261103/pair-03-on-health.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-2s-02.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-20261103/final-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-20261103/kernel.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-14
+log/m8-final-20261103/m8-affinity-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-7
+log/m8-pilot2-20261103/m8-busy.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-recovery-1-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-runc-20261103/run.sh
+  s_6e6fc63242599e::t_cc944e479023da 1-58
+log/experiments/m8-final-20261103/accuracy-churn-1s-01.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-invalid.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-recovery-1-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/exit.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-runc-20261103/restored-spec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-173
+log/m8-final-20261103/boundary-events.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-02-on-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/pair-04-on-agent-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-4
+log/m8-20261103/race.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-4
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-final-20261103/vmm-fds.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-134
+log/experiments/m8-final-20261103/pair-02-on-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/m8-source.patch
+  s_6e6fc63242599e::t_cc944e479023da 1-539
+log/experiments/m8-final-20261103/pair-01-on-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-baseline-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1-497
+log/experiments/m8-final-20261103/accuracy-steady-1s-02.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/kata-identity.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-qemu-version.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/m8-final-20261103/m8-invalid.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-baseline-2-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-agent-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-20261103/unit.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-18
+log/m8-pilot-20261103/failure-monitor-late-capture.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-40
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-01-off-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-02-on-agent-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/experiments/m8-final-20261103/pair-04-on-health.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/after-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-618
+log/experiments/m8-final-20261103/accuracy-topology.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-02-off-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-baseline-1-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-contention-1-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/runc-identity.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/workload-port-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-3
+log/m8-20261103/final-build.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-32
+log/m8-20261103/final-windows.json
+  s_6e6fc63242599e::t_cc944e479023da 1-89
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-contention-1-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-contention-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1-591
+log/m8-pilot2-20261103/m8-contention-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1-591
+log/m8-runc-20261103/metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/source-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-9
+log/m8-pilot-20261103/metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/restored-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/m8-20261103/paired-accuracy-console.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-22
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-03-on-agent-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/m8-pilot2-20261103/m8-concurrent-first.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/cri-container-cpu.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/experiments/m8-final-20261103/pair-01-on-health.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-affinity-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-7
+log/m8-pilot2-20261103/monitor-sandboxes.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/original-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-188
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-03-on-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-runc-20261103/original-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-188
+log/m8-pilot2-20261103/m8-contention-2-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-source-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-9
+log/m8-20261103/final-state-checks.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-13
+log/experiments/m8-final-20261103/accuracy-steady-2s-01.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-04-on-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/m8-source-head.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/source-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-9
+log/m8-final-20261103/runc-identity.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/test-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-189
+log/m8-pilot-20261103/vmm-exe.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/before-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-618
+log/m8-pilot2-20261103/kata-host-cpu.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-runc-20261103/restored.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/m8-final-20261103/m8-contention-2-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/final-image-id.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/topology-ready.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-warmup-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/summary.json
+  s_6e6fc63242599e::t_cc944e479023da 1-260
+log/m8-runc-20261103/before-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/m8-pilot2-20261103/kata-metrics.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-1383
+log/experiments/m8-final-20261103/workload-status.json
+  s_6e6fc63242599e::t_cc944e479023da 1-226
+log/m8-pilot2-20261103/m8-recovery-2-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/pair-01-on-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/pair-02-on-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/restored-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/m8-final-20261103/exit.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/source-sha256.json
+  s_6e6fc63242599e::t_cc944e479023da 1-129
+log/m8-final-20261103/kata-metrics.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-1357
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/topology-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-runc-20261103/exit.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/vmm-exe.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-04-off-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-baseline-2-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot-20261103/failure-agent.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-100
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/pilot-console.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-33
+log/m8-pilot-20261103/source-head.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/cri-sandbox.json
+  s_6e6fc63242599e::t_cc944e479023da 1-1028
+log/m8-pilot-20261103/before-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-618
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-20261103/final-contract.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/kubernetes-version.json
+  s_6e6fc63242599e::t_cc944e479023da 1-29
+log/m8-pilot-20261103/health-before.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-recovery-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1-541
+log/m8-final-20261103/m8-recovery-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1-529
+log/experiments/m8-final-20261103/go-version.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/kata-identity.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-effects.json
+  s_6e6fc63242599e::t_cc944e479023da 1-5
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/cri-container-exec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/m8-final-20261103/original-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-201
+docs/plan.md
+  s_6e6fc63242599e::t_fd0bd6878589cc 328,394
+log/m8-pilot2-20261103/m8-effects.json
+  s_6e6fc63242599e::t_cc944e479023da 1-5
+log/experiments/m8-final-20261103/pair-04-on-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-baseline-1-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-recovery-1-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/build.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-32
+log/m8-pilot2-20261103/m8-contention-1-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-recovery-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1-509
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/m8-affinity-pinned.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-14
+log/m8-final-20261103/kata-host-cpu.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/original-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-188
+log/m8-pilot-20261103/topology-ready.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/pilot2-windows.json
+  s_6e6fc63242599e::t_cc944e479023da 1-89
+log/experiments/m8-final-20261103/accuracy-steady-1s-01.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/topology-ready.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/vmm-exe.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/original-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-201
+log/m8-final-20261103/m8-baseline-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1-492
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/health-before.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/m8-source-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-9
+log/experiments/m8-final-20261103/active-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/final-runtimeclass.json
+  s_6e6fc63242599e::t_cc944e479023da 1-20
+log/m8-final-20261103/m8-contention-2-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-2s-02.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/topology-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/m8-affinity-pinned.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-14
+log/m8-final-20261103/m8-recovery-2-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-concurrent-first.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/m8-contention-2-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-warmup-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/topology-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-baseline-2-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-2s-01-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-04-on-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-final-20261103/source-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-9
+log/m8-pilot2-20261103/topology-deleted-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-03-on-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/m8-contention-affinity.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-10
+log/m8-final-20261103/test-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-189
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/health-before.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/failure-describe.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-131
+log/m8-20261103/final-services.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/experiments/m8-final-20261103/commands.jsonl
+  s_6e6fc63242599e::t_cc944e479023da 1-183
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-20261103/original-agent-spec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-173
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/monitor-sandboxes.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-02.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-03-on-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-runc-20261103/metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/m8-contention-cri.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/experiments/m8-final-20261103/git-head.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-contention-1-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/topology-deleted-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/pilot2-console.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-39
+log/experiments/m8-final-20261103/pair-04-on-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-baseline-1-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-churn-250ms-01-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/m8-baseline-1-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/workload-pod.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/cri-container-exec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/m8-baseline-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1-534
+log/m8-pilot2-20261103/source-head.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/pods.json
+  s_6e6fc63242599e::t_cc944e479023da 1-518
+log/experiments/m8-final-20261103/accuracy-steady-250ms-02-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot-20261103/vmm-fds.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-134
+log/m8-pilot2-20261103/m8-baseline-2-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-after-delete.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/manifest-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-02-on-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/restored-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/pair-03-off-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/namespace-kernel.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-4
+log/m8-20261103/pilot2-contract.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-2s-02-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/cri-container-exec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/topology-deleted-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/after-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-618
+log/m8-20261103/final-containerd.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-291
+log/m8-pilot2-20261103/boundary-events.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-21
+log/2026-11-03-kata-vmm.md
+  s_6e6fc63242599e::t_bbf0d10ff08ec7 1-57,65-70
+  s_6e6fc63242599e::t_23ef3975c8acef 60-61,63-64
+  s_6e6fc63242599e::t_6375adb048fa88 62
+  s_6e6fc63242599e::t_fd0bd6878589cc 58-59
+log/m8-final-20261103/m8-recovery-1-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-20261103/final-console.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-39
+log/m8-pilot2-20261103/runc-identity.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-contention-affinity.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-10
+log/m8-runc-20261103/integration.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-296
+log/experiments/m8-final-20261103/accuracy-steady-250ms-01-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/nodes.json
+  s_6e6fc63242599e::t_cc944e479023da 1-285
+log/m8-final-20261103/topology-deleted-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-busy.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/kata-identity.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/exit.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/before-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-618
+log/m8-runc-20261103/candidate.json
+  s_6e6fc63242599e::t_cc944e479023da 1-188
+log/m8-final-20261103/m8-contention-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1-581
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/pair-01-on-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-2s-01.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/failure-containerd.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-120
+log/m8-runc-20261103/port-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-4
+log/m8-runc-20261103/original-spec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-173
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-workload.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/cri-container-cpu.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/experiments/m8-final-20261103/pair-01-on-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot-20261103/pods.json
+  s_6e6fc63242599e::t_cc944e479023da 1-518
+log/m8-runc-20261103/after-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/m8-pilot2-20261103/m8-contention-cri.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/m8-20261103/final-agent-spec.json
+  s_6e6fc63242599e::t_cc944e479023da 1-173
+log/experiments/m8-final-20261103/pair-01-on-agent-forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/m8-20261103/final-cri-pods.json
+  s_6e6fc63242599e::t_cc944e479023da 1-396
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-contention-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1-611
+log/m8-pilot2-20261103/m8-qemu-version.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-2
+log/m8-20261103/final-source-sha256.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-10
+log/m8-pilot2-20261103/m8-recovery-2-reference-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/m8-source-head.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-2s-02-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/pair-03-on-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot-20261103/original-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-201
+log/m8-final-20261103/forward.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-21
+log/m8-runc-20261103/original.json
+  s_6e6fc63242599e::t_cc944e479023da 1-201
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-20261103/final-node.json
+  s_6e6fc63242599e::t_cc944e479023da 1-276
+log/m8-pilot-20261103/failure-pods.json
+  s_6e6fc63242599e::t_cc944e479023da 1-518
+log/m8-20261103/check-state.sh
+  s_6e6fc63242599e::t_cc944e479023da 1-35
+log/experiments/m8-final-20261103/pair-02-on-health.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+hack/analyze-vmm.py
+  s_6e6fc63242599e::t_b656de5b1dfea3 1-38
+log/m8-pilot-20261103/original-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-188
+log/experiments/m8-final-20261103/pair-04-on-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-steady-2s-01-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-final-20261103/m8-recovery-1.json
+  s_6e6fc63242599e::t_cc944e479023da 1-559
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/m8-pilot2-20261103/m8-after-delete.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-steady-1s-02-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/original-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-201
+log/experiments/m8-final-20261103/pair-01-on-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-runc-20261103/stability.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-5
+log/m8-pilot2-20261103/m8-baseline-2.json
+  s_6e6fc63242599e::t_cc944e479023da 1-489
+log/m8-pilot2-20261103/test-manifest.json
+  s_6e6fc63242599e::t_cc944e479023da 1-189
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-before-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-health.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+docs/host-resources.md
+  s_6e6fc63242599e::t_fd0bd6878589cc 69-70
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/pair-03-on-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/cri-sandbox.json
+  s_6e6fc63242599e::t_cc944e479023da 1-1028
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-final-20261103/pods.json
+  s_6e6fc63242599e::t_cc944e479023da 1-518
+log/experiments/m8-final-20261103/pair-02-on-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot-20261103/restored-agent.json
+  s_6e6fc63242599e::t_cc944e479023da 1-616
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-end.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot2-20261103/cri-container-cpu.json
+  s_6e6fc63242599e::t_cc944e479023da 1-531
+log/experiments/m8-final-20261103/accuracy-churn-250ms-02-metrics-before.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/experiments/m8-final-20261103/accuracy-steady-1s-01-metrics-after.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-87
+log/m8-pilot2-20261103/vmm-fds.txt
+  s_6e6fc63242599e::t_cc944e479023da 1-134
+log/m8-final-20261103/m8-recovery-2-reference-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/experiments/m8-final-20261103/accuracy-churn-1s-02-after-agent-state.json
+  s_6e6fc63242599e::t_cc944e479023da 1-415
+log/experiments/m8-final-20261103/accuracy-churn-1s-01-start.json
+  s_6e6fc63242599e::t_cc944e479023da 1
+log/m8-pilot-20261103/cri-sandbox.json
+  s_6e6fc63242599e::t_cc944e479023da 1-1028
+log/m8-final-20261103/source-head.txt
+  s_6e6fc63242599e::t_cc944e479023da 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "79e708d89504d11fd0a84dce7d3d8c179f3d70da",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
