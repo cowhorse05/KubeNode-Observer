@@ -1,0 +1,5 @@
+process churn round 1: 20000 child processes completed
+process churn round 2: 20000 child processes completed
+stability test passed: restarts=0, eventsLost=0
+CPU maps: runtime=7552/8192, task_start=1/1
+agent memory: RSS=5.4198272e+07 bytes, Go heap=9.456328e+06 bytes

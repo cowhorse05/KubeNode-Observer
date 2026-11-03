@@ -66,3 +66,5 @@ make m8-test
 外部 procfs 参照窗口包住 HTTP 调用，边界并不完全相同，只能检查 runtime 趋势，不能当精确同窗误差；`sched_schedstats=0` 时不能使用 schedstat waitNs 作等待精度基准。实验中六个窗口只是机制验证，不是统计显著性、生产容量或 runc/Kata 性能优劣的结论。正式跨层研究留到 M9/M10。
 
 保存的 HTTP/CLI 响应可以离线对照 OpenAPI 的 JSON Schema 校验（需 Python PyYAML、jsonschema）：`python3 hack/validate-host-contract.py log/<本次目录>`。不依赖外部 Postman 工作区，也不上传节点信息。
+
+`python3 hack/analyze-vmm.py log/<本次目录>` 汇总六窗的 eBPF CPU、外部 schedstat runtime 趋势和 vCPU 等待，保留两种窗口长度，不把边界不同的差值冒称同窗精度。实测与失败记录见 [M8 报告](../log/2026-11-03-kata-vmm.md)。

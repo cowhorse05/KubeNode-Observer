@@ -1,0 +1,89 @@
+{
+  "windows": [
+    {
+      "phase": "baseline",
+      "round": 1,
+      "ebpfCPUPercent": 52.72769456420065,
+      "ebpfWindowSeconds": 5.016087424,
+      "outerSchedstatCPUPercent": 52.206344428446904,
+      "outerWindowSeconds": 5.500019441,
+      "schedstatsEnabled": "0",
+      "vcpuCount": 2,
+      "waitCount": 2300,
+      "p95Us": 511,
+      "rssBytes": 269455360,
+      "partial": false
+    },
+    {
+      "phase": "baseline",
+      "round": 2,
+      "ebpfCPUPercent": 56.10217233624615,
+      "ebpfWindowSeconds": 5.043655014,
+      "outerSchedstatCPUPercent": 54.84830695776475,
+      "outerWindowSeconds": 5.818539842,
+      "schedstatsEnabled": "0",
+      "vcpuCount": 2,
+      "waitCount": 2246,
+      "p95Us": 4095,
+      "rssBytes": 269455360,
+      "partial": false
+    },
+    {
+      "phase": "contention",
+      "round": 1,
+      "ebpfCPUPercent": 12.298727758263475,
+      "ebpfWindowSeconds": 5.04537606,
+      "outerSchedstatCPUPercent": 12.234165377008585,
+      "outerWindowSeconds": 5.4949319,
+      "schedstatsEnabled": "0",
+      "vcpuCount": 2,
+      "waitCount": 1052,
+      "p95Us": 32767,
+      "rssBytes": 269455360,
+      "partial": false
+    },
+    {
+      "phase": "contention",
+      "round": 2,
+      "ebpfCPUPercent": 12.35391695918955,
+      "ebpfWindowSeconds": 5.054062716,
+      "outerSchedstatCPUPercent": 12.240728974133484,
+      "outerWindowSeconds": 5.50596107,
+      "schedstatsEnabled": "0",
+      "vcpuCount": 2,
+      "waitCount": 1064,
+      "p95Us": 32767,
+      "rssBytes": 269455360,
+      "partial": false
+    },
+    {
+      "phase": "recovery",
+      "round": 1,
+      "ebpfCPUPercent": 53.99421240610634,
+      "ebpfWindowSeconds": 5.11325441,
+      "outerSchedstatCPUPercent": 53.373141814588166,
+      "outerWindowSeconds": 5.543774418,
+      "schedstatsEnabled": "0",
+      "vcpuCount": 2,
+      "waitCount": 2318,
+      "p95Us": 1023,
+      "rssBytes": 269516800,
+      "partial": false
+    },
+    {
+      "phase": "recovery",
+      "round": 2,
+      "ebpfCPUPercent": 53.19921922313443,
+      "ebpfWindowSeconds": 5.063166923,
+      "outerSchedstatCPUPercent": 52.54920211442803,
+      "outerWindowSeconds": 5.910379277,
+      "schedstatsEnabled": "0",
+      "vcpuCount": 2,
+      "waitCount": 2273,
+      "p95Us": 511,
+      "rssBytes": 269516800,
+      "partial": false
+    }
+  ],
+  "referenceLimit": "Outer procfs window includes HTTP overhead, not equal-bound accuracy; disabled schedstats waitNs is not a latency reference."
+}

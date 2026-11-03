@@ -1,0 +1,539 @@
+diff --git a/bpf/cpu.bpf.c b/bpf/cpu.bpf.c
+index 1e03ecc..92944e5 100644
+--- a/bpf/cpu.bpf.c
++++ b/bpf/cpu.bpf.c
+@@ -4,6 +4,11 @@
+ 
+ #define TASK_COMM_LEN 16
+ 
++// Namespace aliases are only used by Host/procfs consumers. Existing CPU keys
++// remain kernel-global so runc accounting and runqlat correlation do not change.
++const volatile __u64 pidns_dev = 0;
++const volatile __u64 pidns_ino = 0;
++
+ struct sched_entity {
+     __u64 sum_exec_runtime;
+ } __attribute__((preserve_access_index));
+@@ -24,6 +29,8 @@ struct cpu_key {
+ struct cpu_value {
+     __u64 runtime_ns;
+     char comm[TASK_COMM_LEN];
++    __u32 namespace_pid;
++    __u32 namespace_tgid;
+ };
+ 
+ struct cpu_start {
+@@ -100,8 +107,13 @@ int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
+ 
+         value = bpf_map_lookup_elem(&cpu_runtime, &key);
+         if (!value) {
++            struct bpf_pidns_info ns = {};
+             initial.runtime_ns = 0;
+             bpf_core_read_str(initial.comm, sizeof(initial.comm), &prev->comm);
++            if (pidns_ino && bpf_get_ns_current_pid_tgid(pidns_dev, pidns_ino, &ns, sizeof(ns)) == 0) {
++                initial.namespace_pid = ns.pid;
++                initial.namespace_tgid = ns.tgid;
++            }
+             bpf_map_update_elem(&cpu_runtime, &key, &initial, BPF_NOEXIST);
+             value = bpf_map_lookup_elem(&cpu_runtime, &key);
+         }
+diff --git a/cmd/kno-agent/main.go b/cmd/kno-agent/main.go
+index 938eeb8..da3b52e 100644
+--- a/cmd/kno-agent/main.go
++++ b/cmd/kno-agent/main.go
+@@ -20,6 +20,7 @@ import (
+ 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
+ 	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
+ 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
++	"github.com/cowhorse05/KubeNode-Observer/internal/host"
+ 	"github.com/cowhorse05/KubeNode-Observer/internal/metrics"
+ 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
+ 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
+@@ -151,6 +152,7 @@ func main() {
+ 	handler.Handle("/api/v1/cpu", cpuCollector)
+ 	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpu.TimedSource{Source: cpuProbe, Recorder: timing, Operation: telemetry.AccuracyScan}, topologyStore, *cgroupRoot))
+ 	handler.Handle("/api/v1/runqlat", runQLatHandler)
++	handler.Handle("/api/v1/host/resources", host.NewHandler(topologyStore, cpuProbe, runQLatProbe, host.NewProcReader(*hostProc, *cgroupRoot)))
+ 	server := &http.Server{
+ 		Addr:              *listenAddress,
+ 		Handler:           handler,
+diff --git a/cmd/kno/main.go b/cmd/kno/main.go
+index 35b7315..4ff4c74 100644
+--- a/cmd/kno/main.go
++++ b/cmd/kno/main.go
+@@ -251,6 +251,45 @@ func main() {
+ 		})
+ 	}
+ 	root.AddCommand(top)
++	var hostDuration time.Duration
++	workloads := &cobra.Command{Use: "workloads", Short: "Measure Host runc-container and Kata VMM resources (not Guest CPU)", RunE: func(_ *cobra.Command, _ []string) error {
++		query := url.Values{"duration": {hostDuration.String()}, "limit": {strconv.Itoa(topLimit)}}
++		if topNamespace != "" {
++			query.Set("namespace", topNamespace)
++		}
++		if topPod != "" {
++			query.Set("pod", topPod)
++		}
++		ctx, cancel := context.WithTimeout(context.Background(), hostDuration+15*time.Second)
++		defer cancel()
++		request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint+"/api/v1/host/resources?"+query.Encode(), nil)
++		if err != nil {
++			return err
++		}
++		response, err := http.DefaultClient.Do(request)
++		if err != nil {
++			return err
++		}
++		defer response.Body.Close()
++		body, err := io.ReadAll(io.LimitReader(response.Body, (16<<20)+1))
++		if err != nil {
++			return err
++		}
++		if len(body) > 16<<20 {
++			return fmt.Errorf("Host response exceeds 16 MiB")
++		}
++		if response.StatusCode != 200 {
++			return fmt.Errorf("agent returned %s: %s", response.Status, body)
++		}
++		var formatted bytes.Buffer
++		if err := json.Indent(&formatted, body, "", "  "); err != nil {
++			return err
++		}
++		fmt.Println(formatted.String())
++		return nil
++	}}
++	workloads.Flags().DurationVar(&hostDuration, "duration", 5*time.Second, "Host measurement window (100ms..30s)")
++	top.AddCommand(workloads)
+ 
+ 	var traceNamespace string
+ 	var tracePod string
+diff --git a/hack/kata-test.sh b/hack/kata-test.sh
+index a050e63..30777f9 100644
+--- a/hack/kata-test.sh
++++ b/hack/kata-test.sh
+@@ -90,8 +90,15 @@ for container in exec cpu; do
+ done
+ node readlink "/proc/${vmm}/exe" >"${KATA_OUTPUT}/vmm-exe.txt"
+ node ls -l "/proc/${vmm}/fd" >"${KATA_OUTPUT}/vmm-fds.txt"
+-node curl -fsS "http://127.0.0.1:8090/sandboxes" >"${KATA_OUTPUT}/monitor-sandboxes.txt"
+-grep -Fx "${sandbox}" "${KATA_OUTPUT}/monitor-sandboxes.txt"
++# On node reboot Monitor starts before the first sandbox directory exists and
++# retries directory discovery every 60s. Bound the readiness wait, not its data.
++monitor_ready=false
++for _ in $(seq 1 90); do
++  node curl -fsS "http://127.0.0.1:8090/sandboxes" >"${KATA_OUTPUT}/monitor-sandboxes.txt"
++  if grep -Fxq "${sandbox}" "${KATA_OUTPUT}/monitor-sandboxes.txt"; then monitor_ready=true; break; fi
++  sleep 1
++done
++[[ "${monitor_ready}" == true ]]
+ ./bin/kno --endpoint "${endpoint}" kata metrics --sandbox "${sandbox}" >"${KATA_OUTPUT}/kata-metrics.txt"
+ grep -q '^kata_hypervisor_proc_stat' "${KATA_OUTPUT}/kata-metrics.txt"
+ grep -q '^kata_guest_cpu_time' "${KATA_OUTPUT}/kata-metrics.txt"
+@@ -102,6 +109,10 @@ get '/api/v1/events?namespace=kno-kata-test&limit=1000' >"${KATA_OUTPUT}/boundar
+ jq -e '([.events[] | select(.comm=="kno-boundary" and .type=="exec" and .workload.podName=="kno-boundary-runc")]|length)>0 and ([.events[] | select(.comm=="kno-boundary" and .workload.podName=="kno-boundary-kata")]|length)==0' "${KATA_OUTPUT}/boundary-events.json" >/dev/null
+ get '/api/v1/cpu?namespace=kno-kata-test&pod=kno-boundary-kata&level=process' >"${KATA_OUTPUT}/kata-host-cpu.json"
+ jq -e '(.items|length)==0' "${KATA_OUTPUT}/kata-host-cpu.json" >/dev/null
++if [[ "${KATA_M8_TEST:-false}" == true ]]; then
++  export KATA_OUTPUT KATA_TEST_ENDPOINT="${endpoint}" KATA_TEST_SANDBOX="${sandbox}"
++  bash hack/kata-vmm-test.sh
++fi
+ kube -n kno-kata-test delete pod kno-boundary-kata --wait=true --timeout=90s
+ removed=false
+ for attempt in $(seq 1 30); do
+@@ -110,6 +121,10 @@ for attempt in $(seq 1 30); do
+   sleep 1
+ done
+ [[ "${removed}" == true ]]
++if [[ "${KATA_M8_TEST:-false}" == true ]]; then
++  get "/api/v1/host/resources?kind=kata&sandbox=${sandbox}&duration=100ms" >"${KATA_OUTPUT}/m8-after-delete.json"
++  jq -e '(.items|length)==0' "${KATA_OUTPUT}/m8-after-delete.json" >/dev/null
++fi
+ gone=false
+ for _ in $(seq 1 30); do
+   if node test ! -d "/proc/${vmm}"; then gone=true; break; fi
+diff --git a/internal/bpfgen/cpu_bpfel.go b/internal/bpfgen/cpu_bpfel.go
+index 1ec2260..16055c4 100644
+--- a/internal/bpfgen/cpu_bpfel.go
++++ b/internal/bpfgen/cpu_bpfel.go
+@@ -25,8 +25,10 @@ type CPUCpuStart struct {
+ }
+ 
+ type CPUCpuValue struct {
+-	RuntimeNs uint64
+-	Comm      [16]int8
++	RuntimeNs     uint64
++	Comm          [16]int8
++	NamespacePid  uint32
++	NamespaceTgid uint32
+ }
+ 
+ // LoadCPU returns the embedded CollectionSpec for CPU.
+@@ -87,6 +89,8 @@ type CPUMapSpecs struct {
+ //
+ // It can be passed ebpf.CollectionSpec.Assign.
+ type CPUVariableSpecs struct {
++	PidnsDev *ebpf.VariableSpec `ebpf:"pidns_dev"`
++	PidnsIno *ebpf.VariableSpec `ebpf:"pidns_ino"`
+ }
+ 
+ // CPUObjects contains all objects after they have been loaded into the kernel.
+@@ -126,6 +130,8 @@ func (m *CPUMaps) Close() error {
+ //
+ // It can be passed to LoadCPUObjects or ebpf.CollectionSpec.LoadAndAssign.
+ type CPUVariables struct {
++	PidnsDev *ebpf.Variable `ebpf:"pidns_dev"`
++	PidnsIno *ebpf.Variable `ebpf:"pidns_ino"`
+ }
+ 
+ // CPUPrograms contains all programs after they have been loaded into the kernel.
+diff --git a/internal/bpfgen/cpu_bpfel.o b/internal/bpfgen/cpu_bpfel.o
+index 499354f8541c77acfaffd25f6548ca576a08758a..2456dd23e8cb50ef31d15bb50172ec3df0eda77c 100644
+GIT binary patch
+literal 9096
+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
+
+literal 8048
+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
+Bc8~x7
+
+diff --git a/internal/probe/cpu.go b/internal/probe/cpu.go
+index 239bb4e..3fdc336 100644
+--- a/internal/probe/cpu.go
++++ b/internal/probe/cpu.go
+@@ -4,7 +4,9 @@ import (
+ 	"bytes"
+ 	"errors"
+ 	"fmt"
++	"os"
+ 	"sync"
++	"syscall"
+ 	"time"
+ 
+ 	"github.com/cilium/ebpf"
+@@ -22,17 +24,20 @@ type CgroupRuntime struct {
+ // Process detail is bounded independently of container totals. CapturedAt is
+ // taken after the small totals scan, not before a potentially slow detail scan.
+ type CPUSnapshot struct {
+-	Processes  []CPURuntime
+-	Totals     []CgroupRuntime
+-	CapturedAt time.Time
++	Processes         []CPURuntime
++	Totals            []CgroupRuntime
++	CapturedAt        time.Time
++	DetailsCapturedAt time.Time
+ }
+ 
+ type CPURuntime struct {
+-	CgroupID uint64
+-	TGID     uint32
+-	PID      uint32
+-	Runtime  uint64
+-	Comm     [cpuCommLen]byte
++	CgroupID      uint64
++	TGID          uint32
++	PID           uint32
++	Runtime       uint64
++	Comm          [cpuCommLen]byte
++	NamespacePID  uint32
++	NamespaceTGID uint32
+ }
+ 
+ func (r CPURuntime) Command() string {
+@@ -49,8 +54,10 @@ type cpuKey struct {
+ }
+ 
+ type cpuValue struct {
+-	Runtime uint64
+-	Comm    [cpuCommLen]byte
++	Runtime       uint64
++	Comm          [cpuCommLen]byte
++	NamespacePID  uint32
++	NamespaceTGID uint32
+ }
+ 
+ type CPUProbe struct {
+@@ -61,7 +68,22 @@ type CPUProbe struct {
+ 
+ func NewCPUProbe() (*CPUProbe, error) {
+ 	probe := &CPUProbe{}
+-	if err := bpfgen.LoadCPUObjects(&probe.objects, nil); err != nil {
++	spec, err := bpfgen.LoadCPU()
++	if err != nil {
++		return nil, fmt.Errorf("load CPU spec: %w", err)
++	}
++	info, err := os.Stat("/proc/self/ns/pid")
++	if err != nil {
++		return nil, fmt.Errorf("stat Host PID namespace: %w", err)
++	}
++	stat, ok := info.Sys().(*syscall.Stat_t)
++	if !ok {
++		return nil, fmt.Errorf("PID namespace stat unsupported")
++	}
++	if err := spec.RewriteConstants(map[string]interface{}{"pidns_dev": uint64(stat.Dev), "pidns_ino": stat.Ino}); err != nil {
++		return nil, fmt.Errorf("configure Host PID namespace: %w", err)
++	}
++	if err := spec.LoadAndAssign(&probe.objects, nil); err != nil {
+ 		return nil, fmt.Errorf("load CPU eBPF objects: %w", err)
+ 	}
+ 
+@@ -98,14 +120,17 @@ func (p *CPUProbe) Snapshot() (CPUSnapshot, error) {
+ 		for i := 0; i < n; i++ {
+ 			key, value := keys[i], values[i]
+ 			result.Processes = append(result.Processes, CPURuntime{
+-				CgroupID: key.CgroupID,
+-				TGID:     key.TGID,
+-				PID:      key.PID,
+-				Runtime:  value.Runtime,
+-				Comm:     value.Comm,
++				CgroupID:      key.CgroupID,
++				TGID:          key.TGID,
++				PID:           key.PID,
++				Runtime:       value.Runtime,
++				Comm:          value.Comm,
++				NamespacePID:  value.NamespacePID,
++				NamespaceTGID: value.NamespaceTGID,
+ 			})
+ 		}
+ 		if errors.Is(err, ebpf.ErrKeyNotExist) {
++			result.DetailsCapturedAt = time.Now()
+ 			return result, nil
+ 		}
+ 		if err != nil {
+diff --git a/internal/probe/cpu_linux_test.go b/internal/probe/cpu_linux_test.go
+index 293b19e..4e8caa3 100644
+--- a/internal/probe/cpu_linux_test.go
++++ b/internal/probe/cpu_linux_test.go
+@@ -131,3 +131,39 @@ func TestCPUBatchSnapshotKernel(t *testing.T) {
+ 		}
+ 	}
+ }
++
++func TestCPUNamespaceAliasKernel(t *testing.T) {
++	if os.Getenv("KNO_BPF_TEST") != "1" {
++		t.Skip("set KNO_BPF_TEST=1 with BPF privileges")
++	}
++	if err := rlimit.RemoveMemlock(); err != nil {
++		t.Fatal(err)
++	}
++	p, err := NewCPUProbe()
++	if err != nil {
++		t.Fatal(err)
++	}
++	defer p.Close()
++	child := exec.Command("/bin/sleep", "0.2")
++	if err := child.Start(); err != nil {
++		t.Fatal(err)
++	}
++	pid := uint32(child.Process.Pid)
++	if err := child.Wait(); err != nil {
++		t.Fatal(err)
++	}
++	snapshot, err := p.Snapshot()
++	if err != nil {
++		t.Fatal(err)
++	}
++	for _, task := range snapshot.Processes {
++		if task.NamespacePID == pid && task.NamespaceTGID == pid {
++			t.Logf("kernel PID=%d namespace PID=%d runtime=%dns", task.PID, task.NamespacePID, task.Runtime)
++			if task.Runtime == 0 {
++				t.Fatal("namespace alias had no runtime")
++			}
++			return
++		}
++	}
++	t.Fatalf("no CPU map alias for visible child PID %d", pid)
++}
+diff --git a/internal/runqlat/handler.go b/internal/runqlat/handler.go
+index 28204b3..734e2d5 100644
+--- a/internal/runqlat/handler.go
++++ b/internal/runqlat/handler.go
+@@ -259,6 +259,16 @@ func summarize(value delta) Latency {
+ 	return result
+ }
+ 
++// SummarizeHistogram reuses the same bucket/percentile semantics for Host
++// threads. Counts come from histogram buckets, not a separate non-atomic map.
++func SummarizeHistogram(totalNS uint64, buckets [probe.RunQLatBuckets]uint64) Latency {
++	value := delta{totalNS: totalNS, buckets: buckets}
++	for _, count := range buckets {
++		value.count += count
++	}
++	return summarize(value)
++}
++
+ func percentile(buckets [probe.RunQLatBuckets]uint64, count uint64, percent uint64) uint64 {
+ 	target := (count*percent + 99) / 100
+ 	var cumulative uint64
+diff --git a/internal/topology/kata.go b/internal/topology/kata.go
+index f050511..289ef9e 100644
+--- a/internal/topology/kata.go
++++ b/internal/topology/kata.go
+@@ -23,7 +23,9 @@ type hostTask struct {
+ 	args        []string
+ }
+ 
+-func parseTaskStat(content string) (parent int, start uint64, err error) {
++// ParseTaskStat extracts identity fields without splitting a comm containing
++// spaces/parentheses. start is field 22 in kernel clock ticks, not wall time.
++func ParseTaskStat(content string) (parent int, start uint64, err error) {
+ 	// comm can itself contain spaces and parentheses. Fields after its final
+ 	// ')' start at state (3), so ppid (4) and starttime (22) are offsets 1/19.
+ 	end := strings.LastIndex(content, ")")
+@@ -58,7 +60,7 @@ func (p *ProcFS) hostTasks() (map[int]hostTask, error) {
+ 		if err != nil {
+ 			continue
+ 		}
+-		parent, start, err := parseTaskStat(string(stat))
++		parent, start, err := ParseTaskStat(string(stat))
+ 		if err != nil {
+ 			continue
+ 		}
+@@ -114,7 +116,7 @@ func (p *ProcFS) hostIdentity(task hostTask) (*HostProcess, error) {
+ 	if err != nil {
+ 		return nil, err
+ 	}
+-	_, start, err := parseTaskStat(string(stat))
++	_, start, err := ParseTaskStat(string(stat))
+ 	if err != nil || start != task.start {
+ 		return nil, fmt.Errorf("host PID changed during discovery")
+ 	}
+diff --git a/internal/topology/store.go b/internal/topology/store.go
+index 90a23da..e52e95d 100644
+--- a/internal/topology/store.go
++++ b/internal/topology/store.go
+@@ -3,6 +3,7 @@ package topology
+ import (
+ 	"context"
+ 	"encoding/json"
++	"fmt"
+ 	"net/http"
+ 	"sync"
+ 	"sync/atomic"
+@@ -191,3 +192,16 @@ func (s *Store) HasSandbox(id string) bool {
+ 	}
+ 	return false
+ }
++
++// CurrentSnapshot returns an immutable view. Consumers must not mutate its
++// slices. Measurements fail closed rather than treating stale identity as live.
++func (s *Store) CurrentSnapshot() (*Snapshot, error) {
++	s.errorMu.RLock()
++	lastError := s.lastError
++	s.errorMu.RUnlock()
++	current := s.snapshot.Load()
++	if current == nil || time.Since(current.GeneratedAt) > 30*time.Second || lastError != "" {
++		return nil, fmt.Errorf("current topology is unavailable, stale or failing: %s", lastError)
++	}
++	return current, nil
++}

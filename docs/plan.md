@@ -325,7 +325,7 @@ microVM 工作在 MVP 完成后开始。
 
 ### M8：Host/VMM 资源归属
 
-状态：下一阶段，尚未实现。M7 的身份关联和官方 metrics 查询不等于已经实现 VMM/vCPU 的项目 eBPF 资源视图；不将共享 VMM 直接塞回普通容器 CPU 索引。
+状态（2026-11-03）：已实现独立 Host/VMM 资源窗口、QEMU vCPU 线程 CPU/runqlat 与 runc 统一视图。双 Guest 容器只计一次 VM；显式处理 Node/global PID namespace 别名、线程 cgroup、身份变化、缺失/重置与 partial/null。最终镜像 baseline→同核竞争→恢复六窗、Host/Guest 边界与删除清理通过，原有 runc integration 和 40000 子进程回归通过。不将共享 VMM 塞回普通容器索引，也不把 Host RSS/IO 当 Guest 内部指标。接口、复现与限制见 [M8 指南](host-resources.md)，原始结果见 [M8 报告](../log/2026-11-03-kata-vmm.md)。
 
 - 将 hypervisor CPU、内存、线程和 IO 归属到 Pod。
 - 识别 hypervisor vCPU threads。
@@ -391,7 +391,7 @@ Metrics 优化已完成 key-only 有界 census 与后台快照：4 个双版本�
 2. 128 MiB 下有限的无诊断 Pod/元数据 churn 观察已完成，不将其扩张为长期生产保证；
 3. 更受控 CPU 环境、更长窗口和跨内核测量作为后续研究，不以无限优化阻塞功能；
 4. 每项优化必须同时通过 integration，并核对 events lost、map occupancy 与归属正确性；
-5. 已在 M7 入口通知用户，并在收到明确授权后完成上述 Kata 接入；下一阶段是 M8 Host/VMM 资源视图，不以无限优化阻塞功能。
+5. 已在 M7 入口通知用户，并在收到明确授权后完成 Kata 接入与 M8 Host/VMM 视图；后续 M9 才进入 Guest 进程探针，不以无限优化阻塞功能，也不提前混合两层记账。
 
 ## 11. 主要风险
 

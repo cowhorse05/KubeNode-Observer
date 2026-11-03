@@ -1,0 +1,4 @@
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/host	1.302s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	2.119s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	1.015s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/runqlat	1.060s

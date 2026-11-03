@@ -1,0 +1,13 @@
+true
+true
+true
+time="2026-11-03T09:46:42Z" level=warning msg="Ignoring unknown key in TOML for plugin" error="strict mode: fields in the document are missing in the target struct" key="containerd untrusted_workload_runtime" plugin=io.containerd.cri.v1.runtime
+Linux LPT027754 6.6.114.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Mon Dec  1 20:46:23 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+go version go1.22.2 linux/amd64
+minikube version: v1.38.1
+commit: c93a4cb9311efc66b90d33ea03f75f2c4120e9b0
+4294967296 0  private
+Filesystem      1B-blocks  Used  Available Use% Mounted on
+shm            1073741824 86016 1073655808   1% /dev/shm
+{"responseCapturesValidated": 9, "errorCapturesValidated": 2, "schema": "OpenAPI 3.1 / JSON Schema 2020-12", "result": "passed"}
+Final state verified: original Agent spec, Ready node, zero restarts, no test namespace/Pods/lock, empty Monitor; Kata runtime/services retained.
