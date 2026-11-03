@@ -25,8 +25,10 @@ type CPUCpuStart struct {
 }
 
 type CPUCpuValue struct {
-	RuntimeNs uint64
-	Comm      [16]int8
+	RuntimeNs     uint64
+	Comm          [16]int8
+	NamespacePid  uint32
+	NamespaceTgid uint32
 }
 
 // LoadCPU returns the embedded CollectionSpec for CPU.
@@ -87,6 +89,8 @@ type CPUMapSpecs struct {
 //
 // It can be passed ebpf.CollectionSpec.Assign.
 type CPUVariableSpecs struct {
+	PidnsDev *ebpf.VariableSpec `ebpf:"pidns_dev"`
+	PidnsIno *ebpf.VariableSpec `ebpf:"pidns_ino"`
 }
 
 // CPUObjects contains all objects after they have been loaded into the kernel.
@@ -126,6 +130,8 @@ func (m *CPUMaps) Close() error {
 //
 // It can be passed to LoadCPUObjects or ebpf.CollectionSpec.LoadAndAssign.
 type CPUVariables struct {
+	PidnsDev *ebpf.Variable `ebpf:"pidns_dev"`
+	PidnsIno *ebpf.Variable `ebpf:"pidns_ino"`
 }
 
 // CPUPrograms contains all programs after they have been loaded into the kernel.
