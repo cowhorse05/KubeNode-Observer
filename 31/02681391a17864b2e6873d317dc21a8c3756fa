@@ -1,0 +1,24 @@
+bpf/cpu.bpf.c
+  s_6e6fc63242599e::t_cb1ba2304ef4f2 7-11,32-33,110,113-116
+internal/probe/cpu_linux_test.go
+  s_6e6fc63242599e::t_e65b0151b53415 134-135,165-167,169
+  s_6e6fc63242599e::t_04c45fa4cd1b02 136-164,168
+internal/probe/cpu.go
+  s_6e6fc63242599e::t_cb1ba2304ef4f2 7,9,27-30,34-40,57-60,71-86,123-129,133
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "3102681391a17864b2e6873d317dc21a8c3756fa",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
