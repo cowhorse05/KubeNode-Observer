@@ -10,6 +10,7 @@ COST_AGENT_IMAGE ?= kubenode-observer/kno-agent:cost
 METRICS_AGENT_IMAGE ?= kubenode-observer/kno-agent:metrics-cache
 MEMORY_AGENT_IMAGE ?= kubenode-observer/kno-agent:memory
 KATA_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-host
+VMM_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-vmm
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
@@ -122,7 +123,7 @@ deploy:
 undeploy:
 	kubectl --context $(MINIKUBE_PROFILE) delete -f deploy/minikube/kno-agent.yaml --ignore-not-found
 
-.PHONY: kata-check kata-install kata-test
+.PHONY: kata-check kata-install kata-test m8-test
 kata-check:
 	KUBE_CONTEXT=$(MINIKUBE_PROFILE) bash hack/kata-preflight.sh
 
@@ -135,5 +136,12 @@ kata-test: workload-image cpu-hog-image
 	docker build -f examples/kata-boundary/Dockerfile.local -t kubenode-observer/kata-boundary:dev .
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(KATA_AGENT_IMAGE) kubenode-observer/kata-boundary:dev $(CPU_HOG_IMAGE)
 	KUBE_CONTEXT=$(MINIKUBE_PROFILE) AGENT_IMAGE=$(KATA_AGENT_IMAGE) bash hack/kata-test.sh
+
+# Requires an installed Kata runtime; pins only the temporary test processes.
+m8-test: workload-image cpu-hog-image
+	$(MAKE) image-local IMAGE=$(VMM_AGENT_IMAGE)
+	docker build -f examples/kata-boundary/Dockerfile.local -t kubenode-observer/kata-boundary:dev .
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(VMM_AGENT_IMAGE) kubenode-observer/kata-boundary:dev $(CPU_HOG_IMAGE)
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) AGENT_IMAGE=$(VMM_AGENT_IMAGE) KATA_M8_TEST=true bash hack/kata-test.sh
 
 

@@ -23,7 +23,9 @@ type hostTask struct {
 	args        []string
 }
 
-func parseTaskStat(content string) (parent int, start uint64, err error) {
+// ParseTaskStat extracts identity fields without splitting a comm containing
+// spaces/parentheses. start is field 22 in kernel clock ticks, not wall time.
+func ParseTaskStat(content string) (parent int, start uint64, err error) {
 	// comm can itself contain spaces and parentheses. Fields after its final
 	// ')' start at state (3), so ppid (4) and starttime (22) are offsets 1/19.
 	end := strings.LastIndex(content, ")")
@@ -58,7 +60,7 @@ func (p *ProcFS) hostTasks() (map[int]hostTask, error) {
 		if err != nil {
 			continue
 		}
-		parent, start, err := parseTaskStat(string(stat))
+		parent, start, err := ParseTaskStat(string(stat))
 		if err != nil {
 			continue
 		}
@@ -114,7 +116,7 @@ func (p *ProcFS) hostIdentity(task hostTask) (*HostProcess, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, start, err := parseTaskStat(string(stat))
+	_, start, err := ParseTaskStat(string(stat))
 	if err != nil || start != task.start {
 		return nil, fmt.Errorf("host PID changed during discovery")
 	}
