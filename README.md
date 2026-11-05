@@ -5,7 +5,7 @@ KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测
 
 当前 v0.1.0 已完成进程生命周期、CPU 热点和 run queue latency 观测闭环：节点 DaemonSet 捕获 exec/exit 与调度事件，通过 cgroup ID 关联 Kubernetes Workload，并提供 Pod → Container → Process 逐层下钻。
 
-2026-10-27：runc CPU 收尾后，已跑通 Kata 4.3.1 Go/QEMU 的真实双容器 Pod、Host shim/VMM 身份与官方 Monitor 接入。当前仍不提供 Guest 进程 eBPF 或统一 VMM CPU 排名。安装、可见性边界与复现见 [Kata 指南](docs/kata.md)，runc 方法与性能限制见 [收尾报告](log/2026-10-26-cpu-accounting.md)。
+2026-11-03：Kata 研究扩展进入 M8，提供 Host 统一资源视图和 QEMU vCPU 的 CPU/runqlat，双容器共享 VM 不重复计数。仍不提供 Guest 进程 eBPF。字段口径与复现实验见 [M8 指南](docs/host-resources.md)，安装见 [Kata 指南](docs/kata.md)，runc 方法与性能限制见 [收尾报告](log/2026-10-26-cpu-accounting.md)。
 
 ## 当前能力
 
@@ -22,6 +22,8 @@ KubeNode-Observer 是一个以 Go、eBPF 和 Kubernetes 为核心的节点观测
 - 提供不依赖远端镜像仓库的本地端到端 smoke test。
 
 Kata 研究扩展另外提供 `snapshot.sandboxes` 和 `kno kata metrics --sandbox <id>`，不把 CRI 返回的 VMM PID 当作 Guest 容器 init PID；普通 runc 功能保持原语义。
+
+M8 的 `kno top workloads -n <namespace> --duration=5s` / `/api/v1/host/resources` 统一展示 runc container 与 Kata sandbox 的 **Host** CPU、带来源标记的内存，以及 VMM IO/线程/vCPU 等待；缺失结果显式为 `null` 和 `partial`。不要将 VMM RSS 当作 Guest 已用内存。`make m8-test` 在已安装 Kata 的节点上运行 baseline → 同核竞争 → 恢复实验，结束恢复 Agent 并删除测试资源。
 
 ## 一键 Demo
 

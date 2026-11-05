@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: KubeNode-Observer Host resource windows
+  version: 0.2.0-experimental
+  description: >-
+    Read-only on-demand Host measurements. Kata VM rows and runc container rows
+    share a view, never a Guest CPU accounting domain. No authentication; trusted
+    development nodes only. Existing /api/v1/cpu and /api/v1/runqlat are unchanged.
+paths:
+  /api/v1/host/resources:
+    get:
+      operationId: measureHostResources
+      description: >-
+        One concurrent window, default 5s (100ms..30s). Snapshots are non-atomic.
+        A matched row whose identity/counters disappear or reset remains present
+        with issues/partial=true and null unavailable measurements, not zero.
+        A zero runqlat count means no observed completed waits, not no contention.
+        Selection is bounded to 256 rows and 512 threads per VMM. QEMU vCPU roles
+        use the CPU N/KVM thread naming convention inside the verified VMM;
+        roleSource explicitly identifies this heuristic, not a QMP guarantee.
+      parameters:
+        - {name: duration, in: query, schema: {type: string, default: 5s}}
+        - {name: namespace, in: query, schema: {type: string}}
+        - {name: pod, in: query, schema: {type: string}}
+        - {name: sandbox, in: query, schema: {type: string, pattern: '^[0-9a-f]{64}$'}}
+        - {name: kind, in: query, schema: {type: string, enum: [all, kata, runc], default: all}}
+        - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 100, default: 20}}
+      responses:
+        '200':
+          description: >-
+            JSON domain=host, startedAt, durationSeconds, totalItems and items.
+            Rows sort by valid CPU percent descending, then stable identity.
+            kind=kata-sandbox rows contain VMM process RSS, procfs IO deltas and
+            per-thread CPU/runqlat. runc-container rows use independent cgroup
+            CPU deltas and memory.current, not init-process RSS. IO read/write
+            bytes are Host process accounting, not Guest block throughput.
+            CPU.accounting is vmm-threads or cgroup; each CPU has its actual
+            windowSeconds. VMM/threads must keep PID starttime and cgroup identity
+            across endpoints; new/deleted/reused threads make the row partial.
+            Kernel PID keys are retained, with namespace aliases to join Host
+            procfs. Missing map aliases/counters are explicitly unavailable.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/HostResponse'}
+        '400':
+          description: Invalid duration, filter, limit or repeated/unknown parameter.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+              example: {code: invalid_query, message: 'duration must be 100ms..30s'}
+        '405':
+          description: Only GET allowed; Allow header is GET.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+        '429':
+          description: Another Host measurement is active; Retry-After header is 1 second.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+              example: {code: measurement_busy, message: another Host resource window is active}
+        '503':
+          description: Topology absent/stale/failing, bound exceeded or probe scan failed.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+components:
+  schemas:
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: {type: string, enum: [invalid_query, method_not_allowed, measurement_busy, measurement_unavailable]}
+        message: {type: string, minLength: 1}
+    CPU:
+      type: [object, 'null']
+      required: [accounting, runtimeNs, percent, windowSeconds]
+      properties:
+        accounting: {type: string, enum: [cgroup, vmm-threads]}
+        runtimeNs: {type: integer, minimum: 0}
+        percent: {type: number, minimum: 0}
+        windowSeconds: {type: number, exclusiveMinimum: 0}
+    Latency:
+      type: [object, 'null']
+      description: Log2 microsecond bucket upper-bound percentiles; a missing endpoint is null, not an observed zero.
+      required: [count, averageUs, p50Us, p95Us, p99Us, maxUs]
+      properties:
+        count: {type: integer, minimum: 0}
+        averageUs: {type: number, minimum: 0}
+        p50Us: {type: integer, minimum: 0}
+        p95Us: {type: integer, minimum: 0}
+        p99Us: {type: integer, minimum: 0}
+        maxUs: {type: integer, minimum: 0}
+        buckets: {type: array, items: {type: object}}
+    Thread:
+      type: object
+      required: [tid, startTimeTicks, cgroupId, command, role, cpu, runqlat]
+      properties:
+        tid: {type: integer, minimum: 1, description: PID in the node procfs namespace.}
+        kernelTid: {type: integer, minimum: 1}
+        kernelTgid: {type: integer, minimum: 1}
+        startTimeTicks: {type: integer, minimum: 0}
+        cgroupId: {type: integer, minimum: 1}
+        command: {type: string}
+        role: {type: string, enum: [vcpu, vmm-main, other]}
+        vcpuIndex: {type: integer, minimum: 0}
+        cpu: {$ref: '#/components/schemas/CPU'}
+        runqlat: {$ref: '#/components/schemas/Latency'}
+        issues: {type: array, items: {type: string}}
+    HostItem:
+      type: object
+      required: [kind, namespace, podName, podUid, sandboxId, cpu, memory, io, threads, vcpuRunqlat, partial]
+      properties:
+        kind: {type: string, enum: [kata-sandbox, runc-container]}
+        namespace: {type: string}
+        podName: {type: string}
+        podUid: {type: string}
+        sandboxId: {type: string}
+        containerId: {type: string}
+        pid: {type: integer, minimum: 1}
+        cpu: {$ref: '#/components/schemas/CPU'}
+        memory:
+          type: [object, 'null']
+          required: [bytes, source]
+          properties:
+            bytes: {type: integer, minimum: 0}
+            source: {type: string, enum: [cgroup-memory.current, proc-status-rss]}
+        io:
+          type: [object, 'null']
+          required: [readBytes, writeBytes, readChars, writeChars]
+          properties:
+            readBytes: {type: integer, minimum: 0}
+            writeBytes: {type: integer, minimum: 0}
+            readChars: {type: integer, minimum: 0}
+            writeChars: {type: integer, minimum: 0}
+        threads: {type: array, maxItems: 512, items: {$ref: '#/components/schemas/Thread'}}
+        vcpuRunqlat: {$ref: '#/components/schemas/Latency'}
+        partial: {type: boolean}
+        issues: {type: array, items: {type: string}}
+    HostResponse:
+      type: object
+      required: [domain, roleSource, startedAt, durationSeconds, totalItems, items]
+      properties:
+        domain: {type: string, const: host}
+        roleSource: {type: string, const: qemu-thread-name}
+        startedAt: {type: string, format: date-time}
+        durationSeconds: {type: number, minimum: 0}
+        totalItems: {type: integer, minimum: 0, maximum: 256}
+        items: {type: array, maxItems: 100, items: {$ref: '#/components/schemas/HostItem'}}

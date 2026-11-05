@@ -57,7 +57,9 @@ sched_process_exec / sched_process_exit
 
 ## CPU runtime 聚合
 
-Kata 扩展见 [接入指南](kata.md)：CRI Ready Sandbox 独立进入 `snapshot.sandboxes`，经宿主可执行文件、完整 shim 参数、VMM 父子关系和启动 tick 核对身份。应用容器重启间隙不等于 VM 消失。Kata 的 CRI container PID 不在 Host procfs 中当作业务容器解析；Guest 容器返回 `processVisibility=guest-unavailable`。VMM 的 Host cgroup 不加入普通容器 Resolve 索引，因此不会把共享 VM 重复归属到多个容器。官方 Monitor 仅按需、按 Sandbox 查询，未合入普通自监控 `/metrics`，本阶段不改动 eBPF 记账或添加 Guest Probe。
+Kata 扩展见 [接入指南](kata.md)：CRI Ready Sandbox 独立进入 `snapshot.sandboxes`，经宿主可执行文件、完整 shim 参数、VMM 父子关系和启动 tick 核对身份。应用容器重启间隙不等于 VM 消失。Kata 的 CRI container PID 不在 Host procfs 中当作业务容器解析；Guest 容器返回 `processVisibility=guest-unavailable`。VMM 的 Host cgroup 不加入普通容器 Resolve 索引，因此不会把共享 VM 重复归属到多个容器。官方 Monitor 仅按需、按 Sandbox 查询，未合入普通自监控 `/metrics`，M7 不改动 eBPF 记账或添加 Guest Probe。
+
+M8 单独提供 `/api/v1/host/resources`：验证 VMM/线程的 procfs 生成和每线程 cgroup，再通过 CPU map value 中的 namespace PID/TGID 别名找到全局 eBPF key，关联现有 CPU 和 runqlat。CPU key/总量记账不变，只在新明细 key 插入时取得别名；值大小从 24 增至 32 bytes，容量不变。runc 使用原有独立 cgroup 总量，VM 使用完整稳定线程集合的差值之和，缺失不能当零。VMM RSS、进程 IO 与 vCPU Host 等待不代表 Guest 内部指标。角色采用 QEMU 线程命名启发式，不占用 QMP；具体字段、请求上限及一致性边界见 [M8 指南](host-resources.md)。
 
 ```text
 sched_switch raw tracepoint

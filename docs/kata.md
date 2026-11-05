@@ -4,6 +4,8 @@
 
 不包含自研运行时、Guest eBPF Probe、vCPU thread 调度分析或 runc/Kata 性能优劣结论。Kata Monitor 已有 Guest OS/Agent 聚合指标，不等于项目实现了 Guest 进程观测。
 
+后续 M8 已增加独立 Host/VMM 资源视图和 vCPU thread 调度观测，使用方法及字段边界见 [M8 指南](host-resources.md)；本页保留 M7 安装与身份说明。
+
 ## 为什么 Sandbox 独立建模
 
 一个 Kata Pod 的多个容器共享 VM。CRI 返回的 container PID **不能直接当作宿主容器 init PID**；本环境实际返回的是 VMM PID。继续套用 runc 的 PID→cgroup 逻辑，会把 VMM 重复记在不同业务容器上。

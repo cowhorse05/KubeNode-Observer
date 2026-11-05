@@ -259,6 +259,16 @@ func summarize(value delta) Latency {
 	return result
 }
 
+// SummarizeHistogram reuses the same bucket/percentile semantics for Host
+// threads. Counts come from histogram buckets, not a separate non-atomic map.
+func SummarizeHistogram(totalNS uint64, buckets [probe.RunQLatBuckets]uint64) Latency {
+	value := delta{totalNS: totalNS, buckets: buckets}
+	for _, count := range buckets {
+		value.count += count
+	}
+	return summarize(value)
+}
+
 func percentile(buckets [probe.RunQLatBuckets]uint64, count uint64, percent uint64) uint64 {
 	target := (count*percent + 99) / 100
 	var cumulative uint64

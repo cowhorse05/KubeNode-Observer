@@ -3,11 +3,32 @@ package topology
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
 )
+
+func TestCurrentSnapshotRequiresFreshSuccessfulTopology(t *testing.T) {
+	s := NewStore(fakeCollector{})
+	if _, err := s.CurrentSnapshot(); err == nil {
+		t.Fatal("missing topology accepted")
+	}
+	s.snapshot.Store(&Snapshot{GeneratedAt: time.Now().Add(-time.Minute)})
+	if _, err := s.CurrentSnapshot(); err == nil {
+		t.Fatal("stale topology accepted")
+	}
+	s.snapshot.Store(&Snapshot{GeneratedAt: time.Now()})
+	if _, err := s.CurrentSnapshot(); err != nil {
+		t.Fatal(err)
+	}
+	s.collector = fakeCollector{err: fmt.Errorf("CRI unavailable")}
+	_ = s.Refresh(context.Background())
+	if _, err := s.CurrentSnapshot(); err == nil {
+		t.Fatal("failed refresh hidden behind previous snapshot")
+	}
+}
 
 type fakeCollector struct {
 	snapshot Snapshot

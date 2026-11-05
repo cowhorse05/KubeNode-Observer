@@ -3,6 +3,7 @@ package topology
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"sync"
 	"sync/atomic"
@@ -190,4 +191,17 @@ func (s *Store) HasSandbox(id string) bool {
 		}
 	}
 	return false
+}
+
+// CurrentSnapshot returns an immutable view. Consumers must not mutate its
+// slices. Measurements fail closed rather than treating stale identity as live.
+func (s *Store) CurrentSnapshot() (*Snapshot, error) {
+	s.errorMu.RLock()
+	lastError := s.lastError
+	s.errorMu.RUnlock()
+	current := s.snapshot.Load()
+	if current == nil || time.Since(current.GeneratedAt) > 30*time.Second || lastError != "" {
+		return nil, fmt.Errorf("current topology is unavailable, stale or failing: %s", lastError)
+	}
+	return current, nil
 }

@@ -1,0 +1,7 @@
+pid 3109's current affinity list: 0-11
+pid 3113's current affinity list: 0-11
+pid 3131's current affinity list: 0-11
+pid 3132's current affinity list: 0-11
+pid 3137's current affinity list: 0-11
+pid 3149's current affinity list: 0-11
+pid 3178's current affinity list: 0-11

@@ -1,0 +1,5 @@
+{
+  "baselineP95Us": 2303,
+  "contentionP95Us": 32767,
+  "recoveryP95Us": 767
+}

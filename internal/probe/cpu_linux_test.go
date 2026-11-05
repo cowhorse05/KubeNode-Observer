@@ -131,3 +131,39 @@ func TestCPUBatchSnapshotKernel(t *testing.T) {
 		}
 	}
 }
+
+func TestCPUNamespaceAliasKernel(t *testing.T) {
+	if os.Getenv("KNO_BPF_TEST") != "1" {
+		t.Skip("set KNO_BPF_TEST=1 with BPF privileges")
+	}
+	if err := rlimit.RemoveMemlock(); err != nil {
+		t.Fatal(err)
+	}
+	p, err := NewCPUProbe()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer p.Close()
+	child := exec.Command("/bin/sleep", "0.2")
+	if err := child.Start(); err != nil {
+		t.Fatal(err)
+	}
+	pid := uint32(child.Process.Pid)
+	if err := child.Wait(); err != nil {
+		t.Fatal(err)
+	}
+	snapshot, err := p.Snapshot()
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, task := range snapshot.Processes {
+		if task.NamespacePID == pid && task.NamespaceTGID == pid {
+			t.Logf("kernel PID=%d namespace PID=%d runtime=%dns", task.PID, task.NamespacePID, task.Runtime)
+			if task.Runtime == 0 {
+				t.Fatal("namespace alias had no runtime")
+			}
+			return
+		}
+	}
+	t.Fatalf("no CPU map alias for visible child PID %d", pid)
+}

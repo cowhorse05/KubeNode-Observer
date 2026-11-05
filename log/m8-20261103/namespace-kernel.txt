@@ -1,0 +1,4 @@
+=== RUN   TestCPUNamespaceAliasKernel
+    cpu_linux_test.go:161: kernel PID=242654 namespace PID=241661 runtime=1340604ns
+--- PASS: TestCPUNamespaceAliasKernel (0.36s)
+PASS

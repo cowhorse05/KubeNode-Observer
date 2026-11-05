@@ -251,6 +251,45 @@ func main() {
 		})
 	}
 	root.AddCommand(top)
+	var hostDuration time.Duration
+	workloads := &cobra.Command{Use: "workloads", Short: "Measure Host runc-container and Kata VMM resources (not Guest CPU)", RunE: func(_ *cobra.Command, _ []string) error {
+		query := url.Values{"duration": {hostDuration.String()}, "limit": {strconv.Itoa(topLimit)}}
+		if topNamespace != "" {
+			query.Set("namespace", topNamespace)
+		}
+		if topPod != "" {
+			query.Set("pod", topPod)
+		}
+		ctx, cancel := context.WithTimeout(context.Background(), hostDuration+15*time.Second)
+		defer cancel()
+		request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint+"/api/v1/host/resources?"+query.Encode(), nil)
+		if err != nil {
+			return err
+		}
+		response, err := http.DefaultClient.Do(request)
+		if err != nil {
+			return err
+		}
+		defer response.Body.Close()
+		body, err := io.ReadAll(io.LimitReader(response.Body, (16<<20)+1))
+		if err != nil {
+			return err
+		}
+		if len(body) > 16<<20 {
+			return fmt.Errorf("Host response exceeds 16 MiB")
+		}
+		if response.StatusCode != 200 {
+			return fmt.Errorf("agent returned %s: %s", response.Status, body)
+		}
+		var formatted bytes.Buffer
+		if err := json.Indent(&formatted, body, "", "  "); err != nil {
+			return err
+		}
+		fmt.Println(formatted.String())
+		return nil
+	}}
+	workloads.Flags().DurationVar(&hostDuration, "duration", 5*time.Second, "Host measurement window (100ms..30s)")
+	top.AddCommand(workloads)
 
 	var traceNamespace string
 	var tracePod string

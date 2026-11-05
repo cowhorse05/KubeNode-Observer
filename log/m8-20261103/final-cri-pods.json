@@ -1,0 +1,396 @@
+{
+  "items": [
+    {
+      "id": "a2e92228e9f3e9ea587d7c98c408ebbf1dc338c94b7ede4cbbf027919b210454",
+      "metadata": {
+        "name": "kno-agent-np4nr",
+        "uid": "60e76a99-e1fd-49e8-87fc-5cf9f107200d",
+        "namespace": "kube-system",
+        "attempt": 0
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793699177694852388",
+      "labels": {
+        "app.kubernetes.io/name": "kno-agent",
+        "controller-revision-hash": "7c7c8dd497",
+        "io.kubernetes.pod.name": "kno-agent-np4nr",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "60e76a99-e1fd-49e8-87fc-5cf9f107200d",
+        "pod-template-generation": "55"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/restartedAt": "2026-10-20T11:53:01+08:00",
+        "kubernetes.io/config.seen": "2026-11-03T09:46:17.359078624Z",
+        "kubernetes.io/config.source": "api",
+        "prometheus.io/path": "/metrics",
+        "prometheus.io/port": "18080",
+        "prometheus.io/scrape": "true"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "8c6b2c7b9d0bb4557d5686894f2022b68c3db04050aebc4e8eb36a56d25de829",
+      "metadata": {
+        "name": "kno-agent-cgssm",
+        "uid": "7c929957-ea91-464e-9e9f-3da2e5ab050f",
+        "namespace": "kube-system",
+        "attempt": 0
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793698953263569265",
+      "labels": {
+        "app.kubernetes.io/name": "kno-agent",
+        "controller-revision-hash": "678cd5f8df",
+        "io.kubernetes.pod.name": "kno-agent-cgssm",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "7c929957-ea91-464e-9e9f-3da2e5ab050f",
+        "pod-template-generation": "54"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/restartedAt": "2026-10-20T11:53:01+08:00",
+        "kubernetes.io/config.seen": "2026-11-03T09:42:32.938039930Z",
+        "kubernetes.io/config.source": "api",
+        "prometheus.io/path": "/metrics",
+        "prometheus.io/port": "18080",
+        "prometheus.io/scrape": "true"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "73cde65d4fee8a6722f78c80edae1692015cb4228291c0faac353741fe28ceba",
+      "metadata": {
+        "name": "kno-observer-experiment",
+        "uid": "61ee580b-6ee5-4b0c-bd4f-e3691ac31a0a",
+        "namespace": "default",
+        "attempt": 0
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793698792881484325",
+      "labels": {
+        "io.kubernetes.pod.name": "kno-observer-experiment",
+        "io.kubernetes.pod.namespace": "default",
+        "io.kubernetes.pod.uid": "61ee580b-6ee5-4b0c-bd4f-e3691ac31a0a"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"kno-observer-experiment\",\"namespace\":\"default\"},\"spec\":{\"containers\":[{\"args\":[\"--listen=:8080\",\"--work-iterations=64\"],\"image\":\"kubenode-observer/observer-benchmark:dev\",\"imagePullPolicy\":\"Never\",\"name\":\"benchmark\",\"readinessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":8080},\"periodSeconds\":1},\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"1\",\"memory\":\"32Mi\"}}}],\"nodeName\":\"kno-dev\",\"restartPolicy\":\"Never\"}}\n",
+        "kubernetes.io/config.seen": "2026-11-03T09:39:51.861894343Z",
+        "kubernetes.io/config.source": "api"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "7f0b9849102a4a9ec74b4aa423dbe262de30dfe21683710edf733b218438ece9",
+      "metadata": {
+        "name": "coredns-7d764666f9-lfstc",
+        "uid": "55d6ceba-0574-480b-9b6c-fdc613326b70",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696882714780203",
+      "labels": {
+        "io.kubernetes.pod.name": "coredns-7d764666f9-lfstc",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "55d6ceba-0574-480b-9b6c-fdc613326b70",
+        "k8s-app": "kube-dns",
+        "pod-template-hash": "7d764666f9"
+      },
+      "annotations": {
+        "kubernetes.io/config.seen": "2026-11-03T09:08:01.666754707Z",
+        "kubernetes.io/config.source": "api"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "aa5ab1a5804566de53363e03c18b9264b23b4a9e6f975da46e678abe8dcf17ff",
+      "metadata": {
+        "name": "kube-proxy-4q8cn",
+        "uid": "8b967d33-6afe-4e8b-982e-5c08b685b497",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696882033184726",
+      "labels": {
+        "controller-revision-hash": "9b7b96d6c",
+        "io.kubernetes.pod.name": "kube-proxy-4q8cn",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "8b967d33-6afe-4e8b-982e-5c08b685b497",
+        "k8s-app": "kube-proxy",
+        "pod-template-generation": "1"
+      },
+      "annotations": {
+        "kubernetes.io/config.seen": "2026-11-03T09:08:01.666751875Z",
+        "kubernetes.io/config.source": "api"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "dc598fa64336566427a76252426a92d2393d105b9be05fca121cd1688500ddaa",
+      "metadata": {
+        "name": "storage-provisioner",
+        "uid": "b0d20374-7657-42cd-ae1c-572788ecf033",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696882027599131",
+      "labels": {
+        "addonmanager.kubernetes.io/mode": "Reconcile",
+        "integration-test": "storage-provisioner",
+        "io.kubernetes.pod.name": "storage-provisioner",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "b0d20374-7657-42cd-ae1c-572788ecf033"
+      },
+      "annotations": {
+        "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"labels\":{\"addonmanager.kubernetes.io/mode\":\"Reconcile\",\"integration-test\":\"storage-provisioner\"},\"name\":\"storage-provisioner\",\"namespace\":\"kube-system\"},\"spec\":{\"containers\":[{\"command\":[\"/storage-provisioner\"],\"image\":\"gcr.io/k8s-minikube/storage-provisioner:v5\",\"imagePullPolicy\":\"IfNotPresent\",\"name\":\"storage-provisioner\",\"volumeMounts\":[{\"mountPath\":\"/tmp\",\"name\":\"tmp\"}]}],\"hostNetwork\":true,\"serviceAccountName\":\"storage-provisioner\",\"volumes\":[{\"hostPath\":{\"path\":\"/tmp\",\"type\":\"Directory\"},\"name\":\"tmp\"}]}}\n",
+        "kubernetes.io/config.seen": "2026-11-03T09:08:01.666753718Z",
+        "kubernetes.io/config.source": "api"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "e3dfa9905dd1921aa92023a97501a27568f57ae0df0b5bd8a67e98a6ebf8cced",
+      "metadata": {
+        "name": "kube-scheduler-kno-dev",
+        "uid": "1d02533f9f8212523b4fe5db220e6f9e",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696877552739209",
+      "labels": {
+        "component": "kube-scheduler",
+        "io.kubernetes.pod.name": "kube-scheduler-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "1d02533f9f8212523b4fe5db220e6f9e",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubernetes.io/config.hash": "1d02533f9f8212523b4fe5db220e6f9e",
+        "kubernetes.io/config.seen": "2026-11-03T09:07:56.665459526Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "127dc2b1f87db718d84b5c7b602d8d12634ca8dcf85d24bd763df56af3c4aee9",
+      "metadata": {
+        "name": "kube-controller-manager-kno-dev",
+        "uid": "5bccc93f8bc4600fa5987f351c495838",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696877546331104",
+      "labels": {
+        "component": "kube-controller-manager",
+        "io.kubernetes.pod.name": "kube-controller-manager-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "5bccc93f8bc4600fa5987f351c495838",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubernetes.io/config.hash": "5bccc93f8bc4600fa5987f351c495838",
+        "kubernetes.io/config.seen": "2026-11-03T09:07:56.665459065Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "f5ba553e05fbb9d19f30f6aa1c97c57dcb78b790c1b526fba22634384ec7c4d7",
+      "metadata": {
+        "name": "kube-apiserver-kno-dev",
+        "uid": "a0b84b2c8e718b24bb735829786da16b",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696877518412340",
+      "labels": {
+        "component": "kube-apiserver",
+        "io.kubernetes.pod.name": "kube-apiserver-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "a0b84b2c8e718b24bb735829786da16b",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint": "192.168.49.2:8443",
+        "kubernetes.io/config.hash": "a0b84b2c8e718b24bb735829786da16b",
+        "kubernetes.io/config.seen": "2026-11-03T09:07:56.665458250Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "c88db51d52dcbd9a53d8f81ba802226eeb5066d5303065117f818050dadee484",
+      "metadata": {
+        "name": "etcd-kno-dev",
+        "uid": "7aa99f588eb591303e696ee76696fc7b",
+        "namespace": "kube-system",
+        "attempt": 7
+      },
+      "state": "SANDBOX_READY",
+      "createdAt": "1793696877493945704",
+      "labels": {
+        "component": "etcd",
+        "io.kubernetes.pod.name": "etcd-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "7aa99f588eb591303e696ee76696fc7b",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubeadm.kubernetes.io/etcd.advertise-client-urls": "https://192.168.49.2:2379",
+        "kubernetes.io/config.hash": "7aa99f588eb591303e696ee76696fc7b",
+        "kubernetes.io/config.seen": "2026-11-03T09:07:56.665454805Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "0834d7e76276d5fc4ddffa1163ea9bfc80930c11665347047a4851833bce5f0a",
+      "metadata": {
+        "name": "coredns-7d764666f9-lfstc",
+        "uid": "55d6ceba-0574-480b-9b6c-fdc613326b70",
+        "namespace": "kube-system",
+        "attempt": 6
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793067612574446668",
+      "labels": {
+        "io.kubernetes.pod.name": "coredns-7d764666f9-lfstc",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "55d6ceba-0574-480b-9b6c-fdc613326b70",
+        "k8s-app": "kube-dns",
+        "pod-template-hash": "7d764666f9"
+      },
+      "annotations": {
+        "kubernetes.io/config.seen": "2026-10-27T02:20:11.614495264Z",
+        "kubernetes.io/config.source": "api"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "217cabc826708f2cd137ada0da0587967e8278a7621b33762de4fb1312f560e3",
+      "metadata": {
+        "name": "kube-proxy-4q8cn",
+        "uid": "8b967d33-6afe-4e8b-982e-5c08b685b497",
+        "namespace": "kube-system",
+        "attempt": 6
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793067611963534549",
+      "labels": {
+        "controller-revision-hash": "9b7b96d6c",
+        "io.kubernetes.pod.name": "kube-proxy-4q8cn",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "8b967d33-6afe-4e8b-982e-5c08b685b497",
+        "k8s-app": "kube-proxy",
+        "pod-template-generation": "1"
+      },
+      "annotations": {
+        "kubernetes.io/config.seen": "2026-10-27T02:20:11.614493784Z",
+        "kubernetes.io/config.source": "api"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "9f64cb22cbe8a25650b5879a9eef8b2834ea2ca3a9047a3fad418c20179c92da",
+      "metadata": {
+        "name": "kube-controller-manager-kno-dev",
+        "uid": "5bccc93f8bc4600fa5987f351c495838",
+        "namespace": "kube-system",
+        "attempt": 6
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793067607480585092",
+      "labels": {
+        "component": "kube-controller-manager",
+        "io.kubernetes.pod.name": "kube-controller-manager-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "5bccc93f8bc4600fa5987f351c495838",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubernetes.io/config.hash": "5bccc93f8bc4600fa5987f351c495838",
+        "kubernetes.io/config.seen": "2026-10-27T02:20:06.619618214Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "c5e25414ce6ddee2833ebbf25365caaec7265d7fa49255447a4471104f244ebc",
+      "metadata": {
+        "name": "kube-apiserver-kno-dev",
+        "uid": "a0b84b2c8e718b24bb735829786da16b",
+        "namespace": "kube-system",
+        "attempt": 6
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793067607475567685",
+      "labels": {
+        "component": "kube-apiserver",
+        "io.kubernetes.pod.name": "kube-apiserver-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "a0b84b2c8e718b24bb735829786da16b",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubeadm.kubernetes.io/kube-apiserver.advertise-address.endpoint": "192.168.49.2:8443",
+        "kubernetes.io/config.hash": "a0b84b2c8e718b24bb735829786da16b",
+        "kubernetes.io/config.seen": "2026-10-27T02:20:06.619617224Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "f634968bef53441f1f9a30e0c4779a5852685106e60b4d1fd060e97d55ca6866",
+      "metadata": {
+        "name": "etcd-kno-dev",
+        "uid": "7aa99f588eb591303e696ee76696fc7b",
+        "namespace": "kube-system",
+        "attempt": 6
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793067607420738551",
+      "labels": {
+        "component": "etcd",
+        "io.kubernetes.pod.name": "etcd-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "7aa99f588eb591303e696ee76696fc7b",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubeadm.kubernetes.io/etcd.advertise-client-urls": "https://192.168.49.2:2379",
+        "kubernetes.io/config.hash": "7aa99f588eb591303e696ee76696fc7b",
+        "kubernetes.io/config.seen": "2026-10-27T02:20:06.619615233Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    },
+    {
+      "id": "c72e61405bec5ca1cccf772e6937b46d15192c3295d9d6c7ab2d4afe46ff8c9c",
+      "metadata": {
+        "name": "kube-scheduler-kno-dev",
+        "uid": "1d02533f9f8212523b4fe5db220e6f9e",
+        "namespace": "kube-system",
+        "attempt": 6
+      },
+      "state": "SANDBOX_NOTREADY",
+      "createdAt": "1793067607413984318",
+      "labels": {
+        "component": "kube-scheduler",
+        "io.kubernetes.pod.name": "kube-scheduler-kno-dev",
+        "io.kubernetes.pod.namespace": "kube-system",
+        "io.kubernetes.pod.uid": "1d02533f9f8212523b4fe5db220e6f9e",
+        "tier": "control-plane"
+      },
+      "annotations": {
+        "kubernetes.io/config.hash": "1d02533f9f8212523b4fe5db220e6f9e",
+        "kubernetes.io/config.seen": "2026-10-27T02:20:06.619609391Z",
+        "kubernetes.io/config.source": "file"
+      },
+      "runtimeHandler": ""
+    }
+  ]
+}

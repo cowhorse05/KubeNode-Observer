@@ -4,6 +4,11 @@
 
 #define TASK_COMM_LEN 16
 
+// Namespace aliases are only used by Host/procfs consumers. Existing CPU keys
+// remain kernel-global so runc accounting and runqlat correlation do not change.
+const volatile __u64 pidns_dev = 0;
+const volatile __u64 pidns_ino = 0;
+
 struct sched_entity {
     __u64 sum_exec_runtime;
 } __attribute__((preserve_access_index));
@@ -24,6 +29,8 @@ struct cpu_key {
 struct cpu_value {
     __u64 runtime_ns;
     char comm[TASK_COMM_LEN];
+    __u32 namespace_pid;
+    __u32 namespace_tgid;
 };
 
 struct cpu_start {
@@ -100,8 +107,13 @@ int trace_cpu_runtime(struct bpf_raw_tracepoint_args *ctx)
 
         value = bpf_map_lookup_elem(&cpu_runtime, &key);
         if (!value) {
+            struct bpf_pidns_info ns = {};
             initial.runtime_ns = 0;
             bpf_core_read_str(initial.comm, sizeof(initial.comm), &prev->comm);
+            if (pidns_ino && bpf_get_ns_current_pid_tgid(pidns_dev, pidns_ino, &ns, sizeof(ns)) == 0) {
+                initial.namespace_pid = ns.pid;
+                initial.namespace_tgid = ns.tgid;
+            }
             bpf_map_update_elem(&cpu_runtime, &key, &initial, BPF_NOEXIST);
             value = bpf_map_lookup_elem(&cpu_runtime, &key);
         }

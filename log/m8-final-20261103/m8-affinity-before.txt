@@ -1,0 +1,7 @@
+pid 5488's current affinity list: 0-11
+pid 5492's current affinity list: 0-11
+pid 5496's current affinity list: 0-11
+pid 5497's current affinity list: 0-11
+pid 5498's current affinity list: 0-11
+pid 5499's current affinity list: 0-11
+pid 5553's current affinity list: 0-11

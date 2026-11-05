@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"os"
 	"sync"
+	"syscall"
 	"time"
 
 	"github.com/cilium/ebpf"
@@ -22,17 +24,20 @@ type CgroupRuntime struct {
 // Process detail is bounded independently of container totals. CapturedAt is
 // taken after the small totals scan, not before a potentially slow detail scan.
 type CPUSnapshot struct {
-	Processes  []CPURuntime
-	Totals     []CgroupRuntime
-	CapturedAt time.Time
+	Processes         []CPURuntime
+	Totals            []CgroupRuntime
+	CapturedAt        time.Time
+	DetailsCapturedAt time.Time
 }
 
 type CPURuntime struct {
-	CgroupID uint64
-	TGID     uint32
-	PID      uint32
-	Runtime  uint64
-	Comm     [cpuCommLen]byte
+	CgroupID      uint64
+	TGID          uint32
+	PID           uint32
+	Runtime       uint64
+	Comm          [cpuCommLen]byte
+	NamespacePID  uint32
+	NamespaceTGID uint32
 }
 
 func (r CPURuntime) Command() string {
@@ -49,8 +54,10 @@ type cpuKey struct {
 }
 
 type cpuValue struct {
-	Runtime uint64
-	Comm    [cpuCommLen]byte
+	Runtime       uint64
+	Comm          [cpuCommLen]byte
+	NamespacePID  uint32
+	NamespaceTGID uint32
 }
 
 type CPUProbe struct {
@@ -61,7 +68,22 @@ type CPUProbe struct {
 
 func NewCPUProbe() (*CPUProbe, error) {
 	probe := &CPUProbe{}
-	if err := bpfgen.LoadCPUObjects(&probe.objects, nil); err != nil {
+	spec, err := bpfgen.LoadCPU()
+	if err != nil {
+		return nil, fmt.Errorf("load CPU spec: %w", err)
+	}
+	info, err := os.Stat("/proc/self/ns/pid")
+	if err != nil {
+		return nil, fmt.Errorf("stat Host PID namespace: %w", err)
+	}
+	stat, ok := info.Sys().(*syscall.Stat_t)
+	if !ok {
+		return nil, fmt.Errorf("PID namespace stat unsupported")
+	}
+	if err := spec.RewriteConstants(map[string]interface{}{"pidns_dev": uint64(stat.Dev), "pidns_ino": stat.Ino}); err != nil {
+		return nil, fmt.Errorf("configure Host PID namespace: %w", err)
+	}
+	if err := spec.LoadAndAssign(&probe.objects, nil); err != nil {
 		return nil, fmt.Errorf("load CPU eBPF objects: %w", err)
 	}
 
@@ -98,14 +120,17 @@ func (p *CPUProbe) Snapshot() (CPUSnapshot, error) {
 		for i := 0; i < n; i++ {
 			key, value := keys[i], values[i]
 			result.Processes = append(result.Processes, CPURuntime{
-				CgroupID: key.CgroupID,
-				TGID:     key.TGID,
-				PID:      key.PID,
-				Runtime:  value.Runtime,
-				Comm:     value.Comm,
+				CgroupID:      key.CgroupID,
+				TGID:          key.TGID,
+				PID:           key.PID,
+				Runtime:       value.Runtime,
+				Comm:          value.Comm,
+				NamespacePID:  value.NamespacePID,
+				NamespaceTGID: value.NamespaceTGID,
 			})
 		}
 		if errors.Is(err, ebpf.ErrKeyNotExist) {
+			result.DetailsCapturedAt = time.Now()
 			return result, nil
 		}
 		if err != nil {

@@ -90,8 +90,15 @@ for container in exec cpu; do
 done
 node readlink "/proc/${vmm}/exe" >"${KATA_OUTPUT}/vmm-exe.txt"
 node ls -l "/proc/${vmm}/fd" >"${KATA_OUTPUT}/vmm-fds.txt"
-node curl -fsS "http://127.0.0.1:8090/sandboxes" >"${KATA_OUTPUT}/monitor-sandboxes.txt"
-grep -Fx "${sandbox}" "${KATA_OUTPUT}/monitor-sandboxes.txt"
+# On node reboot Monitor starts before the first sandbox directory exists and
+# retries directory discovery every 60s. Bound the readiness wait, not its data.
+monitor_ready=false
+for _ in $(seq 1 90); do
+  node curl -fsS "http://127.0.0.1:8090/sandboxes" >"${KATA_OUTPUT}/monitor-sandboxes.txt"
+  if grep -Fxq "${sandbox}" "${KATA_OUTPUT}/monitor-sandboxes.txt"; then monitor_ready=true; break; fi
+  sleep 1
+done
+[[ "${monitor_ready}" == true ]]
 ./bin/kno --endpoint "${endpoint}" kata metrics --sandbox "${sandbox}" >"${KATA_OUTPUT}/kata-metrics.txt"
 grep -q '^kata_hypervisor_proc_stat' "${KATA_OUTPUT}/kata-metrics.txt"
 grep -q '^kata_guest_cpu_time' "${KATA_OUTPUT}/kata-metrics.txt"
@@ -102,6 +109,10 @@ get '/api/v1/events?namespace=kno-kata-test&limit=1000' >"${KATA_OUTPUT}/boundar
 jq -e '([.events[] | select(.comm=="kno-boundary" and .type=="exec" and .workload.podName=="kno-boundary-runc")]|length)>0 and ([.events[] | select(.comm=="kno-boundary" and .workload.podName=="kno-boundary-kata")]|length)==0' "${KATA_OUTPUT}/boundary-events.json" >/dev/null
 get '/api/v1/cpu?namespace=kno-kata-test&pod=kno-boundary-kata&level=process' >"${KATA_OUTPUT}/kata-host-cpu.json"
 jq -e '(.items|length)==0' "${KATA_OUTPUT}/kata-host-cpu.json" >/dev/null
+if [[ "${KATA_M8_TEST:-false}" == true ]]; then
+  export KATA_OUTPUT KATA_TEST_ENDPOINT="${endpoint}" KATA_TEST_SANDBOX="${sandbox}"
+  bash hack/kata-vmm-test.sh
+fi
 kube -n kno-kata-test delete pod kno-boundary-kata --wait=true --timeout=90s
 removed=false
 for attempt in $(seq 1 30); do
@@ -110,6 +121,10 @@ for attempt in $(seq 1 30); do
   sleep 1
 done
 [[ "${removed}" == true ]]
+if [[ "${KATA_M8_TEST:-false}" == true ]]; then
+  get "/api/v1/host/resources?kind=kata&sandbox=${sandbox}&duration=100ms" >"${KATA_OUTPUT}/m8-after-delete.json"
+  jq -e '(.items|length)==0' "${KATA_OUTPUT}/m8-after-delete.json" >/dev/null
+fi
 gone=false
 for _ in $(seq 1 30); do
   if node test ! -d "/proc/${vmm}"; then gone=true; break; fi

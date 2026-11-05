@@ -20,6 +20,7 @@ import (
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
 	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
+	"github.com/cowhorse05/KubeNode-Observer/internal/host"
 	"github.com/cowhorse05/KubeNode-Observer/internal/metrics"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
@@ -151,6 +152,7 @@ func main() {
 	handler.Handle("/api/v1/cpu", cpuCollector)
 	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpu.TimedSource{Source: cpuProbe, Recorder: timing, Operation: telemetry.AccuracyScan}, topologyStore, *cgroupRoot))
 	handler.Handle("/api/v1/runqlat", runQLatHandler)
+	handler.Handle("/api/v1/host/resources", host.NewHandler(topologyStore, cpuProbe, runQLatProbe, host.NewProcReader(*hostProc, *cgroupRoot)))
 	server := &http.Server{
 		Addr:              *listenAddress,
 		Handler:           handler,

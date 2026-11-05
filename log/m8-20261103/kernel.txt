@@ -1,0 +1,14 @@
+=== RUN   TestCPURuntimeRetentionKernel
+    cpu_linux_test.go:78: capacity=8192 children=128 retained=128 runtime=97308856ns wait4_CPU=78356000ns ratio=1.2419
+    cpu_linux_test.go:78: capacity=16 children=128 retained=1 runtime=521235ns wait4_CPU=68136000ns ratio=0.0076
+--- PASS: TestCPURuntimeRetentionKernel (0.40s)
+=== RUN   TestCPUBatchSnapshotKernel
+--- PASS: TestCPUBatchSnapshotKernel (0.06s)
+=== RUN   TestCPUNamespaceAliasKernel
+    cpu_linux_test.go:161: kernel PID=281262 namespace PID=280188 runtime=1286827ns
+--- PASS: TestCPUNamespaceAliasKernel (0.21s)
+=== RUN   TestCPURuntimeCommand
+--- PASS: TestCPURuntimeCommand (0.00s)
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+PASS

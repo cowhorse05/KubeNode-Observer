@@ -1,0 +1,10 @@
+pid 6369's current affinity list: 0-11
+pid 6369's new affinity list: 0
+pid 6383's current affinity list: 0-11
+pid 6383's new affinity list: 0
+pid 6384's current affinity list: 0-11
+pid 6384's new affinity list: 0
+pid 6385's current affinity list: 0-11
+pid 6385's new affinity list: 0
+pid 6386's current affinity list: 0-11
+pid 6386's new affinity list: 0

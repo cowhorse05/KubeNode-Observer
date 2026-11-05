@@ -1,0 +1,260 @@
+{
+  "status": "complete",
+  "config": {
+    "mode": "all",
+    "context": "kno-dev",
+    "output": "log/experiments/m8-final-20261103",
+    "image": "kubenode-observer/observer-benchmark:dev",
+    "costAgentImage": "kubenode-observer/kno-agent:cost",
+    "baselineAgentImage": "kubenode-observer/kno-agent:cost",
+    "candidateAgentImage": "kubenode-observer/kno-agent:metrics-cache",
+    "testAgentImage": "kubenode-observer/kno-agent:kata-vmm",
+    "pairs": 4,
+    "accuracyRepeats": 2,
+    "intervals": "250ms,1s,2s",
+    "durationNs": 10000000000,
+    "warmupNs": 3000000000,
+    "settleNs": 5000000000,
+    "memoryAgentImage": "kubenode-observer/kno-agent:memory",
+    "memoryGoLimits": "original,80MiB",
+    "memoryPulses": 5,
+    "memoryIdleNs": 60000000000,
+    "memoryIntervalNs": 5000000000
+  },
+  "pairedRounds": [
+    {
+      "number": 1,
+      "order": "off/on",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.029931452,
+        "operations": 1636098,
+        "throughputOpsPerSecond": 163121.55350510965,
+        "p99Us": 17,
+        "latencyOverflow": 1435
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.011575566,
+        "operations": 1674030,
+        "throughputOpsPerSecond": 167209.4456026603,
+        "p99Us": 17,
+        "latencyOverflow": 1420
+      },
+      "throughputDeltaPercent": 2.506040440218471,
+      "p99DeltaPercent": 0
+    },
+    {
+      "number": 2,
+      "order": "on/off",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.000012381,
+        "operations": 1549052,
+        "throughputOpsPerSecond": 154905.00821210933,
+        "p99Us": 17,
+        "latencyOverflow": 1018
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.066733729,
+        "operations": 1671585,
+        "throughputOpsPerSecond": 166050.38386825897,
+        "p99Us": 16,
+        "latencyOverflow": 1037
+      },
+      "throughputDeltaPercent": 7.1949743812598,
+      "p99DeltaPercent": -5.882352941176472
+    },
+    {
+      "number": 3,
+      "order": "off/on",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.005880271,
+        "operations": 1581648,
+        "throughputOpsPerSecond": 158071.84946876523,
+        "p99Us": 17,
+        "latencyOverflow": 1600
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.031587574,
+        "operations": 1477715,
+        "throughputOpsPerSecond": 147306.19546500905,
+        "p99Us": 19,
+        "latencyOverflow": 1479
+      },
+      "throughputDeltaPercent": -6.810607986138262,
+      "p99DeltaPercent": 11.764705882352944
+    },
+    {
+      "number": 4,
+      "order": "on/off",
+      "off": {
+        "mode": "steady",
+        "durationSeconds": 10.023700346,
+        "operations": 1613141,
+        "throughputOpsPerSecond": 160932.68397071853,
+        "p99Us": 16,
+        "latencyOverflow": 1465
+      },
+      "on": {
+        "mode": "steady",
+        "durationSeconds": 10.044543824,
+        "operations": 1536733,
+        "throughputOpsPerSecond": 152991.81594769855,
+        "p99Us": 19,
+        "latencyOverflow": 1538
+      },
+      "throughputDeltaPercent": -4.934279244646667,
+      "p99DeltaPercent": 18.75
+    }
+  ],
+  "throughputEffect": {
+    "medianPercent": -1.2141194022140978,
+    "bootstrapLowerPercent": -6.810607986138262,
+    "bootstrapUpperPercent": 7.1949743812598,
+    "pairs": 4
+  },
+  "p99Effect": {
+    "medianPercent": 5.882352941176472,
+    "bootstrapLowerPercent": -5.882352941176472,
+    "bootstrapUpperPercent": 18.75,
+    "pairs": 4
+  },
+  "accuracyCases": [
+    {
+      "mode": "steady",
+      "interval": "250ms",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-250ms-01.json",
+      "absoluteErrorPercent": 0.000006751924308545654,
+      "signedErrorPercent": 0.000006751924308545654,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-1s-01.json",
+      "absoluteErrorPercent": 0.000006233569338487399,
+      "signedErrorPercent": -0.000006233569338487399,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "2s",
+      "repeat": 1,
+      "rawFile": "accuracy-steady-2s-01.json",
+      "absoluteErrorPercent": 0.00000103001216444909,
+      "signedErrorPercent": 0.00000103001216444909,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "250ms",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-250ms-01.json",
+      "absoluteErrorPercent": 0.00010209446805742317,
+      "signedErrorPercent": -0.00010209446805742317,
+      "referenceSkewPercent": 0.0002115843115875206,
+      "missingKeys": 17870,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "1s",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-1s-01.json",
+      "absoluteErrorPercent": 7.053033712622891e-8,
+      "signedErrorPercent": -7.053033712622891e-8,
+      "referenceSkewPercent": 0,
+      "missingKeys": 18680,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "2s",
+      "repeat": 1,
+      "rawFile": "accuracy-churn-2s-01.json",
+      "absoluteErrorPercent": 0.0013631312272943674,
+      "signedErrorPercent": -0.0013631312272943674,
+      "referenceSkewPercent": 0.0029227436431716342,
+      "missingKeys": 19781,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "2s",
+      "repeat": 2,
+      "rawFile": "accuracy-churn-2s-02.json",
+      "absoluteErrorPercent": 0.000003010746951748189,
+      "signedErrorPercent": -0.000003010746951748189,
+      "referenceSkewPercent": 0,
+      "missingKeys": 16698,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "1s",
+      "repeat": 2,
+      "rawFile": "accuracy-churn-1s-02.json",
+      "absoluteErrorPercent": 9.896022112876324e-7,
+      "signedErrorPercent": -9.896022112876324e-7,
+      "referenceSkewPercent": 0,
+      "missingKeys": 19690,
+      "resetKeys": 0
+    },
+    {
+      "mode": "churn",
+      "interval": "250ms",
+      "repeat": 2,
+      "rawFile": "accuracy-churn-250ms-02.json",
+      "absoluteErrorPercent": 4.7404110636861674e-7,
+      "signedErrorPercent": -4.7404110636861674e-7,
+      "referenceSkewPercent": 0,
+      "missingKeys": 17281,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "2s",
+      "repeat": 2,
+      "rawFile": "accuracy-steady-2s-02.json",
+      "absoluteErrorPercent": 0.000004531841746313603,
+      "signedErrorPercent": 0.000004531841746313603,
+      "referenceSkewPercent": 0,
+      "missingKeys": 120,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "1s",
+      "repeat": 2,
+      "rawFile": "accuracy-steady-1s-02.json",
+      "absoluteErrorPercent": 7.500061460774532e-7,
+      "signedErrorPercent": -7.500061460774532e-7,
+      "referenceSkewPercent": 0,
+      "missingKeys": 0,
+      "resetKeys": 0
+    },
+    {
+      "mode": "steady",
+      "interval": "250ms",
+      "repeat": 2,
+      "rawFile": "accuracy-steady-250ms-02.json",
+      "absoluteErrorPercent": 0.000001079657641067655,
+      "signedErrorPercent": -0.000001079657641067655,
+      "referenceSkewPercent": 0,
+      "missingKeys": 125,
+      "resetKeys": 0
+    }
+  ]
+}
