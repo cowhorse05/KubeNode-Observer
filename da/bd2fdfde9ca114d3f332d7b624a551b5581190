@@ -1,0 +1,112 @@
+Makefile
+  s_6e6fc63242599e::t_c372bf4d4f754d 14-15,150-159,167-172
+  s_6e6fc63242599e::t_962b55a43350cc 149,160-166
+cmd/kno-agent/main.go
+  s_6e6fc63242599e::t_761876aa8bdb0d 23,37,112-113,115-116,163
+postman/mocks/guest-probe/default.js
+  s_6e6fc63242599e::t_1959767701a225 1-28
+cmd/kno/main.go
+  s_6e6fc63242599e::t_761876aa8bdb0d 348-355,357-359,361,363-365,367-368,370,372-373,375-380,382-383,386-392,394
+api/guest-resources.openapi.yaml
+  s_6e6fc63242599e::t_98c8e7af53c2a6 32-35,50-91,94-99,117-126
+  s_6e6fc63242599e::t_ce9202ec9ff948 44-46,129,138-143
+  s_6e6fc63242599e::t_117b9c4bfc752a 1-31,36-43,47-49,92-93,100-116,127-128,130-137,144-162
+hack/validate-guest-contract.py
+  s_6e6fc63242599e::t_98c8e7af53c2a6 1-46
+internal/topology/kubernetes.go
+  s_6e6fc63242599e::t_761876aa8bdb0d 24,110
+  s_6e6fc63242599e::t_da5dc80f3b2acf 22-23,108-109
+internal/topology/kubernetes_test.go
+  s_6e6fc63242599e::t_829a9de91abbb7 25-27,29-31,33-36
+internal/guest/proc_test.go
+  s_6e6fc63242599e::t_829a9de91abbb7 1-11,13-14,16-20,22-23,26-28,31,35,37-38,40-42,45-47,49-55,57-64,66-74
+internal/probe/runqlat.go
+  s_6e6fc63242599e::t_8d0127539eb079 5,39-41,43-55
+internal/probe/runqlat_linux_test.go
+  s_6e6fc63242599e::t_962b55a43350cc 1-17,19-20,22,24-25,27,29-30,32-35,37-45,47-51
+internal/guest/measure.go
+  s_6e6fc63242599e::t_761876aa8bdb0d 209-211,226-232,254-260
+  s_6e6fc63242599e::t_ce9202ec9ff948 115,207-208,238,241-242,244-248,252,261,264-267
+  s_6e6fc63242599e::t_e8b9340f150295 71-72,138,222
+  s_6e6fc63242599e::t_8d0127539eb079 21-23,29,140-177
+  s_6e6fc63242599e::t_1a4771f760545c 204-206
+  s_6e6fc63242599e::t_27e071657809a0 1-20,24-28,30-70,73-114,116-137,139,178-203,212-221,223-225,233-237,239-240,243,249-251,253,262-263,268-272
+cmd/kno-guest/main.go
+  s_6e6fc63242599e::t_761876aa8bdb0d 4,6,9,11-14,18,25-26,29,63-64
+  s_6e6fc63242599e::t_2b217ec81a456c 89-91
+  s_6e6fc63242599e::t_e8ff97dca902f0 24,39-42,51-60
+  s_6e6fc63242599e::t_8d0127539eb079 102
+  s_6e6fc63242599e::t_e8b9340f150295 113-129
+  s_6e6fc63242599e::t_60fcb62db7ded3 1-3,5,7-8,15-17,20-23,27,30-38,43-49,62,65-88,92,133-134
+  s_6e6fc63242599e::t_8de28154fd5579 28,50,61,100,132
+deploy/kata/guest-runtime.toml
+  s_6e6fc63242599e::t_60fcb62db7ded3 1-7
+internal/guest/relay_test.go
+  s_6e6fc63242599e::t_2b217ec81a456c 13,74,76,137-138
+  s_6e6fc63242599e::t_d7da580bc20f52 20,22-73,75,77-78,80-128,130-136,139-198,201-217,222-243
+  s_6e6fc63242599e::t_1959767701a225 1-12,14-19,21,79,129,199-200,218-221,244
+postman/simulations/guest-relay/guest-relay.context.md
+  s_6e6fc63242599e::t_78d303a20ed36d 26,28-31
+  s_6e6fc63242599e::t_1959767701a225 1-25,27
+internal/guest/relay.go
+  s_6e6fc63242599e::t_e8ff97dca902f0 55,171,176,184,190-203
+  s_6e6fc63242599e::t_da5dc80f3b2acf 1-41,69,72-170,172-175,177-179,185-189,204-206
+  s_6e6fc63242599e::t_ce9202ec9ff948 180-183
+internal/guest/measure_test.go
+  s_6e6fc63242599e::t_d7da580bc20f52 15-95,98-105,117-152,194-206,208-240
+  s_6e6fc63242599e::t_ce9202ec9ff948 96-97
+  s_6e6fc63242599e::t_8d0127539eb079 106-116,153-193
+  s_6e6fc63242599e::t_1c8a90dc2347af 1-14,207,241
+internal/guest/protocol.go
+  s_6e6fc63242599e::t_27e071657809a0 1-34,36-38,43-129
+  s_6e6fc63242599e::t_c74b3667883047 35,39,41-42
+examples/guest-probe/Dockerfile.local
+  s_6e6fc63242599e::t_60fcb62db7ded3 1-3
+examples/guest-probe/pods.yaml
+  s_6e6fc63242599e::t_c372bf4d4f754d 1-51
+postman/simulations/guest-relay/guest-relay.sim.yaml
+  s_6e6fc63242599e::t_1959767701a225 1-7
+examples/guest-probe/Dockerfile.workload
+  s_6e6fc63242599e::t_c372bf4d4f754d 1-4
+examples/guest-probe/Dockerfile.kernel-test
+  s_6e6fc63242599e::t_962b55a43350cc 1-6
+hack/install-kata-guest.sh
+  s_6e6fc63242599e::t_60fcb62db7ded3 1-48
+hack/guest-test.sh
+  s_6e6fc63242599e::t_0036a3343fb407 58-65
+  s_6e6fc63242599e::t_b3f07e4e9971e8 57
+  s_6e6fc63242599e::t_1a4771f760545c 6,11,80-83,86,95-105,110,114
+  s_6e6fc63242599e::t_fa71b803eafbb8 32-34,43-44,111-113,115-117,131
+  s_6e6fc63242599e::t_2cb979cff5e231 1-5,7-10,12-31,35-42,45-56,66-79,84-85,87-94,106-109,118-130,132-134
+internal/guest/proc.go
+  s_6e6fc63242599e::t_27e071657809a0 1-13,16-18,22-31,33-38,40-41,43-47,49-51,53-55,57,59-91,93-95,97-103
+hack/guest-check.sh
+  s_6e6fc63242599e::t_962b55a43350cc 24-26,28-31,41,43,45,54
+  s_6e6fc63242599e::t_fa71b803eafbb8 42,44
+  s_6e6fc63242599e::t_d12453f7a8dd88 1-23,27,32-40,46-53
+examples/guest-probe/kernel-child.S
+  s_6e6fc63242599e::t_962b55a43350cc 1-19
+examples/guest-probe/check.yaml
+  s_6e6fc63242599e::t_60fcb62db7ded3 1-20
+deploy/kata/guest-runtimeclass.yaml
+  s_6e6fc63242599e::t_60fcb62db7ded3 1-11
+postman/mocks/guest-probe/config.yaml
+  s_6e6fc63242599e::t_1959767701a225 2-4
+  s_6e6fc63242599e::t_f24d93a9afcf04 1,5-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "dabd2fdfde9ca114d3f332d7b624a551b5581190",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
