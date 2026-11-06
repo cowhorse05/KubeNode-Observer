@@ -14,11 +14,14 @@ import (
 )
 
 type PodInfo struct {
-	UID        string
-	RuntimeUID string
-	Static     bool
-	Phase      string
-	QoSClass   string
+	UID         string
+	RuntimeUID  string
+	Static      bool
+	Phase       string
+	QoSClass    string
+	IP          string
+	GuestProbe  bool
+	HostNetwork bool
 }
 
 type NodeInfo struct {
@@ -97,11 +100,14 @@ func podInfo(pod *corev1.Pod) PodInfo {
 		static = true
 	}
 	return PodInfo{
-		UID:        string(pod.UID),
-		RuntimeUID: runtimeUID,
-		Static:     static,
-		Phase:      string(pod.Status.Phase),
-		QoSClass:   string(pod.Status.QOSClass),
+		UID:         string(pod.UID),
+		RuntimeUID:  runtimeUID,
+		Static:      static,
+		Phase:       string(pod.Status.Phase),
+		QoSClass:    string(pod.Status.QOSClass),
+		IP:          pod.Status.PodIP,
+		GuestProbe:  pod.Annotations["observer.kubenode.io/guest-probe"] == "enabled",
+		HostNetwork: pod.Spec.HostNetwork,
 	}
 }
 

@@ -1,0 +1,8 @@
+version: 1
+name: guest-probe
+origin: 192.0.2.10
+interceptRequests: true
+scenarios:
+  - name: default
+    path: default.js
+    default: true

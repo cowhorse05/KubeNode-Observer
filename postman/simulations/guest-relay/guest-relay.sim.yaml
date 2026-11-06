@@ -1,0 +1,7 @@
+simulation: guest-relay
+routing: path
+mocks:
+  - name: guest-probe
+    routeKey: guest
+    origin: 192.0.2.10
+    path: postman/mocks/guest-probe

@@ -1,0 +1,3 @@
+FROM scratch
+COPY bin/kno-guest /kno-guest
+ENTRYPOINT ["/kno-guest"]
