@@ -1,0 +1,7 @@
+{
+  "baselineMeanWindowP95Us": 191,
+  "contentionMeanWindowP95Us": 2047,
+  "recoveryMeanWindowP95Us": 127,
+  "contentionAbove2xBaseline": true,
+  "recoveryBelowContention": true
+}

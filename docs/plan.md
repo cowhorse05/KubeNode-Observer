@@ -334,6 +334,8 @@ microVM 工作在 MVP 完成后开始。
 
 ### M9：Guest Probe
 
+状态（2026-11-06）：已完成真实 Guest CPU/runqlat、共享 Pod PID namespace 验证和固定 Pod 网络 relay。复用 Kata 官方 debug kernel 与既有 BPF 程序，不自研内核；Node 用当前 Pod UID/Sandbox/VMM generation 和 nonce 校验关联。严格区分完整稳定线程 CPU 与部分覆盖 runqlat，缺失不补零。最终六窗、Guest 真内核测试、M8 以及 runc integration/40000 子进程回归通过，原部署已恢复；复现、失败诊断与边界见 [M9 指南](guest-probe.md) 和 [报告](../log/2026-11-06-kata-guest.md)。尚未做时钟对齐、VSOCK 或生产安全部署。
+
 - 在 Kata VM 内运行最小 Guest Probe。
 - 采集 guest process CPU runtime 与 run queue latency。
 - 使用 Pod UID 和 Sandbox ID 关联 Host/Guest 数据。
@@ -391,7 +393,7 @@ Metrics 优化已完成 key-only 有界 census 与后台快照：4 个双版本�
 2. 128 MiB 下有限的无诊断 Pod/元数据 churn 观察已完成，不将其扩张为长期生产保证；
 3. 更受控 CPU 环境、更长窗口和跨内核测量作为后续研究，不以无限优化阻塞功能；
 4. 每项优化必须同时通过 integration，并核对 events lost、map occupancy 与归属正确性；
-5. 已在 M7 入口通知用户，并在收到明确授权后完成 Kata 接入与 M8 Host/VMM 视图；后续 M9 才进入 Guest 进程探针，不以无限优化阻塞功能，也不提前混合两层记账。
+5. 已在 M7 入口通知用户，并在收到明确授权后完成 Kata 接入、M8 Host/VMM 及 M9 Guest 进程探针；M10 才研究跨层时间对齐，不提前混合两层记账。
 
 ## 11. 主要风险
 

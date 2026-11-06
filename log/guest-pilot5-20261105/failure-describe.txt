@@ -1,0 +1,115 @@
+Name:                kno-guest
+Namespace:           kno-guest-test
+Priority:            0
+Runtime Class Name:  kno-kata-qemu-guest
+Service Account:     default
+Node:                kno-dev/192.168.49.2
+Start Time:          Thu, 05 Nov 2026 17:53:43 +0800
+Labels:              <none>
+Annotations:         observer.kubenode.io/guest-probe: enabled
+Status:              Running
+IP:                  10.244.1.99
+IPs:
+  IP:  10.244.1.99
+Containers:
+  probe:
+    Container ID:   containerd://a1bd2568ae721d2a7f53af3519b8f25c31545e7976efa66f050e1e038047c9ee
+    Image:          kubenode-observer/guest-probe:dev
+    Image ID:       sha256:a7b4eee25184c2a4c8f28b54811cdb81525530b5d31948c8bd4a7b0556774c19
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Thu, 05 Nov 2026 17:53:48 +0800
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  128Mi
+    Requests:
+      cpu:      100m
+      memory:   64Mi
+    Readiness:  http-get http://:18081/healthz delay=1s timeout=1s period=1s #success=1 #failure=3
+    Environment:
+      POD_UID:   (v1:metadata.uid)
+    Mounts:     <none>
+  workload:
+    Container ID:  containerd://72a864afa4bed7fc22e1d59c03dc33e81c615cf8aed69e5698b608ce71c2a550
+    Image:         kubenode-observer/guest-workload:dev
+    Image ID:      sha256:d254dd8397f79130eaa174e0b90237ab3052196412664ab5b8cc69e2bce615f3
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --iterations=1800
+      --interval=1s
+    State:          Running
+      Started:      Thu, 05 Nov 2026 17:53:48 +0800
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     1500m
+      memory:  64Mi
+    Requests:
+      cpu:        100m
+      memory:     32Mi
+    Environment:  <none>
+    Mounts:       <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+
+
+Name:             kno-guest-runc
+Namespace:        kno-guest-test
+Priority:         0
+Service Account:  default
+Node:             kno-dev/192.168.49.2
+Start Time:       Thu, 05 Nov 2026 17:53:43 +0800
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.1.100
+IPs:
+  IP:  10.244.1.100
+Containers:
+  workload:
+    Container ID:  containerd://76fca38cb5ae630aab9a53ceacc26a470264eef54e900837722c2997609387d6
+    Image:         kubenode-observer/guest-workload:dev
+    Image ID:      sha256:d254dd8397f79130eaa174e0b90237ab3052196412664ab5b8cc69e2bce615f3
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --iterations=1800
+      --interval=1s
+    State:          Running
+      Started:      Thu, 05 Nov 2026 17:53:45 +0800
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     200m
+      memory:  64Mi
+    Requests:
+      cpu:        10m
+      memory:     16Mi
+    Environment:  <none>
+    Mounts:       <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s

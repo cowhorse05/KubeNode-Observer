@@ -132,3 +132,9 @@ Agent 完成 exec、CPU、runqlat 三组程序的 CO-RE relocation 和 attach �
 仅在显式启用本地诊断端口时，`/diagnostics` 才额外输出 Agent 自身 cgroup 的 `memory.current/max/peak/stat/events`、RSS、Go heap/stack、`Sys-HeapReleased` 和当前 GOMEMLIMIT。内存读取错误与 CPU 诊断错误分别报告，缺失值不伪装成零。`memory.peak` 是 cgroup 创建以来的高水位；不支持时省略。
 
 RSS、Go managed memory 和 cgroup charge 是不同口径，不能互相替代；kernel/slab 有包含关系，也不能把 map memlock 再加到 cgroup current。GOMEMLIMIT 是 Go runtime 的软限制，不覆盖所有进程和内核内存。默认部署不设置该变量；实验可显式对照 `original,80MiB`，但有限窗口没有 OOM 不等于长期预算有保证。操作方法见 [内存预算观测](experiments.md#内存预算观测)。
+
+## 独立 Guest 测量域（M9）
+
+`cmd/kno-guest` 在 Kata Guest 内加载原有 CPU/runqlat 程序，通过共享 Pod procfs 的 PID/starttime/线程集合及 BPF namespace alias 验证进程窗口；它不运行 Node informer、CRI 或 exec collector。Node Agent 的 Guest relay 默认关闭，只对当前验证过的 Kata Sandbox 和显式 opt-in Pod IP 请求固定端口，检查 Pod UID、nonce 和前后 VMM generation 后补入 Sandbox 身份。Guest 不写 Host cgroup/container index，旧 API 语义不变。
+
+CPU 要求完整稳定线程集；runqlat 可返回有完整端点的线程子集，同时报告 `runqlatCoverage` 和 `partial`。最近 switch-out 身份用于排除 Kata exec 留下的历史 cgroup key，不是原子当前 cgroup 证明。Host 和 Guest 没有共享时钟/窗口，不能相加或直接作根因推断。字段、安全边界、官方 debug kernel 和复现实验见 [Guest Probe 指南](guest-probe.md)。

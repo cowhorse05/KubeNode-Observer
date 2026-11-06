@@ -1,0 +1,108 @@
+{
+  "domain": "guest",
+  "podUid": "45a8a664-4e40-4bc8-8e5d-baa0bd172569",
+  "sandboxId": "f5c58ea04f30c5f859829996efe7ee29d8383626954c81cee61a9d2b36df1a3b",
+  "namespace": "kno-guest-test",
+  "podName": "kno-guest",
+  "kernelRelease": "6.18.56",
+  "bootId": "1b02d42c-a6bc-4e00-9065-cd4ba94d22d0",
+  "instanceId": "8022dea6b138c0493ec26815a15eca06",
+  "requestId": "9f550a5019e31dada6ae0516a76de3aa",
+  "startedAt": "2026-11-05T10:03:28.940572201Z",
+  "durationSeconds": 5.016845548,
+  "totalItems": 1,
+  "processes": [
+    {
+      "namespacePid": 292,
+      "pid": 521,
+      "cgroupId": 1414,
+      "startTimeTicks": 6964,
+      "command": "guest-burn",
+      "cpu": {
+        "runtimeNs": 5326065802,
+        "percent": 106.32592660501281,
+        "windowSeconds": 5.009188231
+      },
+      "runqlat": {
+        "count": 53798,
+        "averageUs": 655.5702448046396,
+        "p50Us": 1023,
+        "p95Us": 2047,
+        "p99Us": 2047,
+        "maxUs": 8191,
+        "buckets": [
+          {
+            "lowerUs": 1,
+            "upperUs": 1,
+            "count": 514
+          },
+          {
+            "lowerUs": 2,
+            "upperUs": 3,
+            "count": 1086
+          },
+          {
+            "lowerUs": 4,
+            "upperUs": 7,
+            "count": 5052
+          },
+          {
+            "lowerUs": 8,
+            "upperUs": 15,
+            "count": 6305
+          },
+          {
+            "lowerUs": 16,
+            "upperUs": 31,
+            "count": 1873
+          },
+          {
+            "lowerUs": 32,
+            "upperUs": 63,
+            "count": 505
+          },
+          {
+            "lowerUs": 64,
+            "upperUs": 127,
+            "count": 387
+          },
+          {
+            "lowerUs": 128,
+            "upperUs": 255,
+            "count": 270
+          },
+          {
+            "lowerUs": 256,
+            "upperUs": 511,
+            "count": 88
+          },
+          {
+            "lowerUs": 512,
+            "upperUs": 1023,
+            "count": 32280
+          },
+          {
+            "lowerUs": 1024,
+            "upperUs": 2047,
+            "count": 5302
+          },
+          {
+            "lowerUs": 2048,
+            "upperUs": 4095,
+            "count": 124
+          },
+          {
+            "lowerUs": 4096,
+            "upperUs": 8191,
+            "count": 12
+          }
+        ]
+      },
+      "runqlatCoverage": {
+        "observedThreads": 18,
+        "totalThreads": 18
+      },
+      "partial": false
+    }
+  ]
+}

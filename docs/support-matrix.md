@@ -15,7 +15,7 @@
 
 版本表表示实测边界，不代表代码主动拒绝相邻版本。换内核、Kubernetes 或 runtime 后，应先运行 `make check` 和完整 integration。
 
-独立研究扩展（不扩张以上 runc v0.1.0 指标语义）：已在同一 WSL2/Docker-driver Minikube 验证 Kata 4.3.1 **Go/QEMU**、Guest Linux 6.18.56、双容器共享 VM、Host shim/VMM 身份、官方 Monitor 与生命周期边界。M8 新增 QEMU 11.0.1 Host/VMM/vCPU 资源视图和同核竞争/恢复实验，见 [M8 指南](host-resources.md)。尚未验证 runtime-rs/Cloud Hypervisor、Guest 进程探针或多 VM 容量。Go runtime 在上游 4.x 已弃用，选择与限制见 [Kata 指南](kata.md)。
+独立研究扩展（不扩张以上 runc v0.1.0 指标语义）：已在同一 WSL2/Docker-driver Minikube 验证 Kata 4.3.1 **Go/QEMU**、Guest Linux 6.18.56、双容器共享 VM、Host shim/VMM 身份、官方 Monitor 与生命周期边界。M8 新增 QEMU 11.0.1 Host/VMM/vCPU 资源视图和同核竞争/恢复实验，见 [M8 指南](host-resources.md)。M9 在官方 debug Guest kernel 上验证独立特权 Probe、共享 Pod PID namespace 的 CPU/runqlat 和固定 Pod 网络 relay，见 [M9 指南](guest-probe.md)。默认 Guest kernel 缺能力，不支持直接加载；部分线程 runqlat 不当完整进程分布。尚未验证 runtime-rs/Cloud Hypervisor、多 VM 容量、生产安全部署或跨层时钟对齐。Go runtime 在上游 4.x 已弃用，选择与限制见 [Kata 指南](kata.md)。
 
 ## 精度与一致性
 

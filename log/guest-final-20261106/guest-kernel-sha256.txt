@@ -1,0 +1,2 @@
+a0272010e327c389205b73e145657dc1c970a3c2a6d203e2969cb744a06232b8  /opt/kata/share/kata-containers/vmlinux-debug.container
+0292fc5fcbfc1f8a967d0c486633030136867c4e7c0657473af08a145c8f3dab  /opt/kata/share/kata-containers/config-6.18.56-208-debug

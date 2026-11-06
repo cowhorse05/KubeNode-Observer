@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-05",
+  "cliVersion": "1.86.0",
+  "scope": "local Postman simulation proxy, no account/workspace publication",
+  "caller": "production Guest Relay via real net/http transport",
+  "dependency": "repository-owned Guest Probe contract mock",
+  "cases": 9,
+  "memberRequestsObserved": 9,
+  "silentMembers": [],
+  "testExitCode": 0,
+  "validated": ["200", "429", "503 JSON to 502", "500 HTML to 502", "wrong Pod UID to 409", "wrong nonce to 409", "oversized body to 502", "redirect not followed", "timeout to 504"],
+  "notEstablished": ["real Guest counters", "Kata networking", "identity attestation", "scheduler accuracy"]
+}

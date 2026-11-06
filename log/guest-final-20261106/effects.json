@@ -1,0 +1,14 @@
+{
+  "baselineWindowP95Us": [
+    255,
+    127
+  ],
+  "contentionWindowP95Us": [
+    2047,
+    2047
+  ],
+  "recoveryWindowP95Us": [
+    127,
+    127
+  ]
+}

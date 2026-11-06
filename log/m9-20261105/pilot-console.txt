@@ -1,0 +1,17 @@
+configmap/kno-experiment-lock created
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+namespace/kno-guest-test created
+pod/kno-guest created
+pod/kno-guest-runc created
+pod/kno-guest condition met
+pod/kno-guest-runc condition met
+curl: (22) The requested URL returned error: 503
+namespace "kno-guest-test" deleted
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+configmap "kno-experiment-lock" deleted from kube-system namespace

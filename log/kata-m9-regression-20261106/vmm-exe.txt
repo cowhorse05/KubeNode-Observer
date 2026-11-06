@@ -1,0 +1,1 @@
+/opt/kata/bin/qemu-system-x86_64
