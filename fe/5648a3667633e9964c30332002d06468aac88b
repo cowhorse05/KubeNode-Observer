@@ -1,0 +1,167 @@
+log/guest-pilot-20261105/topology-ready.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1
+log/guest-pilot3-20261105/failure-describe.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-115
+log/m9-20261105/node-hosts.before
+  s_6e6fc63242599e::t_802c2578bfb59c 1-7
+log/guest-pilot3-20261105/informer-preflight.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+README.md
+  s_6e6fc63242599e::t_a89eff3da4c51a 8,28
+log/guest-pilot3-20261105/baseline-warmup-8.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-check-20261105/unprivileged-manifest.json
+  s_6e6fc63242599e::t_9b31870ea18199 1-37
+log/guest-pilot-20261105/failure-pods.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-419
+log/guest-pilot3-20261105/candidate.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-189
+log/guest-pilot-20261105/original-manifest.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-188
+log/guest-check-20261105/default.json
+  s_6e6fc63242599e::t_9b31870ea18199 1
+log/guest-pilot-20261105/topology-1.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1
+log/guest-pilot3-20261105/baseline-warmup-6.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/m9-20261105/network-repair.txt
+  s_6e6fc63242599e::t_59ece7e3fd62e8 1-3
+log/guest-pilot-20261105/original-agent.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-201
+log/guest-pilot3-20261105/baseline-warmup-4.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-pilot3-20261105/failure-agent.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-100
+log/m9-20261105/nat-after.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-70
+docs/guest-probe.md
+  s_6e6fc63242599e::t_d960a828819d1b 95-96
+docs/support-matrix.md
+  s_6e6fc63242599e::t_a89eff3da4c51a 18
+log/guest-pilot-20261105/before-agent.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-618
+log/guest-pilot-20261105/pods.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-419
+log/guest-pilot-20261105/source-sha256.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-7
+log/guest-pilot-20261105/source-head.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1
+log/m9-20261105/service-vip-after.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/2026-11-06-kata-guest.md
+  s_6e6fc63242599e::t_9d060890d8c0c4 90-98
+  s_6e6fc63242599e::t_91c2cef5a9a8a6 1-70
+  s_6e6fc63242599e::t_d960a828819d1b 71-89
+log/guest-kernel-20261106/kernel-test-manifest.json
+  s_6e6fc63242599e::t_9db9a613e937d5 1-44
+log/guest-pilot3-20261105/topology-1.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-pilot-20261105/baseline-workload.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-2
+log/guest-pilot3-20261105/exit.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/m9-20261105/network-repair-v2.txt
+  s_6e6fc63242599e::t_5528aae62e9756 41
+  s_6e6fc63242599e::t_73bc5c40c2a9ba 25-26
+log/guest-pilot3-20261105/baseline-warmup-2.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-pilot3-20261105/metrics-before.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-87
+log/guest-pilot-20261105/metrics-before.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-87
+log/guest-pilot3-20261105/baseline-workload.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-2
+log/m9-20261105/repair-network.sh
+  s_6e6fc63242599e::t_0a5126409621ce 9-12
+  s_6e6fc63242599e::t_78d303a20ed36d 1-8,13-24
+log/guest-pilot3-20261105/source-head.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-pilot3-20261105/pods.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-419
+docs/plan.md
+  s_6e6fc63242599e::t_a9805b0ef40bbe 337
+  s_6e6fc63242599e::t_a79f2587aecb75 338,396
+log/m9-20261106/guest-kernel-build.txt
+  s_6e6fc63242599e::t_9db9a613e937d5 44-45
+  s_6e6fc63242599e::t_412fd9e14785e9 46-48
+log/guest-pilot3-20261105/failure-probe.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+docs/architecture.md
+  s_6e6fc63242599e::t_5286e80c01b16a 135-140
+log/guest-pilot6-20261105/exit.json
+  s_6e6fc63242599e::t_8261fe8a8065fa 1
+log/guest-pilot3-20261105/baseline-warmup-1.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-kernel-20261106/kernel.json
+  s_6e6fc63242599e::t_412fd9e14785e9 1-17
+log/guest-pilot3-20261105/baseline-warmup-5.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-pilot6-20261105/restored-agent.json
+  s_6e6fc63242599e::t_8261fe8a8065fa 1-616
+log/m9-20261105/node-hosts.after
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-8
+log/guest-pilot-20261105/restored-agent.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-616
+log/guest-pilot-20261105/candidate.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-189
+log/guest-pilot-20261105/forward.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-4
+log/guest-pilot-20261105/exit.json
+  s_6e6fc63242599e::t_5ada1f9bb83380 1
+log/m9-20261105/kube-proxy-after.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-22
+log/guest-pilot3-20261105/original-manifest.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-188
+log/guest-pilot3-20261105/original-agent.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-201
+.gitattributes
+  s_6e6fc63242599e::t_fa71b803eafbb8 14-15
+log/m9-20261105/simulation-test.txt
+  s_6e6fc63242599e::t_211ad33599bf75 1-22
+log/guest-pilot-20261105/failure-describe.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-115
+log/guest-pilot3-20261105/forward.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-12
+log/guest-pilot3-20261105/before-agent.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-618
+log/guest-pilot-20261105/failure-agent.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1-100
+log/guest-pilot3-20261105/source-sha256.txt
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-8
+log/guest-pilot3-20261105/baseline-warmup-7.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-kernel-20261106/kernel-manifest.json
+  s_6e6fc63242599e::t_9db9a613e937d5 1-44
+log/m9-20261105/node-hosts.repaired
+  s_6e6fc63242599e::t_78d303a20ed36d 1-8
+log/guest-pilot-20261105/failure-probe.txt
+  s_6e6fc63242599e::t_5ada1f9bb83380 1
+log/guest-pilot3-20261105/failure-pods.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-419
+log/guest-pilot3-20261105/baseline-warmup-3.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/m9-20261105/simulation-validation.json
+  s_6e6fc63242599e::t_829a9de91abbb7 1-13
+log/guest-pilot3-20261105/topology-ready.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1
+log/guest-check-20261105/default-pod.json
+  s_6e6fc63242599e::t_9b31870ea18199 1-175
+log/guest-pilot3-20261105/restored-agent.json
+  s_6e6fc63242599e::t_1cae3f3ec5833a 1-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "fe5648a3667633e9964c30332002d06468aac88b",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
