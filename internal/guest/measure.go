@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/cowhorse05/KubeNode-Observer/internal/clockdomain"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
 )
@@ -27,6 +28,7 @@ type Handler struct {
 	Latency   LatencyReader
 	Proc      ProcSource
 	Scheduler IdentityReader
+	Clock     clockdomain.Source
 	mu        sync.Mutex
 }
 
@@ -71,15 +73,20 @@ func (h *Handler) measure(ctx context.Context, q query) (Response, error) {
 	started := time.Now()
 	result.StartedAt = started.UTC()
 	result.Processes = []Process{}
+	result.Timing = nil
+	recorder, err := clockdomain.Begin(q.timing, h.Clock)
+	if err != nil {
+		return result, err
+	}
 	before, err := h.Proc.Snapshot(q.comm)
 	if err != nil {
 		return result, err
 	}
-	c0, err := h.CPU.Snapshot()
+	c0, err := clockdomain.Capture(recorder, clockdomain.CPUStart, h.CPU.Snapshot)
 	if err != nil {
 		return result, err
 	}
-	l0, err := h.Latency.Snapshot()
+	l0, err := clockdomain.Capture(recorder, clockdomain.RunQLatStart, h.Latency.Snapshot)
 	if err != nil {
 		return result, err
 	}
@@ -94,11 +101,11 @@ func (h *Handler) measure(ctx context.Context, q query) (Response, error) {
 		return result, ctx.Err()
 	case <-timer.C:
 	}
-	c1, err := h.CPU.Snapshot()
+	c1, err := clockdomain.Capture(recorder, clockdomain.CPUEnd, h.CPU.Snapshot)
 	if err != nil {
 		return result, err
 	}
-	l1, err := h.Latency.Snapshot()
+	l1, err := clockdomain.Capture(recorder, clockdomain.RunQLatEnd, h.Latency.Snapshot)
 	if err != nil {
 		return result, err
 	}
@@ -136,6 +143,13 @@ func (h *Handler) measure(ctx context.Context, q query) (Response, error) {
 		result.Processes = result.Processes[:q.limit]
 	}
 	result.DurationSeconds = time.Since(started).Seconds()
+	result.Timing, err = recorder.Finish()
+	if err != nil {
+		return result, err
+	}
+	if result.Timing != nil && result.Timing.Identity.BootID != result.BootID {
+		return result, fmt.Errorf("snapshot boot identity contradicts Probe identity")
+	}
 	return result, nil
 }
 

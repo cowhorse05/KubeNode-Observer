@@ -48,7 +48,7 @@ Node 的 `/api/v1/guest/clock?sandbox=...&samples=7` 返回校准 burst；直接
 | `selectedSample` | 指向首次最窄样本，其他样本没有被删掉 |
 | `scope=exchange-only` | 防止把本次往返估计默认为后续窗口的有效映射 |
 
-所有纳秒字段是 **int64 十进制字符串**，包括可能为负的 offset；避免 JavaScript Number 超过 2^53 的精度损失。已有 Guest resource API 的数值和字段保持不变。
+所有纳秒字段是 **int64 十进制字符串**，包括可能为负的 offset；避免 JavaScript Number 超过 2^53 的精度损失。已有 Guest resource API 默认数值和字段保持不变；M10b 仅在显式 `timing=true` 时附加读取括号，见 [窗口指南](window-timing.md)。
 
 每次依赖调用最多 1s，整个 burst 预算 5s，Probe 响应最多 8KiB；不自动重试或跳过坏样本。校准与 Guest resources 共用 Node 单操作 gate，忙则 429；直连 Probe clock 是轻量端点，不加 CPU measurement mutex。400/404/405/409/429/502/503/504 的边界与 JSON 错误见 [OpenAPI](../api/guest-clock.openapi.yaml)，所有响应 `Cache-Control: no-store`。JSON 响应多余字段、尾随对象、缺失时间戳、错误 content type 均明确失败。
 
@@ -71,7 +71,7 @@ python3 hack/validate-clock-contract.py log/clock-my-run
 
 ## 离 tdk 正式实验还差什么
 
-1. M10b：核对 BPF ktime/namespace offset，记录两端真实快照时间括号和窗口重叠；不只给两次顺序查询加一个 offset。
+1. M10b：独立 BPF/namespace 诊断、+2秒正对照和可选真实快照读取括号已实现，见 [窗口指南](window-timing.md)；尚需带明确速率假设的保守窗口映射/重叠，不能只给两次顺序查询加一个 offset。
 2. M10c：Host contention × Guest contention 双轴干预、runc/Kata 及 Probe off/on 对照，预先规定质量门限和重复顺序，不按想要的分位数挑结果。
 3. 整理可移植配置、环境 Go/No-Go、离线镜像和测试产物，完成本地兼容性验收、冻结版本。
 4. **以上开发收尾后才到 tdk 正式实验**：先确认其 runtime/KVM/权限/资源与隔离条件，单独保存环境和数据；Minikube 的结果不充当 tdk 结论。

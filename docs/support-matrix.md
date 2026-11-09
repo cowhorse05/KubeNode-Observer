@@ -20,6 +20,7 @@
 ## 精度与一致性
 
 - M10a 只支持实验性的用户态 CLOCK_MONOTONIC 往返校准，输出条件 offset 区间和 exchange-only scope；不保证跨往返固定 offset、未来有效期、BPF 事件映射或同步窗口。time namespace unavailable 不当成已证明零 offset。见 [校准限制](clock-calibration.md)；
+- M10b 增加独立 BPF/用户态读钟诊断、子 namespace +2秒正对照和 opt-in 资源快照括号；实测相容不扩张为永久零偏移或未来漂移界，尚无跨域窗口重叠计算。见 [窗口限制](window-timing.md)；
 - CPU 使用率是最近约 1 秒窗口内的 runtime/wall time，不是长期平均值；多线程 workload 可以超过 100%；Pod/Container 使用独立 cgroup 累计量，Process 使用有限进程明细，二者不保证求和相等；
 - runqlat 的 P50/P95/P99 是微秒 log2 bucket 上界，不是精确分位数；
 - runqlat 起止 map 快照不是跨 map 原子事务，事件总数以 histogram delta 为准；

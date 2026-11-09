@@ -36,6 +36,16 @@ http.createServer((req, res) => {
     durationSeconds: 0.1, totalItems: 0, processes: []
   };
   const send = () => { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(body)); };
+  if (url.searchParams.get('timing') === 'true' && scenario !== 'timing-missing') {
+    const span = (a, b) => ({beforeNs: a.toString(), afterNs: b.toString()});
+    body.timing = {
+      clock: 'CLOCK_MONOTONIC', identity: {bootId: body.bootId, timeNamespace: 'unavailable'},
+      start: {cpu: span(10n, 11n), runqlat: span(12n, 13n)},
+      end: {cpu: span(100000020n, 100000021n), runqlat: span(100000022n, 100000023n)}
+    };
+    if (scenario === 'timing-order') body.timing.end.cpu.beforeNs = '1';
+    if (scenario === 'timing-boot') body.timing.identity.bootId = '00112233-4455-6677-8899-aabbccddeefa';
+  }
   switch (scenario) {
     case 'busy': res.writeHead(429, {'Content-Type': 'application/json'}); res.end('{"code":"measurement_busy"}'); return;
     case 'json-error': res.writeHead(503, {'Content-Type': 'application/json'}); res.end('{"code":"measurement_unavailable"}'); return;

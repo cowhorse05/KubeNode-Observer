@@ -143,4 +143,6 @@ CPU 要求完整稳定线程集；runqlat 可返回有完整端点的线程子�
 
 独立 `/api/v1/guest/clock` 使用两端用户态 Linux CLOCK_MONOTONIC 读取 h1/g2/g3/h4；Node 使用与 M9 一样的目标身份和 nonce 约束，按一次交换内 offset 恒定的条件推导 `[g3-h4,g2-h1]`。所有原始样本保留，选首次最小残余宽度，不合并成长期固定映射。每次 RPC <=1s、burst <=5s、响应 <=8KiB，共用 Node Guest 操作 gate。时钟接口没有附加 BPF 程序或修改记账路径，也不设系统时钟。
 
-Boot ID、time namespace 与 Probe instance 标记代际，NS 用 int64 十进制字符串避免客户端浮点精度损失。time namespace 不可读显式 unavailable。该接口只估计所读用户态时钟，**不能自动说明 BPF ktime 的 namespace 关系、事件时间线或资源采样窗口已经对齐**。原有资源查询仍保持独立窗口；M10b 才核对这一步。见 [校准指南](clock-calibration.md)。
+Boot ID、time namespace 与 Probe instance 标记代际，NS 用 int64 十进制字符串避免客户端浮点精度损失。time namespace 不可读显式 unavailable。该接口只估计所读用户态时钟，**不能自动说明 BPF ktime 的 namespace 关系、事件时间线或资源采样窗口已经对齐**。见 [校准指南](clock-calibration.md)。
+
+M10b 将原生读钟和 opt-in Recorder 放在 `internal/clockdomain`，两端资源 Handler 只在 `timing=true` 时给实际四次 map Snapshot 加读取括号和身份检查；默认没有额外读钟，未改变 scheduler 程序或聚合口径。独立 `kno-clockcheck` 用不 attach/pin 的私有 BPF TEST_RUN 核对内核/用户态关系，同时保留 RAW 括号及只读调时参数。身份检查和相容括号不是永久映射；尚未输出跨域重叠或根因，见 [窗口指南](window-timing.md)。

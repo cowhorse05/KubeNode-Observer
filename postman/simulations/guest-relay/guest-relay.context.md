@@ -24,6 +24,7 @@ Stop the owned simulation process with SIGINT. The test points only its HTTP tra
 ## Observations
 
 <!-- begin:observations -->
+2026-11-09 (M10b): the sole Guest member served clock, legacy resources and opt-in timing fixtures; no silent member or passthrough. Production Relay forwarded timing and rejected missing, out-of-order and boot-contradicting metadata; legacy timeout/identity/error cases still passed. Local simulation stopped after the run.
 2026-11-09: the sole Guest member served both clock and resource paths, including timeout/identity/error cases; none silent or passthrough. Production Clock Relay and legacy Relay tests passed; simulation stopped after the run.
 2026-11-05: the sole Guest member served every tested failure shape; the production Relay returned expected success/busy/upstream/identity/timeout statuses. No member was silent. Live BPF/network claims are intentionally separate.
 <!-- end:observations -->
