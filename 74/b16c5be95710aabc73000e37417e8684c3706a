@@ -1,0 +1,194 @@
+log/m10-20261109/final-state.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+docs/architecture.md
+  s_6e6fc63242599e::t_ed547b27d2f415 141-146
+log/clock-final-20261109/agent-before.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-416
+log/clock-final-20261109/candidate.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-189
+log/2026-11-09-clock-calibration.md
+  s_6e6fc63242599e::t_811b9be7e2b5fd 1-4,6-67
+  s_6e6fc63242599e::t_392e6def87deb9 5
+log/clock-final-20261109/disabled.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/clock-final-20261109/idle-1.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/idle-3.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/loaded-1.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/loaded-2.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/original-spec.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-173
+log/m10-runc-20261109/restored-spec.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-173
+log/m10-runc-20261109/agent-before.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-415
+log/m10-20261109/runtime-types.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-8
+log/m10-20261109/preflight-final.txt
+  s_6e6fc63242599e::t_ae2a29a0ea21b2 1-2
+log/clock-final-20261109/guest-resources.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/clock-final-20261109/loaded-5.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/m10-runc-20261109/run.sh
+  s_6e6fc63242599e::t_383decbaf85ab2 1-43
+internal/guest/clock_test.go
+  s_6e6fc63242599e::t_cb956d80f4f48b 223-225
+  s_6e6fc63242599e::t_392e6def87deb9 218,249-252
+docs/support-matrix.md
+  s_6e6fc63242599e::t_ed547b27d2f415 22
+log/clock-final-20261109/topology-recreated.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-runc-20261109/forward.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-3
+log/m10-runc-20261109/metrics-after.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-87
+log/clock-final-20261109/source-sha256.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-7
+log/clock-final-20261109/probe-resources.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-20261109/guest-kernel-sha256.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-2
+docs/clock-calibration.md
+  s_6e6fc63242599e::t_77c9510bd6cb45 1-77
+log/clock-final-20261109/idle-5.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/recreated.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-169
+log/clock-final-20261109/restored-spec.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-173
+log/clock-final-20261109/informer.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-20261109/runc-console.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-318
+log/clock-final-20261109/exit.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-20261109/final-kata-sandboxes.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-runc-20261109/candidate.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-188
+log/clock-final-20261109/forward.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-24
+log/m10-runc-20261109/original.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-201
+log/m10-20261109/go-race-final.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-runc-20261109/original-spec.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-173
+log/clock-final-20261109/deleted.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-20261109/simulation-tests.txt
+  s_6e6fc63242599e::t_8a990503f6f01b 1-42
+log/clock-final-20261109/original-manifest.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-188
+log/clock-final-20261109/loaded-3.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/loaded-4.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/clock-final-20261109/agent-after.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-416
+log/clock-final-20261109/deleted-topology.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/clock-final-20261109/idle-4.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+postman/simulations/guest-relay/guest-relay.context.md
+  s_6e6fc63242599e::t_77c9510bd6cb45 13,22,27
+.gitattributes
+  s_6e6fc63242599e::t_77c9510bd6cb45 16-17
+log/m10-20261109/same-kernel-control.txt
+  s_6e6fc63242599e::t_9528ec25022098 1-5
+log/clock-final-20261109/disabled-manifest.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-188
+log/clock-final-20261109/original-agent.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-201
+log/clock-final-20261109/validation.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-74
+docs/plan.md
+  s_6e6fc63242599e::t_ed547b27d2f415 346-347,353
+log/m10-20261109/clock-race-initial.txt
+  s_6e6fc63242599e::t_73c179156cebb8 1-2
+log/clock-final-20261109/metrics-after.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-87
+log/clock-final-20261109/workload.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/clock-final-20261109/pods.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-258
+log/m10-20261109/final-nodes.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-328
+log/m10-20261109/go-test-final.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-20
+log/m10-20261109/pod-preview.json
+  s_6e6fc63242599e::t_ae2a29a0ea21b2 1-80
+log/m10-20261109/guest-time-ns-config.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/clock-final-20261109/images.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-138
+log/clock-final-20261109/topology-initial.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-20261109/host-kernel.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-runc-20261109/exit.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-runc-20261109/integration.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-307
+log/m10-runc-20261109/metrics-before.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-87
+log/m10-20261109/preflight.sh
+  s_6e6fc63242599e::t_5cd792e60b466d 1-4,6-14
+  s_6e6fc63242599e::t_9d5bdd3fd68e92 5
+log/m10-runc-20261109/original-manifest.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-188
+README.md
+  s_6e6fc63242599e::t_ed547b27d2f415 30-31
+log/m10-20261109/go-test.txt
+  s_6e6fc63242599e::t_0725341fe17713 1-13
+log/m10-20261109/live-console.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-178
+log/m10-20261109/simulation-validation.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-15
+log/clock-final-20261109/metrics-before.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1-87
+log/m10-20261109/final-agent-spec.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-173
+log/clock-final-20261109/pod-manifest.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-80
+log/m10-20261109/preflight.txt
+  s_6e6fc63242599e::t_179e46a618ad86 1-2
+log/clock-final-20261109/direct.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-runc-20261109/agent-after.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-415
+log/clock-final-20261109/idle-2.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-89
+log/m10-20261109/check-state.sh
+  s_6e6fc63242599e::t_383decbaf85ab2 1-23
+log/clock-final-20261109/source-head.txt
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+hack/validate-clock-contract.py
+  s_6e6fc63242599e::t_fb08468e4cd483 22,46-48,54-61,63-64
+log/m10-20261109/validation-with-model-check.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-84
+log/clock-final-20261109/host-resources.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1
+log/m10-20261109/final-agent.json
+  s_6e6fc63242599e::t_383decbaf85ab2 1-616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "74b16c5be95710aabc73000e37417e8684c3706a",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
