@@ -1,0 +1,245 @@
+log/window-m10b-20261109-r2/pre-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109/host-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-399
+log/m10b-20261109/runc-clock-validation.json
+  s_6e6fc63242599e::t_984f3c7c4b7101 1-25
+log/m10b-20261109/namespace-positive.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/kata-clock-validation.json
+  s_6e6fc63242599e::t_984f3c7c4b7101 1-25
+log/window-m10b-20261109-r2/metrics-before.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-87
+log/window-m10b-20261109-r2/post-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109-r2/guest-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-135
+log/window-m10b-20261109/pre-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/m10b-20261109/diagnose-exit.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/host-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-395
+log/window-m10b-20261109-r2/forward.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-20
+log/m10b-20261109/window-build.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-92
+log/window-m10b-20261109-r2/agent-before.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-416
+log/window-m10b-20261109-r2/pod-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-80
+log/clockdomain-m10b-20261109/runc-validation.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-25
+log/m10b-20261109/kata-clock-pod.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-176
+log/window-m10b-20261109-r2/guest-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-145
+log/window-m10b-20261109-r2/post-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109-r2/validation.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-77
+log/window-m10b-20261109-r2/post-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109/source-head.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/window-console.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-18
+log/window-m10b-20261109/agent-before.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-416
+log/window-m10b-20261109/metrics-before.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-87
+log/2026-11-09-clockdomain-windows.md
+  s_6e6fc63242599e::t_4a20eb857587b1 1-31,33-55,57-64
+  s_6e6fc63242599e::t_47bc41626d20f3 32
+  s_6e6fc63242599e::t_0eb42b8f22e154 56
+log/window-m10b-20261109-r2/pre-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109-r2/agent-after.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-416
+log/window-m10b-20261109-r2/host-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-404
+log/m10b-20261109/wsl-clock-validation.json
+  s_6e6fc63242599e::t_984f3c7c4b7101 1-25
+log/window-m10b-20261109-r2/exit.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/unit-owned-packages.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-22
+log/m10b-20261109/clockcheck-build.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-27
+log/m10b-20261109/clockdomain-console.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-9
+log/window-m10b-20261109/post-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109/topology.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/simulation-test.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-52
+log/m10b-20261109/runc-clock-pod.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-171
+log/window-m10b-20261109-r2/original-spec.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-173
+log/window-m10b-20261109/pods.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-258
+log/clockdomain-m10b-20261109/kata-validation.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-25
+log/m10b-20261109/diagnose-console.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-8
+log/window-m10b-20261109/restored-spec.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-173
+log/window-m10b-20261109/workload.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/host-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-424
+log/clockdomain-m10b-20261109/source-head.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/clockdomain-m10b-20261109/host-validation.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-25
+log/window-m10b-20261109/host-default.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/kata-clock-pod-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-37
+log/window-m10b-20261109/guest-default.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/guest-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-130
+log/window-m10b-20261109-r2/original-agent.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-201
+log/window-m10b-20261109/pod-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-80
+log/window-m10b-20261109/post-3.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109-r2/guest-default.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/topology.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/informer.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/exit.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/guest-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-140
+log/m10b-20261109/diagnose.sh
+  s_6e6fc63242599e::t_d78a4599475d0c 1-24
+log/window-m10b-20261109-r2/host-empty.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/original-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-188
+log/window-m10b-20261109-r2/metrics-after.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-87
+log/m10b-20261109/namespace-positive-validation.json
+  s_6e6fc63242599e::t_984f3c7c4b7101 1-25
+log/window-m10b-20261109/guest-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-135
+log/clockdomain-m10b-20261109/runc-clock.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/wsl-clock.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/informer.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/failure-probe.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/candidate.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-189
+log/window-m10b-20261109/pre-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109/pre-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109/agent-after.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-416
+log/window-m10b-20261109-r2/pods.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-258
+log/window-m10b-20261109/forward.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-20
+log/window-m10b-20261109/host-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-414
+log/clockdomain-m10b-20261109/exit.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/clockdomain-m10b-20261109/kata-clock.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/candidate.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-189
+log/window-m10b-20261109-r2/images.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-138
+log/window-m10b-20261109/guest-1.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-60
+log/window-m10b-20261109/failure-agent.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-100
+log/window-m10b-20261109-r2/pre-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109-r2/restored-spec.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-173
+log/clockdomain-m10b-20261109/runc-pod.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-171
+log/clockdomain-m10b-20261109/source-sha256.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-7
+log/clockdomain-m10b-20261109/kata-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-37
+log/clockdomain-m10b-20261109/namespace-validation.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-25
+log/clockdomain-m10b-20261109/kata-pod.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-176
+log/clockdomain-m10b-20261109/namespace-positive.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/race-test.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-4
+log/clockdomain-m10b-20261109/runc-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-36
+log/m10b-20261109/kernel-test.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-3
+log/window-m10b-20261109/original-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-188
+log/m10b-20261109/runc-clock.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/source-head.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109-r2/source-sha256.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-27
+log/window-m10b-20261109/source-sha256.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-27
+log/window-m10b-20261109/host-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-407
+log/clockdomain-m10b-20261109/images.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-47
+log/window-m10b-20261109-r2/host-default.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/m10b-20261109/window-r2-console.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-15
+log/window-m10b-20261109/host-empty.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/images.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-138
+log/m10b-20261109/kata-clock.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/original-spec.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-173
+log/m10b-20261109/runc-clock-pod-manifest.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-36
+log/window-m10b-20261109/failure-pods.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-258
+log/clockdomain-m10b-20261109/host-clock.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+log/window-m10b-20261109/original-agent.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-201
+log/window-m10b-20261109/metrics-after.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-87
+log/window-m10b-20261109/post-2.json
+  s_6e6fc63242599e::t_e7e7117a2567ea 1-89
+log/window-m10b-20261109-r2/workload.txt
+  s_6e6fc63242599e::t_e7e7117a2567ea 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "0c19f9f9122fcb74fd0a11b75a5ade8924a3d214",
+  "prompts": {},
+  "sessions": {
+    "s_6e6fc63242599e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13439-bb80-7643-99bd-672601298a07",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
