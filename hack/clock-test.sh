@@ -65,7 +65,7 @@ for _ in $(seq 1 30);do get /api/v1/topology >"${CLOCK_OUTPUT}/informer.json";if
 kube -n kube-system get pods -l app.kubernetes.io/name=kno-agent -o json >"${CLOCK_OUTPUT}/agent-before.json"
 get /metrics >"${CLOCK_OUTPUT}/metrics-before.txt"
 kube create ns kno-clock-test;owned=true
-kube create --dry-run=client -f examples/guest-probe/pods.yaml -o json | jq '.items=[.items[]|select(.metadata.name=="kno-guest")|.metadata.namespace="kno-clock-test"|(.spec.containers[].image)|=if .=="kubenode-observer/guest-probe:dev" then env.CLOCK_GUEST_IMAGE else . end]' >"${CLOCK_OUTPUT}/pod-manifest.json"
+kube create --dry-run=client -f examples/guest-probe/pods.yaml -o json | jq -s '{apiVersion:"v1",kind:"List",items:[.[]|select(.metadata.name=="kno-guest")|.metadata.namespace="kno-clock-test"|(.spec.containers[].image)|=if .=="kubenode-observer/guest-probe:dev" then env.CLOCK_GUEST_IMAGE else . end]}' >"${CLOCK_OUTPUT}/pod-manifest.json"
 kube apply -f "${CLOCK_OUTPUT}/pod-manifest.json"
 discover() {
   kube -n kno-clock-test wait --for=condition=Ready pod/kno-guest --timeout=180s
