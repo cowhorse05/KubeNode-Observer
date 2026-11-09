@@ -11,3 +11,5 @@ log/cpu-v2-validation-*/** -text linguist-generated=true
 log/*-console.txt -text -whitespace linguist-generated=true
 log/kata-*/** -text -whitespace linguist-generated=true
 log/m8-*/** -text -whitespace linguist-generated=true
+log/guest-*/** -text -whitespace linguist-generated=true
+log/m9-*/** -text -whitespace linguist-generated=true

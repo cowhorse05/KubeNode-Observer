@@ -1,0 +1,91 @@
+{
+  "domain": "guest",
+  "podUid": "1eee3649-1ff4-4831-9c15-64ef55beccbe",
+  "sandboxId": "ccd673e100210e1b8fc7d7c9b210f4081916af7c4a382b16cae8c503fdc7ae2d",
+  "namespace": "kno-guest-test",
+  "podName": "kno-guest",
+  "kernelRelease": "6.18.56",
+  "bootId": "99018284-7b53-485b-8549-00df17d36b08",
+  "instanceId": "b413ef7cd6074d9aecc77179c03415b0",
+  "requestId": "4edb022ede4807c2e97d0aefd7d9650c",
+  "startedAt": "2026-11-06T03:38:22.692566831Z",
+  "durationSeconds": 5.013171138,
+  "totalItems": 1,
+  "processes": [
+    {
+      "namespacePid": 544,
+      "pid": 793,
+      "cgroupId": 1414,
+      "startTimeTicks": 12823,
+      "command": "guest-burn",
+      "cpu": {
+        "runtimeNs": 5036068141,
+        "percent": 100.57753055457601,
+        "windowSeconds": 5.007150318
+      },
+      "runqlat": {
+        "count": 1198,
+        "averageUs": 21.95328714524207,
+        "p50Us": 15,
+        "p95Us": 127,
+        "p99Us": 255,
+        "maxUs": 511,
+        "buckets": [
+          {
+            "lowerUs": 1,
+            "upperUs": 1,
+            "count": 18
+          },
+          {
+            "lowerUs": 2,
+            "upperUs": 3,
+            "count": 339
+          },
+          {
+            "lowerUs": 4,
+            "upperUs": 7,
+            "count": 111
+          },
+          {
+            "lowerUs": 8,
+            "upperUs": 15,
+            "count": 145
+          },
+          {
+            "lowerUs": 16,
+            "upperUs": 31,
+            "count": 388
+          },
+          {
+            "lowerUs": 32,
+            "upperUs": 63,
+            "count": 135
+          },
+          {
+            "lowerUs": 64,
+            "upperUs": 127,
+            "count": 30
+          },
+          {
+            "lowerUs": 128,
+            "upperUs": 255,
+            "count": 27
+          },
+          {
+            "lowerUs": 256,
+            "upperUs": 511,
+            "count": 5
+          }
+        ]
+      },
+      "runqlatCoverage": {
+        "observedThreads": 5,
+        "totalThreads": 6
+      },
+      "partial": true,
+      "issues": [
+        "runqlat partial coverage: 5/6 stable threads; missing/reset endpoints excluded, not zero-filled"
+      ]
+    }
+  ]
+}

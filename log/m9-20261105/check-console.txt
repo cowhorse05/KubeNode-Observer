@@ -1,0 +1,14 @@
+configmap/kno-experiment-lock created
+namespace/kno-guest-test created
+pod/kno-guest-check created
+true
+pod "kno-guest-check" deleted from kno-guest-test namespace
+pod/kno-guest-check created
+true
+pod "kno-guest-check" deleted from kno-guest-test namespace
+pod/kno-guest-check created
+true
+pod "kno-guest-check" deleted from kno-guest-test namespace
+Guest feasibility passed: default/no-privilege negative controls, debug-kernel CPU/runqlat positive load.
+namespace "kno-guest-test" deleted
+configmap "kno-experiment-lock" deleted from kube-system namespace

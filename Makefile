@@ -11,6 +11,8 @@ METRICS_AGENT_IMAGE ?= kubenode-observer/kno-agent:metrics-cache
 MEMORY_AGENT_IMAGE ?= kubenode-observer/kno-agent:memory
 KATA_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-host
 VMM_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-vmm
+GUEST_IMAGE ?= kubenode-observer/guest-probe:dev
+GUEST_AGENT_IMAGE ?= kubenode-observer/kno-agent:guest
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
@@ -143,5 +145,30 @@ m8-test: workload-image cpu-hog-image
 	docker build -f examples/kata-boundary/Dockerfile.local -t kubenode-observer/kata-boundary:dev .
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(VMM_AGENT_IMAGE) kubenode-observer/kata-boundary:dev $(CPU_HOG_IMAGE)
 	KUBE_CONTEXT=$(MINIKUBE_PROFILE) AGENT_IMAGE=$(VMM_AGENT_IMAGE) KATA_M8_TEST=true bash hack/kata-test.sh
+
+.PHONY: guest-image guest-install guest-check guest-kernel-check m9-test
+guest-image:
+	$(GO_BUILD_ENV) go build $(GO_BUILD_FLAGS) -o $(BINARY_DIR)/kno-guest ./cmd/kno-guest
+	docker build -f examples/guest-probe/Dockerfile.local -t $(GUEST_IMAGE) .
+
+guest-install:
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) bash hack/install-kata-guest.sh
+
+guest-check: guest-image
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(GUEST_IMAGE)
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) bash hack/guest-check.sh
+
+guest-kernel-check:
+	CGO_ENABLED=0 go test -c -o $(BINARY_DIR)/kno-probe.test ./internal/probe
+	$(CC) -nostdlib -static -o $(BINARY_DIR)/kno-kernel-child examples/guest-probe/kernel-child.S
+	docker build -f examples/guest-probe/Dockerfile.kernel-test -t kubenode-observer/guest-kernel-test:dev .
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true kubenode-observer/guest-kernel-test:dev
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) GUEST_CHECK_MODE=kernel bash hack/guest-check.sh
+
+m9-test: guest-image workload-image contention-image
+	$(MAKE) image-local IMAGE=$(GUEST_AGENT_IMAGE)
+	docker build -f examples/guest-probe/Dockerfile.workload -t kubenode-observer/guest-workload:dev .
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(GUEST_IMAGE) $(GUEST_AGENT_IMAGE) kubenode-observer/guest-workload:dev
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) AGENT_IMAGE=$(GUEST_AGENT_IMAGE) bash hack/guest-test.sh
 
 

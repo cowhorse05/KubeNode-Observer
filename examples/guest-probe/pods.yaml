@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-guest
+  namespace: kno-guest-test
+  annotations:
+    observer.kubenode.io/guest-probe: enabled
+spec:
+  runtimeClassName: kno-kata-qemu-guest
+  shareProcessNamespace: true
+  automountServiceAccountToken: false
+  restartPolicy: Never
+  containers:
+    - name: probe
+      image: kubenode-observer/guest-probe:dev
+      imagePullPolicy: Never
+      env:
+        - name: POD_UID
+          valueFrom: {fieldRef: {fieldPath: metadata.uid}}
+      securityContext: {privileged: true}
+      readinessProbe:
+        httpGet: {path: /healthz, port: 18081}
+        initialDelaySeconds: 1
+        periodSeconds: 1
+      resources:
+        requests: {cpu: 100m, memory: 64Mi}
+        limits: {cpu: 500m, memory: 128Mi}
+    - name: workload
+      image: kubenode-observer/guest-workload:dev
+      imagePullPolicy: Never
+      args: ["--iterations=1800", "--interval=1s"]
+      resources:
+        requests: {cpu: 100m, memory: 32Mi}
+        limits: {cpu: 1500m, memory: 64Mi}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-guest-runc
+  namespace: kno-guest-test
+spec:
+  restartPolicy: Never
+  automountServiceAccountToken: false
+  containers:
+    - name: workload
+      image: kubenode-observer/guest-workload:dev
+      imagePullPolicy: Never
+      args: ["--iterations=1800", "--interval=1s"]
+      resources:
+        requests: {cpu: 10m, memory: 16Mi}
+        limits: {cpu: 200m, memory: 64Mi}

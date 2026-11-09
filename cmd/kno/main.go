@@ -345,6 +345,53 @@ func main() {
 	trace.AddCommand(runQLat)
 	root.AddCommand(trace)
 
+	var guestSandbox, guestComm string
+	var guestDuration time.Duration
+	var guestLimit int
+	guestCommand := &cobra.Command{Use: "guest", Short: "Query Guest processes, separate from Host resources"}
+	guestResources := &cobra.Command{Use: "resources", Short: "Measure processes through the opt-in Node Guest relay", RunE: func(_ *cobra.Command, _ []string) error {
+		if guestDuration < 100*time.Millisecond || guestDuration > 10*time.Second {
+			return fmt.Errorf("duration must be 100ms..10s")
+		}
+		query := url.Values{"sandbox": {guestSandbox}, "duration": {guestDuration.String()}, "limit": {strconv.Itoa(guestLimit)}}
+		if guestComm != "" {
+			query.Set("comm", guestComm)
+		}
+		ctx, cancel := context.WithTimeout(context.Background(), guestDuration+15*time.Second)
+		defer cancel()
+		request, err := http.NewRequestWithContext(ctx, http.MethodGet, endpoint+"/api/v1/guest/resources?"+query.Encode(), nil)
+		if err != nil {
+			return err
+		}
+		response, err := http.DefaultClient.Do(request)
+		if err != nil {
+			return err
+		}
+		defer response.Body.Close()
+		body, err := io.ReadAll(io.LimitReader(response.Body, (2<<20)+1))
+		if err != nil {
+			return err
+		}
+		if len(body) > 2<<20 {
+			return fmt.Errorf("Guest response exceeds 2MiB")
+		}
+		if response.StatusCode != 200 {
+			return fmt.Errorf("agent returned %s: %s", response.Status, body)
+		}
+		var formatted bytes.Buffer
+		if err := json.Indent(&formatted, body, "", "  "); err != nil {
+			return err
+		}
+		fmt.Println(formatted.String())
+		return nil
+	}}
+	guestResources.Flags().StringVar(&guestSandbox, "sandbox", "", "full current Kata Sandbox ID (required)")
+	guestResources.Flags().StringVar(&guestComm, "comm", "", "exact Guest process comm filter")
+	guestResources.Flags().DurationVar(&guestDuration, "duration", 5*time.Second, "Guest window (100ms..10s)")
+	guestResources.Flags().IntVar(&guestLimit, "limit", 20, "maximum processes (1..100)")
+	_ = guestResources.MarkFlagRequired("sandbox")
+	guestCommand.AddCommand(guestResources)
+	root.AddCommand(guestCommand)
 	if err := root.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

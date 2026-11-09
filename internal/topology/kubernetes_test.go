@@ -22,3 +22,15 @@ func TestPodInfoUsesMirrorHashForStaticPodRuntimeIdentity(t *testing.T) {
 		t.Fatalf("unexpected pod info: %#v", info)
 	}
 }
+
+func TestGuestProbeOptInRequiresExplicitAnnotationAndRetainsNetworkScope(t *testing.T) {
+	pod := &corev1.Pod{ObjectMeta: metav1.ObjectMeta{Annotations: map[string]string{"observer.kubenode.io/guest-probe": "enabled"}}, Spec: corev1.PodSpec{HostNetwork: true}, Status: corev1.PodStatus{PodIP: "192.0.2.1"}}
+	info := podInfo(pod)
+	if !info.GuestProbe || !info.HostNetwork || info.IP != "192.0.2.1" {
+		t.Fatal(info)
+	}
+	pod.Annotations["observer.kubenode.io/guest-probe"] = "true"
+	if podInfo(pod).GuestProbe {
+		t.Fatal("implicit opt-in accepted")
+	}
+}

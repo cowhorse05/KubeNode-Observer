@@ -1,0 +1,33 @@
+{
+  "domain": "guest",
+  "podUid": "45a8a664-4e40-4bc8-8e5d-baa0bd172569",
+  "sandboxId": "f5c58ea04f30c5f859829996efe7ee29d8383626954c81cee61a9d2b36df1a3b",
+  "namespace": "kno-guest-test",
+  "podName": "kno-guest",
+  "kernelRelease": "6.18.56",
+  "bootId": "1b02d42c-a6bc-4e00-9065-cd4ba94d22d0",
+  "instanceId": "8022dea6b138c0493ec26815a15eca06",
+  "requestId": "6831aeb610ffc4e08a346853c515bd68",
+  "startedAt": "2026-11-05T10:03:17.099257283Z",
+  "durationSeconds": 5.022826367,
+  "totalItems": 1,
+  "processes": [
+    {
+      "namespacePid": 292,
+      "startTimeTicks": 6964,
+      "command": "guest-burn",
+      "cpu": null,
+      "runqlat": null,
+      "runqlatCoverage": {
+        "observedThreads": 0,
+        "totalThreads": 17
+      },
+      "partial": true,
+      "issues": [
+        "thread set changed: before=17 after=18",
+        "process CPU unavailable: incomplete stable thread set/counters",
+        "process runqlat unavailable: incomplete endpoints/thread set"
+      ]
+    }
+  ]
+}

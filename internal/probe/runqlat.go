@@ -2,6 +2,7 @@ package probe
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"sync"
 
@@ -33,6 +34,25 @@ type RunQLatProbe struct {
 	objects bpfgen.RunQLatObjects
 	links   []link.Link
 	close   sync.Once
+}
+
+// TaskIdentity is the last switch-out identity already maintained by runqlat.
+// It is a scheduler observation, not an atomic procfs/current-cgroup guarantee.
+type TaskIdentity struct {
+	CgroupID uint64
+	TGID     uint32
+}
+
+func (p *RunQLatProbe) TaskIdentity(pid uint32) (TaskIdentity, bool, error) {
+	var value bpfgen.RunQLatTaskIdentity
+	err := p.objects.TaskIdentity.Lookup(pid, &value)
+	if errors.Is(err, ebpf.ErrKeyNotExist) {
+		return TaskIdentity{}, false, nil
+	}
+	if err != nil {
+		return TaskIdentity{}, false, fmt.Errorf("read scheduled task identity: %w", err)
+	}
+	return TaskIdentity{CgroupID: value.CgroupId, TGID: value.Tgid}, true, nil
 }
 
 func NewRunQLatProbe() (*RunQLatProbe, error) {

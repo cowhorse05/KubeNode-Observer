@@ -1,0 +1,1383 @@
+# HELP go_gc_duration_seconds A summary of the wall-time pause (stop-the-world) duration in garbage collection cycles.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 5.1931e-05
+go_gc_duration_seconds{quantile="0.25"} 5.5786e-05
+go_gc_duration_seconds{quantile="0.5"} 6.1123e-05
+go_gc_duration_seconds{quantile="0.75"} 0.00011861
+go_gc_duration_seconds{quantile="1"} 0.000423884
+go_gc_duration_seconds_sum 0.001586558
+go_gc_duration_seconds_count 15
+# HELP go_gc_gogc_percent Heap size target percentage configured by the user, otherwise 100. This value is set by the GOGC environment variable, and the runtime/debug.SetGCPercent function. Sourced from /gc/gogc:percent.
+# TYPE go_gc_gogc_percent gauge
+go_gc_gogc_percent 40
+# HELP go_gc_gomemlimit_bytes Go runtime memory limit configured by the user, otherwise math.MaxInt64. This value is set by the GOMEMLIMIT environment variable, and the runtime/debug.SetMemoryLimit function. Sourced from /gc/gomemlimit:bytes.
+# TYPE go_gc_gomemlimit_bytes gauge
+go_gc_gomemlimit_bytes 9.223372036854776e+18
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 51
+# HELP go_info Information about the Go environment.
+# TYPE go_info gauge
+go_info{version="go1.26.9"} 1
+# HELP go_memstats_alloc_bytes Number of bytes allocated in heap and currently in use. Equals to /memory/classes/heap/objects:bytes.
+# TYPE go_memstats_alloc_bytes gauge
+go_memstats_alloc_bytes 3.61692e+06
+# HELP go_memstats_alloc_bytes_total Total number of bytes allocated in heap until now, even if released already. Equals to /gc/heap/allocs:bytes.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 1.3094888e+07
+# HELP go_memstats_buck_hash_sys_bytes Number of bytes used by the profiling bucket hash table. Equals to /memory/classes/profiling/buckets:bytes.
+# TYPE go_memstats_buck_hash_sys_bytes gauge
+go_memstats_buck_hash_sys_bytes 1.455649e+06
+# HELP go_memstats_frees_total Total number of heap objects frees. Equals to /gc/heap/frees:objects + /gc/heap/tiny/allocs:objects.
+# TYPE go_memstats_frees_total counter
+go_memstats_frees_total 172498
+# HELP go_memstats_gc_sys_bytes Number of bytes used for garbage collection system metadata. Equals to /memory/classes/metadata/other:bytes.
+# TYPE go_memstats_gc_sys_bytes gauge
+go_memstats_gc_sys_bytes 3.596016e+06
+# HELP go_memstats_heap_alloc_bytes Number of heap bytes allocated and currently in use, same as go_memstats_alloc_bytes. Equals to /memory/classes/heap/objects:bytes.
+# TYPE go_memstats_heap_alloc_bytes gauge
+go_memstats_heap_alloc_bytes 3.61692e+06
+# HELP go_memstats_heap_idle_bytes Number of heap bytes waiting to be used. Equals to /memory/classes/heap/released:bytes + /memory/classes/heap/free:bytes.
+# TYPE go_memstats_heap_idle_bytes gauge
+go_memstats_heap_idle_bytes 5.89824e+06
+# HELP go_memstats_heap_inuse_bytes Number of heap bytes that are in use. Equals to /memory/classes/heap/objects:bytes + /memory/classes/heap/unused:bytes
+# TYPE go_memstats_heap_inuse_bytes gauge
+go_memstats_heap_inuse_bytes 5.603328e+06
+# HELP go_memstats_heap_objects Number of currently allocated objects. Equals to /gc/heap/objects:objects.
+# TYPE go_memstats_heap_objects gauge
+go_memstats_heap_objects 22180
+# HELP go_memstats_heap_released_bytes Number of heap bytes released to OS. Equals to /memory/classes/heap/released:bytes.
+# TYPE go_memstats_heap_released_bytes gauge
+go_memstats_heap_released_bytes 5.890048e+06
+# HELP go_memstats_heap_sys_bytes Number of heap bytes obtained from system. Equals to /memory/classes/heap/objects:bytes + /memory/classes/heap/unused:bytes + /memory/classes/heap/released:bytes + /memory/classes/heap/free:bytes.
+# TYPE go_memstats_heap_sys_bytes gauge
+go_memstats_heap_sys_bytes 1.1501568e+07
+# HELP go_memstats_last_gc_time_seconds Number of seconds since 1970 of last garbage collection.
+# TYPE go_memstats_last_gc_time_seconds gauge
+go_memstats_last_gc_time_seconds 1.7939363990853093e+09
+# HELP go_memstats_mallocs_total Total number of heap objects allocated, both live and gc-ed. Semantically a counter version for go_memstats_heap_objects gauge. Equals to /gc/heap/allocs:objects + /gc/heap/tiny/allocs:objects.
+# TYPE go_memstats_mallocs_total counter
+go_memstats_mallocs_total 194678
+# HELP go_memstats_mcache_inuse_bytes Number of bytes in use by mcache structures. Equals to /memory/classes/metadata/mcache/inuse:bytes.
+# TYPE go_memstats_mcache_inuse_bytes gauge
+go_memstats_mcache_inuse_bytes 4592
+# HELP go_memstats_mcache_sys_bytes Number of bytes used for mcache structures obtained from system. Equals to /memory/classes/metadata/mcache/inuse:bytes + /memory/classes/metadata/mcache/free:bytes.
+# TYPE go_memstats_mcache_sys_bytes gauge
+go_memstats_mcache_sys_bytes 16072
+# HELP go_memstats_mspan_inuse_bytes Number of bytes in use by mspan structures. Equals to /memory/classes/metadata/mspan/inuse:bytes.
+# TYPE go_memstats_mspan_inuse_bytes gauge
+go_memstats_mspan_inuse_bytes 95840
+# HELP go_memstats_mspan_sys_bytes Number of bytes used for mspan structures obtained from system. Equals to /memory/classes/metadata/mspan/inuse:bytes + /memory/classes/metadata/mspan/free:bytes.
+# TYPE go_memstats_mspan_sys_bytes gauge
+go_memstats_mspan_sys_bytes 97920
+# HELP go_memstats_next_gc_bytes Number of heap bytes when next garbage collection will take place. Equals to /gc/heap/goal:bytes.
+# TYPE go_memstats_next_gc_bytes gauge
+go_memstats_next_gc_bytes 4.926818e+06
+# HELP go_memstats_other_sys_bytes Number of bytes used for other system allocations. Equals to /memory/classes/other:bytes.
+# TYPE go_memstats_other_sys_bytes gauge
+go_memstats_other_sys_bytes 706223
+# HELP go_memstats_stack_inuse_bytes Number of bytes obtained from system for stack allocator in non-CGO environments. Equals to /memory/classes/heap/stacks:bytes.
+# TYPE go_memstats_stack_inuse_bytes gauge
+go_memstats_stack_inuse_bytes 1.081344e+06
+# HELP go_memstats_stack_sys_bytes Number of bytes obtained from system for stack allocator. Equals to /memory/classes/heap/stacks:bytes + /memory/classes/os-stacks:bytes.
+# TYPE go_memstats_stack_sys_bytes gauge
+go_memstats_stack_sys_bytes 1.081344e+06
+# HELP go_memstats_sys_bytes Number of bytes obtained from system. Equals to /memory/classes/total:byte.
+# TYPE go_memstats_sys_bytes gauge
+go_memstats_sys_bytes 1.8454792e+07
+# HELP go_sched_gomaxprocs_threads The current runtime.GOMAXPROCS setting, or the number of operating system threads that can execute user-level Go code simultaneously. Sourced from /sched/gomaxprocs:threads.
+# TYPE go_sched_gomaxprocs_threads gauge
+go_sched_gomaxprocs_threads 2
+# HELP go_threads Number of OS threads created.
+# TYPE go_threads gauge
+go_threads 10
+# HELP kata_hypervisor_fds Open FDs for hypervisor.
+# TYPE kata_hypervisor_fds gauge
+kata_hypervisor_fds 133
+# HELP kata_hypervisor_io_stat Process IO statistics.
+# TYPE kata_hypervisor_io_stat gauge
+kata_hypervisor_io_stat{item="cancelledwritebytes"} 0
+kata_hypervisor_io_stat{item="rchar"} 3.579192e+06
+kata_hypervisor_io_stat{item="readbytes"} 0
+kata_hypervisor_io_stat{item="syscr"} 1934
+kata_hypervisor_io_stat{item="syscw"} 2096
+kata_hypervisor_io_stat{item="wchar"} 16767
+kata_hypervisor_io_stat{item="writebytes"} 0
+# HELP kata_hypervisor_netdev Net devices statistics.
+# TYPE kata_hypervisor_netdev gauge
+kata_hypervisor_netdev{interface="eth0",item="recv_bytes"} 19028
+kata_hypervisor_netdev{interface="eth0",item="recv_compressed"} 0
+kata_hypervisor_netdev{interface="eth0",item="recv_drop"} 0
+kata_hypervisor_netdev{interface="eth0",item="recv_errs"} 0
+kata_hypervisor_netdev{interface="eth0",item="recv_fifo"} 0
+kata_hypervisor_netdev{interface="eth0",item="recv_frame"} 0
+kata_hypervisor_netdev{interface="eth0",item="recv_multicast"} 0
+kata_hypervisor_netdev{interface="eth0",item="recv_packets"} 103
+kata_hypervisor_netdev{interface="eth0",item="sent_bytes"} 9420
+kata_hypervisor_netdev{interface="eth0",item="sent_carrier"} 0
+kata_hypervisor_netdev{interface="eth0",item="sent_colls"} 0
+kata_hypervisor_netdev{interface="eth0",item="sent_compressed"} 0
+kata_hypervisor_netdev{interface="eth0",item="sent_drop"} 0
+kata_hypervisor_netdev{interface="eth0",item="sent_errs"} 0
+kata_hypervisor_netdev{interface="eth0",item="sent_fifo"} 0
+kata_hypervisor_netdev{interface="eth0",item="sent_packets"} 100
+kata_hypervisor_netdev{interface="lo",item="recv_bytes"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_compressed"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_drop"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_errs"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_fifo"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_frame"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_multicast"} 0
+kata_hypervisor_netdev{interface="lo",item="recv_packets"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_bytes"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_carrier"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_colls"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_compressed"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_drop"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_errs"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_fifo"} 0
+kata_hypervisor_netdev{interface="lo",item="sent_packets"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_bytes"} 8878
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_compressed"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_drop"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_errs"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_fifo"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_frame"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_multicast"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="recv_packets"} 93
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_bytes"} 18738
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_carrier"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_colls"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_compressed"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_drop"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_errs"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_fifo"} 0
+kata_hypervisor_netdev{interface="tap0_kata",item="sent_packets"} 100
+# HELP kata_hypervisor_proc_stat Hypervisor process statistics.
+# TYPE kata_hypervisor_proc_stat gauge
+kata_hypervisor_proc_stat{item="cstime"} 0
+kata_hypervisor_proc_stat{item="cutime"} 0
+kata_hypervisor_proc_stat{item="stime"} 101
+kata_hypervisor_proc_stat{item="utime"} 393
+# HELP kata_hypervisor_proc_status Hypervisor process status.
+# TYPE kata_hypervisor_proc_status gauge
+kata_hypervisor_proc_status{item="hugetlbpages"} 0
+kata_hypervisor_proc_status{item="nonvoluntary_ctxt_switches"} 4
+kata_hypervisor_proc_status{item="rssanon"} 1.5204352e+07
+kata_hypervisor_proc_status{item="rssfile"} 9.009152e+07
+kata_hypervisor_proc_status{item="rssshmem"} 1.62496512e+08
+kata_hypervisor_proc_status{item="vmdata"} 1.2611584e+08
+kata_hypervisor_proc_status{item="vmexe"} 5.34528e+06
+kata_hypervisor_proc_status{item="vmhwm"} 2.67792384e+08
+kata_hypervisor_proc_status{item="vmlck"} 0
+kata_hypervisor_proc_status{item="vmlib"} 8192
+kata_hypervisor_proc_status{item="vmpeak"} 1.476993024e+09
+kata_hypervisor_proc_status{item="vmpin"} 0
+kata_hypervisor_proc_status{item="vmpmd"} 0
+kata_hypervisor_proc_status{item="vmpte"} 917504
+kata_hypervisor_proc_status{item="vmrss"} 2.67792384e+08
+kata_hypervisor_proc_status{item="vmsize"} 1.476993024e+09
+kata_hypervisor_proc_status{item="vmstk"} 135168
+kata_hypervisor_proc_status{item="vmswap"} 0
+kata_hypervisor_proc_status{item="voluntary_ctxt_switches"} 709
+# HELP kata_hypervisor_threads Hypervisor process threads.
+# TYPE kata_hypervisor_threads gauge
+kata_hypervisor_threads 7
+# HELP kata_shim_agent_rpc_durations_histogram_milliseconds RPC latency distributions.
+# TYPE kata_shim_agent_rpc_durations_histogram_milliseconds histogram
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="2"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="4"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="8"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="16"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CheckRequest",le="+Inf"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.CheckRequest"} 1594
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.CheckRequest"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="2"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="4"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="8"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="16"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="32"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="128"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="256"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="512"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateContainerRequest",le="+Inf"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.CreateContainerRequest"} 215
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.CreateContainerRequest"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="2"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="4"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="8"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="16"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.CreateSandboxRequest",le="+Inf"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.CreateSandboxRequest"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.CreateSandboxRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="2"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="4"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="8"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="16"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.ExecProcessRequest",le="+Inf"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.ExecProcessRequest"} 19
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.ExecProcessRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="1"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="2"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="4"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="8"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="16"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.GuestDetailsRequest",le="+Inf"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.GuestDetailsRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.GuestDetailsRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="1"} 4
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="2"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="4"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="8"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="16"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="32"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="64"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="128"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="256"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="512"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.OnlineCPUMemRequest",le="+Inf"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.OnlineCPUMemRequest"} 59
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.OnlineCPUMemRequest"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="1"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="2"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="4"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="8"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="16"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="32"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="64"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="128"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="256"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="512"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StartContainerRequest",le="+Inf"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.StartContainerRequest"} 4
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.StartContainerRequest"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="2"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="4"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="8"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="16"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="32"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="64"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="128"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="256"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="512"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.StatsContainerRequest",le="+Inf"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.StatsContainerRequest"} 6
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.StatsContainerRequest"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="1"} 4
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="2"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="4"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="8"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="16"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="32"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="64"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="128"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="256"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="512"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateEphemeralMountsRequest",le="+Inf"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.UpdateEphemeralMountsRequest"} 3
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.UpdateEphemeralMountsRequest"} 5
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="2"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="4"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="8"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="16"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateInterfaceRequest",le="+Inf"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.UpdateInterfaceRequest"} 9
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.UpdateInterfaceRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="1"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="2"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="4"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="8"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="16"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.UpdateRoutesRequest",le="+Inf"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.UpdateRoutesRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.UpdateRoutesRequest"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="1"} 0
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="2"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="4"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="8"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="16"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="32"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="64"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="128"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="256"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="512"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_bucket{action="grpc.WaitProcessRequest",le="+Inf"} 1
+kata_shim_agent_rpc_durations_histogram_milliseconds_sum{action="grpc.WaitProcessRequest"} 2
+kata_shim_agent_rpc_durations_histogram_milliseconds_count{action="grpc.WaitProcessRequest"} 1
+# HELP kata_shim_fds Kata containerd shim v2 open FDs.
+# TYPE kata_shim_fds gauge
+kata_shim_fds 31
+# HELP kata_shim_io_stat Kata containerd shim v2 process IO statistics.
+# TYPE kata_shim_io_stat gauge
+kata_shim_io_stat{item="cancelledwritebytes"} 0
+kata_shim_io_stat{item="rchar"} 203359
+kata_shim_io_stat{item="readbytes"} 155648
+kata_shim_io_stat{item="syscr"} 1082
+kata_shim_io_stat{item="syscw"} 1000
+kata_shim_io_stat{item="wchar"} 223449
+kata_shim_io_stat{item="writebytes"} 0
+# HELP kata_shim_pod_overhead_cpu Kata Pod overhead for CPU resources(percent).
+# TYPE kata_shim_pod_overhead_cpu gauge
+kata_shim_pod_overhead_cpu 0
+# HELP kata_shim_pod_overhead_memory_in_bytes Kata Pod overhead for memory resources(bytes).
+# TYPE kata_shim_pod_overhead_memory_in_bytes gauge
+kata_shim_pod_overhead_memory_in_bytes 0
+# HELP kata_shim_proc_stat Kata containerd shim v2 process statistics.
+# TYPE kata_shim_proc_stat gauge
+kata_shim_proc_stat{item="cstime"} 0
+kata_shim_proc_stat{item="cutime"} 0
+kata_shim_proc_stat{item="stime"} 58
+kata_shim_proc_stat{item="utime"} 34
+# HELP kata_shim_proc_status Kata containerd shim v2 process status.
+# TYPE kata_shim_proc_status gauge
+kata_shim_proc_status{item="hugetlbpages"} 0
+kata_shim_proc_status{item="nonvoluntary_ctxt_switches"} 0
+kata_shim_proc_status{item="rssanon"} 9.027584e+06
+kata_shim_proc_status{item="rssfile"} 2.5923584e+07
+kata_shim_proc_status{item="rssshmem"} 0
+kata_shim_proc_status{item="vmdata"} 8.660992e+07
+kata_shim_proc_status{item="vmexe"} 1.5056896e+07
+kata_shim_proc_status{item="vmhwm"} 3.4951168e+07
+kata_shim_proc_status{item="vmlck"} 0
+kata_shim_proc_status{item="vmlib"} 8192
+kata_shim_proc_status{item="vmpeak"} 1.324367872e+09
+kata_shim_proc_status{item="vmpin"} 0
+kata_shim_proc_status{item="vmpmd"} 0
+kata_shim_proc_status{item="vmpte"} 180224
+kata_shim_proc_status{item="vmrss"} 3.4951168e+07
+kata_shim_proc_status{item="vmsize"} 1.324367872e+09
+kata_shim_proc_status{item="vmstk"} 135168
+kata_shim_proc_status{item="vmswap"} 0
+kata_shim_proc_status{item="voluntary_ctxt_switches"} 23
+# HELP kata_shim_rpc_durations_histogram_milliseconds RPC latency distributions.
+# TYPE kata_shim_rpc_durations_histogram_milliseconds histogram
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="1"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="2"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="4"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="8"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="16"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="32"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="64"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="128"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="256"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="512"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="connect",le="+Inf"} 6
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="connect"} 0
+kata_shim_rpc_durations_histogram_milliseconds_count{action="connect"} 6
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="1"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="2"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="4"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="8"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="16"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="32"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="64"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="128"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="256"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="512"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="create",le="+Inf"} 3
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="create"} 2278
+kata_shim_rpc_durations_histogram_milliseconds_count{action="create"} 3
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="1"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="2"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="4"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="8"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="16"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="32"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="64"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="128"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="256"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="512"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="delete",le="+Inf"} 1
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="delete"} 0
+kata_shim_rpc_durations_histogram_milliseconds_count{action="delete"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="1"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="2"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="4"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="8"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="16"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="32"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="64"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="128"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="256"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="512"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="exec",le="+Inf"} 1
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="exec"} 0
+kata_shim_rpc_durations_histogram_milliseconds_count{action="exec"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="1"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="2"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="4"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="8"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="16"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="32"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="64"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="128"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="256"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="512"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="kill",le="+Inf"} 1
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="kill"} 0
+kata_shim_rpc_durations_histogram_milliseconds_count{action="kill"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="1"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="2"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="4"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="8"} 3
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="16"} 3
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="32"} 4
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="64"} 4
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="128"} 4
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="256"} 4
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="512"} 4
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="start",le="+Inf"} 4
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="start"} 29
+kata_shim_rpc_durations_histogram_milliseconds_count{action="start"} 4
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="1"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="2"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="4"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="8"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="16"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="32"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="64"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="128"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="256"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="512"} 28
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="state",le="+Inf"} 29
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="state"} 1942
+kata_shim_rpc_durations_histogram_milliseconds_count{action="state"} 29
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="1"} 0
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="2"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="4"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="8"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="16"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="32"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="64"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="128"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="256"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="512"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="stats",le="+Inf"} 2
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="stats"} 7
+kata_shim_rpc_durations_histogram_milliseconds_count{action="stats"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="1"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="2"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="4"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="8"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="16"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="32"} 1
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="64"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="128"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="256"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="512"} 2
+kata_shim_rpc_durations_histogram_milliseconds_bucket{action="wait",le="+Inf"} 2
+kata_shim_rpc_durations_histogram_milliseconds_sum{action="wait"} 39
+kata_shim_rpc_durations_histogram_milliseconds_count{action="wait"} 2
+# HELP kata_shim_threads Kata containerd shim v2 process threads.
+# TYPE kata_shim_threads gauge
+kata_shim_threads 10
+# HELP kata_virtiofsd_fds Open FDs for virtiofsd.
+# TYPE kata_virtiofsd_fds gauge
+kata_virtiofsd_fds 6
+# HELP kata_virtiofsd_io_stat Process IO statistics.
+# TYPE kata_virtiofsd_io_stat gauge
+kata_virtiofsd_io_stat{item="cancelledwritebytes"} 0
+kata_virtiofsd_io_stat{item="rchar"} 2949
+kata_virtiofsd_io_stat{item="readbytes"} 0
+kata_virtiofsd_io_stat{item="syscr"} 17
+kata_virtiofsd_io_stat{item="syscw"} 2
+kata_virtiofsd_io_stat{item="wchar"} 2
+kata_virtiofsd_io_stat{item="writebytes"} 0
+# HELP kata_virtiofsd_proc_stat Virtiofsd process statistics.
+# TYPE kata_virtiofsd_proc_stat gauge
+kata_virtiofsd_proc_stat{item="cstime"} 0
+kata_virtiofsd_proc_stat{item="cutime"} 0
+kata_virtiofsd_proc_stat{item="stime"} 0
+kata_virtiofsd_proc_stat{item="utime"} 0
+# HELP kata_virtiofsd_proc_status Virtiofsd process status.
+# TYPE kata_virtiofsd_proc_status gauge
+kata_virtiofsd_proc_status{item="hugetlbpages"} 0
+kata_virtiofsd_proc_status{item="nonvoluntary_ctxt_switches"} 0
+kata_virtiofsd_proc_status{item="rssanon"} 151552
+kata_virtiofsd_proc_status{item="rssfile"} 2.048e+06
+kata_virtiofsd_proc_status{item="rssshmem"} 0
+kata_virtiofsd_proc_status{item="vmdata"} 90112
+kata_virtiofsd_proc_status{item="vmexe"} 2.174976e+06
+kata_virtiofsd_proc_status{item="vmhwm"} 2.199552e+06
+kata_virtiofsd_proc_status{item="vmlck"} 0
+kata_virtiofsd_proc_status{item="vmlib"} 8192
+kata_virtiofsd_proc_status{item="vmpeak"} 3.117056e+06
+kata_virtiofsd_proc_status{item="vmpin"} 0
+kata_virtiofsd_proc_status{item="vmpmd"} 0
+kata_virtiofsd_proc_status{item="vmpte"} 45056
+kata_virtiofsd_proc_status{item="vmrss"} 2.199552e+06
+kata_virtiofsd_proc_status{item="vmsize"} 3.026944e+06
+kata_virtiofsd_proc_status{item="vmstk"} 135168
+kata_virtiofsd_proc_status{item="vmswap"} 0
+kata_virtiofsd_proc_status{item="voluntary_ctxt_switches"} 3
+# HELP kata_virtiofsd_threads Virtiofsd process threads.
+# TYPE kata_virtiofsd_threads gauge
+kata_virtiofsd_threads 1
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 0.92
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1.048576e+06
+# HELP process_network_receive_bytes_total Number of bytes received by the process over the network.
+# TYPE process_network_receive_bytes_total counter
+process_network_receive_bytes_total 7.316119509e+09
+# HELP process_network_transmit_bytes_total Number of bytes sent by the process over the network.
+# TYPE process_network_transmit_bytes_total counter
+process_network_transmit_bytes_total 7.111118991e+09
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 31
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 3.35872e+07
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1.79393639541e+09
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 1.324367872e+09
+# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.
+# TYPE process_virtual_memory_max_bytes gauge
+process_virtual_memory_max_bytes 1.8446744073709552e+19
+# HELP kata_guest_netdev_stat Guest net devices statistics.
+# TYPE kata_guest_netdev_stat gauge
+kata_guest_netdev_stat{interface="eth0",item="recv_bytes"} 18648
+kata_guest_netdev_stat{interface="eth0",item="recv_compressed"} 0
+kata_guest_netdev_stat{interface="eth0",item="recv_drop"} 0
+kata_guest_netdev_stat{interface="eth0",item="recv_errs"} 0
+kata_guest_netdev_stat{interface="eth0",item="recv_fifo"} 0
+kata_guest_netdev_stat{interface="eth0",item="recv_frame"} 0
+kata_guest_netdev_stat{interface="eth0",item="recv_multicast"} 0
+kata_guest_netdev_stat{interface="eth0",item="recv_packets"} 99
+kata_guest_netdev_stat{interface="eth0",item="sent_bytes"} 8878
+kata_guest_netdev_stat{interface="eth0",item="sent_carrier"} 0
+kata_guest_netdev_stat{interface="eth0",item="sent_colls"} 0
+kata_guest_netdev_stat{interface="eth0",item="sent_compressed"} 0
+kata_guest_netdev_stat{interface="eth0",item="sent_drop"} 0
+kata_guest_netdev_stat{interface="eth0",item="sent_errs"} 0
+kata_guest_netdev_stat{interface="eth0",item="sent_fifo"} 0
+kata_guest_netdev_stat{interface="eth0",item="sent_packets"} 93
+kata_guest_netdev_stat{interface="lo",item="recv_bytes"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_compressed"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_drop"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_errs"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_fifo"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_frame"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_multicast"} 0
+kata_guest_netdev_stat{interface="lo",item="recv_packets"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_bytes"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_carrier"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_colls"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_compressed"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_drop"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_errs"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_fifo"} 0
+kata_guest_netdev_stat{interface="lo",item="sent_packets"} 0
+# HELP kata_agent_proc_status Agent process status.
+# TYPE kata_agent_proc_status gauge
+kata_agent_proc_status{item="hugetlbpages"} 0
+kata_agent_proc_status{item="nonvoluntary_ctxt_switches"} 138
+kata_agent_proc_status{item="rssanon"} 3904
+kata_agent_proc_status{item="rssfile"} 10632
+kata_agent_proc_status{item="rssshmem"} 0
+kata_agent_proc_status{item="vmdata"} 17420
+kata_agent_proc_status{item="vmexe"} 20880
+kata_agent_proc_status{item="vmhwm"} 14536
+kata_agent_proc_status{item="vmlck"} 0
+kata_agent_proc_status{item="vmlib"} 2612
+kata_agent_proc_status{item="vmpeak"} 508024
+kata_agent_proc_status{item="vmpin"} 0
+kata_agent_proc_status{item="vmpte"} 160
+kata_agent_proc_status{item="vmrss"} 14536
+kata_agent_proc_status{item="vmsize"} 507988
+kata_agent_proc_status{item="vmstk"} 132
+kata_agent_proc_status{item="vmswap"} 0
+kata_agent_proc_status{item="voluntary_ctxt_switches"} 8
+# HELP kata_agent_total_rss Agent process total RSS size
+# TYPE kata_agent_total_rss gauge
+kata_agent_total_rss 1.46432e+07
+# HELP kata_agent_total_vm Agent process total VM size
+# TYPE kata_agent_total_vm gauge
+kata_agent_total_vm 5.20179712e+08
+# HELP kata_agent_total_time Agent process total time
+# TYPE kata_agent_total_time gauge
+kata_agent_total_time 0.13
+# HELP kata_guest_diskstat Disks statistics in system.
+# TYPE kata_guest_diskstat gauge
+kata_guest_diskstat{disk="loop0",item="discards"} 0
+kata_guest_diskstat{disk="loop0",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop0",item="flushes"} 0
+kata_guest_diskstat{disk="loop0",item="in_progress"} 0
+kata_guest_diskstat{disk="loop0",item="merged"} 0
+kata_guest_diskstat{disk="loop0",item="reads"} 0
+kata_guest_diskstat{disk="loop0",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop0",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop0",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop0",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop0",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop0",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop0",item="time_reading"} 0
+kata_guest_diskstat{disk="loop0",item="time_writing"} 0
+kata_guest_diskstat{disk="loop0",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop0",item="writes"} 0
+kata_guest_diskstat{disk="loop0",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop1",item="discards"} 0
+kata_guest_diskstat{disk="loop1",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop1",item="flushes"} 0
+kata_guest_diskstat{disk="loop1",item="in_progress"} 0
+kata_guest_diskstat{disk="loop1",item="merged"} 0
+kata_guest_diskstat{disk="loop1",item="reads"} 0
+kata_guest_diskstat{disk="loop1",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop1",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop1",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop1",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop1",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop1",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop1",item="time_reading"} 0
+kata_guest_diskstat{disk="loop1",item="time_writing"} 0
+kata_guest_diskstat{disk="loop1",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop1",item="writes"} 0
+kata_guest_diskstat{disk="loop1",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop2",item="discards"} 0
+kata_guest_diskstat{disk="loop2",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop2",item="flushes"} 0
+kata_guest_diskstat{disk="loop2",item="in_progress"} 0
+kata_guest_diskstat{disk="loop2",item="merged"} 0
+kata_guest_diskstat{disk="loop2",item="reads"} 0
+kata_guest_diskstat{disk="loop2",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop2",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop2",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop2",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop2",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop2",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop2",item="time_reading"} 0
+kata_guest_diskstat{disk="loop2",item="time_writing"} 0
+kata_guest_diskstat{disk="loop2",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop2",item="writes"} 0
+kata_guest_diskstat{disk="loop2",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop3",item="discards"} 0
+kata_guest_diskstat{disk="loop3",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop3",item="flushes"} 0
+kata_guest_diskstat{disk="loop3",item="in_progress"} 0
+kata_guest_diskstat{disk="loop3",item="merged"} 0
+kata_guest_diskstat{disk="loop3",item="reads"} 0
+kata_guest_diskstat{disk="loop3",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop3",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop3",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop3",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop3",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop3",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop3",item="time_reading"} 0
+kata_guest_diskstat{disk="loop3",item="time_writing"} 0
+kata_guest_diskstat{disk="loop3",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop3",item="writes"} 0
+kata_guest_diskstat{disk="loop3",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop4",item="discards"} 0
+kata_guest_diskstat{disk="loop4",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop4",item="flushes"} 0
+kata_guest_diskstat{disk="loop4",item="in_progress"} 0
+kata_guest_diskstat{disk="loop4",item="merged"} 0
+kata_guest_diskstat{disk="loop4",item="reads"} 0
+kata_guest_diskstat{disk="loop4",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop4",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop4",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop4",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop4",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop4",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop4",item="time_reading"} 0
+kata_guest_diskstat{disk="loop4",item="time_writing"} 0
+kata_guest_diskstat{disk="loop4",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop4",item="writes"} 0
+kata_guest_diskstat{disk="loop4",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop5",item="discards"} 0
+kata_guest_diskstat{disk="loop5",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop5",item="flushes"} 0
+kata_guest_diskstat{disk="loop5",item="in_progress"} 0
+kata_guest_diskstat{disk="loop5",item="merged"} 0
+kata_guest_diskstat{disk="loop5",item="reads"} 0
+kata_guest_diskstat{disk="loop5",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop5",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop5",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop5",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop5",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop5",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop5",item="time_reading"} 0
+kata_guest_diskstat{disk="loop5",item="time_writing"} 0
+kata_guest_diskstat{disk="loop5",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop5",item="writes"} 0
+kata_guest_diskstat{disk="loop5",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop6",item="discards"} 0
+kata_guest_diskstat{disk="loop6",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop6",item="flushes"} 0
+kata_guest_diskstat{disk="loop6",item="in_progress"} 0
+kata_guest_diskstat{disk="loop6",item="merged"} 0
+kata_guest_diskstat{disk="loop6",item="reads"} 0
+kata_guest_diskstat{disk="loop6",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop6",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop6",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop6",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop6",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop6",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop6",item="time_reading"} 0
+kata_guest_diskstat{disk="loop6",item="time_writing"} 0
+kata_guest_diskstat{disk="loop6",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop6",item="writes"} 0
+kata_guest_diskstat{disk="loop6",item="writes_merged"} 0
+kata_guest_diskstat{disk="loop7",item="discards"} 0
+kata_guest_diskstat{disk="loop7",item="discards_merged"} 0
+kata_guest_diskstat{disk="loop7",item="flushes"} 0
+kata_guest_diskstat{disk="loop7",item="in_progress"} 0
+kata_guest_diskstat{disk="loop7",item="merged"} 0
+kata_guest_diskstat{disk="loop7",item="reads"} 0
+kata_guest_diskstat{disk="loop7",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="loop7",item="sectors_read"} 0
+kata_guest_diskstat{disk="loop7",item="sectors_written"} 0
+kata_guest_diskstat{disk="loop7",item="time_discarding"} 0
+kata_guest_diskstat{disk="loop7",item="time_flushing"} 0
+kata_guest_diskstat{disk="loop7",item="time_in_progress"} 0
+kata_guest_diskstat{disk="loop7",item="time_reading"} 0
+kata_guest_diskstat{disk="loop7",item="time_writing"} 0
+kata_guest_diskstat{disk="loop7",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="loop7",item="writes"} 0
+kata_guest_diskstat{disk="loop7",item="writes_merged"} 0
+kata_guest_diskstat{disk="pmem0",item="discards"} 0
+kata_guest_diskstat{disk="pmem0",item="discards_merged"} 0
+kata_guest_diskstat{disk="pmem0",item="flushes"} 0
+kata_guest_diskstat{disk="pmem0",item="in_progress"} 0
+kata_guest_diskstat{disk="pmem0",item="merged"} 0
+kata_guest_diskstat{disk="pmem0",item="reads"} 0
+kata_guest_diskstat{disk="pmem0",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="pmem0",item="sectors_read"} 0
+kata_guest_diskstat{disk="pmem0",item="sectors_written"} 0
+kata_guest_diskstat{disk="pmem0",item="time_discarding"} 0
+kata_guest_diskstat{disk="pmem0",item="time_flushing"} 0
+kata_guest_diskstat{disk="pmem0",item="time_in_progress"} 0
+kata_guest_diskstat{disk="pmem0",item="time_reading"} 0
+kata_guest_diskstat{disk="pmem0",item="time_writing"} 0
+kata_guest_diskstat{disk="pmem0",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="pmem0",item="writes"} 0
+kata_guest_diskstat{disk="pmem0",item="writes_merged"} 0
+kata_guest_diskstat{disk="pmem0p1",item="discards"} 0
+kata_guest_diskstat{disk="pmem0p1",item="discards_merged"} 0
+kata_guest_diskstat{disk="pmem0p1",item="flushes"} 0
+kata_guest_diskstat{disk="pmem0p1",item="in_progress"} 0
+kata_guest_diskstat{disk="pmem0p1",item="merged"} 0
+kata_guest_diskstat{disk="pmem0p1",item="reads"} 0
+kata_guest_diskstat{disk="pmem0p1",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="pmem0p1",item="sectors_read"} 0
+kata_guest_diskstat{disk="pmem0p1",item="sectors_written"} 0
+kata_guest_diskstat{disk="pmem0p1",item="time_discarding"} 0
+kata_guest_diskstat{disk="pmem0p1",item="time_flushing"} 0
+kata_guest_diskstat{disk="pmem0p1",item="time_in_progress"} 0
+kata_guest_diskstat{disk="pmem0p1",item="time_reading"} 0
+kata_guest_diskstat{disk="pmem0p1",item="time_writing"} 0
+kata_guest_diskstat{disk="pmem0p1",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="pmem0p1",item="writes"} 0
+kata_guest_diskstat{disk="pmem0p1",item="writes_merged"} 0
+kata_guest_diskstat{disk="pmem0p2",item="discards"} 0
+kata_guest_diskstat{disk="pmem0p2",item="discards_merged"} 0
+kata_guest_diskstat{disk="pmem0p2",item="flushes"} 0
+kata_guest_diskstat{disk="pmem0p2",item="in_progress"} 0
+kata_guest_diskstat{disk="pmem0p2",item="merged"} 0
+kata_guest_diskstat{disk="pmem0p2",item="reads"} 0
+kata_guest_diskstat{disk="pmem0p2",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="pmem0p2",item="sectors_read"} 0
+kata_guest_diskstat{disk="pmem0p2",item="sectors_written"} 0
+kata_guest_diskstat{disk="pmem0p2",item="time_discarding"} 0
+kata_guest_diskstat{disk="pmem0p2",item="time_flushing"} 0
+kata_guest_diskstat{disk="pmem0p2",item="time_in_progress"} 0
+kata_guest_diskstat{disk="pmem0p2",item="time_reading"} 0
+kata_guest_diskstat{disk="pmem0p2",item="time_writing"} 0
+kata_guest_diskstat{disk="pmem0p2",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="pmem0p2",item="writes"} 0
+kata_guest_diskstat{disk="pmem0p2",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram0",item="discards"} 0
+kata_guest_diskstat{disk="ram0",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram0",item="flushes"} 0
+kata_guest_diskstat{disk="ram0",item="in_progress"} 0
+kata_guest_diskstat{disk="ram0",item="merged"} 0
+kata_guest_diskstat{disk="ram0",item="reads"} 0
+kata_guest_diskstat{disk="ram0",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram0",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram0",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram0",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram0",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram0",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram0",item="time_reading"} 0
+kata_guest_diskstat{disk="ram0",item="time_writing"} 0
+kata_guest_diskstat{disk="ram0",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram0",item="writes"} 0
+kata_guest_diskstat{disk="ram0",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram1",item="discards"} 0
+kata_guest_diskstat{disk="ram1",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram1",item="flushes"} 0
+kata_guest_diskstat{disk="ram1",item="in_progress"} 0
+kata_guest_diskstat{disk="ram1",item="merged"} 0
+kata_guest_diskstat{disk="ram1",item="reads"} 0
+kata_guest_diskstat{disk="ram1",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram1",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram1",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram1",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram1",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram1",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram1",item="time_reading"} 0
+kata_guest_diskstat{disk="ram1",item="time_writing"} 0
+kata_guest_diskstat{disk="ram1",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram1",item="writes"} 0
+kata_guest_diskstat{disk="ram1",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram10",item="discards"} 0
+kata_guest_diskstat{disk="ram10",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram10",item="flushes"} 0
+kata_guest_diskstat{disk="ram10",item="in_progress"} 0
+kata_guest_diskstat{disk="ram10",item="merged"} 0
+kata_guest_diskstat{disk="ram10",item="reads"} 0
+kata_guest_diskstat{disk="ram10",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram10",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram10",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram10",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram10",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram10",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram10",item="time_reading"} 0
+kata_guest_diskstat{disk="ram10",item="time_writing"} 0
+kata_guest_diskstat{disk="ram10",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram10",item="writes"} 0
+kata_guest_diskstat{disk="ram10",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram11",item="discards"} 0
+kata_guest_diskstat{disk="ram11",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram11",item="flushes"} 0
+kata_guest_diskstat{disk="ram11",item="in_progress"} 0
+kata_guest_diskstat{disk="ram11",item="merged"} 0
+kata_guest_diskstat{disk="ram11",item="reads"} 0
+kata_guest_diskstat{disk="ram11",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram11",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram11",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram11",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram11",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram11",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram11",item="time_reading"} 0
+kata_guest_diskstat{disk="ram11",item="time_writing"} 0
+kata_guest_diskstat{disk="ram11",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram11",item="writes"} 0
+kata_guest_diskstat{disk="ram11",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram12",item="discards"} 0
+kata_guest_diskstat{disk="ram12",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram12",item="flushes"} 0
+kata_guest_diskstat{disk="ram12",item="in_progress"} 0
+kata_guest_diskstat{disk="ram12",item="merged"} 0
+kata_guest_diskstat{disk="ram12",item="reads"} 0
+kata_guest_diskstat{disk="ram12",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram12",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram12",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram12",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram12",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram12",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram12",item="time_reading"} 0
+kata_guest_diskstat{disk="ram12",item="time_writing"} 0
+kata_guest_diskstat{disk="ram12",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram12",item="writes"} 0
+kata_guest_diskstat{disk="ram12",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram13",item="discards"} 0
+kata_guest_diskstat{disk="ram13",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram13",item="flushes"} 0
+kata_guest_diskstat{disk="ram13",item="in_progress"} 0
+kata_guest_diskstat{disk="ram13",item="merged"} 0
+kata_guest_diskstat{disk="ram13",item="reads"} 0
+kata_guest_diskstat{disk="ram13",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram13",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram13",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram13",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram13",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram13",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram13",item="time_reading"} 0
+kata_guest_diskstat{disk="ram13",item="time_writing"} 0
+kata_guest_diskstat{disk="ram13",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram13",item="writes"} 0
+kata_guest_diskstat{disk="ram13",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram14",item="discards"} 0
+kata_guest_diskstat{disk="ram14",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram14",item="flushes"} 0
+kata_guest_diskstat{disk="ram14",item="in_progress"} 0
+kata_guest_diskstat{disk="ram14",item="merged"} 0
+kata_guest_diskstat{disk="ram14",item="reads"} 0
+kata_guest_diskstat{disk="ram14",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram14",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram14",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram14",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram14",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram14",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram14",item="time_reading"} 0
+kata_guest_diskstat{disk="ram14",item="time_writing"} 0
+kata_guest_diskstat{disk="ram14",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram14",item="writes"} 0
+kata_guest_diskstat{disk="ram14",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram15",item="discards"} 0
+kata_guest_diskstat{disk="ram15",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram15",item="flushes"} 0
+kata_guest_diskstat{disk="ram15",item="in_progress"} 0
+kata_guest_diskstat{disk="ram15",item="merged"} 0
+kata_guest_diskstat{disk="ram15",item="reads"} 0
+kata_guest_diskstat{disk="ram15",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram15",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram15",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram15",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram15",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram15",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram15",item="time_reading"} 0
+kata_guest_diskstat{disk="ram15",item="time_writing"} 0
+kata_guest_diskstat{disk="ram15",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram15",item="writes"} 0
+kata_guest_diskstat{disk="ram15",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram2",item="discards"} 0
+kata_guest_diskstat{disk="ram2",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram2",item="flushes"} 0
+kata_guest_diskstat{disk="ram2",item="in_progress"} 0
+kata_guest_diskstat{disk="ram2",item="merged"} 0
+kata_guest_diskstat{disk="ram2",item="reads"} 0
+kata_guest_diskstat{disk="ram2",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram2",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram2",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram2",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram2",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram2",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram2",item="time_reading"} 0
+kata_guest_diskstat{disk="ram2",item="time_writing"} 0
+kata_guest_diskstat{disk="ram2",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram2",item="writes"} 0
+kata_guest_diskstat{disk="ram2",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram3",item="discards"} 0
+kata_guest_diskstat{disk="ram3",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram3",item="flushes"} 0
+kata_guest_diskstat{disk="ram3",item="in_progress"} 0
+kata_guest_diskstat{disk="ram3",item="merged"} 0
+kata_guest_diskstat{disk="ram3",item="reads"} 0
+kata_guest_diskstat{disk="ram3",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram3",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram3",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram3",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram3",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram3",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram3",item="time_reading"} 0
+kata_guest_diskstat{disk="ram3",item="time_writing"} 0
+kata_guest_diskstat{disk="ram3",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram3",item="writes"} 0
+kata_guest_diskstat{disk="ram3",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram4",item="discards"} 0
+kata_guest_diskstat{disk="ram4",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram4",item="flushes"} 0
+kata_guest_diskstat{disk="ram4",item="in_progress"} 0
+kata_guest_diskstat{disk="ram4",item="merged"} 0
+kata_guest_diskstat{disk="ram4",item="reads"} 0
+kata_guest_diskstat{disk="ram4",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram4",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram4",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram4",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram4",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram4",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram4",item="time_reading"} 0
+kata_guest_diskstat{disk="ram4",item="time_writing"} 0
+kata_guest_diskstat{disk="ram4",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram4",item="writes"} 0
+kata_guest_diskstat{disk="ram4",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram5",item="discards"} 0
+kata_guest_diskstat{disk="ram5",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram5",item="flushes"} 0
+kata_guest_diskstat{disk="ram5",item="in_progress"} 0
+kata_guest_diskstat{disk="ram5",item="merged"} 0
+kata_guest_diskstat{disk="ram5",item="reads"} 0
+kata_guest_diskstat{disk="ram5",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram5",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram5",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram5",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram5",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram5",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram5",item="time_reading"} 0
+kata_guest_diskstat{disk="ram5",item="time_writing"} 0
+kata_guest_diskstat{disk="ram5",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram5",item="writes"} 0
+kata_guest_diskstat{disk="ram5",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram6",item="discards"} 0
+kata_guest_diskstat{disk="ram6",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram6",item="flushes"} 0
+kata_guest_diskstat{disk="ram6",item="in_progress"} 0
+kata_guest_diskstat{disk="ram6",item="merged"} 0
+kata_guest_diskstat{disk="ram6",item="reads"} 0
+kata_guest_diskstat{disk="ram6",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram6",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram6",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram6",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram6",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram6",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram6",item="time_reading"} 0
+kata_guest_diskstat{disk="ram6",item="time_writing"} 0
+kata_guest_diskstat{disk="ram6",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram6",item="writes"} 0
+kata_guest_diskstat{disk="ram6",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram7",item="discards"} 0
+kata_guest_diskstat{disk="ram7",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram7",item="flushes"} 0
+kata_guest_diskstat{disk="ram7",item="in_progress"} 0
+kata_guest_diskstat{disk="ram7",item="merged"} 0
+kata_guest_diskstat{disk="ram7",item="reads"} 0
+kata_guest_diskstat{disk="ram7",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram7",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram7",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram7",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram7",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram7",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram7",item="time_reading"} 0
+kata_guest_diskstat{disk="ram7",item="time_writing"} 0
+kata_guest_diskstat{disk="ram7",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram7",item="writes"} 0
+kata_guest_diskstat{disk="ram7",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram8",item="discards"} 0
+kata_guest_diskstat{disk="ram8",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram8",item="flushes"} 0
+kata_guest_diskstat{disk="ram8",item="in_progress"} 0
+kata_guest_diskstat{disk="ram8",item="merged"} 0
+kata_guest_diskstat{disk="ram8",item="reads"} 0
+kata_guest_diskstat{disk="ram8",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram8",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram8",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram8",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram8",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram8",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram8",item="time_reading"} 0
+kata_guest_diskstat{disk="ram8",item="time_writing"} 0
+kata_guest_diskstat{disk="ram8",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram8",item="writes"} 0
+kata_guest_diskstat{disk="ram8",item="writes_merged"} 0
+kata_guest_diskstat{disk="ram9",item="discards"} 0
+kata_guest_diskstat{disk="ram9",item="discards_merged"} 0
+kata_guest_diskstat{disk="ram9",item="flushes"} 0
+kata_guest_diskstat{disk="ram9",item="in_progress"} 0
+kata_guest_diskstat{disk="ram9",item="merged"} 0
+kata_guest_diskstat{disk="ram9",item="reads"} 0
+kata_guest_diskstat{disk="ram9",item="sectors_discarded"} 0
+kata_guest_diskstat{disk="ram9",item="sectors_read"} 0
+kata_guest_diskstat{disk="ram9",item="sectors_written"} 0
+kata_guest_diskstat{disk="ram9",item="time_discarding"} 0
+kata_guest_diskstat{disk="ram9",item="time_flushing"} 0
+kata_guest_diskstat{disk="ram9",item="time_in_progress"} 0
+kata_guest_diskstat{disk="ram9",item="time_reading"} 0
+kata_guest_diskstat{disk="ram9",item="time_writing"} 0
+kata_guest_diskstat{disk="ram9",item="weighted_time_in_progress"} 0
+kata_guest_diskstat{disk="ram9",item="writes"} 0
+kata_guest_diskstat{disk="ram9",item="writes_merged"} 0
+# HELP kata_agent_io_stat Agent process IO statistics.
+# TYPE kata_agent_io_stat gauge
+kata_agent_io_stat{item="cancelled_write_bytes"} 0
+kata_agent_io_stat{item="rchar"} 213042
+kata_agent_io_stat{item="read_bytes"} 4096
+kata_agent_io_stat{item="syscr"} 1141
+kata_agent_io_stat{item="syscw"} 24486
+kata_agent_io_stat{item="wchar"} 248097
+kata_agent_io_stat{item="write_bytes"} 0
+# HELP kata_agent_scrape_count Metrics scrape count
+# TYPE kata_agent_scrape_count counter
+kata_agent_scrape_count 1
+# HELP kata_guest_load Guest system load.
+# TYPE kata_guest_load gauge
+kata_guest_load{item="load1"} 0
+kata_guest_load{item="load15"} 0
+kata_guest_load{item="load5"} 0
+# HELP kata_agent_threads Agent process threads
+# TYPE kata_agent_threads gauge
+kata_agent_threads 6
+# HELP kata_guest_meminfo Statistics about memory usage in the system.
+# TYPE kata_guest_meminfo gauge
+kata_guest_meminfo{item="active"} 1.687552e+06
+kata_guest_meminfo{item="active_anon"} 45056
+kata_guest_meminfo{item="active_file"} 1.642496e+06
+kata_guest_meminfo{item="anon_hugepages"} 0
+kata_guest_meminfo{item="anon_pages"} 1.458176e+07
+kata_guest_meminfo{item="bounce"} 0
+kata_guest_meminfo{item="buffers"} 1.642496e+06
+kata_guest_meminfo{item="cached"} 5.423104e+06
+kata_guest_meminfo{item="cma_free"} 0
+kata_guest_meminfo{item="cma_total"} 0
+kata_guest_meminfo{item="commit_limit"} 3.51105024e+08
+kata_guest_meminfo{item="committed_as"} 1.3146112e+08
+kata_guest_meminfo{item="direct_map_1G"} 0
+kata_guest_meminfo{item="direct_map_2M"} 1.035993088e+09
+kata_guest_meminfo{item="direct_map_4M"} 0
+kata_guest_meminfo{item="direct_map_4k"} 3.7613568e+07
+kata_guest_meminfo{item="dirty"} 0
+kata_guest_meminfo{item="hardware_corrupted"} 0
+kata_guest_meminfo{item="high_free"} 0
+kata_guest_meminfo{item="high_total"} 0
+kata_guest_meminfo{item="hugepages_free"} 0
+kata_guest_meminfo{item="hugepages_rsvd"} 0
+kata_guest_meminfo{item="hugepages_surp"} 0
+kata_guest_meminfo{item="hugepages_total"} 0
+kata_guest_meminfo{item="hugepagesize"} 2.097152e+06
+kata_guest_meminfo{item="hugetlb"} 0
+kata_guest_meminfo{item="inactive"} 1.9869696e+07
+kata_guest_meminfo{item="inactive_anon"} 1.6023552e+07
+kata_guest_meminfo{item="inactive_file"} 3.846144e+06
+kata_guest_meminfo{item="k_reclaimable"} 2.78528e+06
+kata_guest_meminfo{item="kernel_stack"} 1.523712e+06
+kata_guest_meminfo{item="low_free"} 0
+kata_guest_meminfo{item="low_total"} 0
+kata_guest_meminfo{item="mapped"} 2.3924736e+07
+kata_guest_meminfo{item="mem_available"} 6.35305984e+08
+kata_guest_meminfo{item="mem_free"} 6.39942656e+08
+kata_guest_meminfo{item="mem_total"} 7.02210048e+08
+kata_guest_meminfo{item="mlocked"} 0
+kata_guest_meminfo{item="mmap_copy"} 0
+kata_guest_meminfo{item="nfs_unstable"} 0
+kata_guest_meminfo{item="page_tables"} 1.183744e+06
+kata_guest_meminfo{item="per_cpu"} 532480
+kata_guest_meminfo{item="quicklists"} 0
+kata_guest_meminfo{item="s_reclaimable"} 2.78528e+06
+kata_guest_meminfo{item="s_unreclaim"} 1.1055104e+07
+kata_guest_meminfo{item="shmem"} 1.568768e+06
+kata_guest_meminfo{item="shmem_hugepages"} 0
+kata_guest_meminfo{item="shmem_pmd_mapped"} 0
+kata_guest_meminfo{item="slab"} 1.3840384e+07
+kata_guest_meminfo{item="swap_cached"} 0
+kata_guest_meminfo{item="swap_free"} 0
+kata_guest_meminfo{item="swap_total"} 0
+kata_guest_meminfo{item="unevictable"} 0
+kata_guest_meminfo{item="vmalloc_chunk"} 0
+kata_guest_meminfo{item="vmalloc_total"} 3.5184372087808e+13
+kata_guest_meminfo{item="vmalloc_used"} 3.985408e+06
+kata_guest_meminfo{item="writeback"} 0
+kata_guest_meminfo{item="writeback_tmp"} 0
+# HELP kata_guest_vm_stat Guest virtual memory statistics.
+# TYPE kata_guest_vm_stat gauge
+kata_guest_vm_stat{item="allocstall_device"} 0
+kata_guest_vm_stat{item="allocstall_dma"} 0
+kata_guest_vm_stat{item="allocstall_dma32"} 0
+kata_guest_vm_stat{item="allocstall_movable"} 0
+kata_guest_vm_stat{item="allocstall_normal"} 0
+kata_guest_vm_stat{item="balloon_deflate"} 0
+kata_guest_vm_stat{item="balloon_inflate"} 0
+kata_guest_vm_stat{item="compact_daemon_free_scanned"} 0
+kata_guest_vm_stat{item="compact_daemon_migrate_scanned"} 0
+kata_guest_vm_stat{item="compact_daemon_wake"} 0
+kata_guest_vm_stat{item="compact_fail"} 0
+kata_guest_vm_stat{item="compact_free_scanned"} 0
+kata_guest_vm_stat{item="compact_isolated"} 0
+kata_guest_vm_stat{item="compact_migrate_scanned"} 0
+kata_guest_vm_stat{item="compact_stall"} 0
+kata_guest_vm_stat{item="compact_success"} 0
+kata_guest_vm_stat{item="direct_map_level2_collapses"} 0
+kata_guest_vm_stat{item="direct_map_level2_splits"} 7
+kata_guest_vm_stat{item="direct_map_level3_collapses"} 0
+kata_guest_vm_stat{item="direct_map_level3_splits"} 0
+kata_guest_vm_stat{item="drop_pagecache"} 0
+kata_guest_vm_stat{item="drop_slab"} 0
+kata_guest_vm_stat{item="htlb_buddy_alloc_fail"} 0
+kata_guest_vm_stat{item="htlb_buddy_alloc_success"} 0
+kata_guest_vm_stat{item="kswapd_high_wmark_hit_quickly"} 0
+kata_guest_vm_stat{item="kswapd_inodesteal"} 0
+kata_guest_vm_stat{item="kswapd_low_wmark_hit_quickly"} 0
+kata_guest_vm_stat{item="nr_active_anon"} 11
+kata_guest_vm_stat{item="nr_active_file"} 401
+kata_guest_vm_stat{item="nr_anon_pages"} 3534
+kata_guest_vm_stat{item="nr_anon_transparent_hugepages"} 0
+kata_guest_vm_stat{item="nr_balloon_pages"} 0
+kata_guest_vm_stat{item="nr_dirtied"} 0
+kata_guest_vm_stat{item="nr_dirty"} 0
+kata_guest_vm_stat{item="nr_dirty_background_threshold"} 15520
+kata_guest_vm_stat{item="nr_dirty_threshold"} 31079
+kata_guest_vm_stat{item="nr_file_hugepages"} 0
+kata_guest_vm_stat{item="nr_file_pages"} 1725
+kata_guest_vm_stat{item="nr_file_pmdmapped"} 0
+kata_guest_vm_stat{item="nr_foll_pin_acquired"} 0
+kata_guest_vm_stat{item="nr_foll_pin_released"} 0
+kata_guest_vm_stat{item="nr_free_cma"} 0
+kata_guest_vm_stat{item="nr_free_pages"} 156236
+kata_guest_vm_stat{item="nr_free_pages_blocks"} 154624
+kata_guest_vm_stat{item="nr_hugetlb"} 0
+kata_guest_vm_stat{item="nr_inactive_anon"} 3886
+kata_guest_vm_stat{item="nr_inactive_file"} 939
+kata_guest_vm_stat{item="nr_iommu_pages"} 0
+kata_guest_vm_stat{item="nr_isolated_anon"} 0
+kata_guest_vm_stat{item="nr_isolated_file"} 0
+kata_guest_vm_stat{item="nr_kernel_file_pages"} 0
+kata_guest_vm_stat{item="nr_kernel_misc_reclaimable"} 0
+kata_guest_vm_stat{item="nr_kernel_stack"} 1488
+kata_guest_vm_stat{item="nr_mapped"} 5828
+kata_guest_vm_stat{item="nr_memmap_boot_pages"} 2048
+kata_guest_vm_stat{item="nr_memmap_pages"} 2048
+kata_guest_vm_stat{item="nr_mlock"} 0
+kata_guest_vm_stat{item="nr_page_table_pages"} 289
+kata_guest_vm_stat{item="nr_sec_page_table_pages"} 0
+kata_guest_vm_stat{item="nr_shmem"} 383
+kata_guest_vm_stat{item="nr_shmem_hugepages"} 0
+kata_guest_vm_stat{item="nr_shmem_pmdmapped"} 0
+kata_guest_vm_stat{item="nr_slab_reclaimable"} 680
+kata_guest_vm_stat{item="nr_slab_unreclaimable"} 2699
+kata_guest_vm_stat{item="nr_swapcached"} 0
+kata_guest_vm_stat{item="nr_throttled_written"} 0
+kata_guest_vm_stat{item="nr_unaccepted"} 0
+kata_guest_vm_stat{item="nr_unevictable"} 0
+kata_guest_vm_stat{item="nr_unstable"} 0
+kata_guest_vm_stat{item="nr_vmscan_immediate_reclaim"} 0
+kata_guest_vm_stat{item="nr_vmscan_write"} 0
+kata_guest_vm_stat{item="nr_writeback"} 0
+kata_guest_vm_stat{item="nr_written"} 0
+kata_guest_vm_stat{item="nr_zone_active_anon"} 11
+kata_guest_vm_stat{item="nr_zone_active_file"} 401
+kata_guest_vm_stat{item="nr_zone_inactive_anon"} 3886
+kata_guest_vm_stat{item="nr_zone_inactive_file"} 939
+kata_guest_vm_stat{item="nr_zone_unevictable"} 0
+kata_guest_vm_stat{item="nr_zone_write_pending"} 0
+kata_guest_vm_stat{item="numa_foreign"} 0
+kata_guest_vm_stat{item="numa_hit"} 32324
+kata_guest_vm_stat{item="numa_interleave"} 1157
+kata_guest_vm_stat{item="numa_local"} 32324
+kata_guest_vm_stat{item="numa_miss"} 0
+kata_guest_vm_stat{item="numa_other"} 0
+kata_guest_vm_stat{item="oom_kill"} 0
+kata_guest_vm_stat{item="pageoutrun"} 0
+kata_guest_vm_stat{item="pgactivate"} 1495
+kata_guest_vm_stat{item="pgalloc_device"} 0
+kata_guest_vm_stat{item="pgalloc_dma"} 32
+kata_guest_vm_stat{item="pgalloc_dma32"} 33085
+kata_guest_vm_stat{item="pgalloc_movable"} 0
+kata_guest_vm_stat{item="pgalloc_normal"} 7575
+kata_guest_vm_stat{item="pgdeactivate"} 0
+kata_guest_vm_stat{item="pgdemote_direct"} 0
+kata_guest_vm_stat{item="pgdemote_khugepaged"} 0
+kata_guest_vm_stat{item="pgdemote_kswapd"} 0
+kata_guest_vm_stat{item="pgdemote_proactive"} 0
+kata_guest_vm_stat{item="pgfault"} 73748
+kata_guest_vm_stat{item="pgfree"} 199407
+kata_guest_vm_stat{item="pginodesteal"} 0
+kata_guest_vm_stat{item="pglazyfree"} 0
+kata_guest_vm_stat{item="pglazyfreed"} 0
+kata_guest_vm_stat{item="pgmajfault"} 213
+kata_guest_vm_stat{item="pgmigrate_fail"} 0
+kata_guest_vm_stat{item="pgmigrate_success"} 0
+kata_guest_vm_stat{item="pgpgin"} 1673
+kata_guest_vm_stat{item="pgpgout"} 0
+kata_guest_vm_stat{item="pgrefill"} 0
+kata_guest_vm_stat{item="pgreuse"} 738
+kata_guest_vm_stat{item="pgrotated"} 0
+kata_guest_vm_stat{item="pgscan_anon"} 0
+kata_guest_vm_stat{item="pgscan_direct"} 0
+kata_guest_vm_stat{item="pgscan_direct_throttle"} 0
+kata_guest_vm_stat{item="pgscan_file"} 0
+kata_guest_vm_stat{item="pgscan_khugepaged"} 0
+kata_guest_vm_stat{item="pgscan_kswapd"} 0
+kata_guest_vm_stat{item="pgscan_proactive"} 0
+kata_guest_vm_stat{item="pgskip_device"} 0
+kata_guest_vm_stat{item="pgskip_dma"} 0
+kata_guest_vm_stat{item="pgskip_dma32"} 0
+kata_guest_vm_stat{item="pgskip_movable"} 0
+kata_guest_vm_stat{item="pgskip_normal"} 0
+kata_guest_vm_stat{item="pgsteal_anon"} 0
+kata_guest_vm_stat{item="pgsteal_direct"} 0
+kata_guest_vm_stat{item="pgsteal_file"} 0
+kata_guest_vm_stat{item="pgsteal_khugepaged"} 0
+kata_guest_vm_stat{item="pgsteal_kswapd"} 0
+kata_guest_vm_stat{item="pgsteal_proactive"} 0
+kata_guest_vm_stat{item="pswpin"} 0
+kata_guest_vm_stat{item="pswpout"} 0
+kata_guest_vm_stat{item="slabs_scanned"} 0
+kata_guest_vm_stat{item="swap_ra"} 0
+kata_guest_vm_stat{item="swap_ra_hit"} 0
+kata_guest_vm_stat{item="swpin_zero"} 0
+kata_guest_vm_stat{item="swpout_zero"} 0
+kata_guest_vm_stat{item="thp_migration_fail"} 0
+kata_guest_vm_stat{item="thp_migration_split"} 0
+kata_guest_vm_stat{item="thp_migration_success"} 0
+kata_guest_vm_stat{item="unevictable_pgs_cleared"} 0
+kata_guest_vm_stat{item="unevictable_pgs_culled"} 0
+kata_guest_vm_stat{item="unevictable_pgs_mlocked"} 0
+kata_guest_vm_stat{item="unevictable_pgs_munlocked"} 0
+kata_guest_vm_stat{item="unevictable_pgs_rescued"} 0
+kata_guest_vm_stat{item="unevictable_pgs_scanned"} 0
+kata_guest_vm_stat{item="unevictable_pgs_stranded"} 0
+kata_guest_vm_stat{item="workingset_activate_anon"} 0
+kata_guest_vm_stat{item="workingset_activate_file"} 0
+kata_guest_vm_stat{item="workingset_nodereclaim"} 0
+kata_guest_vm_stat{item="workingset_nodes"} 0
+kata_guest_vm_stat{item="workingset_refault_anon"} 0
+kata_guest_vm_stat{item="workingset_refault_file"} 0
+kata_guest_vm_stat{item="workingset_restore_anon"} 0
+kata_guest_vm_stat{item="workingset_restore_file"} 0
+kata_guest_vm_stat{item="zone_reclaim_failed"} 0
+kata_guest_vm_stat{item="zone_reclaim_success"} 0
+# HELP kata_guest_tasks Guest system load.
+# TYPE kata_guest_tasks gauge
+kata_guest_tasks{item="cur"} 1
+kata_guest_tasks{item="max"} 92
+# HELP kata_agent_proc_stat Agent process statistics.
+# TYPE kata_agent_proc_stat gauge
+kata_agent_proc_stat{item="cstime"} 2
+kata_agent_proc_stat{item="cutime"} 0
+kata_agent_proc_stat{item="stime"} 7
+kata_agent_proc_stat{item="utime"} 6
+# HELP kata_guest_cpu_time Guest CPU statistics.
+# TYPE kata_guest_cpu_time gauge
+kata_guest_cpu_time{cpu="0",item="guest"} 0
+kata_guest_cpu_time{cpu="0",item="guest_nice"} 0
+kata_guest_cpu_time{cpu="0",item="idle"} 3650
+kata_guest_cpu_time{cpu="0",item="iowait"} 10
+kata_guest_cpu_time{cpu="0",item="irq"} 0
+kata_guest_cpu_time{cpu="0",item="nice"} 0
+kata_guest_cpu_time{cpu="0",item="softirq"} 30
+kata_guest_cpu_time{cpu="0",item="steal"} 0
+kata_guest_cpu_time{cpu="0",item="system"} 740
+kata_guest_cpu_time{cpu="0",item="user"} 2390
+kata_guest_cpu_time{cpu="1",item="guest"} 0
+kata_guest_cpu_time{cpu="1",item="guest_nice"} 0
+kata_guest_cpu_time{cpu="1",item="idle"} 4520
+kata_guest_cpu_time{cpu="1",item="iowait"} 30
+kata_guest_cpu_time{cpu="1",item="irq"} 0
+kata_guest_cpu_time{cpu="1",item="nice"} 0
+kata_guest_cpu_time{cpu="1",item="softirq"} 90
+kata_guest_cpu_time{cpu="1",item="steal"} 0
+kata_guest_cpu_time{cpu="1",item="system"} 80
+kata_guest_cpu_time{cpu="1",item="user"} 450
+kata_guest_cpu_time{cpu="total",item="guest"} 0
+kata_guest_cpu_time{cpu="total",item="guest_nice"} 0
+kata_guest_cpu_time{cpu="total",item="idle"} 8170
+kata_guest_cpu_time{cpu="total",item="iowait"} 40
+kata_guest_cpu_time{cpu="total",item="irq"} 0
+kata_guest_cpu_time{cpu="total",item="nice"} 0
+kata_guest_cpu_time{cpu="total",item="softirq"} 120
+kata_guest_cpu_time{cpu="total",item="steal"} 0
+kata_guest_cpu_time{cpu="total",item="system"} 820
+kata_guest_cpu_time{cpu="total",item="user"} 2850

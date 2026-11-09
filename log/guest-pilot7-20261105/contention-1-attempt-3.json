@@ -1,0 +1,123 @@
+{
+  "domain": "guest",
+  "podUid": "45a8a664-4e40-4bc8-8e5d-baa0bd172569",
+  "sandboxId": "f5c58ea04f30c5f859829996efe7ee29d8383626954c81cee61a9d2b36df1a3b",
+  "namespace": "kno-guest-test",
+  "podName": "kno-guest",
+  "kernelRelease": "6.18.56",
+  "bootId": "1b02d42c-a6bc-4e00-9065-cd4ba94d22d0",
+  "instanceId": "8022dea6b138c0493ec26815a15eca06",
+  "requestId": "33663e8535f5afbd57c2260b00215653",
+  "startedAt": "2026-11-05T10:03:23.200349543Z",
+  "durationSeconds": 5.643371048,
+  "totalItems": 1,
+  "processes": [
+    {
+      "namespacePid": 292,
+      "pid": 521,
+      "cgroupId": 1414,
+      "startTimeTicks": 6964,
+      "command": "guest-burn",
+      "cpu": {
+        "runtimeNs": 6176236940,
+        "percent": 120.1747491043099,
+        "windowSeconds": 5.139379933
+      },
+      "runqlat": {
+        "count": 37635,
+        "averageUs": 1081.6015939683805,
+        "p50Us": 1023,
+        "p95Us": 4095,
+        "p99Us": 16383,
+        "maxUs": 65535,
+        "buckets": [
+          {
+            "lowerUs": 1,
+            "upperUs": 1,
+            "count": 199
+          },
+          {
+            "lowerUs": 2,
+            "upperUs": 3,
+            "count": 635
+          },
+          {
+            "lowerUs": 4,
+            "upperUs": 7,
+            "count": 1189
+          },
+          {
+            "lowerUs": 8,
+            "upperUs": 15,
+            "count": 6135
+          },
+          {
+            "lowerUs": 16,
+            "upperUs": 31,
+            "count": 2680
+          },
+          {
+            "lowerUs": 32,
+            "upperUs": 63,
+            "count": 1310
+          },
+          {
+            "lowerUs": 64,
+            "upperUs": 127,
+            "count": 893
+          },
+          {
+            "lowerUs": 128,
+            "upperUs": 255,
+            "count": 706
+          },
+          {
+            "lowerUs": 256,
+            "upperUs": 511,
+            "count": 572
+          },
+          {
+            "lowerUs": 512,
+            "upperUs": 1023,
+            "count": 10488
+          },
+          {
+            "lowerUs": 1024,
+            "upperUs": 2047,
+            "count": 9794
+          },
+          {
+            "lowerUs": 2048,
+            "upperUs": 4095,
+            "count": 1380
+          },
+          {
+            "lowerUs": 4096,
+            "upperUs": 8191,
+            "count": 923
+          },
+          {
+            "lowerUs": 8192,
+            "upperUs": 16383,
+            "count": 526
+          },
+          {
+            "lowerUs": 16384,
+            "upperUs": 32767,
+            "count": 196
+          },
+          {
+            "lowerUs": 32768,
+            "upperUs": 65535,
+            "count": 9
+          }
+        ]
+      },
+      "runqlatCoverage": {
+        "observedThreads": 18,
+        "totalThreads": 18
+      },
+      "partial": false
+    }
+  ]
+}

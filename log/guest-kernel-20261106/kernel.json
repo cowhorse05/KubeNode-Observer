@@ -1,0 +1,17 @@
+=== RUN   TestCPURuntimeRetentionKernel
+    cpu_linux_test.go:78: capacity=8192 children=128 retained=128 runtime=89825290ns wait4_CPU=89761000ns ratio=1.0007
+    cpu_linux_test.go:78: capacity=16 children=128 retained=7 runtime=4931068ns wait4_CPU=86203000ns ratio=0.0572
+--- PASS: TestCPURuntimeRetentionKernel (1.18s)
+=== RUN   TestCPUBatchSnapshotKernel
+--- PASS: TestCPUBatchSnapshotKernel (0.31s)
+=== RUN   TestCPUNamespaceAliasKernel
+    cpu_linux_test.go:161: kernel PID=463 namespace PID=263 runtime=2740279ns
+--- PASS: TestCPUNamespaceAliasKernel (0.22s)
+=== RUN   TestCPURuntimeCommand
+--- PASS: TestCPURuntimeCommand (0.00s)
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+=== RUN   TestRunQLatTaskIdentityKernel
+    runqlat_linux_test.go:46: namespace PID=264 kernel PID=464 TGID=464 cgroup=1347 matched existing scheduler identity
+--- PASS: TestRunQLatTaskIdentityKernel (0.37s)
+PASS

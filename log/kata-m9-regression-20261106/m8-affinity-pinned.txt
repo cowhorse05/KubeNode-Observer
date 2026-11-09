@@ -1,0 +1,14 @@
+pid 446314's current affinity list: 0-11
+pid 446314's new affinity list: 0
+pid 446317's current affinity list: 0-11
+pid 446317's new affinity list: 0
+pid 446326's current affinity list: 0-11
+pid 446326's new affinity list: 0
+pid 446327's current affinity list: 0-11
+pid 446327's new affinity list: 0
+pid 446328's current affinity list: 0-11
+pid 446328's new affinity list: 0
+pid 446344's current affinity list: 0-11
+pid 446344's new affinity list: 0
+pid 446492's current affinity list: 0-11
+pid 446492's new affinity list: 0

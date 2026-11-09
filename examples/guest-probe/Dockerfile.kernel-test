@@ -1,0 +1,6 @@
+FROM scratch
+COPY bin/kno-probe.test /probe-test
+COPY bin/kno-kernel-child /bin/true
+COPY bin/kno-kernel-child /bin/sleep
+COPY examples/guest-probe/kernel-child.S /tmp/.fixture
+ENTRYPOINT ["/probe-test"]

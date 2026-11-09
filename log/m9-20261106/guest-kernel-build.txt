@@ -1,0 +1,49 @@
+CGO_ENABLED=0 go test -c -o bin/kno-probe.test ./internal/probe
+cc -nostdlib -static -o bin/kno-kernel-child examples/guest-probe/kernel-child.S
+docker build -f examples/guest-probe/Dockerfile.kernel-test -t kubenode-observer/guest-kernel-test:dev .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.kernel-test
+#1 transferring dockerfile: 255B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 95B 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load build context
+#3 transferring context: 5.69MB 0.2s done
+#3 DONE 0.2s
+
+#4 [1/4] COPY bin/kno-probe.test /probe-test
+#4 DONE 0.0s
+
+#5 [2/4] COPY bin/kno-kernel-child /bin/true
+#5 DONE 0.1s
+
+#6 [3/4] COPY bin/kno-kernel-child /bin/sleep
+#6 DONE 0.0s
+
+#7 [4/4] COPY examples/guest-probe/kernel-child.S /tmp/.fixture
+#7 DONE 0.0s
+
+#8 exporting to image
+#8 exporting layers
+#8 exporting layers 0.4s done
+#8 exporting manifest sha256:4197f772701bf7b8cd6f02c107e0ea5d798bed08935672e30cdd970255b7d87d 0.0s done
+#8 exporting config sha256:383a39e1c8479b05ed35d9f7aa928d84c5d7efd021b401739977d0079c47c7db 0.0s done
+#8 exporting attestation manifest sha256:56df26c90fcf6364b8c671b519a711e6584b1a137eaefc098f7e92246473e61e 0.0s done
+#8 exporting manifest list sha256:3012a829d0d65b754341311e52bfe6da1435fb67d0de7c86484bb7313c48cc36 0.0s done
+#8 naming to docker.io/kubenode-observer/guest-kernel-test:dev
+#8 naming to docker.io/kubenode-observer/guest-kernel-test:dev done
+#8 unpacking to docker.io/kubenode-observer/guest-kernel-test:dev 0.1s done
+#8 DONE 0.6s
+minikube -p kno-dev image load --overwrite=true kubenode-observer/guest-kernel-test:dev
+KUBE_CONTEXT=kno-dev GUEST_CHECK_MODE=kernel bash hack/guest-check.sh
+configmap/kno-experiment-lock created
+namespace/kno-guest-test created
+pod/kno-guest-check created
+pod "kno-guest-check" deleted from kno-guest-test namespace
+Guest kernel checks passed.
+namespace "kno-guest-test" deleted
+configmap "kno-experiment-lock" deleted from kube-system namespace

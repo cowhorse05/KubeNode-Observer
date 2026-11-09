@@ -1,0 +1,20 @@
+go: downloading github.com/cilium/ebpf v0.17.3
+go: downloading golang.org/x/sys v0.30.0
+=== RUN   TestCPURuntimeRetentionKernel
+    cpu_linux_test.go:78: capacity=8192 children=128 retained=128 runtime=76846036ns wait4_CPU=76781000ns ratio=1.0008
+    cpu_linux_test.go:78: capacity=16 children=128 retained=3 runtime=1521373ns wait4_CPU=72448000ns ratio=0.0210
+--- PASS: TestCPURuntimeRetentionKernel (0.36s)
+=== RUN   TestCPUBatchSnapshotKernel
+--- PASS: TestCPUBatchSnapshotKernel (0.05s)
+=== RUN   TestCPUNamespaceAliasKernel
+    cpu_linux_test.go:161: kernel PID=2710274 namespace PID=2702084 runtime=977695ns
+--- PASS: TestCPUNamespaceAliasKernel (0.21s)
+=== RUN   TestCPURuntimeCommand
+--- PASS: TestCPURuntimeCommand (0.00s)
+=== RUN   TestMapStatsKernel
+--- PASS: TestMapStatsKernel (0.00s)
+=== RUN   TestRunQLatTaskIdentityKernel
+    runqlat_linux_test.go:46: namespace PID=2702087 kernel PID=2710277 TGID=2710277 cgroup=21 matched existing scheduler identity
+--- PASS: TestRunQLatTaskIdentityKernel (0.23s)
+PASS
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	0.866s

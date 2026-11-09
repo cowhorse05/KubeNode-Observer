@@ -1,0 +1,12 @@
+Forwarding from 127.0.0.1:44779 -> 18080
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779
+Handling connection for 44779

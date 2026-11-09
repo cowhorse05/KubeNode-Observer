@@ -1,0 +1,47 @@
+==================
+WARNING: DATA RACE
+Read at 0x00c0003020e8 by goroutine 134:
+  github.com/cowhorse05/KubeNode-Observer/internal/guest.TestRelayRealHTTPAndFailureShapes.func1()
+      /mnt/d/Users/li.yufeng/Desktop/code/KubeNode-Observer/internal/guest/relay_test.go:136 +0x695
+  testing.tRunner()
+      /usr/lib/go-1.22/src/testing/testing.go:1689 +0x21e
+  testing.(*T).Run.gowrap1()
+      /usr/lib/go-1.22/src/testing/testing.go:1742 +0x44
+
+Previous write at 0x00c0003020e8 by goroutine 140:
+  github.com/cowhorse05/KubeNode-Observer/internal/guest.TestRelayRealHTTPAndFailureShapes.func1.1()
+      /mnt/d/Users/li.yufeng/Desktop/code/KubeNode-Observer/internal/guest/relay_test.go:75 +0xae
+  net/http.HandlerFunc.ServeHTTP()
+      /usr/lib/go-1.22/src/net/http/server.go:2191 +0x47
+  net/http.serverHandler.ServeHTTP()
+      /usr/lib/go-1.22/src/net/http/server.go:3162 +0x2a1
+  net/http.(*conn).serve()
+      /usr/lib/go-1.22/src/net/http/server.go:2064 +0x13c4
+  net/http.(*Server).Serve.gowrap3()
+      /usr/lib/go-1.22/src/net/http/server.go:3310 +0x4f
+
+Goroutine 134 (running) created at:
+  testing.(*T).Run()
+      /usr/lib/go-1.22/src/testing/testing.go:1742 +0x825
+  github.com/cowhorse05/KubeNode-Observer/internal/guest.TestRelayRealHTTPAndFailureShapes()
+      /mnt/d/Users/li.yufeng/Desktop/code/KubeNode-Observer/internal/guest/relay_test.go:70 +0x6c
+  testing.tRunner()
+      /usr/lib/go-1.22/src/testing/testing.go:1689 +0x21e
+  testing.(*T).Run.gowrap1()
+      /usr/lib/go-1.22/src/testing/testing.go:1742 +0x44
+
+Goroutine 140 (running) created at:
+  net/http.(*Server).Serve()
+      /usr/lib/go-1.22/src/net/http/server.go:3310 +0x8ec
+  net/http/httptest.(*Server).goServe.func1()
+      /usr/lib/go-1.22/src/net/http/httptest/server.go:310 +0xbb
+==================
+--- FAIL: TestRelayRealHTTPAndFailureShapes (0.39s)
+    --- FAIL: TestRelayRealHTTPAndFailureShapes/timeout (0.21s)
+        testing.go:1398: race detected during execution of test
+FAIL
+FAIL	github.com/cowhorse05/KubeNode-Observer/internal/guest	0.741s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	2.136s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/host	1.289s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/probe	1.017s
+FAIL

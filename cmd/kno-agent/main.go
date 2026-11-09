@@ -20,6 +20,7 @@ import (
 	"github.com/cowhorse05/KubeNode-Observer/internal/agent"
 	"github.com/cowhorse05/KubeNode-Observer/internal/cpu"
 	eventstore "github.com/cowhorse05/KubeNode-Observer/internal/event"
+	"github.com/cowhorse05/KubeNode-Observer/internal/guest"
 	"github.com/cowhorse05/KubeNode-Observer/internal/host"
 	"github.com/cowhorse05/KubeNode-Observer/internal/metrics"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
@@ -33,6 +34,7 @@ func main() {
 	debugAddress := flag.String("debug-listen", "", "opt-in loopback-only diagnostics and pprof address (e.g. 127.0.0.1:18090)")
 	runtimeEndpoint := flag.String("runtime-endpoint", "unix:///run/containerd/containerd.sock", "CRI runtime endpoint")
 	kataMonitorEndpoint := flag.String("kata-monitor", "", "optional local Kata Monitor http://127.0.0.1:8090 endpoint")
+	guestProbePort := flag.Int("guest-probe-port", 0, "opt-in fixed Pod-network Guest Probe port; 0 disables relay")
 	hostProc := flag.String("host-proc", "/host/proc", "host procfs mount")
 	cgroupRoot := flag.String("cgroup-root", "/host/sys/fs/cgroup", "host cgroup v2 mount")
 	topologyInterval := flag.Duration("topology-interval", 10*time.Second, "topology refresh interval")
@@ -107,6 +109,11 @@ func main() {
 	topologyCollector := topology.NewCollector(*nodeName, criClient, topology.NewProcFS(*hostProc, *cgroupRoot), resolver)
 	topologyCollector.Timing = timing
 	topologyStore := topology.NewStore(topologyCollector)
+	guestRelay, err := guest.NewRelay(topologyStore, resolver, *guestProbePort)
+	if err != nil {
+		logger.Error("invalid Guest relay configuration", "error", err)
+		os.Exit(2)
+	}
 	kataMonitor, err := topology.NewKataMonitor(*kataMonitorEndpoint, topologyStore)
 	if err != nil {
 		logger.Error("invalid Kata Monitor endpoint", "error", err)
@@ -153,6 +160,7 @@ func main() {
 	handler.Handle("/api/v1/cpu/accuracy", cpu.NewAccuracyHandler(cpu.TimedSource{Source: cpuProbe, Recorder: timing, Operation: telemetry.AccuracyScan}, topologyStore, *cgroupRoot))
 	handler.Handle("/api/v1/runqlat", runQLatHandler)
 	handler.Handle("/api/v1/host/resources", host.NewHandler(topologyStore, cpuProbe, runQLatProbe, host.NewProcReader(*hostProc, *cgroupRoot)))
+	handler.Handle(guest.Path, guestRelay)
 	server := &http.Server{
 		Addr:              *listenAddress,
 		Handler:           handler,

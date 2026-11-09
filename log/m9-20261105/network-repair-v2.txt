@@ -1,0 +1,49 @@
+configmap/kno-experiment-lock created
+192.168.49.2    control-plane.minikube.internal
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1001 ms: Timeout was reached
+curl: (28) Failed to connect to 10.96.0.1 port 443 after 1000 ms: Timeout was reached
+Service VIP still unavailable; hosts backup retained, inspect kube-proxy.
+configmap "kno-experiment-lock" deleted from kube-system namespace

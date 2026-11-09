@@ -1,0 +1,31 @@
+{
+  "defaultRuntime": "runc",
+  "runtimes": {
+    "kata-qemu": {
+      "runtimeType": "io.containerd.kata.v2",
+      "options": {
+        "ConfigPath": "/opt/kata/share/defaults/kata-containers/configuration-kno-qemu.toml"
+      }
+    },
+    "kata-qemu-guest": {
+      "runtimeType": "io.containerd.kata.v2",
+      "options": {
+        "ConfigPath": "/opt/kata/share/defaults/kata-containers/configuration-kno-guest.toml"
+      }
+    },
+    "runc": {
+      "runtimeType": "io.containerd.runc.v2",
+      "options": {
+        "BinaryName": "",
+        "CriuImagePath": "",
+        "CriuWorkPath": "",
+        "IoGid": 0,
+        "IoUid": 0,
+        "NoNewKeyring": false,
+        "Root": "",
+        "ShimCgroup": "",
+        "SystemdCgroup": true
+      }
+    }
+  }
+}

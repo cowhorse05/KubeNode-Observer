@@ -1,0 +1,596 @@
+{
+  "domain": "host",
+  "roleSource": "qemu-thread-name",
+  "startedAt": "2026-11-06T03:41:45.004324946Z",
+  "durationSeconds": 5.30065918,
+  "totalItems": 3,
+  "items": [
+    {
+      "kind": "runc-container",
+      "namespace": "kno-kata-test",
+      "podName": "kno-host-contention",
+      "podUid": "eb3c85cd-ace8-4b2f-871f-d2666cb8a78b",
+      "sandboxId": "65a8221f01d21c70e2ac5cf06e958bf2ab9d7752e64a263838764fc615479b30",
+      "containerId": "b131d7c86b64ec18383583566f1f6c446f661b7726ea34655b10c8acf3e9cd82",
+      "cpu": {
+        "accounting": "cgroup",
+        "runtimeNs": 4527671158,
+        "percent": 86.96120694407152,
+        "windowSeconds": 5.206541304
+      },
+      "memory": {
+        "bytes": 1011712,
+        "source": "cgroup-memory.current"
+      },
+      "io": null,
+      "threads": [],
+      "vcpuRunqlat": null,
+      "partial": false
+    },
+    {
+      "kind": "kata-sandbox",
+      "namespace": "kno-kata-test",
+      "podName": "kno-boundary-kata",
+      "podUid": "e62bc8b6-002c-4f27-a1b0-364b055529d9",
+      "sandboxId": "a3ba665440489ffb0fa5e665bec58b24e82f659a91b479233da92746066bb53d",
+      "pid": 446314,
+      "cpu": {
+        "accounting": "vmm-threads",
+        "runtimeNs": 676020109,
+        "percent": 12.985698470627598,
+        "windowSeconds": 5.205881767
+      },
+      "memory": {
+        "bytes": 273305600,
+        "source": "proc-status-rss"
+      },
+      "io": {
+        "readBytes": 0,
+        "writeBytes": 0,
+        "readChars": 272,
+        "writeChars": 456
+      },
+      "threads": [
+        {
+          "tid": 446314,
+          "kernelTid": 2723325,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403457,
+          "cgroupId": 5589425,
+          "command": "qemu-system-x86",
+          "role": "vmm-main",
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 823131,
+            "percent": 0.015811557711852275,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 6,
+            "averageUs": 7908.6115,
+            "p50Us": 4095,
+            "p95Us": 32767,
+            "p99Us": 32767,
+            "maxUs": 32767,
+            "buckets": [
+              {
+                "lowerUs": 4,
+                "upperUs": 7,
+                "count": 1
+              },
+              {
+                "lowerUs": 512,
+                "upperUs": 1023,
+                "count": 1
+              },
+              {
+                "lowerUs": 2048,
+                "upperUs": 4095,
+                "count": 1
+              },
+              {
+                "lowerUs": 8192,
+                "upperUs": 16383,
+                "count": 2
+              },
+              {
+                "lowerUs": 16384,
+                "upperUs": 32767,
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "tid": 446317,
+          "kernelTid": 2723328,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403457,
+          "cgroupId": 5589425,
+          "command": "call_rcu",
+          "role": "other",
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 0,
+            "percent": 0,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 0,
+            "averageUs": 0,
+            "p50Us": 0,
+            "p95Us": 0,
+            "p99Us": 0,
+            "maxUs": 0
+          }
+        },
+        {
+          "tid": 446326,
+          "kernelTid": 2723339,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403458,
+          "cgroupId": 5589425,
+          "command": "vhost-2723325",
+          "role": "other",
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 79637,
+            "percent": 0.0015297504546649071,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 2,
+            "averageUs": 8056.786,
+            "p50Us": 7,
+            "p95Us": 16383,
+            "p99Us": 16383,
+            "maxUs": 16383,
+            "buckets": [
+              {
+                "lowerUs": 4,
+                "upperUs": 7,
+                "count": 1
+              },
+              {
+                "lowerUs": 8192,
+                "upperUs": 16383,
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "tid": 446327,
+          "kernelTid": 2723340,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403458,
+          "cgroupId": 5589425,
+          "command": "IO mon_iothread",
+          "role": "other",
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 431577,
+            "percent": 0.00829018059410722,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 4,
+            "averageUs": 3288.594,
+            "p50Us": 15,
+            "p95Us": 16383,
+            "p99Us": 16383,
+            "maxUs": 16383,
+            "buckets": [
+              {
+                "lowerUs": 8,
+                "upperUs": 15,
+                "count": 2
+              },
+              {
+                "lowerUs": 2048,
+                "upperUs": 4095,
+                "count": 1
+              },
+              {
+                "lowerUs": 8192,
+                "upperUs": 16383,
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "tid": 446328,
+          "kernelTid": 2723341,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403458,
+          "cgroupId": 5589425,
+          "command": "CPU 0/KVM",
+          "role": "vcpu",
+          "vcpuIndex": 0,
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 229626548,
+            "percent": 4.410905938271571,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 769,
+            "averageUs": 4079.9933706111833,
+            "p50Us": 63,
+            "p95Us": 32767,
+            "p99Us": 32767,
+            "maxUs": 65535,
+            "buckets": [
+              {
+                "lowerUs": 2,
+                "upperUs": 3,
+                "count": 50
+              },
+              {
+                "lowerUs": 4,
+                "upperUs": 7,
+                "count": 138
+              },
+              {
+                "lowerUs": 8,
+                "upperUs": 15,
+                "count": 165
+              },
+              {
+                "lowerUs": 16,
+                "upperUs": 31,
+                "count": 28
+              },
+              {
+                "lowerUs": 32,
+                "upperUs": 63,
+                "count": 13
+              },
+              {
+                "lowerUs": 64,
+                "upperUs": 127,
+                "count": 12
+              },
+              {
+                "lowerUs": 128,
+                "upperUs": 255,
+                "count": 4
+              },
+              {
+                "lowerUs": 256,
+                "upperUs": 511,
+                "count": 2
+              },
+              {
+                "lowerUs": 512,
+                "upperUs": 1023,
+                "count": 10
+              },
+              {
+                "lowerUs": 1024,
+                "upperUs": 2047,
+                "count": 33
+              },
+              {
+                "lowerUs": 2048,
+                "upperUs": 4095,
+                "count": 126
+              },
+              {
+                "lowerUs": 4096,
+                "upperUs": 8191,
+                "count": 58
+              },
+              {
+                "lowerUs": 8192,
+                "upperUs": 16383,
+                "count": 64
+              },
+              {
+                "lowerUs": 16384,
+                "upperUs": 32767,
+                "count": 61
+              },
+              {
+                "lowerUs": 32768,
+                "upperUs": 65535,
+                "count": 5
+              }
+            ]
+          }
+        },
+        {
+          "tid": 446344,
+          "kernelTid": 2723361,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403462,
+          "cgroupId": 5589425,
+          "command": "vhost-2723325",
+          "role": "other",
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 1732424,
+            "percent": 0.03327820487552767,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 27,
+            "averageUs": 4057.118814814815,
+            "p50Us": 2047,
+            "p95Us": 32767,
+            "p99Us": 32767,
+            "maxUs": 32767,
+            "buckets": [
+              {
+                "lowerUs": 4,
+                "upperUs": 7,
+                "count": 4
+              },
+              {
+                "lowerUs": 8,
+                "upperUs": 15,
+                "count": 3
+              },
+              {
+                "lowerUs": 16,
+                "upperUs": 31,
+                "count": 3
+              },
+              {
+                "lowerUs": 32,
+                "upperUs": 63,
+                "count": 1
+              },
+              {
+                "lowerUs": 64,
+                "upperUs": 127,
+                "count": 1
+              },
+              {
+                "lowerUs": 128,
+                "upperUs": 255,
+                "count": 1
+              },
+              {
+                "lowerUs": 1024,
+                "upperUs": 2047,
+                "count": 5
+              },
+              {
+                "lowerUs": 2048,
+                "upperUs": 4095,
+                "count": 3
+              },
+              {
+                "lowerUs": 4096,
+                "upperUs": 8191,
+                "count": 2
+              },
+              {
+                "lowerUs": 8192,
+                "upperUs": 16383,
+                "count": 2
+              },
+              {
+                "lowerUs": 16384,
+                "upperUs": 32767,
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "tid": 446492,
+          "kernelTid": 2723524,
+          "kernelTgid": 2723325,
+          "startTimeTicks": 26403655,
+          "cgroupId": 5589425,
+          "command": "CPU 1/KVM",
+          "role": "vcpu",
+          "vcpuIndex": 1,
+          "cpu": {
+            "accounting": "vmm-threads",
+            "runtimeNs": 443326792,
+            "percent": 8.515882838719875,
+            "windowSeconds": 5.205881767
+          },
+          "runqlat": {
+            "count": 416,
+            "averageUs": 7083.723584134615,
+            "p50Us": 4095,
+            "p95Us": 32767,
+            "p99Us": 32767,
+            "maxUs": 65535,
+            "buckets": [
+              {
+                "lowerUs": 2,
+                "upperUs": 3,
+                "count": 7
+              },
+              {
+                "lowerUs": 4,
+                "upperUs": 7,
+                "count": 25
+              },
+              {
+                "lowerUs": 8,
+                "upperUs": 15,
+                "count": 26
+              },
+              {
+                "lowerUs": 16,
+                "upperUs": 31,
+                "count": 35
+              },
+              {
+                "lowerUs": 32,
+                "upperUs": 63,
+                "count": 33
+              },
+              {
+                "lowerUs": 64,
+                "upperUs": 127,
+                "count": 26
+              },
+              {
+                "lowerUs": 128,
+                "upperUs": 255,
+                "count": 6
+              },
+              {
+                "lowerUs": 256,
+                "upperUs": 511,
+                "count": 4
+              },
+              {
+                "lowerUs": 512,
+                "upperUs": 1023,
+                "count": 4
+              },
+              {
+                "lowerUs": 1024,
+                "upperUs": 2047,
+                "count": 13
+              },
+              {
+                "lowerUs": 2048,
+                "upperUs": 4095,
+                "count": 50
+              },
+              {
+                "lowerUs": 4096,
+                "upperUs": 8191,
+                "count": 44
+              },
+              {
+                "lowerUs": 8192,
+                "upperUs": 16383,
+                "count": 77
+              },
+              {
+                "lowerUs": 16384,
+                "upperUs": 32767,
+                "count": 64
+              },
+              {
+                "lowerUs": 32768,
+                "upperUs": 65535,
+                "count": 2
+              }
+            ]
+          }
+        }
+      ],
+      "vcpuRunqlat": {
+        "count": 1185,
+        "averageUs": 5134.467437130801,
+        "p50Us": 2047,
+        "p95Us": 32767,
+        "p99Us": 32767,
+        "maxUs": 65535,
+        "buckets": [
+          {
+            "lowerUs": 2,
+            "upperUs": 3,
+            "count": 57
+          },
+          {
+            "lowerUs": 4,
+            "upperUs": 7,
+            "count": 163
+          },
+          {
+            "lowerUs": 8,
+            "upperUs": 15,
+            "count": 191
+          },
+          {
+            "lowerUs": 16,
+            "upperUs": 31,
+            "count": 63
+          },
+          {
+            "lowerUs": 32,
+            "upperUs": 63,
+            "count": 46
+          },
+          {
+            "lowerUs": 64,
+            "upperUs": 127,
+            "count": 38
+          },
+          {
+            "lowerUs": 128,
+            "upperUs": 255,
+            "count": 10
+          },
+          {
+            "lowerUs": 256,
+            "upperUs": 511,
+            "count": 6
+          },
+          {
+            "lowerUs": 512,
+            "upperUs": 1023,
+            "count": 14
+          },
+          {
+            "lowerUs": 1024,
+            "upperUs": 2047,
+            "count": 46
+          },
+          {
+            "lowerUs": 2048,
+            "upperUs": 4095,
+            "count": 176
+          },
+          {
+            "lowerUs": 4096,
+            "upperUs": 8191,
+            "count": 102
+          },
+          {
+            "lowerUs": 8192,
+            "upperUs": 16383,
+            "count": 141
+          },
+          {
+            "lowerUs": 16384,
+            "upperUs": 32767,
+            "count": 125
+          },
+          {
+            "lowerUs": 32768,
+            "upperUs": 65535,
+            "count": 7
+          }
+        ]
+      },
+      "partial": false
+    },
+    {
+      "kind": "runc-container",
+      "namespace": "kno-kata-test",
+      "podName": "kno-boundary-runc",
+      "podUid": "82abf75c-089e-436c-9aea-010652dc4074",
+      "sandboxId": "165fd2516b41968c1e36126eea845ed0420225e4209ba23e195d605af209ca90",
+      "containerId": "999e406e2adb3509c64e379c91b7832296d9e2f8f300e67106d6c06be7e4bf54",
+      "cpu": {
+        "accounting": "cgroup",
+        "runtimeNs": 23361195,
+        "percent": 0.4486893243707186,
+        "windowSeconds": 5.206541304
+      },
+      "memory": {
+        "bytes": 5238784,
+        "source": "cgroup-memory.current"
+      },
+      "io": null,
+      "threads": [],
+      "vcpuRunqlat": null,
+      "partial": false
+    }
+  ]
+}
+

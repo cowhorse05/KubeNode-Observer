@@ -1,0 +1,22 @@
+=== RUN   TestRelayPostmanSimulation
+=== RUN   TestRelayPostmanSimulation/valid
+=== RUN   TestRelayPostmanSimulation/busy
+=== RUN   TestRelayPostmanSimulation/json-error
+=== RUN   TestRelayPostmanSimulation/html-error
+=== RUN   TestRelayPostmanSimulation/identity
+=== RUN   TestRelayPostmanSimulation/nonce
+=== RUN   TestRelayPostmanSimulation/oversize
+=== RUN   TestRelayPostmanSimulation/redirect
+=== RUN   TestRelayPostmanSimulation/timeout
+--- PASS: TestRelayPostmanSimulation (5.31s)
+    --- PASS: TestRelayPostmanSimulation/valid (0.07s)
+    --- PASS: TestRelayPostmanSimulation/busy (0.01s)
+    --- PASS: TestRelayPostmanSimulation/json-error (0.01s)
+    --- PASS: TestRelayPostmanSimulation/html-error (0.01s)
+    --- PASS: TestRelayPostmanSimulation/identity (0.01s)
+    --- PASS: TestRelayPostmanSimulation/nonce (0.01s)
+    --- PASS: TestRelayPostmanSimulation/oversize (0.08s)
+    --- PASS: TestRelayPostmanSimulation/redirect (0.01s)
+    --- PASS: TestRelayPostmanSimulation/timeout (5.10s)
+PASS
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	5.333s
