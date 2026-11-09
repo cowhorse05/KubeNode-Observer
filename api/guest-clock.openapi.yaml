@@ -1,0 +1,129 @@
+openapi: 3.1.0
+info:
+  title: KubeNode-Observer experimental clock calibration (M10a)
+  version: 0.3.0-experimental
+  description: >-
+    Read-only user-space CLOCK_MONOTONIC exchanges, NOT NTP clock discipline,
+    cryptographic attestation, BPF event alignment or causal attribution.
+    Same opt-in fixed-port, verified Sandbox routing as Guest resources.
+    No TLS/auth; trusted development only. Never sets any system clock.
+paths:
+  /api/v1/guest/clock:
+    get:
+      operationId: calibrateGuestClock
+      description: >-
+        Node requires full sandbox ID; samples defaults 7 (3..15), sequential,
+        20ms pacing, each request <=1s and total budget <=5s. Shares the Guest
+        resources relay single-operation gate. Does not retry/discard bad
+        exchanges: whole burst fails. Direct Probe accepts NO query and returns
+        one ClockReply; optional fresh X-Kno-Request-ID is echoed (not auth).
+        Node generates a new nonce for every exchange, checks Pod/VMM identity
+        throughout and boot/time-namespace/Probe-instance continuity.
+        h1 before HTTP call, g2 in handler, g3 before JSON encode/write, h4 after
+        bounded body read before decode. Host/Guest timestamps are NOT wall time.
+        Offset is Guest minus Host. Per exchange [g3-h4, g2-h1], conditional on
+        constant offset during THAT exchange and nonnegative path delays.
+        Midpoint is not exact; no symmetric-path assumption or future validity
+        is guaranteed. Selected sample is first with smallest residual width,
+        NOT an intersection/average across changing clocks. All samples retained.
+        Time namespace unavailable is explicit; no BPF ktime mapping is inferred.
+      parameters:
+        - {name: sandbox, in: query, description: Node only, mandatory there, rejected by Probe., schema: {type: string, pattern: '^[0-9a-f]{64}$'}}
+        - {name: samples, in: query, description: Node only., schema: {type: integer, minimum: 3, maximum: 15, default: 7}}
+        - {name: X-Kno-Request-ID, in: header, description: Probe only; Node always generates its own., schema: {type: string, pattern: '^[0-9a-f]{32}$'}}
+      responses:
+        '200':
+          description: Calibration at Node, ClockReply at direct Probe. Cache-Control no-store. NS fields are decimal STRINGS, not JavaScript Number.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - {$ref: '#/components/schemas/Calibration'}
+                  - {$ref: '#/components/schemas/ClockReply'}
+        '400':
+          description: Invalid, repeated, unknown or malformed query/nonce.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Error'}
+              example: {code: invalid_query, message: samples must be 3..15}
+        '404':
+          description: Current Sandbox absent on Node.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+        '405':
+          description: GET only; Allow GET.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+        '409':
+          description: Identity/clock generation changed, backwards or incompatible clock sample.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+        '429':
+          description: Another Guest operation active or Probe busy; Retry-After 1.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+        '502':
+          description: Bad upstream status/content, invalid/trailing/unknown JSON fields, missing timestamps or body >8KiB.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+        '503':
+          description: Relay disabled, unready topology, not opted in, invalid target or clock read failure.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+        '504':
+          description: Bounded exchange/burst timeout.
+          content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}
+components:
+  schemas:
+    Ns:
+      type: string
+      pattern: '^-?(0|[1-9][0-9]*)$'
+      description: Signed int64 decimal ns; strings preserve integer precision. Raw timestamps must be positive.
+    Identity:
+      type: object
+      additionalProperties: false
+      required: [bootId, timeNamespace]
+      properties:
+        bootId: {type: string, format: uuid}
+        timeNamespace: {type: string, pattern: '^(time:\[[0-9]+\]|unavailable)$'}
+    ClockReply:
+      type: object
+      additionalProperties: false
+      required: [domain, clock, podUid, instanceId, requestId, identity, receivedNs, sentNs]
+      properties:
+        domain: {const: guest}
+        clock: {const: CLOCK_MONOTONIC}
+        podUid: {type: string, minLength: 1}
+        instanceId: {type: string, pattern: '^[0-9a-f]{32}$'}
+        requestId: {type: string, pattern: '^[0-9a-f]{32}$'}
+        identity: {$ref: '#/components/schemas/Identity'}
+        receivedNs: {$ref: '#/components/schemas/Ns'}
+        sentNs: {$ref: '#/components/schemas/Ns'}
+    Sample:
+      type: object
+      additionalProperties: false
+      required: [requestId, hostSendNs, guestReceiveNs, guestSendNs, hostReceiveNs, offsetLowerNs, offsetUpperNs, offsetMidpointNs]
+      properties:
+        requestId: {type: string, pattern: '^[0-9a-f]{32}$'}
+        hostSendNs: {$ref: '#/components/schemas/Ns'}
+        guestReceiveNs: {$ref: '#/components/schemas/Ns'}
+        guestSendNs: {$ref: '#/components/schemas/Ns'}
+        hostReceiveNs: {$ref: '#/components/schemas/Ns'}
+        offsetLowerNs: {$ref: '#/components/schemas/Ns'}
+        offsetUpperNs: {$ref: '#/components/schemas/Ns'}
+        offsetMidpointNs: {$ref: '#/components/schemas/Ns'}
+    Calibration:
+      type: object
+      additionalProperties: false
+      required: [clock, scope, sandboxId, podUid, host, guest, probeInstanceId, samples, selectedSample]
+      properties:
+        clock: {const: CLOCK_MONOTONIC}
+        scope: {const: exchange-only}
+        sandboxId: {type: string, pattern: '^[0-9a-f]{64}$'}
+        podUid: {type: string, minLength: 1}
+        host: {$ref: '#/components/schemas/Identity'}
+        guest: {$ref: '#/components/schemas/Identity'}
+        probeInstanceId: {type: string, pattern: '^[0-9a-f]{32}$'}
+        samples: {type: array, minItems: 3, maxItems: 15, items: {$ref: '#/components/schemas/Sample'}}
+        selectedSample: {type: integer, minimum: 0, maximum: 14}
+    Error:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code: {type: string, enum: [invalid_query, method_not_allowed, measurement_busy, guest_unavailable, clock_unavailable]}
+        message: {type: string, minLength: 1}

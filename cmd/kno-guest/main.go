@@ -102,6 +102,7 @@ func main() {
 	handler := &guest.Handler{Identity: guest.Response{PodUID: *podUID, KernelRelease: strings.TrimSpace(result["kernelRelease"].(string)), BootID: strings.TrimSpace(result["bootId"].(string)), InstanceID: instance}, CPU: cpu, Latency: latency, Proc: guest.ProcFS{Root: "/proc"}, Scheduler: latency}
 	mux := http.NewServeMux()
 	mux.Handle(guest.Path, handler)
+	mux.Handle(guest.ClockPath, &guest.ClockHandler{PodUID: *podUID, InstanceID: instance, Source: guest.LinuxClock{}})
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		_ = json.NewEncoder(w).Encode(map[string]interface{}{"ready": true, "domain": "guest", "podUid": *podUID, "instanceId": instance})

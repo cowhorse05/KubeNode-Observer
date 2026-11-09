@@ -391,6 +391,7 @@ func main() {
 	guestResources.Flags().IntVar(&guestLimit, "limit", 20, "maximum processes (1..100)")
 	_ = guestResources.MarkFlagRequired("sandbox")
 	guestCommand.AddCommand(guestResources)
+	guestCommand.AddCommand(newClockCommand(&endpoint))
 	root.AddCommand(guestCommand)
 	if err := root.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
