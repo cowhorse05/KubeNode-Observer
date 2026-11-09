@@ -1,0 +1,52 @@
+=== RUN   TestClockPostmanSimulation
+=== RUN   TestClockPostmanSimulation/valid
+=== RUN   TestClockPostmanSimulation/identity
+=== RUN   TestClockPostmanSimulation/nonce
+=== RUN   TestClockPostmanSimulation/busy
+=== RUN   TestClockPostmanSimulation/html-error
+=== RUN   TestClockPostmanSimulation/json-error
+=== RUN   TestClockPostmanSimulation/oversize
+=== RUN   TestClockPostmanSimulation/redirect
+=== RUN   TestClockPostmanSimulation/timeout
+--- PASS: TestClockPostmanSimulation (1.17s)
+    --- PASS: TestClockPostmanSimulation/valid (0.10s)
+    --- PASS: TestClockPostmanSimulation/identity (0.01s)
+    --- PASS: TestClockPostmanSimulation/nonce (0.01s)
+    --- PASS: TestClockPostmanSimulation/busy (0.01s)
+    --- PASS: TestClockPostmanSimulation/html-error (0.01s)
+    --- PASS: TestClockPostmanSimulation/json-error (0.01s)
+    --- PASS: TestClockPostmanSimulation/oversize (0.01s)
+    --- PASS: TestClockPostmanSimulation/redirect (0.01s)
+    --- PASS: TestClockPostmanSimulation/timeout (1.00s)
+=== RUN   TestRelayPostmanSimulation
+=== RUN   TestRelayPostmanSimulation/valid
+=== RUN   TestRelayPostmanSimulation/busy
+=== RUN   TestRelayPostmanSimulation/json-error
+=== RUN   TestRelayPostmanSimulation/html-error
+=== RUN   TestRelayPostmanSimulation/identity
+=== RUN   TestRelayPostmanSimulation/nonce
+=== RUN   TestRelayPostmanSimulation/oversize
+=== RUN   TestRelayPostmanSimulation/redirect
+=== RUN   TestRelayPostmanSimulation/timeout
+--- PASS: TestRelayPostmanSimulation (5.21s)
+    --- PASS: TestRelayPostmanSimulation/valid (0.01s)
+    --- PASS: TestRelayPostmanSimulation/busy (0.01s)
+    --- PASS: TestRelayPostmanSimulation/json-error (0.01s)
+    --- PASS: TestRelayPostmanSimulation/html-error (0.01s)
+    --- PASS: TestRelayPostmanSimulation/identity (0.01s)
+    --- PASS: TestRelayPostmanSimulation/nonce (0.01s)
+    --- PASS: TestRelayPostmanSimulation/oversize (0.05s)
+    --- PASS: TestRelayPostmanSimulation/redirect (0.01s)
+    --- PASS: TestRelayPostmanSimulation/timeout (5.10s)
+=== RUN   TestTimingPostmanSimulation
+=== RUN   TestTimingPostmanSimulation/valid
+=== RUN   TestTimingPostmanSimulation/timing-missing
+=== RUN   TestTimingPostmanSimulation/timing-order
+=== RUN   TestTimingPostmanSimulation/timing-boot
+--- PASS: TestTimingPostmanSimulation (0.03s)
+    --- PASS: TestTimingPostmanSimulation/valid (0.01s)
+    --- PASS: TestTimingPostmanSimulation/timing-missing (0.01s)
+    --- PASS: TestTimingPostmanSimulation/timing-order (0.01s)
+    --- PASS: TestTimingPostmanSimulation/timing-boot (0.01s)
+PASS
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	6.428s

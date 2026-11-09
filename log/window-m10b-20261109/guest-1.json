@@ -1,0 +1,60 @@
+{
+  "domain": "guest",
+  "podUid": "4c4012fd-7712-4748-ac02-2ff4983ee679",
+  "sandboxId": "845d965aab3f899bc2cb055450a9e6d4a92aba637e12e9556dcf5914a169f428",
+  "namespace": "kno-window-test",
+  "podName": "kno-guest",
+  "kernelRelease": "6.18.56",
+  "bootId": "2cc7d14e-6877-4797-9e34-817450df2918",
+  "instanceId": "a9b9982029c7c27914a188f23ff45f24",
+  "requestId": "65248429c39dbf50abe141969bc666df",
+  "startedAt": "2026-11-09T09:23:47.002534188Z",
+  "durationSeconds": 2.007414957,
+  "totalItems": 1,
+  "processes": [
+    {
+      "namespacePid": 26,
+      "startTimeTicks": 443,
+      "command": "guest-burn",
+      "cpu": null,
+      "runqlat": null,
+      "runqlatCoverage": {
+        "observedThreads": 0,
+        "totalThreads": 10
+      },
+      "partial": true,
+      "issues": [
+        "thread set changed: before=10 after=11",
+        "process CPU unavailable: incomplete stable thread set/counters",
+        "process runqlat unavailable: incomplete endpoints/thread set"
+      ]
+    }
+  ],
+  "timing": {
+    "clock": "CLOCK_MONOTONIC",
+    "identity": {
+      "bootId": "2cc7d14e-6877-4797-9e34-817450df2918",
+      "timeNamespace": "unavailable"
+    },
+    "start": {
+      "cpu": {
+        "beforeNs": "5398686385",
+        "afterNs": "5398936671"
+      },
+      "runqlat": {
+        "beforeNs": "5398937390",
+        "afterNs": "5399772708"
+      }
+    },
+    "end": {
+      "cpu": {
+        "beforeNs": "7400153160",
+        "afterNs": "7400687171"
+      },
+      "runqlat": {
+        "beforeNs": "7400687839",
+        "afterNs": "7401378479"
+      }
+    }
+  }
+}

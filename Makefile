@@ -15,6 +15,9 @@ GUEST_IMAGE ?= kubenode-observer/guest-probe:dev
 GUEST_AGENT_IMAGE ?= kubenode-observer/kno-agent:guest
 CLOCK_AGENT_IMAGE ?= kubenode-observer/kno-agent:clock
 CLOCK_GUEST_IMAGE ?= kubenode-observer/guest-probe:clock
+WINDOW_AGENT_IMAGE ?= kubenode-observer/kno-agent:window
+WINDOW_GUEST_IMAGE ?= kubenode-observer/guest-probe:window
+CLOCKCHECK_IMAGE ?= kubenode-observer/clockcheck:dev
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
@@ -180,5 +183,21 @@ m10-clock-test: workload-image contention-image
 	docker build -f examples/guest-probe/Dockerfile.workload -t kubenode-observer/guest-workload:dev .
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CLOCK_GUEST_IMAGE) $(CLOCK_AGENT_IMAGE) kubenode-observer/guest-workload:dev
 	KUBE_CONTEXT=$(MINIKUBE_PROFILE) CLOCK_AGENT_IMAGE=$(CLOCK_AGENT_IMAGE) CLOCK_GUEST_IMAGE=$(CLOCK_GUEST_IMAGE) bash hack/clock-test.sh
+
+.PHONY: clockcheck-image clockdomain-test m10-window-test
+clockcheck-image:
+	$(GO_BUILD_ENV) go build $(GO_BUILD_FLAGS) -o $(BINARY_DIR)/kno-clockcheck ./cmd/kno-clockcheck
+	docker build -f examples/guest-probe/Dockerfile.clockcheck -t $(CLOCKCHECK_IMAGE) .
+
+clockdomain-test: clockcheck-image
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CLOCKCHECK_IMAGE)
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) CLOCKCHECK_IMAGE=$(CLOCKCHECK_IMAGE) bash hack/clockdomain-test.sh
+
+m10-window-test: workload-image contention-image
+	$(MAKE) guest-image GUEST_IMAGE=$(WINDOW_GUEST_IMAGE)
+	$(MAKE) image-local IMAGE=$(WINDOW_AGENT_IMAGE)
+	docker build -f examples/guest-probe/Dockerfile.workload -t kubenode-observer/guest-workload:dev .
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(WINDOW_GUEST_IMAGE) $(WINDOW_AGENT_IMAGE) kubenode-observer/guest-workload:dev
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) WINDOW_AGENT_IMAGE=$(WINDOW_AGENT_IMAGE) WINDOW_GUEST_IMAGE=$(WINDOW_GUEST_IMAGE) bash hack/window-test.sh
 
 

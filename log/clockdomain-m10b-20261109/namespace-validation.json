@@ -1,0 +1,25 @@
+{
+  "result": "passed",
+  "samples": 5,
+  "identity": {
+    "bootId": "6af980d8-e07f-4db1-9ff1-d16d0e4f855d",
+    "timeNamespace": "time:[4026532404]"
+  },
+  "expectedUserMinusBpfNs": "2000000000",
+  "allBracketsContainZero": false,
+  "maxKernelReadBracketNs": "111061",
+  "userMinusBpfEnvelopeNs": [
+    "1999950828",
+    "2000061889"
+  ],
+  "monoElapsedNs": "401655010",
+  "rawElapsedBracketNs": [
+    "402717838",
+    "402718833"
+  ],
+  "observedEndpointMonoVsRawRatePpm": [
+    -2641.6023111588624,
+    -2639.138125289598
+  ],
+  "scope": "observed-endpoints-only; not a Host/Guest mapping or future drift bound"
+}

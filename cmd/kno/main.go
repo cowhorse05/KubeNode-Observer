@@ -252,8 +252,12 @@ func main() {
 	}
 	root.AddCommand(top)
 	var hostDuration time.Duration
+	var hostTiming bool
 	workloads := &cobra.Command{Use: "workloads", Short: "Measure Host runc-container and Kata VMM resources (not Guest CPU)", RunE: func(_ *cobra.Command, _ []string) error {
 		query := url.Values{"duration": {hostDuration.String()}, "limit": {strconv.Itoa(topLimit)}}
+		if hostTiming {
+			query.Set("timing", "true")
+		}
 		if topNamespace != "" {
 			query.Set("namespace", topNamespace)
 		}
@@ -289,6 +293,7 @@ func main() {
 		return nil
 	}}
 	workloads.Flags().DurationVar(&hostDuration, "duration", 5*time.Second, "Host measurement window (100ms..30s)")
+	workloads.Flags().BoolVar(&hostTiming, "timing", false, "include native snapshot read brackets (not cross-layer alignment)")
 	top.AddCommand(workloads)
 
 	var traceNamespace string
@@ -348,12 +353,16 @@ func main() {
 	var guestSandbox, guestComm string
 	var guestDuration time.Duration
 	var guestLimit int
+	var guestTiming bool
 	guestCommand := &cobra.Command{Use: "guest", Short: "Query Guest processes, separate from Host resources"}
 	guestResources := &cobra.Command{Use: "resources", Short: "Measure processes through the opt-in Node Guest relay", RunE: func(_ *cobra.Command, _ []string) error {
 		if guestDuration < 100*time.Millisecond || guestDuration > 10*time.Second {
 			return fmt.Errorf("duration must be 100ms..10s")
 		}
 		query := url.Values{"sandbox": {guestSandbox}, "duration": {guestDuration.String()}, "limit": {strconv.Itoa(guestLimit)}}
+		if guestTiming {
+			query.Set("timing", "true")
+		}
 		if guestComm != "" {
 			query.Set("comm", guestComm)
 		}
@@ -389,6 +398,7 @@ func main() {
 	guestResources.Flags().StringVar(&guestComm, "comm", "", "exact Guest process comm filter")
 	guestResources.Flags().DurationVar(&guestDuration, "duration", 5*time.Second, "Guest window (100ms..10s)")
 	guestResources.Flags().IntVar(&guestLimit, "limit", 20, "maximum processes (1..100)")
+	guestResources.Flags().BoolVar(&guestTiming, "timing", false, "include native snapshot read brackets (not cross-layer alignment)")
 	_ = guestResources.MarkFlagRequired("sandbox")
 	guestCommand.AddCommand(guestResources)
 	guestCommand.AddCommand(newClockCommand(&endpoint))

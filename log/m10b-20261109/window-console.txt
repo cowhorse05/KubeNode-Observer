@@ -1,0 +1,18 @@
+configmap/kno-experiment-lock created
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+namespace/kno-window-test created
+pod/kno-guest created
+pod/kno-guest condition met
+Traceback (most recent call last):
+  File "/mnt/d/Users/li.yufeng/Desktop/code/KubeNode-Observer/hack/validate-window-contract.py", line 8, in <module>
+    from referencing import Registry, Resource
+ModuleNotFoundError: No module named 'referencing'
+namespace "kno-window-test" deleted
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+configmap "kno-experiment-lock" deleted from kube-system namespace

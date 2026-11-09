@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/cowhorse05/KubeNode-Observer/internal/clockdomain"
 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
 )
 
@@ -41,24 +42,26 @@ type Coverage struct {
 	TotalThreads    int `json:"totalThreads"`
 }
 type Response struct {
-	Domain          string    `json:"domain"`
-	PodUID          string    `json:"podUid"`
-	SandboxID       string    `json:"sandboxId,omitempty"`
-	Namespace       string    `json:"namespace,omitempty"`
-	PodName         string    `json:"podName,omitempty"`
-	KernelRelease   string    `json:"kernelRelease"`
-	BootID          string    `json:"bootId"`
-	InstanceID      string    `json:"instanceId"`
-	RequestID       string    `json:"requestId"`
-	StartedAt       time.Time `json:"startedAt"`
-	DurationSeconds float64   `json:"durationSeconds"`
-	TotalItems      int       `json:"totalItems"`
-	Processes       []Process `json:"processes"`
+	Domain          string              `json:"domain"`
+	PodUID          string              `json:"podUid"`
+	SandboxID       string              `json:"sandboxId,omitempty"`
+	Namespace       string              `json:"namespace,omitempty"`
+	PodName         string              `json:"podName,omitempty"`
+	KernelRelease   string              `json:"kernelRelease"`
+	BootID          string              `json:"bootId"`
+	InstanceID      string              `json:"instanceId"`
+	RequestID       string              `json:"requestId"`
+	StartedAt       time.Time           `json:"startedAt"`
+	DurationSeconds float64             `json:"durationSeconds"`
+	TotalItems      int                 `json:"totalItems"`
+	Processes       []Process           `json:"processes"`
+	Timing          *clockdomain.Window `json:"timing,omitempty"`
 }
 type query struct {
 	duration      time.Duration
 	limit         int
 	comm, sandbox string
+	timing        bool
 }
 
 func parse(r *http.Request, relay bool) (query, error) {
@@ -92,6 +95,11 @@ func parse(r *http.Request, relay bool) (query, error) {
 				return q, fmt.Errorf("sandbox is assigned only by the Node relay")
 			}
 			q.sandbox = v[0]
+		case "timing":
+			if v[0] != "true" && v[0] != "false" {
+				return q, fmt.Errorf("timing must be true or false")
+			}
+			q.timing = v[0] == "true"
 		default:
 			return q, fmt.Errorf("unknown query parameter: %s", key)
 		}

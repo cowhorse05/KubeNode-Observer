@@ -1,0 +1,77 @@
+{
+  "result": "passed",
+  "resourceResponsesValidated": 9,
+  "calibrationsValidated": 6,
+  "rounds": [
+    {
+      "round": 1,
+      "host": {
+        "readBracketWidthsNs": [
+          "758351",
+          "100933730",
+          "686110",
+          "10789754"
+        ],
+        "cpuReadInteriorNs": "2101564881",
+        "runqlatReadInteriorNs": "2001317288"
+      },
+      "guest": {
+        "readBracketWidthsNs": [
+          "3290871",
+          "1551953",
+          "15391883",
+          "39537234"
+        ],
+        "cpuReadInteriorNs": "2003414081",
+        "runqlatReadInteriorNs": "2017261767"
+      }
+    },
+    {
+      "round": 2,
+      "host": {
+        "readBracketWidthsNs": [
+          "921330",
+          "92875833",
+          "515550",
+          "11534744"
+        ],
+        "cpuReadInteriorNs": "2093395786",
+        "runqlatReadInteriorNs": "2001034482"
+      },
+      "guest": {
+        "readBracketWidthsNs": [
+          "1265492",
+          "8997407",
+          "691202",
+          "2043947"
+        ],
+        "cpuReadInteriorNs": "2009526911",
+        "runqlatReadInteriorNs": "2001215904"
+      }
+    },
+    {
+      "round": 3,
+      "host": {
+        "readBracketWidthsNs": [
+          "399378",
+          "16968162",
+          "676465",
+          "10293876"
+        ],
+        "cpuReadInteriorNs": "2017209817",
+        "runqlatReadInteriorNs": "2000919464"
+      },
+      "guest": {
+        "readBracketWidthsNs": [
+          "839037",
+          "2323946",
+          "1005588",
+          "2693758"
+        ],
+        "cpuReadInteriorNs": "2003409898",
+        "runqlatReadInteriorNs": "2002091913"
+      }
+    }
+  ],
+  "crossDomainOverlap": "not calculated; rate model still required"
+}

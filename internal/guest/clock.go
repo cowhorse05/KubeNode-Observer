@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
+
+	"github.com/cowhorse05/KubeNode-Observer/internal/clockdomain"
 )
 
 const ClockPath = "/api/v1/guest/clock"
@@ -16,10 +18,7 @@ type ClockSource interface {
 	Identity() (ClockIdentity, error)
 }
 
-type ClockIdentity struct {
-	BootID        string `json:"bootId"`
-	TimeNamespace string `json:"timeNamespace"`
-}
+type ClockIdentity = clockdomain.Identity
 
 type ClockReply struct {
 	Domain     string        `json:"domain"`

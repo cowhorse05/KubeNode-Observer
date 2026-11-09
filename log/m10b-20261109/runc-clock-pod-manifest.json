@@ -1,0 +1,36 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "clockcheck-runc",
+    "namespace": "kno-clockdomain-test"
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "restartPolicy": "Never",
+    "containers": [
+      {
+        "name": "check",
+        "image": "kubenode-observer/clockcheck:dev",
+        "imagePullPolicy": "Never",
+        "args": [
+          "--samples=50",
+          "--interval=100ms"
+        ],
+        "securityContext": {
+          "privileged": true
+        },
+        "resources": {
+          "requests": {
+            "cpu": "100m",
+            "memory": "32Mi"
+          },
+          "limits": {
+            "cpu": "500m",
+            "memory": "128Mi"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -29,6 +29,8 @@ M9 的 `kno guest resources --sandbox <完整 ID> --duration=5s` / `/api/v1/gues
 
 2026-11-09：M10a 增加 `kno guest clock --sandbox <完整 ID> --samples=7`，通过四时间戳返回 **Guest−Host 单次往返的条件偏移区间**，保留所有样本而非只给一个精确 offset。纳秒用字符串传输；不调系统时钟、不宣称 BPF 事件或资源窗口已经同步。方法与边界见 [时钟校准指南](docs/clock-calibration.md)。M10 仍在开发，完成本地开发和版本冻结后才到 tdk 做正式实验。
 
+M10b 增加独立 `kno-clockcheck`（私有 BPF TEST_RUN，无 attach/pin）核对时钟域，并支持两个资源查询的 `--timing` / `timing=true`，记录实际 CPU/runqlat 快照前后括号。默认无新增字段，不改变统计口径；读取括号还不是跨域窗口映射。复现和边界见 [窗口指南](docs/window-timing.md)。
+
 ## 一键 Demo
 
 在满足 Linux BTF、cgroup v2、Docker、kubectl 和 Minikube 前置条件后：

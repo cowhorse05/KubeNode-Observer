@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Opt-in userspace CLOCK_MONOTONIC brackets around actual non-atomic CPU/runqlat Snapshot calls. No cross-domain alignment or event timestamps.",
+  "type": "object",
+  "required": ["clock", "identity", "start", "end"],
+  "properties": {
+    "clock": {"const": "CLOCK_MONOTONIC"},
+    "identity": {
+      "type": "object",
+      "required": ["bootId", "timeNamespace"],
+      "properties": {
+        "bootId": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+        "timeNamespace": {"type": "string", "pattern": "^(time:\\[[0-9]+\\]|unavailable)$"}
+      }
+    },
+    "start": {"$ref": "#/$defs/snapshots"},
+    "end": {"$ref": "#/$defs/snapshots"}
+  },
+  "$defs": {
+    "span": {
+      "type": "object",
+      "required": ["beforeNs", "afterNs"],
+      "properties": {
+        "beforeNs": {"type": "string", "pattern": "^[1-9][0-9]*$"},
+        "afterNs": {"type": "string", "pattern": "^[1-9][0-9]*$"}
+      }
+    },
+    "snapshots": {
+      "type": "object",
+      "required": ["cpu", "runqlat"],
+      "properties": {"cpu": {"$ref": "#/$defs/span"}, "runqlat": {"$ref": "#/$defs/span"}}
+    }
+  }
+}

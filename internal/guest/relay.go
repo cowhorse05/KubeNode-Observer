@@ -98,6 +98,9 @@ func (h *Relay) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if q.comm != "" {
 		qv.Set("comm", q.comm)
 	}
+	if q.timing {
+		qv.Set("timing", "true")
+	}
 	ctx, cancel := context.WithTimeout(r.Context(), q.duration+5*time.Second)
 	defer cancel()
 	request, err := http.NewRequestWithContext(ctx, "GET", "http://"+net.JoinHostPort(t.ip, strconv.Itoa(h.port))+Path+"?"+qv.Encode(), nil)
@@ -169,6 +172,14 @@ func (h *Relay) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	writeResponse(w, sample)
 }
 func validate(s Response, q query) error {
+	if q.timing != (s.Timing != nil) {
+		return fmt.Errorf("Guest timing missing or unsolicited")
+	}
+	if s.Timing != nil {
+		if err := s.Timing.Validate(); err != nil || s.Timing.Identity.BootID != s.BootID {
+			return fmt.Errorf("Guest timing invalid or boot identity contradicted")
+		}
+	}
 	if strings.TrimSpace(s.KernelRelease) == "" || len(s.KernelRelease) > 128 || len(s.BootID) != 36 || s.BootID[8] != '-' || s.BootID[13] != '-' || s.BootID[18] != '-' || s.BootID[23] != '-' || !hexID(strings.ReplaceAll(s.BootID, "-", ""), 32) || !hexID(s.InstanceID, 32) || s.StartedAt.IsZero() || s.DurationSeconds < q.duration.Seconds() || math.IsNaN(s.DurationSeconds) || math.IsInf(s.DurationSeconds, 0) || s.DurationSeconds > q.duration.Seconds()+5 || s.TotalItems < len(s.Processes) || s.TotalItems > 256 || s.Processes == nil || len(s.Processes) > q.limit {
 		return fmt.Errorf("Guest envelope violates the bounded response contract")
 	}

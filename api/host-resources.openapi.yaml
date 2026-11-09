@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: KubeNode-Observer Host resource windows
-  version: 0.2.0-experimental
+  version: 0.3.0-experimental
   description: >-
     Read-only on-demand Host measurements. Kata VM rows and runc container rows
     share a view, never a Guest CPU accounting domain. No authentication; trusted
@@ -25,6 +25,16 @@ paths:
         - {name: sandbox, in: query, schema: {type: string, pattern: '^[0-9a-f]{64}$'}}
         - {name: kind, in: query, schema: {type: string, enum: [all, kata, runc], default: all}}
         - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 100, default: 20}}
+        - name: timing
+          in: query
+          description: >-
+            Literal true/false only; default false omits timing. True adds native
+            CLOCK_MONOTONIC brackets around the four CPU/runqlat Snapshot calls.
+            Stable boot/time namespace required or 503. Empty selection returns
+            immediately without timing because no map snapshots were read.
+            Brackets are non-atomic read bounds, not BPF event times, per-row
+            measurement validity, procfs IO brackets, or a Guest clock mapping.
+          schema: {type: boolean, default: false}
       responses:
         '200':
           description: >-
@@ -145,5 +155,6 @@ components:
         roleSource: {type: string, const: qemu-thread-name}
         startedAt: {type: string, format: date-time}
         durationSeconds: {type: number, minimum: 0}
+        timing: {$ref: './window-timing.schema.json'}
         totalItems: {type: integer, minimum: 0, maximum: 256}
         items: {type: array, maxItems: 100, items: {$ref: '#/components/schemas/HostItem'}}

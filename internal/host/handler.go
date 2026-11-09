@@ -5,12 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"sort"
 	"strconv"
 	"strings"
 	"sync"
 	"time"
 
+	"github.com/cowhorse05/KubeNode-Observer/internal/clockdomain"
 	"github.com/cowhorse05/KubeNode-Observer/internal/probe"
 	"github.com/cowhorse05/KubeNode-Observer/internal/runqlat"
 	"github.com/cowhorse05/KubeNode-Observer/internal/topology"
@@ -72,18 +74,20 @@ type Item struct {
 	Issues      []string         `json:"issues,omitempty"`
 }
 type Response struct {
-	Domain          string    `json:"domain"`
-	RoleSource      string    `json:"roleSource"`
-	StartedAt       time.Time `json:"startedAt"`
-	DurationSeconds float64   `json:"durationSeconds"`
-	TotalItems      int       `json:"totalItems"`
-	Items           []Item    `json:"items"`
+	Domain          string              `json:"domain"`
+	RoleSource      string              `json:"roleSource"`
+	StartedAt       time.Time           `json:"startedAt"`
+	DurationSeconds float64             `json:"durationSeconds"`
+	TotalItems      int                 `json:"totalItems"`
+	Items           []Item              `json:"items"`
+	Timing          *clockdomain.Window `json:"timing,omitempty"`
 }
 type Handler struct {
 	topology TopologySource
 	cpu      CPUReader
 	latency  LatencyReader
 	proc     ProcessReader
+	clock    clockdomain.Source
 	mu       sync.Mutex
 }
 
@@ -95,6 +99,7 @@ type selection struct {
 	namespace, pod, sandbox, kind string
 	duration                      time.Duration
 	limit                         int
+	timing                        bool
 }
 type target struct {
 	item      Item
@@ -117,7 +122,11 @@ func fail(w http.ResponseWriter, status int, code, message string) {
 }
 func parseSelection(r *http.Request) (selection, error) {
 	s := selection{kind: "all", duration: 5 * time.Second, limit: 20}
-	for key, values := range r.URL.Query() {
+	query, err := url.ParseQuery(r.URL.RawQuery)
+	if err != nil {
+		return s, err
+	}
+	for key, values := range query {
 		if len(values) != 1 {
 			return s, fmt.Errorf("repeated query parameter: %s", key)
 		}
@@ -130,6 +139,11 @@ func parseSelection(r *http.Request) (selection, error) {
 			s.sandbox = values[0]
 		case "kind":
 			s.kind = values[0]
+		case "timing":
+			if values[0] != "true" && values[0] != "false" {
+				return s, fmt.Errorf("timing must be true or false")
+			}
+			s.timing = values[0] == "true"
 		case "duration":
 			value, err := time.ParseDuration(values[0])
 			if err != nil || value < 100*time.Millisecond || value > 30*time.Second {
@@ -223,7 +237,8 @@ func (h *Handler) processSamples(selected []target) []processSample {
 	return result
 }
 func (h *Handler) measure(ctx context.Context, s selection) (Response, error) {
-	response := Response{Domain: "host", RoleSource: "qemu-thread-name", StartedAt: time.Now().UTC(), Items: []Item{}}
+	started := time.Now()
+	response := Response{Domain: "host", RoleSource: "qemu-thread-name", StartedAt: started.UTC(), Items: []Item{}}
 	snapshot, err := h.topology.CurrentSnapshot()
 	if err != nil {
 		return response, err
@@ -235,12 +250,16 @@ func (h *Handler) measure(ctx context.Context, s selection) (Response, error) {
 	if len(selected) == 0 {
 		return response, nil
 	}
-	beforeProc := h.processSamples(selected)
-	beforeCPU, err := h.cpu.Snapshot()
+	recorder, err := clockdomain.Begin(s.timing, h.clock)
 	if err != nil {
 		return response, err
 	}
-	beforeLat, err := h.latency.Snapshot()
+	beforeProc := h.processSamples(selected)
+	beforeCPU, err := clockdomain.Capture(recorder, clockdomain.CPUStart, h.cpu.Snapshot)
+	if err != nil {
+		return response, err
+	}
+	beforeLat, err := clockdomain.Capture(recorder, clockdomain.RunQLatStart, h.latency.Snapshot)
 	if err != nil {
 		return response, err
 	}
@@ -251,11 +270,11 @@ func (h *Handler) measure(ctx context.Context, s selection) (Response, error) {
 		return response, ctx.Err()
 	case <-timer.C:
 	}
-	afterCPU, err := h.cpu.Snapshot()
+	afterCPU, err := clockdomain.Capture(recorder, clockdomain.CPUEnd, h.cpu.Snapshot)
 	if err != nil {
 		return response, err
 	}
-	afterLat, err := h.latency.Snapshot()
+	afterLat, err := clockdomain.Capture(recorder, clockdomain.RunQLatEnd, h.latency.Snapshot)
 	if err != nil {
 		return response, err
 	}
@@ -310,7 +329,11 @@ func (h *Handler) measure(ctx context.Context, s selection) (Response, error) {
 	if len(response.Items) > s.limit {
 		response.Items = response.Items[:s.limit]
 	}
-	response.DurationSeconds = time.Since(response.StartedAt).Seconds()
+	response.DurationSeconds = time.Since(started).Seconds()
+	response.Timing, err = recorder.Finish()
+	if err != nil {
+		return response, err
+	}
 	return response, nil
 }
 func sameTarget(t target, live []target) bool {
