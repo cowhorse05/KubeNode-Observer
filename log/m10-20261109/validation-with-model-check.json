@@ -1,0 +1,84 @@
+{
+  "result": "passed",
+  "calibrationsValidated": 11,
+  "directRepliesValidated": 1,
+  "errorResponsesValidated": 2,
+  "summaries": [
+    {
+      "file": "idle-1.json",
+      "samples": 7,
+      "selectedWidthNs": 1245418,
+      "selectedMidpointNs": "-526544450341836"
+    },
+    {
+      "file": "idle-2.json",
+      "samples": 7,
+      "selectedWidthNs": 957359,
+      "selectedMidpointNs": "-526544449626806"
+    },
+    {
+      "file": "idle-3.json",
+      "samples": 7,
+      "selectedWidthNs": 912344,
+      "selectedMidpointNs": "-526544449290459"
+    },
+    {
+      "file": "idle-4.json",
+      "samples": 7,
+      "selectedWidthNs": 826598,
+      "selectedMidpointNs": "-526544448567601"
+    },
+    {
+      "file": "idle-5.json",
+      "samples": 7,
+      "selectedWidthNs": 1285111,
+      "selectedMidpointNs": "-526544447330445"
+    },
+    {
+      "file": "loaded-1.json",
+      "samples": 7,
+      "selectedWidthNs": 912270,
+      "selectedMidpointNs": "-526544442377211"
+    },
+    {
+      "file": "loaded-2.json",
+      "samples": 7,
+      "selectedWidthNs": 867228,
+      "selectedMidpointNs": "-526544442045913"
+    },
+    {
+      "file": "loaded-3.json",
+      "samples": 7,
+      "selectedWidthNs": 902794,
+      "selectedMidpointNs": "-526544440953176"
+    },
+    {
+      "file": "loaded-4.json",
+      "samples": 7,
+      "selectedWidthNs": 1322569,
+      "selectedMidpointNs": "-526544439879730"
+    },
+    {
+      "file": "loaded-5.json",
+      "samples": 7,
+      "selectedWidthNs": 913499,
+      "selectedMidpointNs": "-526544439339384"
+    },
+    {
+      "file": "recreated.json",
+      "samples": 15,
+      "selectedWidthNs": 956027,
+      "selectedMidpointNs": "-526572817285554"
+    }
+  ],
+  "constantOffsetHypothesisDiagnostic": {
+    "idle": {
+      "constantOffsetCompatible": false,
+      "incompatibilityGapNs": 1746127
+    },
+    "loaded": {
+      "constantOffsetCompatible": false,
+      "incompatibilityGapNs": 2876689
+    }
+  }
+}

@@ -1,0 +1,318 @@
+configmap/kno-experiment-lock created
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o bin/kno-agent ./cmd/kno-agent
+CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o bin/kno ./cmd/kno
+CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o bin/kno-exec-test ./examples/exec-test
+docker build -f examples/exec-test/Dockerfile.local -t kubenode-observer/exec-test:dev .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.local
+#1 transferring dockerfile: 116B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 95B 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load build context
+#3 transferring context: 1.86MB 0.1s done
+#3 DONE 0.1s
+
+#4 [1/1] COPY bin/kno-exec-test /workload
+#4 CACHED
+
+#5 exporting to image
+#5 exporting layers done
+#5 exporting manifest sha256:9ab10cbdb8c218de35498919f0fe2f4ecfc4aaebdb165edefa338d8c4e87d6dc done
+#5 exporting config sha256:7ce352a8a1a7e746dc4440daa3ac4dba56174a81349abec5387fa30a68367e82 done
+#5 exporting attestation manifest sha256:d2411b3d3999350e4b8e9e365135dbc2f56702092800c5f4b4f8ae8d52cd6eed 0.0s done
+#5 exporting manifest list sha256:116aba3c5e8d9d46e8559c032e81743ec30bb7555bb2f3704e203ad19b4f072a 0.0s done
+#5 naming to docker.io/kubenode-observer/exec-test:dev done
+#5 unpacking to docker.io/kubenode-observer/exec-test:dev done
+#5 DONE 0.1s
+CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o bin/kno-cpu-hog ./examples/cpu-hog
+docker build -f examples/cpu-hog/Dockerfile.local -t kubenode-observer/cpu-hog:dev .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.local
+#1 transferring dockerfile: 112B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 95B 0.1s done
+#2 DONE 0.1s
+
+#3 [internal] load build context
+#3 transferring context: 1.34MB 0.1s done
+#3 DONE 0.1s
+
+#4 [1/1] COPY bin/kno-cpu-hog /workload
+#4 DONE 0.0s
+
+#5 exporting to image
+#5 exporting layers 0.1s done
+#5 exporting manifest sha256:7c8586d3f4f437fd4941304408291a9d1f96174986739d2de4ac19aa4a6dfce8 0.0s done
+#5 exporting config sha256:ad58c956058944184096fcfc796bc3b59f606647126c4968a5e4af5a1decc540 0.0s done
+#5 exporting attestation manifest sha256:2eb30cec00a4799752d18268c99a08d2d0bfff46f1fd87c1e25b5e050353e466 0.0s done
+#5 exporting manifest list sha256:e941c4bc1c3954c93310e39a3194ec88b7dfd7d8cd46f77348a36e41c7911040 0.0s done
+#5 naming to docker.io/kubenode-observer/cpu-hog:dev done
+#5 unpacking to docker.io/kubenode-observer/cpu-hog:dev 0.0s done
+#5 DONE 0.2s
+CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o bin/kno-cpu-contention ./examples/cpu-contention
+docker build -f examples/cpu-contention/Dockerfile.local -t kubenode-observer/cpu-contention:dev .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.local
+#1 transferring dockerfile: 119B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 95B 0.0s done
+#2 DONE 0.1s
+
+#3 [internal] load build context
+#3 transferring context: 1.35MB 0.1s done
+#3 DONE 0.1s
+
+#4 [1/1] COPY bin/kno-cpu-contention /workload
+#4 CACHED
+
+#5 exporting to image
+#5 exporting layers done
+#5 exporting manifest sha256:6e85e17ccf1d85255cfc0f251b2640c932c28089f1f1bf9bafd3fb9cc9eeac31 done
+#5 exporting config sha256:3761d29b5643b85fa997ca0cb0e8fa7e964e383d4b28f2a02a7866b933863679 done
+#5 exporting attestation manifest sha256:ab75a1a6ae565e14943d49cab93726ecf5f4558441b709eb9624413a427ac18e 0.0s done
+#5 exporting manifest list sha256:79fd1c5afccd42e267967e5985dd388eb8ada3420326e38ac57c91317c55a8f8
+#5 exporting manifest list sha256:79fd1c5afccd42e267967e5985dd388eb8ada3420326e38ac57c91317c55a8f8 0.0s done
+#5 naming to docker.io/kubenode-observer/cpu-contention:dev done
+#5 unpacking to docker.io/kubenode-observer/cpu-contention:dev done
+#5 DONE 0.1s
+pod/kno-exec-test-local created
+pod/kno-exec-test-local condition met
+smoke test passed: workload exec event observed
+pod/kno-cpu-hog-local created
+pod/kno-cpu-hog-local condition met
+CPU hotspot test passed: kno-cpu-hog-local is hottest at 93.93572930781924% CPU
+{
+  "accounting": "cgroup",
+  "sampledAt": "2026-11-09T04:42:31.627194914Z",
+  "windowSeconds": 1.00060164,
+  "level": "pod",
+  "items": [
+    {
+      "scope": "pod",
+      "namespace": "default",
+      "podName": "kno-cpu-hog-local",
+      "podUid": "169b8038-ef16-4ad5-950c-7cef73448dde",
+      "runtimeNs": 939922448,
+      "cpuPercent": 93.93572930781924
+    }
+  ],
+  "unresolvedTasks": 293
+}
+pod/kno-runqlat-baseline created
+pod/kno-runqlat-baseline condition met
+pod "kno-runqlat-baseline" deleted from default namespace
+pod/kno-runqlat-contention created
+pod/kno-runqlat-contention condition met
+run queue latency test passed: baseline p95=15us, contention p95=2047us
+cgroup CPU pressure: baseline=76036us, contention=5792837us
+contention result:
+{
+  "startedAt": "2026-11-09T04:42:58.142700158Z",
+  "durationSeconds": 5.17386532,
+  "namespace": "default",
+  "podName": "kno-runqlat-contention",
+  "count": 57958,
+  "averageUs": 615.0468220780565,
+  "p50Us": 1023,
+  "p95Us": 2047,
+  "p99Us": 4095,
+  "maxUs": 32767,
+  "buckets": [
+    {
+      "lowerUs": 1,
+      "upperUs": 1,
+      "count": 15
+    },
+    {
+      "lowerUs": 2,
+      "upperUs": 3,
+      "count": 3337
+    },
+    {
+      "lowerUs": 4,
+      "upperUs": 7,
+      "count": 9050
+    },
+    {
+      "lowerUs": 8,
+      "upperUs": 15,
+      "count": 7168
+    },
+    {
+      "lowerUs": 16,
+      "upperUs": 31,
+      "count": 719
+    },
+    {
+      "lowerUs": 32,
+      "upperUs": 63,
+      "count": 315
+    },
+    {
+      "lowerUs": 64,
+      "upperUs": 127,
+      "count": 499
+    },
+    {
+      "lowerUs": 128,
+      "upperUs": 255,
+      "count": 785
+    },
+    {
+      "lowerUs": 256,
+      "upperUs": 511,
+      "count": 1910
+    },
+    {
+      "lowerUs": 512,
+      "upperUs": 1023,
+      "count": 25362
+    },
+    {
+      "lowerUs": 1024,
+      "upperUs": 2047,
+      "count": 7656
+    },
+    {
+      "lowerUs": 2048,
+      "upperUs": 4095,
+      "count": 1017
+    },
+    {
+      "lowerUs": 4096,
+      "upperUs": 8191,
+      "count": 107
+    },
+    {
+      "lowerUs": 8192,
+      "upperUs": 16383,
+      "count": 16
+    },
+    {
+      "lowerUs": 16384,
+      "upperUs": 32767,
+      "count": 2
+    }
+  ],
+  "processes": [
+    {
+      "namespace": "default",
+      "podName": "kno-runqlat-contention",
+      "podUid": "cf2a613f-1166-4c1d-8089-29e6e1b3255b",
+      "containerName": "workload",
+      "containerId": "a09569a0f89794c83edeabcb008ade9e89d3addf6c5721d816884cec84e99b63",
+      "cgroupId": 11167083,
+      "pid": 258109,
+      "tgid": 258109,
+      "command": "workload",
+      "metadataSource": "current",
+      "count": 57958,
+      "averageUs": 615.0468220780565,
+      "p50Us": 1023,
+      "p95Us": 2047,
+      "p99Us": 4095,
+      "maxUs": 32767,
+      "buckets": [
+        {
+          "lowerUs": 1,
+          "upperUs": 1,
+          "count": 15
+        },
+        {
+          "lowerUs": 2,
+          "upperUs": 3,
+          "count": 3337
+        },
+        {
+          "lowerUs": 4,
+          "upperUs": 7,
+          "count": 9050
+        },
+        {
+          "lowerUs": 8,
+          "upperUs": 15,
+          "count": 7168
+        },
+        {
+          "lowerUs": 16,
+          "upperUs": 31,
+          "count": 719
+        },
+        {
+          "lowerUs": 32,
+          "upperUs": 63,
+          "count": 315
+        },
+        {
+          "lowerUs": 64,
+          "upperUs": 127,
+          "count": 499
+        },
+        {
+          "lowerUs": 128,
+          "upperUs": 255,
+          "count": 785
+        },
+        {
+          "lowerUs": 256,
+          "upperUs": 511,
+          "count": 1910
+        },
+        {
+          "lowerUs": 512,
+          "upperUs": 1023,
+          "count": 25362
+        },
+        {
+          "lowerUs": 1024,
+          "upperUs": 2047,
+          "count": 7656
+        },
+        {
+          "lowerUs": 2048,
+          "upperUs": 4095,
+          "count": 1017
+        },
+        {
+          "lowerUs": 4096,
+          "upperUs": 8191,
+          "count": 107
+        },
+        {
+          "lowerUs": 8192,
+          "upperUs": 16383,
+          "count": 16
+        },
+        {
+          "lowerUs": 16384,
+          "upperUs": 32767,
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "unresolvedTasks": 340
+}
+
+Integration suite passed: lifecycle, CPU hotspot, run queue latency
+M10a final-image runc compatibility checks passed.
+daemonset.apps/kno-agent configured
+Waiting for daemon set "kno-agent" rollout to finish: 0 out of 1 new pods have been updated...
+Waiting for daemon set "kno-agent" rollout to finish: 0 of 1 updated pods are available...
+daemon set "kno-agent" successfully rolled out
+configmap "kno-experiment-lock" deleted from kube-system namespace

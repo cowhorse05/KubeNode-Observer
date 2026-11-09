@@ -1,0 +1,2 @@
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	2.385s
+ok  	github.com/cowhorse05/KubeNode-Observer/cmd/kno	(cached)

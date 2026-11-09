@@ -130,24 +130,46 @@ func TestClockHandlerAndRelayRealHTTP(t *testing.T) {
 }
 
 func TestClockSameKernelControl(t *testing.T) {
-	h,_,_:=relayFixture()
-	server:=httptest.NewServer(&ClockHandler{PodUID:"uid",InstanceID:strings.Repeat("1",32),Source:LinuxClock{}})
-	defer server.Close();attachBackend(h,server)
-	w:=clockRequest(h,"");if w.Code!=200{t.Fatal(w.Code,w.Body.String())}
-	var result Calibration;if err:=json.Unmarshal(w.Body.Bytes(),&result);err!=nil{t.Fatal(err)}
-	if result.Host!=result.Guest{t.Fatal("not the same clock domain")}
-	for _,sample:=range result.Samples{if sample.OffsetLowerNS>0 || sample.OffsetUpperNS<0{t.Fatal("known zero offset outside interval",sample)}}
-	t.Logf("same-kernel CLOCK_MONOTONIC control: zero is inside all %d intervals",len(result.Samples))
+	h, _, _ := relayFixture()
+	server := httptest.NewServer(&ClockHandler{PodUID: "uid", InstanceID: strings.Repeat("1", 32), Source: LinuxClock{}})
+	defer server.Close()
+	attachBackend(h, server)
+	w := clockRequest(h, "")
+	if w.Code != 200 {
+		t.Fatal(w.Code, w.Body.String())
+	}
+	var result Calibration
+	if err := json.Unmarshal(w.Body.Bytes(), &result); err != nil {
+		t.Fatal(err)
+	}
+	if result.Host != result.Guest {
+		t.Fatal("not the same clock domain")
+	}
+	for _, sample := range result.Samples {
+		if sample.OffsetLowerNS > 0 || sample.OffsetUpperNS < 0 {
+			t.Fatal("known zero offset outside interval", sample)
+		}
+	}
+	t.Logf("same-kernel CLOCK_MONOTONIC control: zero is inside all %d intervals", len(result.Samples))
 }
 
 func TestClockDoesNotIntersectDifferentExchanges(t *testing.T) {
-	h,_,_:=relayFixture();h.clock=hostClockFixture()
-	guest:=replyClockFixture();guest.times=[]int64{5010,5020,7010,7020,9010,9020}
-	server:=httptest.NewServer(&ClockHandler{PodUID:"uid",InstanceID:strings.Repeat("1",32),Source:guest})
-	defer server.Close();attachBackend(h,server)
-	w:=clockRequest(h,"");if w.Code!=200{t.Fatal(w.Code,w.Body.String())}
-	var result Calibration;_ =json.Unmarshal(w.Body.Bytes(),&result)
-	if result.SelectedSample!=1 || result.Samples[0].OffsetUpperNS>=result.Samples[1].OffsetLowerNS{t.Fatal("disjoint exchange-local intervals were combined",result)}
+	h, _, _ := relayFixture()
+	h.clock = hostClockFixture()
+	guest := replyClockFixture()
+	guest.times = []int64{5010, 5020, 7010, 7020, 9010, 9020}
+	server := httptest.NewServer(&ClockHandler{PodUID: "uid", InstanceID: strings.Repeat("1", 32), Source: guest})
+	defer server.Close()
+	attachBackend(h, server)
+	w := clockRequest(h, "")
+	if w.Code != 200 {
+		t.Fatal(w.Code, w.Body.String())
+	}
+	var result Calibration
+	_ = json.Unmarshal(w.Body.Bytes(), &result)
+	if result.SelectedSample != 1 || result.Samples[0].OffsetUpperNS >= result.Samples[1].OffsetLowerNS {
+		t.Fatal("disjoint exchange-local intervals were combined", result)
+	}
 }
 
 func TestClockDirectErrors(t *testing.T) {
@@ -193,12 +215,14 @@ func TestClockRejectsUpstreamAndGenerationChanges(t *testing.T) {
 	for _, tc := range []struct {
 		name   string
 		status int
-	}{{"identity", 409}, {"nonce", 409}, {"instance", 409}, {"guest-boot", 409}, {"guest-namespace", 409}, {"host-namespace", 409}, {"host-backwards", 409}, {"guest-backwards", 409}, {"generation", 409}, {"deleted", 409}, {"contradiction", 409}, {"missing-times", 502}, {"trailing", 502}, {"unknown-field", 502}, {"oversize", 502}, {"bad-json", 502}, {"bad-media", 502}, {"html-error", 502}, {"json-error", 502}, {"redirect", 502}, {"busy", 429}, {"timeout", 504}, {"host-read", 503}, {"host-receive-read", 503}} {
+	}{{"identity", 409}, {"domain", 409}, {"clock", 409}, {"nonce", 409}, {"instance", 409}, {"guest-boot", 409}, {"guest-namespace", 409}, {"host-namespace", 409}, {"host-backwards", 409}, {"guest-backwards", 409}, {"generation", 409}, {"deleted", 409}, {"contradiction", 409}, {"missing-times", 502}, {"trailing", 502}, {"unknown-field", 502}, {"oversize", 502}, {"bad-json", 502}, {"bad-media", 502}, {"html-error", 502}, {"json-error", 502}, {"redirect", 502}, {"busy", 429}, {"timeout", 504}, {"host-read", 503}, {"host-receive-read", 503}} {
 		t.Run(tc.name, func(t *testing.T) {
 			h, topo, _ := relayFixture()
 			host := hostClockFixture()
 			h.clock = host
-			h.client.Timeout = 50 * time.Millisecond
+			if tc.name == "timeout" {
+				h.client.Timeout = 50 * time.Millisecond
+			}
 			if tc.name == "host-namespace" {
 				host.change = true
 			}
@@ -222,6 +246,10 @@ func TestClockRejectsUpstreamAndGenerationChanges(t *testing.T) {
 				switch tc.name {
 				case "identity":
 					v.PodUID = "wrong"
+				case "domain":
+					v.Domain = "host"
+				case "clock":
+					v.Clock = "CLOCK_REALTIME"
 				case "nonce":
 					v.RequestID = strings.Repeat("0", 32)
 				case "instance":

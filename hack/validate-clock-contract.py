@@ -19,6 +19,7 @@ directory = Path(sys.argv[1])
 files = sorted(directory.glob("idle-*.json")) + sorted(directory.glob("loaded-*.json")) + [directory / "recreated.json"]
 assert len(files) == 11
 summary = []
+phase_samples = {"idle": [], "loaded": []}
 for path in files:
     value = json.loads(path.read_text())
     validators["Calibration"].validate(value)
@@ -42,10 +43,22 @@ for path in files:
     assert selected == widths.index(min(widths)), "selection must be first minimum residual width"
     summary.append({"file": path.name, "samples": len(widths), "selectedWidthNs": widths[selected],
                     "selectedMidpointNs": value["samples"][selected]["offsetMidpointNs"]})
+    for phase in phase_samples:
+        if path.name.startswith(phase+"-"):
+            phase_samples[phase].extend(value["samples"])
 direct = json.loads((directory / "direct.json").read_text())
 validators["ClockReply"].validate(direct)
 assert int(direct["sentNs"]) >= int(direct["receivedNs"]) > 0
 for name in ("deleted.json", "disabled.json"):
     validators["Error"].validate(json.loads((directory / name).read_text()))
+# Diagnostic ONLY: test a single fixed offset hypothesis, not a calibration
+# intersection, confidence estimate, proof of drift, or acceptance criterion.
+model_checks = {}
+for phase, samples in phase_samples.items():
+    lower = max(int(s["offsetLowerNs"]) for s in samples)
+    upper = min(int(s["offsetUpperNs"]) for s in samples)
+    model_checks[phase] = {"constantOffsetCompatible": lower <= upper,
+                           "incompatibilityGapNs": max(0, lower-upper)}
 print(json.dumps({"result": "passed", "calibrationsValidated": len(files), "directRepliesValidated": 1,
-                  "errorResponsesValidated": 2, "summaries": summary}, indent=2))
+                  "errorResponsesValidated": 2, "summaries": summary,
+                  "constantOffsetHypothesisDiagnostic": model_checks}, indent=2))

@@ -1,0 +1,8 @@
+{
+  "defaultRuntime": "runc",
+  "runtimeTypes": {
+    "kata-qemu": "io.containerd.kata.v2",
+    "kata-qemu-guest": "io.containerd.kata.v2",
+    "runc": "io.containerd.runc.v2"
+  }
+}
