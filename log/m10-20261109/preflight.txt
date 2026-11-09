@@ -1,0 +1,2 @@
+jq: error (at <stdin>:74): Cannot iterate over null (null)
+jq: error (at <stdin>:107): Cannot iterate over null (null)

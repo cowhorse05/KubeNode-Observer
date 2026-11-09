@@ -161,6 +161,7 @@ func main() {
 	handler.Handle("/api/v1/runqlat", runQLatHandler)
 	handler.Handle("/api/v1/host/resources", host.NewHandler(topologyStore, cpuProbe, runQLatProbe, host.NewProcReader(*hostProc, *cgroupRoot)))
 	handler.Handle(guest.Path, guestRelay)
+	handler.HandleFunc(guest.ClockPath, guestRelay.CalibrateHTTP)
 	server := &http.Server{
 		Addr:              *listenAddress,
 		Handler:           handler,

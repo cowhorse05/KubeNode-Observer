@@ -27,6 +27,7 @@ type Relay struct {
 	port     int
 	client   *http.Client
 	mu       sync.Mutex
+	clock    ClockSource
 }
 type target struct {
 	sandbox topology.Sandbox
@@ -38,7 +39,7 @@ func NewRelay(t TopologySource, resolver topology.ResourceResolver, port int) (*
 		return nil, fmt.Errorf("guest-probe-port must be 0 (disabled) or 1..65535")
 	}
 	transport := &http.Transport{Proxy: nil, DialContext: (&net.Dialer{Timeout: 2 * time.Second}).DialContext, ResponseHeaderTimeout: 15 * time.Second, MaxConnsPerHost: 1, DisableKeepAlives: true}
-	return &Relay{topology: t, resolver: resolver, port: port, client: &http.Client{Transport: transport, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}}, nil
+	return &Relay{topology: t, resolver: resolver, port: port, clock: LinuxClock{}, client: &http.Client{Transport: transport, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}}, nil
 }
 func (h *Relay) resolve(id string) (target, int, error) {
 	if h.port == 0 || h.resolver == nil || !h.resolver.Ready() {

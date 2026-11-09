@@ -1,0 +1,4 @@
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	2.208s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/topology	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/host	(cached)
+ok  	github.com/cowhorse05/KubeNode-Observer/cmd/kno	1.018s

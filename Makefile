@@ -13,6 +13,8 @@ KATA_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-host
 VMM_AGENT_IMAGE ?= kubenode-observer/kno-agent:kata-vmm
 GUEST_IMAGE ?= kubenode-observer/guest-probe:dev
 GUEST_AGENT_IMAGE ?= kubenode-observer/kno-agent:guest
+CLOCK_AGENT_IMAGE ?= kubenode-observer/kno-agent:clock
+CLOCK_GUEST_IMAGE ?= kubenode-observer/guest-probe:clock
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
@@ -170,5 +172,13 @@ m9-test: guest-image workload-image contention-image
 	docker build -f examples/guest-probe/Dockerfile.workload -t kubenode-observer/guest-workload:dev .
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(GUEST_IMAGE) $(GUEST_AGENT_IMAGE) kubenode-observer/guest-workload:dev
 	KUBE_CONTEXT=$(MINIKUBE_PROFILE) AGENT_IMAGE=$(GUEST_AGENT_IMAGE) bash hack/guest-test.sh
+
+.PHONY: m10-clock-test
+m10-clock-test: workload-image contention-image
+	$(MAKE) guest-image GUEST_IMAGE=$(CLOCK_GUEST_IMAGE)
+	$(MAKE) image-local IMAGE=$(CLOCK_AGENT_IMAGE)
+	docker build -f examples/guest-probe/Dockerfile.workload -t kubenode-observer/guest-workload:dev .
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(CLOCK_GUEST_IMAGE) $(CLOCK_AGENT_IMAGE) kubenode-observer/guest-workload:dev
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) CLOCK_AGENT_IMAGE=$(CLOCK_AGENT_IMAGE) CLOCK_GUEST_IMAGE=$(CLOCK_GUEST_IMAGE) bash hack/clock-test.sh
 
 

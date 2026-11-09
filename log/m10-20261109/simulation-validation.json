@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-09",
+  "scope": "local Postman simulation, production clock and resource relays over real HTTP",
+  "accountOrWorkspacePublication": false,
+  "clockCases": 9,
+  "resourceCases": 9,
+  "clockMemberRequests": 11,
+  "resourceMemberRequests": 9,
+  "member": "guest",
+  "passthroughRequests": 0,
+  "silentMembers": [],
+  "testExitCode": 0,
+  "ownedSimulationStopped": true,
+  "notEstablished": ["Guest clock ground truth", "BPF clock mapping", "Pod networking", "cross-layer causal attribution"]
+}

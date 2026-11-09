@@ -138,3 +138,9 @@ RSS、Go managed memory 和 cgroup charge 是不同口径，不能互相替代�
 `cmd/kno-guest` 在 Kata Guest 内加载原有 CPU/runqlat 程序，通过共享 Pod procfs 的 PID/starttime/线程集合及 BPF namespace alias 验证进程窗口；它不运行 Node informer、CRI 或 exec collector。Node Agent 的 Guest relay 默认关闭，只对当前验证过的 Kata Sandbox 和显式 opt-in Pod IP 请求固定端口，检查 Pod UID、nonce 和前后 VMM generation 后补入 Sandbox 身份。Guest 不写 Host cgroup/container index，旧 API 语义不变。
 
 CPU 要求完整稳定线程集；runqlat 可返回有完整端点的线程子集，同时报告 `runqlatCoverage` 和 `partial`。最近 switch-out 身份用于排除 Kata exec 留下的历史 cgroup key，不是原子当前 cgroup 证明。Host 和 Guest 没有共享时钟/窗口，不能相加或直接作根因推断。字段、安全边界、官方 debug kernel 和复现实验见 [Guest Probe 指南](guest-probe.md)。
+
+## 交换局部时钟区间（M10a）
+
+独立 `/api/v1/guest/clock` 使用两端用户态 Linux CLOCK_MONOTONIC 读取 h1/g2/g3/h4；Node 使用与 M9 一样的目标身份和 nonce 约束，按一次交换内 offset 恒定的条件推导 `[g3-h4,g2-h1]`。所有原始样本保留，选首次最小残余宽度，不合并成长期固定映射。每次 RPC <=1s、burst <=5s、响应 <=8KiB，共用 Node Guest 操作 gate。时钟接口没有附加 BPF 程序或修改记账路径，也不设系统时钟。
+
+Boot ID、time namespace 与 Probe instance 标记代际，NS 用 int64 十进制字符串避免客户端浮点精度损失。time namespace 不可读显式 unavailable。该接口只估计所读用户态时钟，**不能自动说明 BPF ktime 的 namespace 关系、事件时间线或资源采样窗口已经对齐**。原有资源查询仍保持独立窗口；M10b 才核对这一步。见 [校准指南](clock-calibration.md)。

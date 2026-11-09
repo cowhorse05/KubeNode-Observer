@@ -27,6 +27,8 @@ M8 的 `kno top workloads -n <namespace> --duration=5s` / `/api/v1/host/resource
 
 M9 的 `kno guest resources --sandbox <完整 ID> --duration=5s` / `/api/v1/guest/resources` 返回独立 **Guest** 进程窗口。默认不启用 Node relay，需专用 RuntimeClass、特权 sidecar、Pod PID namespace 和显式 opt-in。`make guest-check` 验证能力，`make guest-kernel-check` 在 Guest 跑内核测试，`make m9-test` 运行真实负载/边界/清理实验。详见 [Guest Probe 指南](docs/guest-probe.md)。
 
+2026-11-09：M10a 增加 `kno guest clock --sandbox <完整 ID> --samples=7`，通过四时间戳返回 **Guest−Host 单次往返的条件偏移区间**，保留所有样本而非只给一个精确 offset。纳秒用字符串传输；不调系统时钟、不宣称 BPF 事件或资源窗口已经同步。方法与边界见 [时钟校准指南](docs/clock-calibration.md)。M10 仍在开发，完成本地开发和版本冻结后才到 tdk 做正式实验。
+
 ## 一键 Demo
 
 在满足 Linux BTF、cgroup v2、Docker、kubectl 和 Minikube 前置条件后：

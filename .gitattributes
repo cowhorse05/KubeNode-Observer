@@ -13,3 +13,5 @@ log/kata-*/** -text -whitespace linguist-generated=true
 log/m8-*/** -text -whitespace linguist-generated=true
 log/guest-*/** -text -whitespace linguist-generated=true
 log/m9-*/** -text -whitespace linguist-generated=true
+log/m10-*/** -text -whitespace linguist-generated=true
+log/clock-*/** -text -whitespace linguist-generated=true

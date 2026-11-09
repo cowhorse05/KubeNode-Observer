@@ -1,0 +1,89 @@
+{
+  "clock": "CLOCK_MONOTONIC",
+  "scope": "exchange-only",
+  "sandboxId": "74df6fac5b082443680c3e945aa45f7eef8449eba8e22e3cbb9619f988c7b63d",
+  "podUid": "729167e2-2873-4d5a-a738-c312c5c9fe42",
+  "host": {
+    "bootId": "6af980d8-e07f-4db1-9ff1-d16d0e4f855d",
+    "timeNamespace": "time:[4026532308]"
+  },
+  "guest": {
+    "bootId": "79ed8fb9-627c-433a-848e-1c62492d1efe",
+    "timeNamespace": "unavailable"
+  },
+  "probeInstanceId": "51958ca14a3cedb0199e385c84b7812a",
+  "samples": [
+    {
+      "requestId": "1cedc77001724bb20bcc43532b98f182",
+      "hostSendNs": "526550627049308",
+      "guestReceiveNs": "6185492011",
+      "guestSendNs": "6186185226",
+      "hostReceiveNs": "526550629522303",
+      "offsetLowerNs": "-526544443337077",
+      "offsetUpperNs": "-526544441557297",
+      "offsetMidpointNs": "-526544442447187"
+    },
+    {
+      "requestId": "f527ec05f6c72dec949bbbea85acc730",
+      "hostSendNs": "526550649876077",
+      "guestReceiveNs": "6207630866",
+      "guestSendNs": "6207746908",
+      "hostReceiveNs": "526550651025029",
+      "offsetLowerNs": "-526544443278121",
+      "offsetUpperNs": "-526544442245211",
+      "offsetMidpointNs": "-526544442761666"
+    },
+    {
+      "requestId": "82f0da4025a4b8843df1434ede975f3a",
+      "hostSendNs": "526550671339694",
+      "guestReceiveNs": "6230300660",
+      "guestSendNs": "6230499178",
+      "hostReceiveNs": "526550673814175",
+      "offsetLowerNs": "-526544443314997",
+      "offsetUpperNs": "-526544441039034",
+      "offsetMidpointNs": "-526544442177016"
+    },
+    {
+      "requestId": "e8a1e5f6c52ef14fb46c5ca639811b2a",
+      "hostSendNs": "526550694167623",
+      "guestReceiveNs": "6252127545",
+      "guestSendNs": "6252203791",
+      "hostReceiveNs": "526550695286473",
+      "offsetLowerNs": "-526544443082682",
+      "offsetUpperNs": "-526544442040078",
+      "offsetMidpointNs": "-526544442561380"
+    },
+    {
+      "requestId": "e832ef5ca69199f07f2975b20e39493d",
+      "hostSendNs": "526550715614818",
+      "guestReceiveNs": "6273611984",
+      "guestSendNs": "6273687611",
+      "hostReceiveNs": "526550716708271",
+      "offsetLowerNs": "-526544443020660",
+      "offsetUpperNs": "-526544442002834",
+      "offsetMidpointNs": "-526544442511747"
+    },
+    {
+      "requestId": "a3e50d7816d8f69bd95b40f6970efc38",
+      "hostSendNs": "526550737011169",
+      "guestReceiveNs": "6295090093",
+      "guestSendNs": "6295148978",
+      "hostReceiveNs": "526550737982324",
+      "offsetLowerNs": "-526544442833346",
+      "offsetUpperNs": "-526544441921076",
+      "offsetMidpointNs": "-526544442377211"
+    },
+    {
+      "requestId": "cab43233935e0909ac994ff8a59831d2",
+      "hostSendNs": "526550758342025",
+      "guestReceiveNs": "6316603996",
+      "guestSendNs": "6316645065",
+      "hostReceiveNs": "526550759426302",
+      "offsetLowerNs": "-526544442781237",
+      "offsetUpperNs": "-526544441738029",
+      "offsetMidpointNs": "-526544442259633"
+    }
+  ],
+  "selectedSample": 5
+}
+

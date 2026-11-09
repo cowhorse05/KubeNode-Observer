@@ -1,0 +1,2 @@
+true
+Clock schemas parsed and validated.

@@ -343,10 +343,14 @@ microVM 工作在 MVP 完成后开始。
 
 ### M10：跨层时间对齐与延迟分析
 
+状态（2026-11-09）：进行中。M10a 已实现用户态 CLOCK_MONOTONIC 四时间戳校准、每次往返的条件 offset 区间和原始样本保留；本地 Kata idle/loaded/重建及同内核零偏移对照通过。没有把它当作 BPF 时钟映射或同步资源窗口。多组数据不支持全程固定 offset 的假设，M10b 还需核对 BPF/namespace 时钟域、窗口括号和漂移不确定性，之后 M10c 才做受控 Host×Guest 干预、runc/Kata 与 Probe off/on 对照。见 [校准指南](clock-calibration.md)。
+
 - 估算 Host 与 Guest 单调时钟偏移。
 - 对齐两层事件时间线。
 - 区分 Guest contention 与 Host vCPU contention。
 - 构建可重复的 runc/Kata 对照实验。
+
+开发与最终实验分开：当前只在本地 Minikube 做功能和兼容性验证；完成 M10b/M10c、可移植配置/环境检查及版本冻结后，再到 **tdk 做正式实验**。在此之前不更改或部署到 tdk，也不把本地调试结果冒充最终实验结论。现有 BPF 为聚合 map，不是逐事件 trace；先对齐聚合窗口，若确需事件级时间线，应另行设计有开销对照的采集方式。
 
 ## 9. 测试策略
 

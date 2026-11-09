@@ -1,0 +1,2 @@
+?   	github.com/cowhorse05/KubeNode-Observer/cmd/kno	[no test files]
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	2.282s

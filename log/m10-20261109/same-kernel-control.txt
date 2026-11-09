@@ -1,0 +1,5 @@
+=== RUN   TestClockSameKernelControl
+    clock_test.go:140: same-kernel CLOCK_MONOTONIC control: zero is inside all 3 intervals
+--- PASS: TestClockSameKernelControl (0.05s)
+PASS
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	0.063s
