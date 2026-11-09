@@ -1,0 +1,140 @@
+{
+  "domain": "guest",
+  "podUid": "7ebcf4d8-f1b5-4b70-9c1f-4dcb5920ca14",
+  "sandboxId": "884b12751c4ffe7d5c2c770cc947d9b8986a6aa12375b5ba216b04d5c517843a",
+  "namespace": "kno-window-test",
+  "podName": "kno-guest",
+  "kernelRelease": "6.18.56",
+  "bootId": "533503f0-afb4-49de-bd5d-afb82daefb25",
+  "instanceId": "969a7bdaf47d891244feb625c239bbdf",
+  "requestId": "080eb5bc316224f0c3c539994e88f1cc",
+  "startedAt": "2026-11-09T11:01:09.759133721Z",
+  "durationSeconds": 2.021204938,
+  "totalItems": 1,
+  "processes": [
+    {
+      "namespacePid": 27,
+      "pid": 234,
+      "cgroupId": 1414,
+      "startTimeTicks": 606,
+      "command": "guest-burn",
+      "cpu": {
+        "runtimeNs": 2685857848,
+        "percent": 133.60943258735767,
+        "windowSeconds": 2.010230712
+      },
+      "runqlat": {
+        "count": 16541,
+        "averageUs": 396.8751915845475,
+        "p50Us": 63,
+        "p95Us": 2047,
+        "p99Us": 4095,
+        "maxUs": 16383,
+        "buckets": [
+          {
+            "lowerUs": 1,
+            "upperUs": 1,
+            "count": 132
+          },
+          {
+            "lowerUs": 2,
+            "upperUs": 3,
+            "count": 622
+          },
+          {
+            "lowerUs": 4,
+            "upperUs": 7,
+            "count": 450
+          },
+          {
+            "lowerUs": 8,
+            "upperUs": 15,
+            "count": 3708
+          },
+          {
+            "lowerUs": 16,
+            "upperUs": 31,
+            "count": 2787
+          },
+          {
+            "lowerUs": 32,
+            "upperUs": 63,
+            "count": 786
+          },
+          {
+            "lowerUs": 64,
+            "upperUs": 127,
+            "count": 660
+          },
+          {
+            "lowerUs": 128,
+            "upperUs": 255,
+            "count": 776
+          },
+          {
+            "lowerUs": 256,
+            "upperUs": 511,
+            "count": 935
+          },
+          {
+            "lowerUs": 512,
+            "upperUs": 1023,
+            "count": 3855
+          },
+          {
+            "lowerUs": 1024,
+            "upperUs": 2047,
+            "count": 1395
+          },
+          {
+            "lowerUs": 2048,
+            "upperUs": 4095,
+            "count": 384
+          },
+          {
+            "lowerUs": 4096,
+            "upperUs": 8191,
+            "count": 50
+          },
+          {
+            "lowerUs": 8192,
+            "upperUs": 16383,
+            "count": 1
+          }
+        ]
+      },
+      "runqlatCoverage": {
+        "observedThreads": 11,
+        "totalThreads": 11
+      },
+      "partial": false
+    }
+  ],
+  "timing": {
+    "clock": "CLOCK_MONOTONIC",
+    "identity": {
+      "bootId": "533503f0-afb4-49de-bd5d-afb82daefb25",
+      "timeNamespace": "unavailable"
+    },
+    "start": {
+      "cpu": {
+        "beforeNs": "15021546411",
+        "afterNs": "15022811903"
+      },
+      "runqlat": {
+        "beforeNs": "15022818496",
+        "afterNs": "15031815903"
+      }
+    },
+    "end": {
+      "cpu": {
+        "beforeNs": "17032338814",
+        "afterNs": "17033030016"
+      },
+      "runqlat": {
+        "beforeNs": "17033031807",
+        "afterNs": "17035075754"
+      }
+    }
+  }
+}

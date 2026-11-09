@@ -1,0 +1,8 @@
+configmap/kno-experiment-lock created
+namespace/kno-clockdomain-test created
+pod/clockcheck-runc created
+pod "clockcheck-runc" deleted from kno-clockdomain-test namespace
+pod/clockcheck-kata created
+pod "clockcheck-kata" deleted from kno-clockdomain-test namespace
+namespace "kno-clockdomain-test" deleted
+configmap "kno-experiment-lock" deleted from kube-system namespace

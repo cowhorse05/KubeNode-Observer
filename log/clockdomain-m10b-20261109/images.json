@@ -1,0 +1,47 @@
+[
+    {
+        "Id": "sha256:3ed7af077c8996220ff9a7f188fe10588b2d2a8ee50f1b8908b959e30b073fa5",
+        "RepoTags": [
+            "kubenode-observer/clockcheck:dev"
+        ],
+        "RepoDigests": [
+            "kubenode-observer/clockcheck@sha256:3ed7af077c8996220ff9a7f188fe10588b2d2a8ee50f1b8908b959e30b073fa5"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-09T17:21:42.10119402+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/kno-clockcheck"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 1305333,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:20fb198f1a28cbd00e2cc100374279dce8dab350906e5012d122b9eeef07ef46"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-09T09:21:42.386904469Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:3ed7af077c8996220ff9a7f188fe10588b2d2a8ee50f1b8908b959e30b073fa5",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "dbeur4vpne7qjbguo9o5p23sq",
+                    "CreatedAt": "2026-11-09T17:21:42.429798655+08:00"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,4 @@
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/clockdomain	1.020s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/guest	2.943s
+ok  	github.com/cowhorse05/KubeNode-Observer/internal/host	1.702s
+ok  	github.com/cowhorse05/KubeNode-Observer/cmd/kno	1.024s

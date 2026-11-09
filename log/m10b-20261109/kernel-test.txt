@@ -1,0 +1,3 @@
+=== RUN   TestKernelClockBracketAndLifecycle
+--- PASS: TestKernelClockBracketAndLifecycle (0.01s)
+PASS
