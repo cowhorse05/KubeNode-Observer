@@ -31,6 +31,8 @@ M9 的 `kno guest resources --sandbox <完整 ID> --duration=5s` / `/api/v1/gues
 
 M10b 增加独立 `kno-clockcheck`（私有 BPF TEST_RUN，无 attach/pin）核对时钟域，并支持两个资源查询的 `--timing` / `timing=true`，记录实际 CPU/runqlat 快照前后括号。默认无新增字段，不改变统计口径；读取括号还不是跨域窗口映射。复现和边界见 [窗口指南](docs/window-timing.md)。
 
+M10c 的本地实验入口 `make m10c-test` 复用现有 Agent、Guest Probe 和 CPU contention workload，采集 Host contention 开/关 × Guest 1/8 workers 四象限的 Host VMM 与 Guest process CPU/runqlat。脚本只把身份、非空指标和读取括号作为硬门禁；趋势方向写入摘要但不决定测试成败。当前尚未完成真实环境验收，方法见 [M10c 四象限实验](docs/m10c-experiment.md)。
+
 ## 一键 Demo
 
 在满足 Linux BTF、cgroup v2、Docker、kubectl 和 Minikube 前置条件后：

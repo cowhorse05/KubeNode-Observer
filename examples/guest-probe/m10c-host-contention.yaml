@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kno-m10c-host-contention
+  namespace: kno-m10c-test
+spec:
+  automountServiceAccountToken: false
+  restartPolicy: Never
+  containers:
+    - name: cpu
+      image: kubenode-observer/cpu-contention:dev
+      imagePullPolicy: Never
+      args: ["--duration=15m", "--workers=4"]
+      resources:
+        requests: {cpu: 100m, memory: 32Mi}
+        limits: {cpu: "2", memory: 128Mi}
