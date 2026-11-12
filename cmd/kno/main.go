@@ -403,6 +403,7 @@ func main() {
 	guestCommand.AddCommand(guestResources)
 	guestCommand.AddCommand(newClockCommand(&endpoint))
 	root.AddCommand(guestCommand)
+	root.AddCommand(newDiagnoseCommand())
 	if err := root.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
