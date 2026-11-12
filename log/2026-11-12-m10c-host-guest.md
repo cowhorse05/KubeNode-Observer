@@ -40,7 +40,7 @@ M10c 已形成一个可复现、会严格失败的 Kata Host × Guest 观测实�
 - `capturePairs=8`，`partialOrIncompleteCoverageCount=0`，`zeroWaitSampleCount=0`；
 - 每窗 CPU 与 runqlat 都非 null，实际窗口不短于请求的 3 秒；
 - Pod UID、完整 Sandbox ID、VMM PID/generation 与唯一 vCPU 0 TID 在窗口间一致；
-- 条件文件与 Guest workload 输出交叉确认 contender 状态、worker 数和 Guest CPU 0 affinity；
+- 条件文件与 CRI inspect 交叉确认 contender Pod UID/PID；Guest workload 输出的 worker 数还必须与 Probe 看到的 `workers + main` 总线程数一致；
 - Agent Pod UID、container ID 和 `restartCount=0` 在实验前后相同；
 - `kno_agent_events_lost_total` 前后均为 0；
 - 原 DaemonSet spec 恢复后与实验前逐字相同，测试 namespace 和实验锁均已删除；
@@ -61,7 +61,7 @@ M10c 已形成一个可复现、会严格失败的 Kata Host × Guest 观测实�
 
 - 当前身份关联链能把同一个 Kata Pod 的 Host VMM/vCPU 与 Guest process 分层展示；
 - 受控同核压力下，Host vCPU 等待和 Guest 内部 runnable 等待能呈现不同组合；
-- partial/null、覆盖率、Agent restart/loss 和清理恢复均受到可审计门禁约束。
+- partial/null 与覆盖率均有可审计的结构门禁或显式质量告警，Agent restart/loss 和清理恢复也有硬检查。
 
 不能说明：
 

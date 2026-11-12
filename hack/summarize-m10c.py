@@ -85,7 +85,26 @@ def load_pairs(directory):
     return captures, rounds
 
 
-def validate_condition(directory, label, host_load, guest_workers, setup):
+def load_contender_evidence(directory, setup):
+    try:
+        inspect = json.loads((directory / "host-contention-cri.json").read_text())
+        affinity = (directory / "host-contention-affinity.txt").read_text()
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError("Host contender CRI/affinity evidence is missing or invalid") from error
+    labels = inspect.get("status", {}).get("labels", {})
+    evidence = {
+        "pid": integer(inspect.get("info", {}).get("pid"), "Host contender CRI PID", positive=True),
+        "podUid": labels.get("io.kubernetes.pod.uid"),
+    }
+    if not isinstance(evidence["podUid"], str) or not evidence["podUid"]:
+        raise ValueError("Host contender CRI Pod UID is invalid")
+    affinity_cpus = re.findall(r"new affinity list:\s*([^\r\n]+)", affinity)
+    if not affinity_cpus or any(value.strip() != str(setup["pinnedHostCpu"]) for value in affinity_cpus):
+        raise ValueError("Host contender affinity evidence contradicts setup.json")
+    return evidence
+
+
+def validate_condition(directory, label, host_load, guest_workers, setup, contender_evidence):
     try:
         condition = json.loads((directory / f"{label}-condition.json").read_text())
         workload = (directory / f"{label}-workload.txt").read_text()
@@ -105,6 +124,9 @@ def validate_condition(directory, label, host_load, guest_workers, setup):
                 or contender.get("phase") != "Running" or contender_pid <= 0
                 or contender_cpu != setup["pinnedHostCpu"]):
             raise ValueError(f"{label} Host contender evidence is invalid")
+        if (contender_pid != contender_evidence["pid"]
+                or contender["podUid"] != contender_evidence["podUid"]):
+            raise ValueError(f"{label} Host contender does not match CRI evidence")
     elif contender is not None:
         raise ValueError(f"{label} unexpectedly records a Host contender")
     ready = re.compile(rf"^running {guest_workers} worker\(s\) on CPU 0 for ", re.MULTILINE)
@@ -112,7 +134,7 @@ def validate_condition(directory, label, host_load, guest_workers, setup):
         raise ValueError(f"{label} Guest worker evidence is invalid")
 
 
-def extract(pair, label, window_seconds, setup):
+def extract(pair, label, window_seconds, setup, guest_workers):
     host, guest = pair["host"], pair["guest"]
     if host.get("domain") != "host" or guest.get("domain") != "guest":
         raise ValueError(f"{label} domain mismatch")
@@ -160,6 +182,8 @@ def extract(pair, label, window_seconds, setup):
             or not isinstance(observed, int) or not isinstance(total, int)
             or observed <= 0 or observed > total):
         raise ValueError(f"{label} Guest runqlat coverage is invalid")
+    if total != guest_workers + 1:
+        raise ValueError(f"{label} Guest thread total does not match workload workers plus main")
     guest_count = integer(guest_lat.get("count"), f"{label} guest count", nonnegative=True)
     host_count = integer(host_lat.get("count"), f"{label} host count", nonnegative=True)
     if not isinstance(process.get("partial"), bool) or not isinstance(item.get("partial"), bool):
@@ -197,6 +221,7 @@ def summarize(directory):
         raise ValueError("configured vCPU index must be 0")
     setup["vcpuHostTid"] = integer(setup.get("vcpuHostTid"), "configured vCPU Host TID", positive=True)
     setup["pinnedHostCpu"] = integer(setup.get("pinnedHostCpu"), "configured Host CPU", nonnegative=True)
+    contender_evidence = load_contender_evidence(directory, setup)
     captures, rounds = load_pairs(directory)
     if len(rounds) != requested_rounds:
         raise ValueError("capture rounds do not match config.json")
@@ -206,8 +231,9 @@ def summarize(directory):
     for round_number in rounds:
         for host_load, guest_workers in QUADRANTS:
             label = f"round-{round_number:02d}-h{host_load}-g{guest_workers}"
-            validate_condition(directory, label, host_load, guest_workers, setup)
-            row = extract(captures[(round_number, host_load, guest_workers)], label, window_seconds, setup)
+            validate_condition(directory, label, host_load, guest_workers, setup, contender_evidence)
+            row = extract(captures[(round_number, host_load, guest_workers)], label, window_seconds, setup,
+                          guest_workers)
             rows[(host_load, guest_workers, round_number)] = row
             if row["guestPartial"] or row["hostPartial"] or row["guestObservedThreads"] < row["guestTotalThreads"]:
                 warning_windows.append(label)

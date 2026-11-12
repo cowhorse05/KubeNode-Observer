@@ -29,7 +29,7 @@ make m10c-test
 M10C_ROUNDS=2 M10C_WINDOW_SECONDS=3 make m10c-test
 ```
 
-原始结果进入新建的 `log/m10c-test-<UTC>/`。`config.json` 固化请求轮数、窗口和镜像名，`setup.json` 固化 Sandbox、VMM/vCPU PID 和所选 Host CPU。每窗的 `*-condition.json` 记录 Host contender Pod UID/PID/phase 与 Guest worker 数，`*-workload.txt` 证明 workers 实际位于 Guest CPU 0；摘要器会交叉检查这些条件而不只相信文件名。`summary.json` 包含四象限原始值/中位数、两项描述性方向和质量警告：
+原始结果进入新建的 `log/m10c-test-<UTC>/`。`config.json` 固化请求轮数、窗口和镜像名，`setup.json` 固化 Sandbox、VMM/vCPU PID 和所选 Host CPU。每窗的 `*-condition.json` 记录 Host contender Pod UID/PID/phase 与 Guest worker 数，`*-workload.txt` 证明 workers 实际位于 Guest CPU 0；摘要器还会把 contender 身份与 CRI inspect 交叉检查，并要求 Guest 总线程数恰为 workers 加 sleeping main，而不只相信文件名或 workload 自报。`summary.json` 包含四象限原始值/中位数、两项描述性方向和质量警告：
 
 - `guestLoadRaisedGuestP95InBothHostStates`：两个 Host 状态下，8 workers 的 Guest P95 是否都高于 1 worker；
 - `hostContentionRaisedHostVcpu0P95InBothGuestStates`：两个 Guest 负载下，Host contender 开启时的 `vCPU 0` P95 是否都更高；

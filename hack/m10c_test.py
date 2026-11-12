@@ -24,6 +24,9 @@ class M10cSummaryTest(unittest.TestCase):
         (directory / "setup.json").write_text(json.dumps({"sandboxId": "sid", "vmmPid": 10,
                                                           "vcpuIndex": 0, "vcpuHostTid": 42,
                                                           "pinnedHostCpu": 3}))
+        (directory / "host-contention-cri.json").write_text(json.dumps(
+            {"info": {"pid": 99}, "status": {"labels": {"io.kubernetes.pod.uid": "contender"}}}))
+        (directory / "host-contention-affinity.txt").write_text("pid 99's new affinity list: 3\n")
         for round_number in range(1, rounds + 1):
             for host_load, guest_workers in module.QUADRANTS:
                 stem = f"round-{round_number:02d}-h{host_load}-g{guest_workers}"
@@ -40,7 +43,10 @@ class M10cSummaryTest(unittest.TestCase):
                          "bootId": "00112233-4455-6677-8899-aabbccddeeff", "timing": timing(),
                          "processes": [{"command": "guest-burn", "cpu": {"percent": 50 + guest_workers},
                                         "runqlat": {"count": 10, "p95Us": guest_p95},
-                                        "runqlatCoverage": {"observedThreads": 2, "totalThreads": 3 if partial else 2},
+                                        "runqlatCoverage": {
+                                            "observedThreads": guest_workers if partial else guest_workers + 1,
+                                            "totalThreads": guest_workers + 1,
+                                        },
                                         "partial": partial}]}
                 host = {"domain": "host", "durationSeconds": 3.1, "timing": timing(),
                          "items": [{"kind": "kata-sandbox", "sandboxId": "sid", "podUid": "uid", "pid": 10,
@@ -132,6 +138,28 @@ class M10cSummaryTest(unittest.TestCase):
             condition["hostContention"] = True
             path.write_text(json.dumps(condition))
             with self.assertRaisesRegex(ValueError, "contradicts"):
+                module.summarize(directory)
+
+    def test_condition_must_match_cri_evidence(self):
+        with tempfile.TemporaryDirectory() as value:
+            directory = Path(value)
+            self.write_fixture(directory, rounds=1)
+            path = directory / "round-01-h1-g1-condition.json"
+            condition = json.loads(path.read_text())
+            condition["hostContender"]["pid"] = 100
+            path.write_text(json.dumps(condition))
+            with self.assertRaisesRegex(ValueError, "does not match CRI"):
+                module.summarize(directory)
+
+    def test_worker_count_must_match_guest_thread_total(self):
+        with tempfile.TemporaryDirectory() as value:
+            directory = Path(value)
+            self.write_fixture(directory, rounds=1)
+            path = directory / "round-01-h0-g8-guest.json"
+            sample = json.loads(path.read_text())
+            sample["processes"][0]["runqlatCoverage"] = {"observedThreads": 2, "totalThreads": 2}
+            path.write_text(json.dumps(sample))
+            with self.assertRaisesRegex(ValueError, "does not match workload"):
                 module.summarize(directory)
 
     def test_missing_quadrant_fails(self):
