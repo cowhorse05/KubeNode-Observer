@@ -1,0 +1,143 @@
+log/m10c-test-20261112T022351Z/agent-after.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-416
+log/m10c-test-20261112T022351Z/round-01-h0-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/metrics-after.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-87
+log/m10c-test-20261112T022351Z/candidate.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-189
+log/m10c-test-20261112T022351Z/guest-manifest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-80
+log/m10c-test-20261112T022351Z/round-01-h0-g1-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/setup.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-7
+log/m10c-test-20261112T022351Z/round-01-h1-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/source-sha256.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-33
+log/m10c-test-20261112T022351Z/original-spec.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-173
+log/m10c-test-20261112T022351Z/round-02-h1-g8-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-10
+log/m10c-test-20261112T022351Z/restored-spec.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-173
+log/m10c-test-20261112T022351Z/source-head.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/topology-ready.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/vcpu0-affinity-before.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g1-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-5
+log/m10c-test-20261112T022351Z/round-02-h0-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/agent-state-after.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-12
+log/m10c-test-20261112T022351Z/round-01-h1-g8-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g8-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/summary.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-192
+log/m10c-test-20261112T022351Z/host-contention-manifest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-33
+log/m10c-test-20261112T022351Z/original-agent.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-201
+log/m10c-test-20261112T022351Z/forward.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-22
+log/m10c-test-20261112T022351Z/topology-1.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/exit.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g1-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g1-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/host-contention-affinity.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-20
+log/m10c-test-20261112T022351Z/agent-state-before.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-12
+log/m10c-test-20261112T022351Z/config.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-13
+log/m10c-test-20261112T022351Z/original-manifest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-188
+log/m10c-test-20261112T022351Z/round-02-h0-g1-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g1-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-10
+log/m10c-test-20261112T022351Z/informer.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h0-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g8-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/agent-before.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-416
+log/m10c-test-20261112T022351Z/round-02-h1-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h0-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h0-g1-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-5
+log/m10c-test-20261112T022351Z/host-contention-cri.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-505
+log/m10c-test-20261112T022351Z/host-contention-ready.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g8-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-5
+log/m10c-test-20261112T022351Z/host-setup.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/2026-11-12-m10c-host-guest.md
+  s_c1a7b97759940b::t_e331d9c5810ccd 7,9,17,33-35
+log/m10c-test-20261112T022351Z/round-02-h0-g8-workload.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g8-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-10
+log/m10c-test-20261112T022351Z/round-02-h0-g8-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-5
+log/m10c-test-20261112T022351Z/images.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-183
+log/m10c-test-20261112T022351Z/round-02-h0-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/metrics-before.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-87
+log/m10c-test-20261112T022351Z/round-01-h1-g1-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1-10
+log/m10c-test-20261112T022351Z/round-02-h1-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/vcpu0-affinity-pinned.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "fade9db30635c4dd28d651f4a74fd9ebf29d1d7a",
+  "prompts": {},
+  "sessions": {
+    "s_c1a7b97759940b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c48a-45d0-78d0-9771-0645ae60a6c4",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
