@@ -1,0 +1,13 @@
+{
+  "createdAt": "2026-11-12T02:11:23Z",
+  "kubeContext": "kno-dev",
+  "minikubeProfile": "kno-dev",
+  "images": {
+    "agent": "kubenode-observer/kno-agent:m10c",
+    "guest": "kubenode-observer/guest-probe:m10c",
+    "workload": "kubenode-observer/guest-workload:m10c",
+    "contention": "kubenode-observer/cpu-contention:dev"
+  },
+  "rounds": 2,
+  "windowSeconds": 3
+}

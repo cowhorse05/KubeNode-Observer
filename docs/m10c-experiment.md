@@ -42,4 +42,6 @@ M10C_ROUNDS=2 M10C_WINDOW_SECONDS=3 make m10c-test
 
 演示时并排展示四象限摘要和一份原始 Host/Guest JSON，说明两个内核分别聚合自己的调度事件，Node 再用 Pod UID、Sandbox ID 和 VMM generation 关联身份。若预期方向未出现，应报告环境噪声、覆盖率和样本量，而不是调参或重跑到想要的结果。
 
-该实验目前只覆盖 Kata 四象限。后续若值得投入，再增加同负载的 runc 参考和 Probe off/on 成本对照；不要在完成真实本地验收前把脚本存在本身写成性能结论。
+该实验目前只覆盖 Kata 四象限。后续若值得投入，再增加同负载的 runc 参考和 Probe off/on 成本对照；不要把脚本存在或一次通过本身写成性能结论。
+
+2026-11-12 的本地 Minikube/Kata 验收、两次失败尝试和最终原始数据见 [M10c 本地验收报告](../log/2026-11-12-m10c-host-guest.md)。这不是 tdk 正式实验。

@@ -1,0 +1,5 @@
+{
+  "hostContention": false,
+  "guestWorkers": 1,
+  "hostContender": null
+}
