@@ -1,0 +1,27 @@
+docs/m10c-experiment.md
+  s_c1a7b97759940b::t_3fb794457e1438 32
+hack/m10c_test.py
+  s_c1a7b97759940b::t_3fb794457e1438 27-29,46-49,143-162
+hack/summarize-m10c.py
+  s_c1a7b97759940b::t_3fb794457e1438 88-107,127-129,137,185-186,224,234-236
+README.md
+  s_c1a7b97759940b::t_3fb794457e1438 34
+log/2026-11-12-m10c-host-guest.md
+  s_c1a7b97759940b::t_3fb794457e1438 43,64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "aae5e4b376c991851a2154238c6c1add612f6b4c",
+  "prompts": {},
+  "sessions": {
+    "s_c1a7b97759940b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c48a-45d0-78d0-9771-0645ae60a6c4",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "cowhorse05 <yli257812@gmail.com>"
+    }
+  }
+}
