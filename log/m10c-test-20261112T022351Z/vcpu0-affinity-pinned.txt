@@ -1,0 +1,2 @@
+pid 16212's current affinity list: 0-11
+pid 16212's new affinity list: 0

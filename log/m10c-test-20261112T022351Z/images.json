@@ -1,0 +1,183 @@
+[
+    {
+        "Id": "sha256:620fe3c8d1e0c3a69d2f960ca41a68bcc375d8c7a1f50be3b83a1d2b8d684afd",
+        "RepoTags": [
+            "kubenode-observer/kno-agent:m10c"
+        ],
+        "RepoDigests": [
+            "kubenode-observer/kno-agent@sha256:620fe3c8d1e0c3a69d2f960ca41a68bcc375d8c7a1f50be3b83a1d2b8d684afd"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-12T10:23:39.511910381+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/kno-agent"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 14468041,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:2d30bcd28eb06743155e94b839c48b7e0d236d6f5bc45910c95f852a044a0156"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-12T02:23:41.008442207Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:620fe3c8d1e0c3a69d2f960ca41a68bcc375d8c7a1f50be3b83a1d2b8d684afd",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "w628cpaqd4utg6xfrrql32zue",
+                    "CreatedAt": "2026-11-12T10:23:41.206306623+08:00"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:c7fe2ea027f30f4b85424dc64b723bff3e34138d2118a11204a412b265f2583c",
+        "RepoTags": [
+            "kubenode-observer/guest-probe:m10c"
+        ],
+        "RepoDigests": [
+            "kubenode-observer/guest-probe@sha256:c7fe2ea027f30f4b85424dc64b723bff3e34138d2118a11204a412b265f2583c"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-12T10:23:24.171078577+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/kno-guest"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 11905013,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:c60a682ecdf7fbfcf14147ed2e19f722686ff6731c057a186a2ab445ea7662e4"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-12T02:23:25.614550777Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:c7fe2ea027f30f4b85424dc64b723bff3e34138d2118a11204a412b265f2583c",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "hiq5s8z5aw23jjxu8chaht7pm",
+                    "CreatedAt": "2026-11-12T10:23:25.80463101+08:00"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:21b7e212afd75d0020c57b542d1a14e6d3499d218481b4e6fdd28671d1899e28",
+        "RepoTags": [
+            "kubenode-observer/guest-workload:m10c"
+        ],
+        "RepoDigests": [
+            "kubenode-observer/guest-workload@sha256:21b7e212afd75d0020c57b542d1a14e6d3499d218481b4e6fdd28671d1899e28"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-12T10:23:44.871406323+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/workload"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 1253202,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:ed17d42694bcdcca44c74e48512810b0bbdf03e1afe79247e7723967946ea2c5",
+                "sha256:0e0c7c47b4f5ad2f2facc7df2b48f577ef5717699b6913ae4fd8907c4a61e8a5"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-12T02:23:45.067210075Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:21b7e212afd75d0020c57b542d1a14e6d3499d218481b4e6fdd28671d1899e28",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "ttjpj6wwbj3lxopcprgj5deom",
+                    "CreatedAt": "2026-11-12T10:23:45.097394619+08:00"
+                }
+            ]
+        }
+    },
+    {
+        "Id": "sha256:2c0bb9c7a02bad2d2c483fbee2c841e1c1cbd2c56208992f41b70471dc314d24",
+        "RepoTags": [
+            "kubenode-observer/cpu-contention:dev"
+        ],
+        "RepoDigests": [
+            "kubenode-observer/cpu-contention@sha256:2c0bb9c7a02bad2d2c483fbee2c841e1c1cbd2c56208992f41b70471dc314d24"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-12T10:23:13.616564758+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/workload"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 630019,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:9ef2c18a29b3a86bfd9d243460c1ee2d474af6c23c10f453990b9a6ef337a9e4"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-12T02:23:13.802834626Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:2c0bb9c7a02bad2d2c483fbee2c841e1c1cbd2c56208992f41b70471dc314d24",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "dav7t2cjm9zaenratjgigdxcc",
+                    "CreatedAt": "2026-11-12T10:23:13.83115707+08:00"
+                }
+            ]
+        }
+    }
+]

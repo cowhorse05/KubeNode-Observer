@@ -15,6 +15,7 @@ log/guest-*/** -text -whitespace linguist-generated=true
 log/m9-*/** -text -whitespace linguist-generated=true
 log/m10-*/** -text -whitespace linguist-generated=true
 log/m10b-*/** -text -whitespace linguist-generated=true
+log/m10c-*/** -text -whitespace linguist-generated=true
 log/clockdomain-*/** -text -whitespace linguist-generated=true
 log/window-*/** -text -whitespace linguist-generated=true
 log/clock-*/** -text -whitespace linguist-generated=true

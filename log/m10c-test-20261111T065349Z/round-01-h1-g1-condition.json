@@ -1,0 +1,10 @@
+{
+  "hostContention": true,
+  "guestWorkers": 1,
+  "hostContender": {
+    "podUid": "0604d5e7-63e6-444f-a207-ffc218101717",
+    "pid": 3720,
+    "phase": "Running",
+    "pinnedHostCpu": 0
+  }
+}

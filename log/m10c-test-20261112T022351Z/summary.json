@@ -1,0 +1,192 @@
+{
+  "capturePairs": 8,
+  "interpretation": "Direction flags are descriptive, not pass/fail gates or causal proof.",
+  "observedDirections": {
+    "guestLoadRaisedGuestP95InBothHostStates": true,
+    "hostContentionRaisedHostVcpu0P95InBothGuestStates": true
+  },
+  "quadrants": {
+    "h0g1": {
+      "guestCoverage": [
+        {
+          "observed": 2,
+          "total": 2
+        },
+        {
+          "observed": 2,
+          "total": 2
+        }
+      ],
+      "guestCpuPercent": [
+        97.2306236331468,
+        88.70007323079354
+      ],
+      "guestRunqlatCount": [
+        134,
+        134
+      ],
+      "guestRunqlatP95Us": [
+        127,
+        127
+      ],
+      "guestWorkers": 1,
+      "hostContention": false,
+      "hostVcpu0RunqlatCount": [
+        13,
+        25
+      ],
+      "hostVcpu0RunqlatP95Us": [
+        127,
+        127
+      ],
+      "hostVmmCpuPercent": [
+        86.57544278500939,
+        102.2260754585574
+      ],
+      "medianGuestCpuPercent": 92.96534843197017,
+      "medianGuestRunqlatP95Us": 127.0,
+      "medianHostVcpu0RunqlatP95Us": 127.0,
+      "medianHostVmmCpuPercent": 94.4007591217834,
+      "samples": 2
+    },
+    "h0g8": {
+      "guestCoverage": [
+        {
+          "observed": 9,
+          "total": 9
+        },
+        {
+          "observed": 9,
+          "total": 9
+        }
+      ],
+      "guestCpuPercent": [
+        99.91994727939365,
+        99.70669816866759
+      ],
+      "guestRunqlatCount": [
+        26285,
+        24128
+      ],
+      "guestRunqlatP95Us": [
+        1023,
+        2047
+      ],
+      "guestWorkers": 8,
+      "hostContention": false,
+      "hostVcpu0RunqlatCount": [
+        22,
+        28
+      ],
+      "hostVcpu0RunqlatP95Us": [
+        127,
+        127
+      ],
+      "hostVmmCpuPercent": [
+        102.23954495402927,
+        100.62005327471068
+      ],
+      "medianGuestCpuPercent": 99.81332272403063,
+      "medianGuestRunqlatP95Us": 1535.0,
+      "medianHostVcpu0RunqlatP95Us": 127.0,
+      "medianHostVmmCpuPercent": 101.42979911436998,
+      "samples": 2
+    },
+    "h1g1": {
+      "guestCoverage": [
+        {
+          "observed": 2,
+          "total": 2
+        },
+        {
+          "observed": 2,
+          "total": 2
+        }
+      ],
+      "guestCpuPercent": [
+        97.1375672884613,
+        99.73620090936474
+      ],
+      "guestRunqlatCount": [
+        146,
+        144
+      ],
+      "guestRunqlatP95Us": [
+        127,
+        127
+      ],
+      "guestWorkers": 1,
+      "hostContention": true,
+      "hostVcpu0RunqlatCount": [
+        142,
+        130
+      ],
+      "hostVcpu0RunqlatP95Us": [
+        32767,
+        32767
+      ],
+      "hostVmmCpuPercent": [
+        21.361602827714666,
+        20.358475202971178
+      ],
+      "medianGuestCpuPercent": 98.43688409891303,
+      "medianGuestRunqlatP95Us": 127.0,
+      "medianHostVcpu0RunqlatP95Us": 32767.0,
+      "medianHostVmmCpuPercent": 20.86003901534292,
+      "samples": 2
+    },
+    "h1g8": {
+      "guestCoverage": [
+        {
+          "observed": 9,
+          "total": 9
+        },
+        {
+          "observed": 9,
+          "total": 9
+        }
+      ],
+      "guestCpuPercent": [
+        99.6030005193747,
+        99.3081715132641
+      ],
+      "guestRunqlatCount": [
+        4783,
+        4727
+      ],
+      "guestRunqlatP95Us": [
+        32767,
+        32767
+      ],
+      "guestWorkers": 8,
+      "hostContention": true,
+      "hostVcpu0RunqlatCount": [
+        132,
+        135
+      ],
+      "hostVcpu0RunqlatP95Us": [
+        32767,
+        32767
+      ],
+      "hostVmmCpuPercent": [
+        20.0251127125673,
+        20.01909773792077
+      ],
+      "medianGuestCpuPercent": 99.4555860163194,
+      "medianGuestRunqlatP95Us": 32767.0,
+      "medianHostVcpu0RunqlatP95Us": 32767.0,
+      "medianHostVmmCpuPercent": 20.022105225244033,
+      "samples": 2
+    }
+  },
+  "qualityWarnings": {
+    "partialOrIncompleteCoverageCount": 0,
+    "partialOrIncompleteCoverageWindows": [],
+    "zeroWaitSampleCount": 0,
+    "zeroWaitSampleWindows": []
+  },
+  "result": "captures_valid",
+  "rounds": 2,
+  "scope": "descriptive-host-x-guest-four-quadrant-summary",
+  "windowSeconds": 3
+}
