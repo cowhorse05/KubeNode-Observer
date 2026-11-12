@@ -1,0 +1,107 @@
+log/m10c-test-20261112T022351Z/host-contention-cri.json
+  s_c1a7b97759940b::t_3a945c65a8111b 17-18,21-22,25-26,29,33-34,37-38,41-42,45,50,57,120,124,128,138,141,144,164,168,175,286,296,306,316,326,394-398,414-415,426,429,437,442,444,454,465,492
+log/m10c-test-20261112T022351Z/host-contention-affinity.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-20
+log/m10c-test-20261112T022351Z/round-01-h1-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g8-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 5-6
+log/m10c-test-20261112T022351Z/round-02-h0-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/agent-state-before.json
+  s_c1a7b97759940b::t_3a945c65a8111b 5,10
+log/m10c-test-20261112T022351Z/round-02-h1-g1-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 5-6
+log/m10c-test-20261112T022351Z/agent-state-after.json
+  s_c1a7b97759940b::t_3a945c65a8111b 5,10
+log/m10c-test-20261112T022351Z/round-01-h0-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/topology-1.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h0-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h1-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h0-g8-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-01-h0-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/config.json
+  s_c1a7b97759940b::t_3a945c65a8111b 2
+log/m10c-test-20261112T022351Z/agent-before.json
+  s_c1a7b97759940b::t_3a945c65a8111b 14,20,22,34-35,152,246,289,296,303,310,317,329,331,349,386,408
+log/m10c-test-20261112T022351Z/round-02-h1-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h1-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/2026-11-12-m10c-host-guest.md
+  s_c1a7b97759940b::t_e331d9c5810ccd 7,9,17,33-35
+log/m10c-test-20261112T022351Z/summary.json
+  s_c1a7b97759940b::t_3a945c65a8111b 21-22,25-26,30,35-36,39,43-44,46-49,64-65,68-69,72,78-79,86-87,89-90,92,107-108,111-112,115,121-122,129-130,132-133,135,150-151,154-155,164-165,172-173,175,178
+log/m10c-test-20261112T022351Z/candidate.json
+  s_c1a7b97759940b::t_3a945c65a8111b 6-7
+log/m10c-test-20261112T022351Z/round-01-h1-g8-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 5-6
+log/m10c-test-20261112T022351Z/vcpu0-affinity-before.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/source-sha256.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 3
+log/m10c-test-20261112T022351Z/round-02-h1-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/host-setup.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/metrics-after.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 3,9,12,15,43-45,55-57,61,64,70-73,76,79,82
+log/m10c-test-20261112T022351Z/original-manifest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 6-7
+log/m10c-test-20261112T022351Z/round-01-h0-g8-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/topology-ready.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/round-02-h0-g1-host.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/agent-after.json
+  s_c1a7b97759940b::t_3a945c65a8111b 14,20,22,34-35,152,246,289,296,303,310,317,329,331,349,386,408
+log/m10c-test-20261112T022351Z/vcpu0-affinity-pinned.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-2
+log/m10c-test-20261112T022351Z/setup.json
+  s_c1a7b97759940b::t_3a945c65a8111b 2-3,5
+log/m10c-test-20261112T022351Z/metrics-before.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 3,9,12,15,43-45,55-57,61,64,70-73,76,79,82
+log/m10c-test-20261112T022351Z/informer.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/forward.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1-22
+log/m10c-test-20261112T022351Z/source-head.txt
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/original-agent.json
+  s_c1a7b97759940b::t_3a945c65a8111b 6-7,10,16,198
+log/m10c-test-20261112T022351Z/round-01-h1-g1-guest.json
+  s_c1a7b97759940b::t_3a945c65a8111b 1
+log/m10c-test-20261112T022351Z/images.json
+  s_c1a7b97759940b::t_3a945c65a8111b 3,8,11,23,27,31,35,41-42,48,53,56,68,72,76,80,86-87,93,98,101,113,117-118,122,126,132-133,139,144,147,159,163,167,171,177-178
+log/m10c-test-20261112T022351Z/round-01-h1-g1-condition.json
+  s_c1a7b97759940b::t_3a945c65a8111b 5-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "5d4a1716cbf336ba55e400b596f080b1b80225f9",
+  "prompts": {},
+  "sessions": {
+    "s_c1a7b97759940b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1c48a-45d0-78d0-9771-0645ae60a6c4",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": null
+    }
+  }
+}
