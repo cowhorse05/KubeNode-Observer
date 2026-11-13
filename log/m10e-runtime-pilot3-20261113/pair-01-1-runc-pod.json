@@ -1,0 +1,172 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "annotations": {
+            "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"kno-runtime-benchmark\",\"namespace\":\"kno-m10e-test\"},\"spec\":{\"automountServiceAccountToken\":false,\"containers\":[{\"args\":[\"--listen=:8080\",\"--work-iterations=64\"],\"image\":\"kubenode-observer/observer-benchmark:m10e\",\"imagePullPolicy\":\"Never\",\"name\":\"benchmark\",\"readinessProbe\":{\"httpGet\":{\"path\":\"/healthz\",\"port\":8080},\"periodSeconds\":1},\"resources\":{\"limits\":{\"cpu\":\"1\",\"memory\":\"128Mi\"},\"requests\":{\"cpu\":\"1\",\"memory\":\"32Mi\"}}}],\"restartPolicy\":\"Never\"}}\n"
+        },
+        "creationTimestamp": "2026-11-13T08:18:30Z",
+        "generation": 1,
+        "name": "kno-runtime-benchmark",
+        "namespace": "kno-m10e-test",
+        "resourceVersion": "1007718",
+        "uid": "ce26dd39-ee24-4af0-9bea-61efb2cba826"
+    },
+    "spec": {
+        "automountServiceAccountToken": false,
+        "containers": [
+            {
+                "args": [
+                    "--listen=:8080",
+                    "--work-iterations=64"
+                ],
+                "image": "kubenode-observer/observer-benchmark:m10e",
+                "imagePullPolicy": "Never",
+                "name": "benchmark",
+                "readinessProbe": {
+                    "failureThreshold": 3,
+                    "httpGet": {
+                        "path": "/healthz",
+                        "port": 8080,
+                        "scheme": "HTTP"
+                    },
+                    "periodSeconds": 1,
+                    "successThreshold": 1,
+                    "timeoutSeconds": 1
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "128Mi"
+                    },
+                    "requests": {
+                        "cpu": "1",
+                        "memory": "32Mi"
+                    }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+            }
+        ],
+        "dnsPolicy": "ClusterFirst",
+        "enableServiceLinks": true,
+        "nodeName": "kno-dev",
+        "preemptionPolicy": "PreemptLowerPriority",
+        "priority": 0,
+        "restartPolicy": "Never",
+        "schedulerName": "default-scheduler",
+        "securityContext": {},
+        "serviceAccount": "default",
+        "serviceAccountName": "default",
+        "terminationGracePeriodSeconds": 30,
+        "tolerations": [
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/not-ready",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            },
+            {
+                "effect": "NoExecute",
+                "key": "node.kubernetes.io/unreachable",
+                "operator": "Exists",
+                "tolerationSeconds": 300
+            }
+        ]
+    },
+    "status": {
+        "conditions": [
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-11-13T08:18:32Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodReadyToStartContainers"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-11-13T08:18:30Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Initialized"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-11-13T08:18:32Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "Ready"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-11-13T08:18:32Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "ContainersReady"
+            },
+            {
+                "lastProbeTime": null,
+                "lastTransitionTime": "2026-11-13T08:18:30Z",
+                "observedGeneration": 1,
+                "status": "True",
+                "type": "PodScheduled"
+            }
+        ],
+        "containerStatuses": [
+            {
+                "allocatedResources": {
+                    "cpu": "1",
+                    "memory": "32Mi"
+                },
+                "containerID": "containerd://7a2987c3e67779fd10171ec99a8ff9ad642222bee100d1d95a4cbbf51a7e8192",
+                "image": "docker.io/kubenode-observer/observer-benchmark:m10e",
+                "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+                "lastState": {},
+                "name": "benchmark",
+                "ready": true,
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "128Mi"
+                    },
+                    "requests": {
+                        "cpu": "1",
+                        "memory": "32Mi"
+                    }
+                },
+                "restartCount": 0,
+                "started": true,
+                "state": {
+                    "running": {
+                        "startedAt": "2026-11-13T08:18:31Z"
+                    }
+                },
+                "user": {
+                    "linux": {
+                        "gid": 0,
+                        "supplementalGroups": [
+                            0
+                        ],
+                        "uid": 0
+                    }
+                }
+            }
+        ],
+        "hostIP": "192.168.49.2",
+        "hostIPs": [
+            {
+                "ip": "192.168.49.2"
+            }
+        ],
+        "observedGeneration": 1,
+        "phase": "Running",
+        "podIP": "10.244.1.149",
+        "podIPs": [
+            {
+                "ip": "10.244.1.149"
+            }
+        ],
+        "qosClass": "Burstable",
+        "startTime": "2026-11-13T08:18:30Z"
+    }
+}

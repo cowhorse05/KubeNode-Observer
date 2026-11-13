@@ -1,0 +1,101 @@
+{
+  "actualImageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+  "captureCount": 4,
+  "effects": {
+    "kataVsRuncP99": {
+      "bootstrapLowerPercent": 121.05263157894738,
+      "bootstrapUpperPercent": 147.61904761904762,
+      "interpretation": "exploratory_small_n_interval",
+      "medianPercent": 134.3358395989975,
+      "pairs": 2
+    },
+    "kataVsRuncThroughput": {
+      "bootstrapLowerPercent": 6.742188525538673,
+      "bootstrapUpperPercent": 8.813918322605474,
+      "interpretation": "exploratory_small_n_interval",
+      "medianPercent": 7.778053424072073,
+      "pairs": 2
+    }
+  },
+  "limitations": [
+    "Results describe this single-node image, kernel, runtime and short benchmark only.",
+    "Fresh Pods remove startup time from the workload window but cannot remove sequential host noise.",
+    "Small-N bootstrap intervals are exploratory and are not a universal Kata overhead claim.",
+    "Host resource captures verify attribution; they are separate from the workload measurement window."
+  ],
+  "nodeName": "kno-dev",
+  "pairedRounds": [
+    {
+      "kata": {
+        "durationSeconds": 5.000380121,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 513,
+        "nodeName": "kno-dev",
+        "operations": 775945,
+        "p50Us": 6.0,
+        "p95Us": 15.0,
+        "p99Us": 42.0,
+        "podUid": "4f453a14-bedc-4c6e-9354-4bb5ef57953f",
+        "throughputOpsPerSecond": 155177.2027773006
+      },
+      "kataVsRuncP99DeltaPercent": 121.05263157894738,
+      "kataVsRuncThroughputDeltaPercent": 8.813918322605474,
+      "order": "runc/kata",
+      "pair": 1,
+      "runc": {
+        "durationSeconds": 5.019582992,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 400,
+        "nodeName": "kno-dev",
+        "operations": 715832,
+        "p50Us": 7.0,
+        "p95Us": 8.0,
+        "p99Us": 19.0,
+        "podUid": "f9e56950-4470-4f51-ad22-1b967d99713e",
+        "throughputOpsPerSecond": 142607.86227478716
+      }
+    },
+    {
+      "kata": {
+        "durationSeconds": 5.026023441,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 540,
+        "nodeName": "kno-dev",
+        "operations": 736844,
+        "p50Us": 6.0,
+        "p95Us": 18.0,
+        "p99Us": 52.0,
+        "podUid": "693b7c17-3aac-4b9c-bc31-12f6e12a33b8",
+        "throughputOpsPerSecond": 146605.76271673618
+      },
+      "kataVsRuncP99DeltaPercent": 147.61904761904762,
+      "kataVsRuncThroughputDeltaPercent": 6.742188525538673,
+      "order": "kata/runc",
+      "pair": 2,
+      "runc": {
+        "durationSeconds": 5.043180854,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 724,
+        "nodeName": "kno-dev",
+        "operations": 692659,
+        "p50Us": 7.0,
+        "p95Us": 9.0,
+        "p99Us": 21.0,
+        "podUid": "ecb5b04a-8781-4c29-85d0-e2df963266aa",
+        "throughputOpsPerSecond": 137345.65942655364
+      }
+    }
+  ],
+  "pairs": 2,
+  "qualityWarnings": {
+    "latencyOverflowCount": 4,
+    "latencyOverflowWindows": [
+      "pair-01-1-runc",
+      "pair-01-2-kata",
+      "pair-02-1-kata",
+      "pair-02-2-runc"
+    ]
+  },
+  "result": "captures_valid",
+  "scope": "descriptive-runc-kata-paired-runtime-comparison"
+}

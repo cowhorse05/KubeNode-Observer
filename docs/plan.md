@@ -343,7 +343,7 @@ microVM 工作在 MVP 完成后开始。
 
 ### M10：跨层时间对齐与延迟分析
 
-状态（2026-11-12）：进行中。M10a 的四时间戳校准与 M10b 的 BPF/用户态诊断、opt-in map 读取括号已保留。因真实 Host/Guest 速率上界没有可靠来源，不把条件时钟模型包装成可用同步门禁；先推进更实用的 M10c/M10d。本地 Host contention 开/关 × Guest 1/8 workers 四象限已在真实 Minikube/Kata 环境通过 8 窗口采集契约；离线诊断按轮重新验证这些数据，只输出 Guest internal、Host vCPU、mixed 或 evidence insufficient 信号。趋势不作为采集脚本通过条件，诊断也不外推为因果或性能保证。runc/Kata 与 Probe off/on 对照仍待后续。见 [校准指南](clock-calibration.md)、[窗口指南](window-timing.md)、[M10c 实验](m10c-experiment.md)、[M10d 诊断](contention-diagnosis.md)和[本地验收报告](../log/2026-11-12-m10c-host-guest.md)。
+状态（2026-11-13）：进行中。M10a 的四时间戳校准与 M10b 的 BPF/用户态诊断、opt-in map 读取括号已保留。因真实 Host/Guest 速率上界没有可靠来源，不把条件时钟模型包装成可用同步门禁；先推进更实用的 M10c/M10d/M10e。四象限数据由离线诊断按轮重新验证，只输出 Guest internal、Host vCPU、mixed 或 evidence insufficient 信号；runc/Kata 对照使用同镜像、同资源和 AB/BA 顺序，Pod Ready 后才计量并独立验证实际 RuntimeClass、image ID 和 Host 归属。趋势不作为采集脚本通过条件，短窗口差值也不外推为因果或普适性能结论。M10e 本地 4 对正式实验已完成：吞吐探索性区间跨 0，当前 4 对 Kata operation P99 均较高；仅作为当前单节点微基准观察。Probe off/on 对照仍待后续。见 [校准指南](clock-calibration.md)、[窗口指南](window-timing.md)、[M10c 实验](m10c-experiment.md)、[M10d 诊断](contention-diagnosis.md)、[M10e 运行时对照](runtime-comparison.md)、[M10c/M10d 本地验收报告](../log/2026-11-12-m10c-host-guest.md)和[M10e 本地验收报告](../log/2026-11-13-m10e-runtime.md)。
 
 - 估算 Host 与 Guest 单调时钟偏移。
 - 对齐两层事件时间线。

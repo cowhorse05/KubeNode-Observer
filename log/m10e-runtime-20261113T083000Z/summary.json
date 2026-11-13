@@ -1,0 +1,175 @@
+{
+  "actualImageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+  "captureCount": 8,
+  "effects": {
+    "kataVsRuncP99": {
+      "bootstrapLowerPercent": 107.40740740740739,
+      "bootstrapUpperPercent": 269.5652173913044,
+      "interpretation": "exploratory_small_n_interval",
+      "medianPercent": 170.83333333333331,
+      "pairs": 4
+    },
+    "kataVsRuncThroughput": {
+      "bootstrapLowerPercent": -26.530132601037092,
+      "bootstrapUpperPercent": 7.396550050908202,
+      "interpretation": "exploratory_small_n_interval",
+      "medianPercent": -5.095765718569623,
+      "pairs": 4
+    }
+  },
+  "limitations": [
+    "Results describe this single-node image, kernel, runtime and short benchmark only.",
+    "Fresh Pods remove startup time from the workload window but cannot remove sequential host noise.",
+    "Small-N bootstrap intervals are exploratory and are not a universal Kata overhead claim.",
+    "Host resource captures verify attribution; they are separate from the workload measurement window."
+  ],
+  "nodeName": "kno-dev",
+  "pairedRounds": [
+    {
+      "kata": {
+        "durationSeconds": 10.000465221,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 1152,
+        "latencyOverflowRate": 0.00092671696036837,
+        "nodeName": "kno-dev",
+        "operations": 1243098,
+        "p50Us": 8.0,
+        "p95Us": 23.0,
+        "p99Us": 63.0,
+        "podUid": "c49e469e-9219-4337-bd2b-e21e3a1a55ad",
+        "throughputOpsPerSecond": 124304.01711608532
+      },
+      "kataVsRuncP99DeltaPercent": 125.0,
+      "kataVsRuncThroughputDeltaPercent": -2.948373117164871,
+      "order": "runc/kata",
+      "pair": 1,
+      "runc": {
+        "durationSeconds": 10.003372703,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 1599,
+        "latencyOverflowRate": 0.0012480146109027617,
+        "nodeName": "kno-dev",
+        "operations": 1281235,
+        "p50Us": 7.0,
+        "p95Us": 10.0,
+        "p99Us": 28.0,
+        "podUid": "93eed81e-6264-44ab-bbca-f89f0c49abc4",
+        "throughputOpsPerSecond": 128080.30231801311
+      }
+    },
+    {
+      "kata": {
+        "durationSeconds": 10.015538668,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 1154,
+        "latencyOverflowRate": 0.0011781424960286184,
+        "nodeName": "kno-dev",
+        "operations": 979508,
+        "p50Us": 9.0,
+        "p95Us": 23.0,
+        "p99Us": 85.0,
+        "podUid": "8999728f-4da1-4e57-aaf6-1dead6ecea72",
+        "throughputOpsPerSecond": 97798.83363932912
+      },
+      "kataVsRuncP99DeltaPercent": 269.5652173913044,
+      "kataVsRuncThroughputDeltaPercent": -26.530132601037092,
+      "order": "kata/runc",
+      "pair": 2,
+      "runc": {
+        "durationSeconds": 10.000014267,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 801,
+        "latencyOverflowRate": 0.0006017380538844784,
+        "nodeName": "kno-dev",
+        "operations": 1331144,
+        "p50Us": 7.0,
+        "p95Us": 9.0,
+        "p99Us": 23.0,
+        "podUid": "599131bf-60e4-43ed-9482-7696993830c3",
+        "throughputOpsPerSecond": 133114.21008595647
+      }
+    },
+    {
+      "kata": {
+        "durationSeconds": 10.000223573,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 1124,
+        "latencyOverflowRate": 0.0008823485543692346,
+        "nodeName": "kno-dev",
+        "operations": 1273873,
+        "p50Us": 7.0,
+        "p95Us": 20.0,
+        "p99Us": 56.0,
+        "podUid": "4789ae35-a709-4ce8-bce8-69bfd6cc1ee8",
+        "throughputOpsPerSecond": 127384.45202759068
+      },
+      "kataVsRuncP99DeltaPercent": 107.40740740740739,
+      "kataVsRuncThroughputDeltaPercent": 7.396550050908202,
+      "order": "runc/kata",
+      "pair": 3,
+      "runc": {
+        "durationSeconds": 10.000016245,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 1090,
+        "latencyOverflowRate": 0.000918966542030073,
+        "nodeName": "kno-dev",
+        "operations": 1186115,
+        "p50Us": 8.0,
+        "p95Us": 12.0,
+        "p99Us": 27.0,
+        "podUid": "d81baff4-fabd-41b0-9413-bbb4d97f7edb",
+        "throughputOpsPerSecond": 118611.30731593128
+      }
+    },
+    {
+      "kata": {
+        "durationSeconds": 10.000500423,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 1052,
+        "latencyOverflowRate": 0.0007749916386358379,
+        "nodeName": "kno-dev",
+        "operations": 1357434,
+        "p50Us": 7.0,
+        "p95Us": 20.0,
+        "p99Us": 57.0,
+        "podUid": "7544bfec-dee9-4389-aa4d-737231f0cfe0",
+        "throughputOpsPerSecond": 135736.6074279701
+      },
+      "kataVsRuncP99DeltaPercent": 216.66666666666666,
+      "kataVsRuncThroughputDeltaPercent": -7.243158319974374,
+      "order": "kata/runc",
+      "pair": 4,
+      "runc": {
+        "durationSeconds": 10.005429143,
+        "imageID": "sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792",
+        "latencyOverflow": 984,
+        "latencyOverflowRate": 0.0006720604526573024,
+        "nodeName": "kno-dev",
+        "operations": 1464154,
+        "p50Us": 7.0,
+        "p95Us": 8.0,
+        "p99Us": 18.0,
+        "podUid": "d084cd5d-79cf-427a-98bd-af0bfc40d3be",
+        "throughputOpsPerSecond": 146335.95211899048
+      }
+    }
+  ],
+  "pairs": 4,
+  "qualityWarnings": {
+    "latencyOverflowCount": 8,
+    "latencyOverflowWindows": [
+      "pair-01-1-runc",
+      "pair-01-2-kata",
+      "pair-02-1-kata",
+      "pair-02-2-runc",
+      "pair-03-1-runc",
+      "pair-03-2-kata",
+      "pair-04-1-kata",
+      "pair-04-2-runc"
+    ],
+    "p99CensoredCount": 0,
+    "p99CensoredWindows": []
+  },
+  "result": "captures_valid",
+  "scope": "descriptive-runc-kata-paired-runtime-comparison"
+}

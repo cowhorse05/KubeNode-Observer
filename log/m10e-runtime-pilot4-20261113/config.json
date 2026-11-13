@@ -1,0 +1,25 @@
+{
+  "createdAt": "2026-11-13T08:20:46Z",
+  "kubeContext": "kno-dev",
+  "minikubeProfile": "kno-dev",
+  "namespace": "kno-m10e-test",
+  "podName": "kno-runtime-benchmark",
+  "image": "kubenode-observer/observer-benchmark:m10e",
+  "agentImage": "kubenode-observer/kno-agent:m10e",
+  "kataRuntimeClass": "kno-kata-qemu",
+  "pairs": 2,
+  "durationSeconds": 5,
+  "warmupSeconds": 1,
+  "workers": 8,
+  "workIterations": 64,
+  "resources": {
+    "requests": {
+      "cpu": "1",
+      "memory": "32Mi"
+    },
+    "limits": {
+      "cpu": "1",
+      "memory": "128Mi"
+    }
+  }
+}

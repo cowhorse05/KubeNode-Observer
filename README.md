@@ -35,6 +35,8 @@ M10c 的本地实验入口 `make m10c-test` 复用现有 Agent、Guest Probe 和
 
 M10d 增加离线 `kno diagnose contention --summary <summary.json>`：重新校验 M10c 四象限与质量字段，按轮配对区分 Guest internal、Host vCPU 和 mixed 信号。它不使用固定延迟阈值，不信任已有方向字段；少于两轮、partial 或零等待样本会得到 `insufficient_evidence`，不会升级为根因结论。用法与 verdict 语义见 [contention 证据摘要](docs/contention-diagnosis.md)。
 
+M10e 增加 `make m10e-runtime-test`：用同一实际镜像和相同 1 CPU container 配置执行 runc/Kata AB/BA 配对微基准，Ready 后才开始计量，并独立核对 RuntimeClass、Pod UID、镜像 digest、Host attribution 和删除清理。本地 4 对正式实验的吞吐区间跨 0；Kata operation P99 在 4 对中均较高，但只描述当前单节点环境，不宣称普适 Kata 开销。方法见 [runc/Kata 配对对照](docs/runtime-comparison.md)，数据与边界见 [M10e 报告](log/2026-11-13-m10e-runtime.md)。
+
 ## 一键 Demo
 
 在满足 Linux BTF、cgroup v2、Docker、kubectl 和 Minikube 前置条件后：
