@@ -33,6 +33,8 @@ M10b 增加独立 `kno-clockcheck`（私有 BPF TEST_RUN，无 attach/pin）核�
 
 M10c 的本地实验入口 `make m10c-test` 复用现有 Agent、Guest Probe 和 CPU contention workload，采集 Host contention 开/关 × Guest 1/8 workers 四象限的 Host VMM 与 Guest process CPU/runqlat。脚本只把身份、非空指标、覆盖率结构和读取括号作为硬门禁；不完整覆盖显式告警，趋势方向写入摘要但不决定测试成败。真实本地 Minikube/Kata 的 8 个窗口已通过采集契约，失败尝试与解释也一并保留；这仍不是统计或因果证明。方法见 [M10c 四象限实验](docs/m10c-experiment.md)，结果见 [本地验收报告](log/2026-11-12-m10c-host-guest.md)。
 
+M10d 增加离线 `kno diagnose contention --summary <summary.json>`：重新校验 M10c 四象限与质量字段，按轮配对区分 Guest internal、Host vCPU 和 mixed 信号。它不使用固定延迟阈值，不信任已有方向字段；少于两轮、partial 或零等待样本会得到 `insufficient_evidence`，不会升级为根因结论。用法与 verdict 语义见 [contention 证据摘要](docs/contention-diagnosis.md)。
+
 ## 一键 Demo
 
 在满足 Linux BTF、cgroup v2、Docker、kubectl 和 Minikube 前置条件后：

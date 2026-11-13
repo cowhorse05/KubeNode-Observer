@@ -343,7 +343,7 @@ microVM 工作在 MVP 完成后开始。
 
 ### M10：跨层时间对齐与延迟分析
 
-状态（2026-11-12）：进行中。M10a 的四时间戳校准与 M10b 的 BPF/用户态诊断、opt-in map 读取括号已保留。因真实 Host/Guest 速率上界没有可靠来源，不把条件时钟模型包装成可用同步门禁；先推进更实用的 M10c。本地 Host contention 开/关 × Guest 1/8 workers 四象限已在真实 Minikube/Kata 环境通过 8 窗口采集契约，趋势不作为脚本通过条件，也不外推为因果或性能保证。runc/Kata 与 Probe off/on 对照仍待后续。见 [校准指南](clock-calibration.md)、[窗口指南](window-timing.md)、[M10c 实验](m10c-experiment.md)和[本地验收报告](../log/2026-11-12-m10c-host-guest.md)。
+状态（2026-11-12）：进行中。M10a 的四时间戳校准与 M10b 的 BPF/用户态诊断、opt-in map 读取括号已保留。因真实 Host/Guest 速率上界没有可靠来源，不把条件时钟模型包装成可用同步门禁；先推进更实用的 M10c/M10d。本地 Host contention 开/关 × Guest 1/8 workers 四象限已在真实 Minikube/Kata 环境通过 8 窗口采集契约；离线诊断按轮重新验证这些数据，只输出 Guest internal、Host vCPU、mixed 或 evidence insufficient 信号。趋势不作为采集脚本通过条件，诊断也不外推为因果或性能保证。runc/Kata 与 Probe off/on 对照仍待后续。见 [校准指南](clock-calibration.md)、[窗口指南](window-timing.md)、[M10c 实验](m10c-experiment.md)、[M10d 诊断](contention-diagnosis.md)和[本地验收报告](../log/2026-11-12-m10c-host-guest.md)。
 
 - 估算 Host 与 Guest 单调时钟偏移。
 - 对齐两层事件时间线。
