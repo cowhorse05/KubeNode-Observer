@@ -21,6 +21,8 @@ CLOCKCHECK_IMAGE ?= kubenode-observer/clockcheck:dev
 M10C_AGENT_IMAGE ?= kubenode-observer/kno-agent:m10c
 M10C_GUEST_IMAGE ?= kubenode-observer/guest-probe:m10c
 M10C_WORKLOAD_IMAGE ?= kubenode-observer/guest-workload:m10c
+M10E_IMAGE ?= kubenode-observer/observer-benchmark:m10e
+M10E_AGENT_IMAGE ?= kubenode-observer/kno-agent:m10e
 MINIKUBE_PROFILE ?= kno-dev
 GO_BUILD_ENV ?= CGO_ENABLED=0
 GO_BUILD_FLAGS ?= -trimpath -ldflags="-s -w"
@@ -213,5 +215,12 @@ m10c-test: workload-image contention-image m10c-burn
 	docker build -f examples/guest-probe/Dockerfile.m10c-workload -t $(M10C_WORKLOAD_IMAGE) .
 	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(M10C_GUEST_IMAGE) $(M10C_AGENT_IMAGE) $(M10C_WORKLOAD_IMAGE) $(CONTENTION_IMAGE)
 	KUBE_CONTEXT=$(MINIKUBE_PROFILE) M10C_AGENT_IMAGE=$(M10C_AGENT_IMAGE) M10C_GUEST_IMAGE=$(M10C_GUEST_IMAGE) M10C_WORKLOAD_IMAGE=$(M10C_WORKLOAD_IMAGE) M10C_CONTENTION_IMAGE=$(CONTENTION_IMAGE) bash hack/m10c-test.sh
+
+.PHONY: m10e-runtime-test
+m10e-runtime-test:
+	$(MAKE) benchmark-image BENCHMARK_IMAGE=$(M10E_IMAGE)
+	$(MAKE) image-local IMAGE=$(M10E_AGENT_IMAGE)
+	minikube -p $(MINIKUBE_PROFILE) image load --overwrite=true $(M10E_IMAGE) $(M10E_AGENT_IMAGE)
+	KUBE_CONTEXT=$(MINIKUBE_PROFILE) M10E_IMAGE=$(M10E_IMAGE) M10E_AGENT_IMAGE=$(M10E_AGENT_IMAGE) bash hack/m10e-runtime-test.sh
 
 

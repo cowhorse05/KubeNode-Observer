@@ -1,0 +1,47 @@
+[
+    {
+        "Id": "sha256:b57d42552d648ca0dafd88afbb5e03334ff6ddccf951cef5cde51e732f2e442a",
+        "RepoTags": [
+            "kubenode-observer/observer-benchmark:m10e"
+        ],
+        "RepoDigests": [
+            "kubenode-observer/observer-benchmark@sha256:b57d42552d648ca0dafd88afbb5e03334ff6ddccf951cef5cde51e732f2e442a"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-11-13T15:57:03.000676522+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Entrypoint": [
+                "/benchmark"
+            ],
+            "WorkingDir": "/"
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 2216153,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:a8cd1618e7c3872055e0123898d160fac535235f1ed0ac15fe79dabcae27e0a6"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-11-13T07:57:03.589743046Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:b57d42552d648ca0dafd88afbb5e03334ff6ddccf951cef5cde51e732f2e442a",
+            "size": 855
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "duu3h3zb0bup7i9ux0n71syfx",
+                    "CreatedAt": "2026-11-13T15:57:03.679246988+08:00"
+                }
+            ]
+        }
+    }
+]

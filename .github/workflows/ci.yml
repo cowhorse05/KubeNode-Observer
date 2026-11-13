@@ -18,5 +18,7 @@ jobs:
           cache: true
       - name: Test
         run: go test ./...
+      - name: Experiment summary tests
+        run: python3 -m unittest discover -s hack -p '*_test.py'
       - name: Build
         run: make build

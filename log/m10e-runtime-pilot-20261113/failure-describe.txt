@@ -1,0 +1,54 @@
+Name:             kno-runtime-benchmark
+Namespace:        kno-m10e-test
+Priority:         0
+Service Account:  default
+Node:             kno-dev/192.168.49.2
+Start Time:       Fri, 13 Nov 2026 15:57:24 +0800
+Labels:           <none>
+Annotations:      <none>
+Status:           Running
+IP:               10.244.1.147
+IPs:
+  IP:  10.244.1.147
+Containers:
+  benchmark:
+    Container ID:  containerd://78152becf5a23ad8d54becdbaf5242f99e083208860ff21996a12b3f6455324c
+    Image:         kubenode-observer/observer-benchmark:m10e
+    Image ID:      sha256:b3abaa242582f1b7004815a3b24b559e0f65c11ce9aca602819ce46181522792
+    Port:          <none>
+    Host Port:     <none>
+    Args:
+      --listen=:8080
+      --work-iterations=64
+    State:          Running
+      Started:      Fri, 13 Nov 2026 15:57:26 +0800
+    Ready:          True
+    Restart Count:  0
+    Limits:
+      cpu:     1
+      memory:  128Mi
+    Requests:
+      cpu:        1
+      memory:     32Mi
+    Readiness:    http-get http://:8080/healthz delay=0s timeout=1s period=1s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:       <none>
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:                      <none>
+QoS Class:                    Burstable
+Node-Selectors:               <none>
+Tolerations:                  node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                              node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  20s   default-scheduler  Successfully assigned kno-m10e-test/kno-runtime-benchmark to kno-dev
+  Normal  Pulled     19s   kubelet            spec.containers{benchmark}: Container image "kubenode-observer/observer-benchmark:m10e" already present on machine and can be accessed by the pod
+  Normal  Created    19s   kubelet            spec.containers{benchmark}: Container created
+  Normal  Started    18s   kubelet            spec.containers{benchmark}: Container started
